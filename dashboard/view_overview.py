@@ -7,6 +7,18 @@ import streamlit as st
 from components import render_metrics, render_tree, activity_item
 
 
+def _last_push_info(orchestrator) -> str:
+    """Короткая сводка о последнем Git-коммите (без обращения к сети)."""
+    try:
+        sync_git = orchestrator._load_sync_git_module()
+        status = sync_git.GitSync(base_dir=orchestrator.base_dir).status()
+        if status.get("status") != "ok":
+            return "Репозиторий ещё не инициализирован."
+        return f"Последний коммит: {status['last_commit']}"
+    except Exception:
+        return "Статус Git недоступен."
+
+
 def render(state: dict, orchestrator) -> None:
     st.markdown('<div class="ark-eyebrow">Обзор системы</div>', unsafe_allow_html=True)
     st.title("🧠 Архитектура в реальном времени")
@@ -22,13 +34,29 @@ def render(state: dict, orchestrator) -> None:
         "confirm_all": ("⚪", "Подтверждение для всего", "Любое изменение сначала предлагается, затем выполняется."),
     }
     icon, label, desc = autonomy_labels.get(autonomy, ("⚪", autonomy, ""))
-    st.markdown(
-        f'<div class="ark-card" style="display:flex;align-items:center;gap:0.6rem;">'
-        f'<span style="font-size:1.1rem;">{icon}</span>'
-        f'<div><strong>Режим автономии: {label}</strong>'
-        f'<div style="color:#8FA398;font-size:0.82rem;">{desc}</div></div></div>',
-        unsafe_allow_html=True,
-    )
+
+    auto_push = state.get("settings", {}).get("auto_push", False)
+    push_icon = "🟢" if auto_push else "⚪"
+    push_label = "включён" if auto_push else "выключен"
+    last_push = _last_push_info(orchestrator)
+
+    col_a, col_b = st.columns(2)
+    with col_a:
+        st.markdown(
+            f'<div class="ark-card" style="display:flex;align-items:center;gap:0.6rem;height:100%;">'
+            f'<span style="font-size:1.1rem;">{icon}</span>'
+            f'<div><strong>Режим автономии: {label}</strong>'
+            f'<div style="color:#8FA398;font-size:0.82rem;">{desc}</div></div></div>',
+            unsafe_allow_html=True,
+        )
+    with col_b:
+        st.markdown(
+            f'<div class="ark-card" style="display:flex;align-items:center;gap:0.6rem;height:100%;">'
+            f'<span style="font-size:1.1rem;">{push_icon}</span>'
+            f'<div><strong>Авто-push в GitHub: {push_label}</strong>'
+            f'<div style="color:#8FA398;font-size:0.82rem;">{last_push}</div></div></div>',
+            unsafe_allow_html=True,
+        )
 
     tasks = state.get("tasks", [])
     done = sum(1 for t in tasks if t["status"] == "done")

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Парсинг каталога производителя",
+    "file": "parsing_kataloga_proizvoditelya.py",
+    "description": "Снять структуру и карточки с uvtech-cc.com и bikai.jp: 14 приборов + расходники.",
+    "created_at": "2026-10-01T21:31:58"
+  },
+  {
+    "name": "Перевод технической документации",
+    "file": "perevod_tehnicheskoy_dokumentacii.py",
+    "description": "Перевод руководств/паспортов через станок с выдачей DOCX/PDF/HTML.",
+    "created_at": "2026-10-01T21:31:58"
+  },
+  {
+    "name": "SEO и GEO оптимизация",
+    "file": "seo_i_geo_optimizaciya.py",
+    "description": "Семантическое ядро, микроразметка Schema.org, оптимизация под ИИ-выдачу.",
+    "created_at": "2026-10-01T21:31:58"
+  },
+  {
+    "name": "Вёрстка карточек товара",
+    "file": "verstka_kartochek_tovara.py",
+    "description": "Единый шаблон карточки: характеристики, фото, PDF, привязка к РУ.",
+    "created_at": "2026-10-01T21:31:58"
+  }
+]
