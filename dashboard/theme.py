@@ -344,7 +344,63 @@ def inject_css() -> None:
             box-shadow: 0 0 10px {ACCENT};
             display: inline-block;
         }}
+
+        /* --- Свёрнутая иконочная панель ---
+           Скрыта, пока боковая панель раскрыта; появляется и остаётся
+           кликабельной, когда пользователь сворачивает боковую панель
+           стандартной стрелкой Streamlit (на основе :has() + aria-expanded,
+           без JS). */
+        .st-key-ark_rail {{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 56px;
+            height: 100vh;
+            z-index: 999999;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35rem;
+            padding-top: 4.2rem;
+            background: {BG_PANEL};
+            border-right: 1px solid {BORDER};
+        }}
+        div[data-testid="stAppViewContainer"]:has(section[data-testid="stSidebar"][aria-expanded="false"]) .st-key-ark_rail {{
+            display: flex;
+        }}
+        div[data-testid="stAppViewContainer"]:has(section[data-testid="stSidebar"][aria-expanded="false"]) div[data-testid="stMainBlockContainer"] {{
+            padding-left: 4.5rem;
+        }}
+        .st-key-ark_rail div[data-testid="stButton"] {{
+            margin: 0;
+        }}
+        .st-key-ark_rail div[data-testid="stButton"] button {{
+            width: 38px;
+            height: 38px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            background: transparent;
+            color: {TEXT_MUTED};
+        }}
+        .st-key-ark_rail div[data-testid="stButton"] button:hover {{
+            background: {ACCENT_SOFT_BG};
+            border-color: {ACCENT_DIM};
+            color: {TEXT};
+        }}
+        .st-key-ark_rail div[data-testid="stButton"] button[kind="primary"] {{
+            background: {ACCENT};
+            border-color: {ACCENT};
+            color: #07140D;
+        }}
+        .st-key-ark_rail div[data-testid="stButton"] button[kind="primary"] span {{
+            color: #07140D !important;
+        }}
         </style>
         """,
         unsafe_allow_html=True,
     )
+

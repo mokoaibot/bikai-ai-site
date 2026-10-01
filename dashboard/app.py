@@ -2,10 +2,10 @@
 dashboard/app.py — минималистичный премиальный дашборд: "зеркало"
 Context-Driven мультиагентной системы.
 
-Чат в сайдбаре (chat_panel.py) — единственный способ вносить изменения.
-Сам дашборд ничего не создаёт: он лишь читает system_state.json (через
-Orchestrator.run_audit) и визуализирует актуальное состояние репозитория
-в реальном времени.
+Управление системой происходит в чате с Оркестратором в Arena (вне этого
+дашборда). Сам дашборд ничего не создаёт: он лишь читает system_state.json
+(через Orchestrator.run_audit) и визуализирует актуальное состояние
+репозитория в реальном времени.
 
 Запуск:
     streamlit run dashboard/app.py --server.port 8501 --server.address 0.0.0.0
@@ -17,7 +17,6 @@ import streamlit as st
 
 from theme import inject_css
 from state import get_orchestrator
-from chat_panel import render_chat
 
 import view_overview
 import view_agents
@@ -33,18 +32,26 @@ inject_css()
 orchestrator = get_orchestrator()
 state = orchestrator.run_audit()
 
+# icon — используется только в свёрнутой иконочной панели (видна, когда
+# боковая панель скрыта), в самой боковой панели иконки не дублируются.
 PAGES = {
-    "overview": {"label": "Обзор", "module": view_overview},
-    "agents": {"label": "Агенты", "module": view_agents},
-    "tasks": {"label": "Задачи", "module": view_tasks},
-    "skills": {"label": "Навыки", "module": view_skills},
-    "knowledge": {"label": "База знаний", "module": view_knowledge},
-    "activity": {"label": "Логи", "module": view_activity},
-    "export": {"label": "Экспорт", "module": view_export},
+    "overview": {"label": "Обзор", "icon": ":material/space_dashboard:", "module": view_overview},
+    "agents": {"label": "Агенты", "icon": ":material/groups:", "module": view_agents},
+    "tasks": {"label": "Задачи", "icon": ":material/checklist:", "module": view_tasks},
+    "skills": {"label": "Навыки", "icon": ":material/bolt:", "module": view_skills},
+    "knowledge": {"label": "База знаний", "icon": ":material/menu_book:", "module": view_knowledge},
+    "activity": {"label": "Логи", "icon": ":material/history:", "module": view_activity},
+    "export": {"label": "Экспорт", "icon": ":material/ios_share:", "module": view_export},
 }
 
 if "page" not in st.session_state:
     st.session_state.page = "overview"
+
+
+def _go(key: str) -> None:
+    st.session_state.page = key
+    st.rerun()
+
 
 with st.sidebar:
     st.markdown(
@@ -62,10 +69,21 @@ with st.sidebar:
             type="primary" if active else "secondary",
             use_container_width=True,
         ):
-            st.session_state.page = key
-            st.rerun()
+            _go(key)
 
-    st.divider()
-    render_chat(orchestrator)
+# Свёрнутая иконочная панель: невидима, пока боковая панель раскрыта;
+# появляется и остаётся кликабельной, когда пользователь сворачивает
+# боковую панель стандартной стрелкой Streamlit.
+with st.container(key="ark_rail"):
+    for key, meta in PAGES.items():
+        active = st.session_state.page == key
+        if st.button(
+            "",
+            icon=meta["icon"],
+            key=f"rail_{key}",
+            type="primary" if active else "secondary",
+            help=meta["label"],
+        ):
+            _go(key)
 
 PAGES[st.session_state.page]["module"].render(state, orchestrator)
