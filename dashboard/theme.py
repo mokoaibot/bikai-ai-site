@@ -349,27 +349,33 @@ def inject_css() -> None:
            Скрыта, пока боковая панель раскрыта; появляется и остаётся
            кликабельной, когда пользователь сворачивает боковую панель
            стандартной стрелкой Streamlit (на основе :has() + aria-expanded,
-           без JS). */
+           без JS). !important — чтобы не проигрывать внутренним флекс-стилям
+           Streamlit для контейнеров. Начинается НИЖЕ шапки, чтобы не
+           перекрывать системную кнопку разворачивания панели. */
         .st-key-ark_rail {{
-            display: none;
+            display: none !important;
+            visibility: hidden;
+            pointer-events: none;
             position: fixed;
-            top: 0;
+            top: 3.6rem;
             left: 0;
-            width: 56px;
-            height: 100vh;
-            z-index: 999999;
+            width: 52px;
+            height: calc(100vh - 3.6rem);
+            z-index: 200;
             flex-direction: column;
             align-items: center;
             gap: 0.35rem;
-            padding-top: 4.2rem;
+            padding-top: 0.8rem;
             background: {BG_PANEL};
             border-right: 1px solid {BORDER};
         }}
         div[data-testid="stAppViewContainer"]:has(section[data-testid="stSidebar"][aria-expanded="false"]) .st-key-ark_rail {{
-            display: flex;
+            display: flex !important;
+            visibility: visible;
+            pointer-events: auto;
         }}
         div[data-testid="stAppViewContainer"]:has(section[data-testid="stSidebar"][aria-expanded="false"]) div[data-testid="stMainBlockContainer"] {{
-            padding-left: 4.5rem;
+            padding-left: 4.2rem;
         }}
         .st-key-ark_rail div[data-testid="stButton"] {{
             margin: 0;
