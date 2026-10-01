@@ -52,3 +52,16 @@
 {"timestamp": "2026-10-01T23:46:20", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
 {"timestamp": "2026-10-01T23:46:20", "level": "INFO", "action": "chat_in", "message": "Получена команда в чате: \"Заведи проект тест-демо для проверки новой архитектуры\""}
 {"timestamp": "2026-10-01T23:46:20", "level": "INFO", "action": "create_project", "message": "Заведён новый проект 'test' (роль: Тест-проект).", "project": "test"}
+{"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "auto_push", "message": "Авто-push выполнен (создан проект test)."}
+{"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "chat_out", "message": "Ответ ассистента: \"✅ Создан новый проектный профиль **test**\n- Роль (для меня в контексте этого проекта): Тест-проект\n- Задача: проверки новой архитектуры\n- Папка: `projects/test`\nЭто не отдельный бот — работу по этому \""}
+{"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "chat_in", "message": "Получена команда в чате: \"Добавь тест-демо инструкцию проверки логов\""}
+{"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "add_instruction", "message": "В проект 'test' добавлена инструкция: «проверки логов».", "project": "test"}
+{"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "chat_out", "message": "Ответ ассистента: \"🛠 В проект **test** добавлена инструкция: «проверки логов»\nФайл: `projects/test/INSTRUCTIONS.md` — я буду сверяться с ним, когда работаю над этим проектом.\""}
+{"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "chat_in", "message": "Получена команда в чате: \"Создай задачу для тест-демо: проверить рендер дашборда\""}
+{"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "create_task", "message": "Создана задача #20 для 'test': проверить рендер дашборда", "project": "test", "task_id": 20}
+{"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "chat_out", "message": "Ответ ассистента: \"📋 Создана задача #20 (test): проверить рендер дашборда\""}
+{"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "chat_in", "message": "Получена команда в чате: \"Удали проект тест-демо\""}
+{"timestamp": "2026-10-01T23:46:23", "level": "WARNING", "action": "delete_project", "message": "Проект 'test' удалён из системы.", "project": "test"}

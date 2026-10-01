@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T23:46:20",
+  "generated_at": "2026-10-01T23:46:23",
   "executor": {
     "note": "Всю работу выполняет один ИИ-исполнитель. 'Проекты' ниже — это контейнеры контекста (роль/инструкции/знания/задачи), а не отдельные автономные боты."
   },
@@ -24,7 +24,7 @@
   },
   "orchestrator": {
     "log_file": "global_logs/orchestrator.log",
-    "log_lines": 56
+    "log_lines": 74
   },
   "global_knowledge_files": [
     {
@@ -39,7 +39,7 @@
     }
   ],
   "global_knowledge_entries": [],
-  "projects_count": 1,
+  "projects_count": 2,
   "projects": [
     {
       "name": "bikai",
@@ -148,6 +148,30 @@
       "log_files": [
         {
           "file": "bikai.log",
+          "lines": 1
+        }
+      ],
+      "log_lines": 1
+    },
+    {
+      "name": "test",
+      "display_name": "тест",
+      "role": "Тест-проект",
+      "task_description": "проверки новой архитектуры",
+      "created_at": "2026-10-01T23:46:20",
+      "path": "projects/test",
+      "instructions": [
+        {
+          "name": "проверки логов",
+          "description": "",
+          "created_at": "2026-10-01T23:46:23"
+        }
+      ],
+      "instructions_count": 1,
+      "knowledge_entries": [],
+      "log_files": [
+        {
+          "file": "test.log",
           "lines": 1
         }
       ],
@@ -306,7 +330,15 @@
       "created_at": "2026-10-01T21:32:07",
       "updated_at": "2026-10-01T21:32:07",
       "project": "bikai"
+    },
+    {
+      "id": 20,
+      "project": "test",
+      "title": "проверить рендер дашборда",
+      "status": "todo",
+      "created_at": "2026-10-01T23:46:23",
+      "updated_at": "2026-10-01T23:46:23"
     }
   ],
-  "chat_messages_count": 2
+  "chat_messages_count": 8
 }

@@ -1,8 +1,0 @@
-{
-  "name": "test",
-  "display_name": "тест",
-  "role": "Тест-проект",
-  "task_description": "проверки новой архитектуры",
-  "created_at": "2026-10-01T23:46:20",
-  "path": "projects/test"
-}
