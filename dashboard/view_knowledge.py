@@ -12,10 +12,10 @@ def render(state: dict, orchestrator) -> None:
     st.title("База знаний")
     st.caption(
         "Добавляйте записи через чат: «Запомни паттерн: ...» (глобально) или "
-        "«Запомни ошибку <агента>: ...» (локально для агента)."
+        "«Запомни ошибку <проекта>: ...» (локально для проекта)."
     )
 
-    tab_global, tab_local = st.tabs(["Глобальная", "Локальная (по агентам)"])
+    tab_global, tab_local = st.tabs(["Глобальная", "Локальная (по проектам)"])
 
     with tab_global:
         entries = state.get("global_knowledge_entries", [])
@@ -34,16 +34,16 @@ def render(state: dict, orchestrator) -> None:
                 knowledge_card(e, "Глобально")
 
     with tab_local:
-        agents = state.get("agents", [])
-        any_local = any(a.get("knowledge_entries") for a in agents)
+        projects = state.get("projects", [])
+        any_local = any(p.get("knowledge_entries") for p in projects)
         if not any_local:
-            st.info("Локальных записей знаний пока нет ни у одного агента.")
-        for agent in agents:
-            entries = agent.get("knowledge_entries", [])
+            st.info("Локальных записей знаний пока нет ни у одного проекта.")
+        for project in projects:
+            entries = project.get("knowledge_entries", [])
             if not entries:
                 continue
-            st.markdown(f'<div class="ark-card-title ark-card-title-lg">{esc(agent["display_name"])}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="ark-card-title ark-card-title-lg">{esc(project["display_name"])}</div>', unsafe_allow_html=True)
             cols = st.columns(2)
             for i, e in enumerate(entries):
                 with cols[i % 2]:
-                    knowledge_card(e, f"Локально · {agent['display_name']}")
+                    knowledge_card(e, f"Локально · {project['display_name']}")

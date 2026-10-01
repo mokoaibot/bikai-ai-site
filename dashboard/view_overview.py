@@ -23,14 +23,25 @@ def render(state: dict, orchestrator) -> None:
     st.markdown('<div class="ark-eyebrow">Обзор системы</div>', unsafe_allow_html=True)
     st.title("Архитектура в реальном времени")
     st.caption(
-        "Это зеркало текущего состояния репозитория. Любое изменение, которое Оркестратор "
-        "применяет по вашей команде в чате Arena, мгновенно отражается здесь."
+        "Это зеркало текущего состояния репозитория. Любое изменение, которое я применяю "
+        "по вашей команде в чате Arena, мгновенно отражается здесь."
+    )
+
+    st.markdown(
+        '<div class="ark-card" style="margin-bottom:0.9rem;">'
+        '<strong>Как это устроено на самом деле:</strong> исполнитель здесь один — я, '
+        'ИИ-агент. «Проекты» ниже — это не отдельные автономные боты, а именованные '
+        'профили контекста (роль, инструкции, задачи, накопленные знания) для разных '
+        'направлений работы. Когда вы просите заняться конкретным проектом, я открываю '
+        'его профиль, перечитываю инструкции и знания — и выполняю работу напрямую сам.'
+        '</div>',
+        unsafe_allow_html=True,
     )
 
     autonomy = state.get("settings", {}).get("autonomy_level", "confirm_all")
     autonomy_labels = {
-        "full_auto": ("Полная автономия", "Агенты/скилы/задачи создаются сразу по ходу работы.", True),
-        "confirm_agents_only": ("Подтверждение для новых агентов", "Новые агенты — по согласованию, остальное сразу.", False),
+        "full_auto": ("Полная автономия", "Проекты/инструкции/задачи создаются сразу по ходу работы.", True),
+        "confirm_agents_only": ("Подтверждение для новых проектов", "Новые проекты — по согласованию, остальное сразу.", False),
         "confirm_all": ("Подтверждение для всего", "Любое изменение сначала предлагается, затем выполняется.", False),
     }
     label, desc, is_on = autonomy_labels.get(autonomy, (autonomy, "", False))
@@ -59,11 +70,11 @@ def render(state: dict, orchestrator) -> None:
 
     tasks = state.get("tasks", [])
     done = sum(1 for t in tasks if t["status"] == "done")
-    total_skills = sum(a["skills_count"] for a in state.get("agents", []))
+    total_instructions = sum(p["instructions_count"] for p in state.get("projects", []))
 
     render_metrics([
-        (state.get("agents_count", 0), "Субагентов"),
-        (total_skills, "Скилов"),
+        (state.get("projects_count", 0), "Проектов"),
+        (total_instructions, "Инструкций"),
         (f"{done}/{len(tasks)}", "Задач выполнено"),
         (len(state.get("global_knowledge_entries", [])), "Записей знаний"),
     ])

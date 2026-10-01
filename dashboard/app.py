@@ -1,11 +1,14 @@
 """
 dashboard/app.py — минималистичный премиальный дашборд: "зеркало"
-Context-Driven мультиагентной системы.
+Context-Driven системы с ОДНИМ исполнителем.
 
-Управление системой происходит в чате с Оркестратором в Arena (вне этого
-дашборда). Сам дашборд ничего не создаёт: он лишь читает system_state.json
-(через Orchestrator.run_audit) и визуализирует актуальное состояние
-репозитория в реальном времени.
+Исполнитель — ИИ-агент, работающий в чате Arena (тот же, кто читает этот
+код). "Проекты" ниже — не отдельные автономные боты, а именованные профили
+контекста (роль, инструкции, знания, задачи) для разных направлений
+работы. Управление системой происходит в чате с этим исполнителем (вне
+этого дашборда). Сам дашборд ничего не создаёт: он лишь читает
+system_state.json (через Orchestrator.run_audit) и визуализирует
+актуальное состояние репозитория в реальном времени.
 
 Запуск:
     streamlit run dashboard/app.py --server.port 8501 --server.address 0.0.0.0
@@ -19,9 +22,9 @@ from theme import inject_css
 from state import get_orchestrator
 
 import view_overview
-import view_agents
+import view_projects
 import view_tasks
-import view_skills
+import view_instructions
 import view_knowledge
 import view_activity
 import view_export
@@ -37,9 +40,9 @@ state = orchestrator.run_audit()
 # соотнести между собой в обоих состояниях.
 PAGES = {
     "overview": {"label": "Обзор", "icon": ":material/space_dashboard:", "module": view_overview},
-    "agents": {"label": "Агенты", "icon": ":material/groups:", "module": view_agents},
+    "projects": {"label": "Проекты", "icon": ":material/folder:", "module": view_projects},
     "tasks": {"label": "Задачи", "icon": ":material/checklist:", "module": view_tasks},
-    "skills": {"label": "Навыки", "icon": ":material/bolt:", "module": view_skills},
+    "instructions": {"label": "Инструкции", "icon": ":material/bolt:", "module": view_instructions},
     "knowledge": {"label": "База знаний", "icon": ":material/menu_book:", "module": view_knowledge},
     "activity": {"label": "Логи", "icon": ":material/history:", "module": view_activity},
     "export": {"label": "Экспорт", "icon": ":material/ios_share:", "module": view_export},

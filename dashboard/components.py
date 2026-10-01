@@ -4,6 +4,11 @@ components.py — переиспользуемые визуальные блок
 
 Стиль — строгий и монохромный: без эмодзи и стоковых иконок,
 состояние передаётся цветом текста/рамки и короткими подписями.
+
+Терминология: исполнитель всегда один (ИИ-агент). "Проекты" — контейнеры
+контекста (роль/инструкции/знания) для разных направлений работы, а не
+отдельные автономные боты. "Инструкции" — обычный текст, который
+исполнитель читает и применяет сам, а не код отдельного модуля.
 """
 
 from __future__ import annotations
@@ -43,55 +48,55 @@ def status_dot(on: bool) -> str:
 
 
 def render_tree(state: dict) -> None:
-    """Рендерит дерево: Оркестратор -> Агенты -> Скилы (без иконок)."""
-    agents = state.get("agents", [])
+    """Рендерит дерево: Исполнитель -> Проекты -> Инструкции (без иконок)."""
+    projects = state.get("projects", [])
     html_parts = ['<div class="ark-tree">']
     html_parts.append(
-        '<details open class="tree-root"><summary>Оркестратор '
-        f'<span class="tree-meta">· агентов: {len(agents)}</span></summary>'
+        '<details open class="tree-root"><summary>Исполнитель (я) '
+        f'<span class="tree-meta">· проектов: {len(projects)}</span></summary>'
     )
     html_parts.append('<div class="tree-children">')
 
-    if not agents:
+    if not projects:
         html_parts.append(
-            '<div class="tree-leaf">Субагентов пока нет — создайте первого через чат слева.</div>'
+            '<div class="tree-leaf">Проектов пока нет — заведите первый через чат слева.</div>'
         )
     else:
-        for agent in agents:
-            skills = agent.get("skills", [])
+        for project in projects:
+            instructions = project.get("instructions", [])
             html_parts.append(
-                f'<details open class="tree-agent"><summary>{esc(agent["display_name"])} '
-                f'<span class="tree-meta">· {esc(agent.get("role",""))} · скилов: {len(skills)} · '
-                f'логов: {agent.get("log_lines",0)}</span></summary>'
+                f'<details open class="tree-agent"><summary>{esc(project["display_name"])} '
+                f'<span class="tree-meta">· {esc(project.get("role",""))} · инструкций: {len(instructions)} · '
+                f'логов: {project.get("log_lines",0)}</span></summary>'
             )
             html_parts.append('<div class="tree-children">')
-            if skills:
-                for s in skills:
+            if instructions:
+                for s in instructions:
                     html_parts.append(f'<div class="tree-leaf">{esc(s["name"])}</div>')
             else:
-                html_parts.append('<div class="tree-leaf">скилов пока нет</div>')
+                html_parts.append('<div class="tree-leaf">инструкций пока нет</div>')
             html_parts.append('</div></details>')
 
     html_parts.append('</div></details></div>')
     st.markdown("".join(html_parts), unsafe_allow_html=True)
 
 
-def agent_card(agent: dict) -> None:
-    skills = agent.get("skills", [])
-    knowledge = agent.get("knowledge_entries", [])
+def project_card(project: dict) -> None:
+    instructions = project.get("instructions", [])
+    knowledge = project.get("knowledge_entries", [])
     st.markdown(
         f"""
         <div class="ark-card">
-            <div class="ark-eyebrow">Субагент</div>
-            <div class="ark-card-title ark-card-title-lg">{esc(agent['display_name'])}</div>
-            <p style="color:#8FA398;margin:0 0 0.5rem 0;">{esc(agent.get('role',''))}</p>
-            <p style="margin:0 0 0.6rem 0;">{esc(agent.get('task_description',''))}</p>
+            <div class="ark-eyebrow">Проект (контекст для единственного исполнителя)</div>
+            <div class="ark-card-title ark-card-title-lg">{esc(project['display_name'])}</div>
+            <p style="color:#8FA398;margin:0 0 0.5rem 0;">{esc(project.get('role',''))}</p>
+            <p style="margin:0 0 0.6rem 0;">{esc(project.get('task_description',''))}</p>
             <div class="ark-meta-list">
-                <span>Путь: <code>{esc(agent.get('path',''))}</code></span>
-                <span>Создан: {esc(agent.get('created_at','—'))}</span>
-                <span>Скилов: {len(skills)}</span>
+                <span>Путь: <code>{esc(project.get('path',''))}</code></span>
+                <span>Создан: {esc(project.get('created_at','—'))}</span>
+                <span>Инструкций: {len(instructions)}</span>
                 <span>Знаний: {len(knowledge)}</span>
-                <span>Логов: {agent.get('log_lines', 0)}</span>
+                <span>Логов: {project.get('log_lines', 0)}</span>
             </div>
         </div>
         """,
@@ -99,16 +104,15 @@ def agent_card(agent: dict) -> None:
     )
 
 
-def skill_card(agent_display_name: str, skill: dict) -> None:
+def instruction_card(project_display_name: str, instruction: dict) -> None:
     st.markdown(
         f"""
         <div class="ark-card">
-            <div class="ark-eyebrow">Скил · {esc(agent_display_name)}</div>
-            <div class="ark-card-title">{esc(skill['name'])}</div>
-            <p style="color:#8FA398;margin:0;">{esc(skill.get('description') or 'без описания')}</p>
+            <div class="ark-eyebrow">Инструкция · {esc(project_display_name)}</div>
+            <div class="ark-card-title">{esc(instruction['name'])}</div>
+            <p style="color:#8FA398;margin:0;">{esc(instruction.get('description') or 'без описания')}</p>
             <div class="ark-meta-list">
-                <span>Файл: <code>{esc(skill.get('file',''))}</code></span>
-                <span>Создан: {esc(skill.get('created_at','—'))}</span>
+                <span>Создано: {esc(instruction.get('created_at','—'))}</span>
             </div>
         </div>
         """,
@@ -137,7 +141,7 @@ STATUS_LABELS = {"todo": "", "in_progress": "в процессе", "done": "го
 
 
 def task_list_row(task: dict) -> None:
-    """Компактная строка списка задач: id, агент, заголовок, простой статус."""
+    """Компактная строка списка задач: id, проект, заголовок, простой статус."""
     status = task.get("status", "todo")
     status_text = STATUS_LABELS.get(status, status)
     status_class = f"ark-task-status {status}"
@@ -146,7 +150,7 @@ def task_list_row(task: dict) -> None:
         <div class="ark-list-row">
             <span class="ark-list-id">#{task['id']}</span>
             <span class="ark-list-title">{esc(task['title'])}</span>
-            <span class="ark-list-agent">{esc(task.get('agent') or '—')}</span>
+            <span class="ark-list-agent">{esc(task.get('project') or '—')}</span>
             <span class="{status_class}">{esc(status_text)}</span>
         </div>
         """,
@@ -156,10 +160,10 @@ def task_list_row(task: dict) -> None:
 
 ACTION_LABELS = {
     "system_init": "Инициализация",
-    "create_agent": "Создан агент",
-    "create_agent_skipped": "Агент пропущен",
-    "delete_agent": "Удалён агент",
-    "add_skill": "Добавлен скил",
+    "create_project": "Заведён проект",
+    "create_project_skipped": "Проект пропущен",
+    "delete_project": "Удалён проект",
+    "add_instruction": "Добавлена инструкция",
     "create_task": "Создана задача",
     "update_task": "Обновлена задача",
     "add_knowledge": "Добавлено знание",

@@ -1,0 +1,242 @@
+# -*- coding: utf-8 -*-
+"""
+Scoped technical glossary for the BIKAI catalog "mini translator".
+
+This is intentionally a narrow, rule-based EN->RU helper built ONLY for this
+catalog's spec tables (parameter names + common recurring value phrases). It
+is NOT the general-purpose translation agent planned for the full dealer
+site later — that one will be a proper (LLM-backed) translator service. This
+one is a small glossary/dictionary matcher good enough for an internal
+approval draft.
+
+Unmatched terms are left in English rather than guessed.
+"""
+
+# Exact-match translations for spec-table group titles.
+GROUP_TITLE_MAP = {
+    "Key Capabilities": "Ключевые характеристики",
+    "UHPLC Pump": "Насос UHPLC",
+    "Autosampler": "Автосэмплер",
+    "Column Oven": "Термостат колонок",
+    "Detector: UV-Vis": "Детектор: УФ-Вид (UV-Vis)",
+    "Detector: DAD": "Детектор: диодно-матричный (DAD)",
+    "Detector: FLD": "Детектор: флуоресцентный (FLD)",
+    "Detector: Fluorescence": "Детектор: флуоресцентный",
+    "Detector: RID": "Детектор: рефрактометрический (RID)",
+    "Detector: Refractive Index": "Детектор: рефрактометрический",
+    "Software": "Программное обеспечение",
+    "Pump": "Насос",
+    "Sensitivity (A vs B)": "Чувствительность (модели A и B)",
+    "Core Specifications": "Основные характеристики",
+    "Mass Spectrometer": "Масс-спектрометр",
+    "Bundled Binary UHPLC Front End": "Встроенный бинарный модуль UHPLC",
+    "Mass Spectrometer Module": "Модуль масс-спектрометра",
+    "GC Module": "Модуль газового хроматографа",
+    "Software & Safety": "ПО и безопасность",
+    "Technical Specifications": "Технические характеристики",
+    "Configurations": "Варианты конфигурации",
+    "D50 vs D51": "D50 и D51",
+    "Models": "Модели",
+    "BIKAI Light Series": "Серия BIKAI Light",
+}
+
+# Exact-match translations for the left-hand "parameter name" column.
+PARAM_MAP = {
+    "Parameter": "Параметр", "Specification": "Характеристика", "Capability": "Возможность",
+    "Value": "Значение", "Details": "Детали", "Category": "Категория",
+    "System Type": "Тип системы", "Pump": "Насос",
+    "Flow Range": "Диапазон потока", "Flow Rate Options": "Варианты скорости потока",
+    "Analytical Flow Range": "Диапазон потока (аналитический)",
+    "Semi-Preparative Flow Range": "Диапазон потока (полупрепаративный)",
+    "Preparative Flow Range": "Диапазон потока (препаративный)",
+    "Flow Increment": "Шаг изменения потока",
+    "Injection Modes": "Режимы ввода пробы",
+    "Loop Options": "Варианты петли ввода", "Sample Loop Options": "Варианты петли ввода пробы",
+    "Sample Capacity": "Вместимость для образцов", "Standard Capacity": "Стандартная вместимость",
+    "Standard Sample Capacity": "Стандартная вместимость для образцов",
+    "High-Throughput Capacity": "Вместимость (высокопроизводительный режим)",
+    "High-Throughput Option": "Опция высокой производительности",
+    "Microplate Capacity": "Вместимость планшетов", "Microplate Option": "Опция планшетов",
+    "Preparative Configuration": "Препаративная конфигурация",
+    "Preparative Sample Capacity": "Препаративная вместимость для образцов",
+    "Carryover": "Перенос пробы (carryover)",
+    "Column Oven": "Термостат колонок", "Column Oven Stability": "Стабильность термостата колонок",
+    "Cooling": "Охлаждение", "Detector Options": "Варианты детекторов",
+    "Application Modes": "Режимы применения", "Pump Configurations": "Конфигурации насоса",
+    "Gradient Modes": "Режимы градиента", "Online Degassing": "Онлайн-дегазация",
+    "Maximum Pressure": "Максимальное давление", "Pressure Equivalent": "Эквивалент давления",
+    "Pressure Pulsation": "Пульсация давления", "Application": "Применение",
+    "Temperature Control": "Контроль температуры", "Heating Range": "Диапазон нагрева",
+    "Cooling Range": "Диапазон охлаждения", "Minimum Temperature": "Минимальная температура",
+    "Temperature Accuracy": "Точность температуры", "Temperature Stability": "Стабильность температуры",
+    "Column Capacity": "Вместимость колонок",
+    "Optional Column Management": "Опциональное управление колонками",
+    "Optional Column Switching": "Опциональное переключение колонок",
+    "Wavelength Range": "Диапазон длин волн", "Wavelength Options": "Варианты длин волн",
+    "Light Source": "Источник света", "Wavelength Accuracy": "Точность длины волны",
+    "Wavelength Precision": "Прецизионность длины волны",
+    "Wavelength calibration": "Калибровка длины волны",
+    "Array": "Матрица", "Spectral Resolution": "Спектральное разрешение",
+    "Standard Flow Cell": "Стандартная проточная кювета",
+    "Low-Volume Option": "Опция малого объёма", "High-Sensitivity Option": "Опция повышенной чувствительности",
+    "Excitation Range": "Диапазон возбуждения", "Emission Range": "Диапазон эмиссии",
+    "Excitation/Emission Range": "Диапазон возбуждения/эмиссии",
+    "Water Raman S/N": "С/Ш по рамановскому пику воды",
+    "Water Raman peak S/N (Signal-to-Noise)": "С/Ш по рамановскому пику воды (сигнал/шум)",
+    "Sampling Rate": "Частота сэмплирования", "Maximum Sampling Rate": "Макс. частота сэмплирования",
+    "Flow Cell": "Проточная кювета", "Refractive Index Range": "Диапазон показателя преломления",
+    "Baseline Noise": "Шум базовой линии", "Baseline Drift": "Дрейф базовой линии",
+    "Flow Cell Volume": "Объём проточной кюветы", "Maximum Flow Rate": "Максимальная скорость потока",
+    "Max Flow Rate": "Макс. скорость потока",
+    "Communication": "Интерфейс связи", "Communication Interface": "Интерфейс связи",
+    "Function": "Функция", "Platform": "Платформа", "Instrument Control": "Управление прибором",
+    "Data Acquisition": "Сбор данных", "Data Processing": "Обработка данных",
+    "Audit Trail": "Журнал аудита", "User Management": "Управление пользователями",
+    "Electronic Signature": "Электронная подпись", "Regulatory Support": "Соответствие нормативам",
+    "Database": "База данных", "Reporting": "Отчётность",
+    "Maintenance Management": "Управление обслуживанием", "Maintenance Reminder": "Напоминания об обслуживании",
+    "Maintenance": "Обслуживание",
+    "Mass Spectrometer Type": "Тип масс-спектрометра", "Ion Source": "Источник ионов",
+    "Ion Source Switching": "Переключение источника ионов",
+    "ESI Flow Rate": "Скорость потока ESI", "APCI Flow Rate": "Скорость потока APCI",
+    "Maximum Heating Temperature": "Максимальная температура нагрева",
+    "Mass Range": "Диапазон масс", "Scanning Speed": "Скорость сканирования",
+    "Maximum Scan Speed": "Максимальная скорость сканирования",
+    "Mass Resolution": "Разрешение по массе", "Resolution": "Разрешение",
+    "Mass Stability": "Стабильность по массе", "Mass stability / accuracy": "Стабильность/точность по массе",
+    "Mass axis stability": "Стабильность оси масс", "Dynamic Range": "Динамический диапазон",
+    "MRM Sensitivity": "Чувствительность MRM", "MRM scan speed": "Скорость сканирования MRM",
+    "Instrument Detection Limit (IDL)": "Предел обнаружения прибора (IDL)",
+    "Scan Modes": "Режимы сканирования", "MS/MS Function": "Функция MS/MS",
+    "Reproducibility": "Воспроизводимость", "Repeatability": "Повторяемость",
+    "Collision Cell": "Коллизионная ячейка", "Gas System": "Газовая система",
+    "Gas Supply": "Подача газа", "Automatic Syringe Pump": "Автоматический шприцевой насос",
+    "Switching Valve": "Переключающий клапан", "Vacuum System": "Вакуумная система",
+    "Vacuum system": "Вакуумная система",
+    "Mechanical Pumping Speed": "Скорость механической откачки",
+    "Turbo Molecular Pump": "Турбомолекулярный насос",
+    "Data System": "Система сбора данных", "Data system": "Система сбора данных",
+    "Software Language": "Язык ПО", "Configuration": "Конфигурация",
+    "Crosstalk": "Перекрёстные помехи", "Detector": "Детектор",
+    "Fore pump": "Форвакуумный насос", "Dimensions and weight": "Габариты и масса",
+    "Dimensions": "Габариты", "Weight": "Масса", "Analyser": "Анализатор",
+    "Sensitivity specification": "Параметр чувствительности", "Everything else": "Всё остальное",
+    "Operating Environment": "Условия эксплуатации", "Sensitivity": "Чувствительность",
+    "Mass Accuracy": "Точность по массе", "Peak Area Reproducibility": "Воспроизводимость площади пика",
+    "Ion Source Type": "Тип источника ионов", "Ion Source Temperature": "Температура источника ионов",
+    "Ionization Energy": "Энергия ионизации", "Filament Current": "Ток нити накала",
+    "Interface Temperature": "Температура интерфейса", "Mass Analyzer": "Масс-анализатор",
+    "Oven Temperature Range": "Диапазон температуры термостата",
+    "Temperature Control Accuracy": "Точность контроля температуры",
+    "Programmed Ramp Stages": "Число программируемых ступеней нагрева",
+    "Maximum Ramp Rate": "Максимальная скорость нагрева", "Cooling Rate": "Скорость охлаждения",
+    "Injection Port Type": "Тип инжектора", "Injector Max Temperature": "Макс. температура инжектора",
+    "Pressure Range / Accuracy": "Диапазон/точность давления", "Injector Modes": "Режимы инжектора",
+    "Column Control Modes": "Режимы управления потоком колонки",
+    "Maximum Split Ratio": "Максимальное соотношение деления потока",
+    "Total Flow Range": "Общий диапазон потока", "Autosampler": "Автосэмплер",
+    "Software Features": "Возможности ПО", "Safety & Monitoring": "Безопасность и мониторинг",
+    "Safety": "Безопасность",
+    "Model": "Модель", "Light Path": "Оптическая схема", "Spectral Bandwidth": "Спектральная ширина щели",
+    "Wave length Reproducibility": "Воспроизводимость длины волны",
+    "Wavelength Reproducibility": "Воспроизводимость длины волны",
+    "Noise": "Шум", "Drift": "Дрейф", "Stray Light": "Рассеянный свет",
+    "Spectrum Scanning": "Сканирование спектра", "Screen": "Экран", "Direct Printing": "Прямая печать",
+    "USB Storage": "USB-накопитель", "Built—in Methods": "Встроенные методики",
+    "Built-in Methods": "Встроенные методики", "Workstation": "Рабочая станция (ПО)",
+    "Isocratic": "Изократический режим", "Binary": "Бинарный режим",
+    "Quaternary": "Четырёхкомпонентный режим", "Dual ternary gradient": "Двойной тройной градиент",
+    "Auto sample Inhalation": "Автоматический забор пробы",
+    "Auto sampler\nIntegral-Loop": "Автосэмплер со встроенной петлёй",
+    "Standard": "Стандартная комплектация", "Heating & cooling": "Нагрев и охлаждение",
+    "Diode-array Detector": "Диодно-матричный детектор",
+    "System, modules & discription": "Система, модули и описание",
+    "System / module": "Система / модуль",
+    "Specifications / Notice": "Характеристики / примечание",
+    "General": "Общие сведения", "Power & Environment": "Питание и условия эксплуатации",
+    "Liquid Flow": "Поток жидкости", "Signal Performance": "Параметры сигнала",
+    "Controls & Interface": "Органы управления и интерфейс",
+    "Communication & Software": "Связь и ПО", "Data Management": "Управление данными",
+    "Principle": "Принцип действия", "Detection Range": "Диапазон обнаружения",
+    "Linear Range": "Линейный диапазон", "Response Time": "Время отклика",
+    "Auto-Zero": "Авто-обнуление", "Baseline Shift Range": "Диапазон смещения базовой линии",
+    "Integrator Output": "Выход на интегратор", "Recorder Output": "Выход на самописец",
+    "External Signal Output (Contact Closure)": "Внешний сигнальный выход (сухой контакт)",
+    "- Ready": "— Готовность", "- Solvent Leakage": "— Утечка растворителя",
+    "- Error (Triggered by: Overheat, Zero Glass Misalignment, Optical Balance Error, Parameter Loss, Low Energy)":
+        "— Ошибка (перегрев, рассогласование нулевого стекла, ошибка оптического баланса, потеря параметров, низкая энергия)",
+    "(Contact Rating: DC 24V, Max 0.1A)": "(характеристики контакта: DC 24В, макс. 0,1 А)",
+    "Cell Volume": "Объём кюветы", "Max Pressure Resistance": "Макс. допустимое давление",
+    "Internal Volume": "Внутренний объём", "Wetted Materials": "Материалы смачиваемых частей",
+    "Power Supply": "Электропитание", "Power Consumption": "Потребляемая мощность",
+    "EMC Standards": "Стандарты ЭМС", "Safety Standards": "Стандарты безопасности",
+    "Note": "Примечание", "Product": "Модель", "Product, modules & discription": "Модель, модули и описание",
+}
+
+# Substring phrase replacements applied to value cells (col2/col3). Longest
+# phrases first to avoid partial clobbering. Numbers/units/model codes are
+# intentionally left untouched.
+VALUE_PHRASES = [
+    ("Deuterium + Tungsten lamps", "Дейтериевая + вольфрамовая лампы"),
+    ("Xenon Lamp (DC)", "Ксеноновая лампа (DC)"),
+    ("Xenon lamp", "Ксеноновая лампа"),
+    ("Xenon Lamp", "Ксеноновая лампа"),
+    ("Deuterium Lamp", "Дейтериевая лампа"),
+    ("pure water as mobile phase", "чистая вода в качестве подвижной фазы"),
+    ("Pure water", "Чистая вода"),
+    ("with cooling function", "с функцией охлаждения"),
+    ("cooling function", "функция охлаждения"),
+    ("double valve", "два клапана"),
+    ("sample tray", "лоток для образцов"),
+    ("quantitative pump", "дозирующий насос"),
+    ("Mass injection", "Массовый ввод"),
+    ("Room temperature", "Комнатная температура"),
+    ("Two position 6-way valve", "Двухпозиционный 6-портовый клапан"),
+    ("Two-position ten-way valve", "Двухпозиционный 10-портовый клапан"),
+    ("two-position 6-way valve", "двухпозиционный 6-портовый клапан"),
+    ("two-position 10-way valve", "двухпозиционный 10-портовый клапан"),
+    ("Two-position 6-way valve", "Двухпозиционный 6-портовый клапан"),
+    ("Two-position 10-way valve", "Двухпозиционный 10-портовый клапан"),
+    ("Forced-air circulation", "Принудительная циркуляция воздуха"),
+    ("Peltier control", "Элемент Пельтье"),
+    ("Peltier", "Элемент Пельтье"),
+    ("Optical/Electrical Auto-Zero", "Оптическое/электрическое авто-обнуление"),
+    ("selectable", "на выбор"),
+    ("Available", "Доступно"),
+    ("Optional", "Опционально"),
+    ("Supported", "Поддерживается"),
+    ("hours", "часов"),
+    ("hour", "час"),
+    ("Up to", "До"),
+    ("up to", "до"),
+    ("under specified conditions", "при заданных условиях"),
+    ("equivalent to", "аналог"),
+    ("comply to multiple branded GC", "совместим с ГХ различных производителей"),
+    ("could support", "поддерживает"),
+    ("vials", "виал"),
+    ("plates", "планшетов"),
+    ("columns", "колонок"),
+    ("Windows 10 or above, 64-bit", "Windows 10 и выше, 64-бит"),
+    ("Chinese / English", "китайский / английский"),
+    ("English, Chinese and Russian interfaces", "интерфейс на английском, китайском и русском языках"),
+    ("English, Chinese, Russian UI", "интерфейс на английском, китайском и русском языках"),
+]
+
+
+def translate_cell(text):
+    """Best-effort phrase substitution for a single table cell's text."""
+    if not text:
+        return text
+    if text in PARAM_MAP:
+        return PARAM_MAP[text]
+    out = text
+    for en, ru in VALUE_PHRASES:
+        if en in out:
+            out = out.replace(en, ru)
+    return out
+
+
+def translate_group_title(title):
+    if not title:
+        return title
+    return GROUP_TITLE_MAP.get(title, title)

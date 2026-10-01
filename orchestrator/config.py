@@ -20,7 +20,7 @@ class Config:
     """
 
     # Список переменных окружения с ключами API, которые потенциально
-    # могут использовать Оркестратор и его субагенты.
+    # может использовать единственный исполнитель при работе над проектами.
     ENV_KEYS = [
         "OPENAI_API_KEY",
         "ANTHROPIC_API_KEY",
@@ -42,7 +42,9 @@ class Config:
         self.environment = os.environ.get("ARENA_ENV", "arena-cloud")
 
         # Ключевые пути репозитория (единая точка правды для всей системы).
-        self.agents_dir = self.base_dir / "agents"
+        # projects_dir хранит контекстные профили проектов (НЕ отдельных
+        # ботов) для единственного исполнителя.
+        self.projects_dir = self.base_dir / "projects"
         self.global_knowledge_dir = self.base_dir / "global_knowledge"
         self.global_logs_dir = self.base_dir / "global_logs"
         self.orchestrator_log_file = self.global_logs_dir / "orchestrator.log"

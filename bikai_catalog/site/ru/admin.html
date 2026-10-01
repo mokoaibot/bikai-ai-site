@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Админ-вид — BIKAI Catalog</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">BIK<span>AI</span><small>Каталог продукции</small></a>
+    <nav class="main-nav"><a href="index.html#chromatography" class="nav-link">⬢ Хроматография</a><a href="index.html#mass-spectrometry" class="nav-link">◆ Масс-спектрометрия</a><a href="index.html#spectroscopy" class="nav-link">▣ Спектроскопия</a><a href="index.html#functional-modules" class="nav-link">⚙ Функциональные модули</a><a href="index.html#gas-generators" class="nav-link">◎ Генераторы газов</a><a href="index.html#sample-treatment" class="nav-link">⬡ Пробоподготовка</a><a href="index.html#consumables" class="nav-link">● Расходные материалы</a></nav>
+    <a href="../admin.html" class="lang-switch">EN — English version</a>
+    <a href="admin.html" class="admin-link">Админ-вид</a>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero hero-admin">
+    <h1>Админ: вид базы данных</h1>
+    <p>Плоское представление всех строк <code>bikai_catalog.db</code> (таблица <code>products</code>, объединённая с <code>consumable_fields</code> и количеством строк <code>spec_rows</code>) — для быстрой внутренней проверки перед утверждением. 55 товаров в 7 категориях. Чтобы добавить новый товар позже: добавьте его в <code>catalog/scripts/build_data.py</code> (или вставьте строку напрямую в файл SQLite) и заново запустите <code>build_db.py</code> + <code>build_site.py</code>.</p>
+    <input id="admin-search" class="search-box" type="search" placeholder="Фильтр по таблице…" oninput="filterTable(this.value)">
+  </section>
+  <table class="admin-table" id="admin-table">
+    <thead><tr>
+      <th>Категория</th><th>Название</th><th>Артикул</th><th>Производитель</th><th>Модель прибора</th><th>Строк характеристик</th><th>Источник</th><th>Slug</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+          <td>Хроматография</td>
+          <td><a href="product/uhplc-1521-pro.html">UHPLC 1521 Pro</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>56</td>
+          <td><a href="https://bikaicorp.com/chromatography/1.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>uhplc-1521-pro</code></td>
+        </tr><tr>
+          <td>Хроматография</td>
+          <td><a href="product/hplc-1511-pro.html">HPLC 1511 Pro</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>56</td>
+          <td><a href="https://bikaicorp.com/chromatography/3.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>hplc-1511-pro</code></td>
+        </tr><tr>
+          <td>Хроматография</td>
+          <td><a href="product/prep-hplc-1511-pro.html">Prep HPLC 1511 Pro</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>0</td>
+          <td><a href="https://bikaicorp.com/chromatography/4.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>prep-hplc-1511-pro</code></td>
+        </tr><tr>
+          <td>Хроматография</td>
+          <td><a href="product/2d-hplc-1511-pro.html">2D HPLC 1511 Pro</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>0</td>
+          <td><a href="https://bikaicorp.com/chromatography/5.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>2d-hplc-1511-pro</code></td>
+        </tr><tr>
+          <td>Хроматография</td>
+          <td><a href="product/bio-hplc-1511-pro.html">Bio HPLC 1511 Pro</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>0</td>
+          <td><a href="https://bikaicorp.com/chromatography/6.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>bio-hplc-1511-pro</code></td>
+        </tr><tr>
+          <td>Хроматография</td>
+          <td><a href="product/gc-7000.html">GC 7000</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>0</td>
+          <td><a href="https://bikaicorp.com/chromatography/7.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>gc-7000</code></td>
+        </tr><tr>
+          <td>Масс-спектрометрия</td>
+          <td><a href="product/tq-1621.html">TQ 1621</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>18</td>
+          <td><a href="https://bikaicorp.com/mass-spectrometry/56.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>tq-1621</code></td>
+        </tr><tr>
+          <td>Масс-спектрометрия</td>
+          <td><a href="product/tq-1620.html">TQ 1620</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>22</td>
+          <td><a href="https://bikaicorp.com/mass-spectrometry/8.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>tq-1620</code></td>
+        </tr><tr>
+          <td>Масс-спектрометрия</td>
+          <td><a href="product/sq-1610.html">SQ 1610</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>15</td>
+          <td><a href="https://bikaicorp.com/mass-spectrometry/55.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>sq-1610</code></td>
+        </tr><tr>
+          <td>Масс-спектрометрия</td>
+          <td><a href="product/gc-ms-7500.html">GC-MS 7500</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>26</td>
+          <td><a href="https://bikaicorp.com/mass-spectrometry/9.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>gc-ms-7500</code></td>
+        </tr><tr>
+          <td>Спектроскопия</td>
+          <td><a href="product/uv-3600-spectrophotometer.html">Спектрофотометр UV 3600 (Ultra-3000)</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>15</td>
+          <td><a href="https://bikaicorp.com/spectroscopy/10.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>uv-3600-spectrophotometer</code></td>
+        </tr><tr>
+          <td>Функциональные модули</td>
+          <td><a href="product/lc-pump.html">Насос для жидкостной хроматографии (ЖХ)</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>8</td>
+          <td><a href="https://bikaicorp.com/functional-module/11.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lc-pump</code></td>
+        </tr><tr>
+          <td>Функциональные модули</td>
+          <td><a href="product/lc-sampler.html">Автосэмплер для жидкостной хроматографии (ЖХ)</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>10</td>
+          <td><a href="https://bikaicorp.com/functional-module/26.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lc-sampler</code></td>
+        </tr><tr>
+          <td>Функциональные модули</td>
+          <td><a href="product/lc-column-oven.html">Термостат колонок для жидкостной хроматографии (ЖХ)</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>7</td>
+          <td><a href="https://bikaicorp.com/functional-module/27.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lc-column-oven</code></td>
+        </tr><tr>
+          <td>Функциональные модули</td>
+          <td><a href="product/lc-diode-array-detector.html">Диодно-матричный детектор (DAD) для жидкостной хроматографии (ЖХ)</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>3</td>
+          <td><a href="https://bikaicorp.com/functional-module/25.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lc-diode-array-detector</code></td>
+        </tr><tr>
+          <td>Функциональные модули</td>
+          <td><a href="product/lc-uv-detector.html">Ультрафиолетовый (УФ) детектор для жидкостной хроматографии (ЖХ)</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>0</td>
+          <td><a href="https://bikaicorp.com/functional-module/28.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lc-uv-detector</code></td>
+        </tr><tr>
+          <td>Функциональные модули</td>
+          <td><a href="product/fluorescence-detector.html">Флуоресцентный детектор</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>16</td>
+          <td><a href="https://bikaicorp.com/functional-module/30.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>fluorescence-detector</code></td>
+        </tr><tr>
+          <td>Функциональные модули</td>
+          <td><a href="product/refractive-index-detector.html">Рефрактометрический детектор (RID)</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>18</td>
+          <td><a href="https://bikaicorp.com/functional-module/31.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>refractive-index-detector</code></td>
+        </tr><tr>
+          <td>Функциональные модули</td>
+          <td><a href="product/evaporative-light-scattering-detector.html">Детектор светорассеяния на основе испарения (ELSD)</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>8</td>
+          <td><a href="https://bikaicorp.com/functional-module/37.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>evaporative-light-scattering-detector</code></td>
+        </tr><tr>
+          <td>Функциональные модули</td>
+          <td><a href="product/gc-sampler.html">Автосэмплер для газовой хроматографии (ГХ)</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>5</td>
+          <td><a href="https://bikaicorp.com/functional-module/51.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>gc-sampler</code></td>
+        </tr><tr>
+          <td>Функциональные модули</td>
+          <td><a href="product/charged-aerosol-detector.html">Детектор заряженных аэрозолей (CAD)</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>9</td>
+          <td><a href="https://bikaicorp.com/functional-module/54.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>charged-aerosol-detector</code></td>
+        </tr><tr>
+          <td>Функциональные модули</td>
+          <td><a href="product/photochemical-derivatizer.html">Фотохимический дериватизатор</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>0</td>
+          <td><a href="https://bikaicorp.com/functional-module/53.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>photochemical-derivatizer</code></td>
+        </tr><tr>
+          <td>Функциональные модули</td>
+          <td><a href="product/fraction-collector.html">Коллектор фракций</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>0</td>
+          <td><a href="https://bikaicorp.com/functional-module/52.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>fraction-collector</code></td>
+        </tr><tr>
+          <td>Генераторы газов</td>
+          <td><a href="product/nitrogen-generator.html">Генератор азота</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>4</td>
+          <td><a href="https://bikaicorp.com/gas-generators/50.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>nitrogen-generator</code></td>
+        </tr><tr>
+          <td>Пробоподготовка</td>
+          <td><a href="product/hextractor-20.html">Автоматизированная система пробоподготовки hExtractor 20</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/product/sample-treatment/automated-sample-preparation-system-hextractor20.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>hextractor-20</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/column.html">Колонка</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/23.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>column</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/cuvette.html">Кювета</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/24.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>cuvette</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/equivalent-lamp.html">Эквивалентная лампа (универсальная)</a></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/product/consumables/equivalent-lamp.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>equivalent-lamp</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-waters-996-2996.html">Waters 2996 / 996 — аналог Wat052586</a></td>
+          <td>BK82022996</td>
+          <td>Waters</td>
+          <td>Waters996/2996</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/d2lampwat052586.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-waters-996-2996</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-waters-2489-2998.html">Waters 2489/2998 — эквивалентная дейтериевая лампа</a></td>
+          <td>BK82020281</td>
+          <td>Waters</td>
+          <td>Waters2489(2695)/2998</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/76.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-waters-2489-2998</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-waters-2487.html">Waters 2487 — эквивалентная дейтериевая лампа</a></td>
+          <td>BK82112487</td>
+          <td>Waters</td>
+          <td>Waters2487</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/75.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-waters-2487</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-thermo-u3000-d2.html">Thermo U3000 6074.1110 — эквивалентная дейтериевая лампа</a></td>
+          <td>BK82226999</td>
+          <td>Thermo ThermoFisher</td>
+          <td>U3000 series</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/74.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-thermo-u3000-d2</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-thermofisher-u3000-tungsten.html">ThermoFisher U3000 — эквивалентная вольфрамовая лампа</a></td>
+          <td>BKWL6074</td>
+          <td>ThermoFisher</td>
+          <td>U3000 series</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/73.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-thermofisher-u3000-tungsten</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-thermofisher-ice3500.html">ThermoFisher, атомно-абсорбционный ICE3500</a></td>
+          <td>BK82024204</td>
+          <td>ThermoFisher</td>
+          <td>Atomic absorption ICE3500</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/72.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-thermofisher-ice3500</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-thermofisher-vhd1.html">Thermo Fisher VH-D1 6083.1110 — эквивалентная дейтериевая лампа</a></td>
+          <td>BK60831110</td>
+          <td>ThermoFisher</td>
+          <td>VH-D1</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/71.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-thermofisher-vhd1</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-shimadzu-l6380.html">Shimadzu, УФ-лампа L6380</a></td>
+          <td>L6380</td>
+          <td>Shimadzu</td>
+          <td>UV-3700/3600/2700/2550/2450/1700/1800/1240/1280</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/70.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-shimadzu-l6380</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-shimadzu-spd10a.html">Shimadzu SPD-10A/20A/15C — эквивалентная дейтериевая лампа</a></td>
+          <td>BK82000010</td>
+          <td>Shimadzu</td>
+          <td>SPD-10A/20A/15C</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/69.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-shimadzu-spd10a</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-shimadzu-lc2010.html">Shimadzu LC-2010 — эквивалентная дейтериевая лампа</a></td>
+          <td>BK82002010</td>
+          <td>Shimadzu</td>
+          <td>LC-2010/A/C</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/68.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-shimadzu-lc2010</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-shimadzu-lc2030-2040.html">Shimadzu LC-2030/2040 — эквивалентная дейтериевая лампа</a></td>
+          <td>BK82002030/2040</td>
+          <td>Shimadzu</td>
+          <td>LC-2030/2040</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/67.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-shimadzu-lc2030-2040</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-pe-365-tungsten.html">Perkin Elmer, серия 365, вольфрамовая лампа N4101037</a></td>
+          <td>BK82221037</td>
+          <td>Perkin Elmer</td>
+          <td>365 series</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/66.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-pe-365-tungsten</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-pe-series200.html">Perkin Elmer Series 200 UV/vis B0114620</a></td>
+          <td>B0114620</td>
+          <td>Perkin Elmer</td>
+          <td>Series 200 UV/vis</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/65.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-pe-series200</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-pe-lambda-d2.html">Perkin Elmer, серия Lambda, дейтериевая лампа L6022728</a></td>
+          <td>L6022728</td>
+          <td>Perkin Elmer</td>
+          <td>Lambda</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/64.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-pe-lambda-d2</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-pe-lambda365.html">PE Lambda365 — эквивалентная дейтериевая лампа</a></td>
+          <td>BK82221036</td>
+          <td>Perkin Elmer</td>
+          <td>Lambda365</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/63.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-pe-lambda365</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-knauer-2520-2550.html">Knauer 2520/2550 — эквивалентная дейтериевая лампа</a></td>
+          <td>BK82012520</td>
+          <td>Knauer</td>
+          <td>2520/2550</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/62.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-knauer-2520-2550</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-knauer-2501.html">Knauer 2501 ALL</a></td>
+          <td>BK82024071</td>
+          <td>Knauer</td>
+          <td>2501 ALL</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/61.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-knauer-2501</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-jasco-970b.html">Jasco 970B 975B 5330-0091B</a></td>
+          <td>BK82000091</td>
+          <td>JASCO</td>
+          <td>970B/975B, 1570/1575, 2070/2075</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/60.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-jasco-970b</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-hitachi-primaide.html">Hitachi primaide DAD, дейтериевая лампа</a></td>
+          <td>BK82224755</td>
+          <td>Hitachi</td>
+          <td>Primaide DAD</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/59.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-hitachi-primaide</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-hitachi-lc-vwd.html">Hitachi LC-VWD</a></td>
+          <td>BK81022430</td>
+          <td>Hitachi</td>
+          <td>LC-VWD</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/58.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-hitachi-lc-vwd</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-analytikjena-ea5000.html">Analytik Jena EA5000 — эквивалентная дейтериевая лампа</a></td>
+          <td>11-0402-001-21</td>
+          <td>Analytikjena</td>
+          <td>EA5000</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/57.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-analytikjena-ea5000</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-analytikjena-specord-plus.html">Analytikjena SPECORD PLUS — эквивалентная дейтериевая лампа</a></td>
+          <td>820-60274-C</td>
+          <td>Analytikjena</td>
+          <td>SPECORD PLUS</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/56.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-analytikjena-specord-plus</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-analytikjena-specord-2xx.html">Analytikjena SPECORD 2xx 820-60021-0</a></td>
+          <td>820-60021-0</td>
+          <td>Analytikjena</td>
+          <td>SPECORD 2xx (PLUS)/50(PLUS)/40/30, SPECORD S600, S100, SPEKOL 1200</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/55.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-analytikjena-specord-2xx</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-agilent-1290-dad.html">Agilent 1290 DAD 5190-0917</a></td>
+          <td>BK82220917</td>
+          <td>Agilent</td>
+          <td>1290 DAD</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/54.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-agilent-1290-dad</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-agilent-vwd.html">Agilent (1100/1200/1220/1260) VWD — эквивалентная дейтериевая лампа</a></td>
+          <td>BK82010100</td>
+          <td>Agilent</td>
+          <td>1100/1200/1220/1260 VWD</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/53.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-agilent-vwd</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-agilent-1100-1200-dad.html">Agilent 1100/1200 DAD 2140-0820</a></td>
+          <td>BK82220820</td>
+          <td>Agilent</td>
+          <td>1100/1200/1220/1260 DAD / 1260 MD</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/52.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-agilent-1100-1200-dad</code></td>
+        </tr><tr>
+          <td>Расходные материалы</td>
+          <td><a href="product/lamp-absciex-mdq-plus.html">AB SCIEX MDQ plus 144-667</a></td>
+          <td>BK82220251</td>
+          <td>ABSCIEX</td>
+          <td>P/ACE MDQ plus</td>
+          <td>0</td>
+          <td><a href="https://www.uvtech-cc.com/products_details/51.html" target="_blank" rel="noopener">источник ↗</a></td>
+          <td><code>lamp-absciex-mdq-plus</code></td>
+        </tr>
+    </tbody>
+  </table>
+</main>
+<script>
+function filterTable(q){
+  q = q.trim().toLowerCase();
+  document.querySelectorAll('#admin-table tbody tr').forEach(function(tr){
+    tr.style.display = (!q || tr.textContent.toLowerCase().indexOf(q) !== -1) ? '' : 'none';
+  });
+}
+</script>
+
+<footer class="site-footer">
+  <p>Внутренний каталог продукции BIKAI — составлен для утверждения. Источники: uvtech-cc.com (основной сайт производителя) и bikaicorp.com (сайт бренда). Не для внешней публикации. Русская версия — черновой машинный перевод (упрощённый словарный переводчик для этой задачи), часть технических значений может оставаться на английском.</p>
+</footer>
+</body>
+</html>

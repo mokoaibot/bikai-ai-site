@@ -1,10 +1,36 @@
 """
-core.py — ядро Главного Агента (Оркестратора).
+core.py — ядро Оркестратора.
 
-Context-Driven архитектура: Оркестратор принимает произвольные текстовые
-команды (через handle_chat_message), с помощью "ИИ-мозга" (orchestrator.brain)
-понимает намерение пользователя и материализует его в реальной файловой
-структуре monorepo (agents/, global_knowledge/, tasks.json, логи и т.д.).
+РЕАЛЬНАЯ АРХИТЕКТУРА (важно понимать, прежде чем читать код ниже):
+
+Исполнитель во всей этой системе ровно ОДИН — ИИ-агент Arena.ai, работающий
+в чате (тот же, кто читает этот код). Никаких независимых субагентов,
+которые бы сами запускались и выполняли работу параллельно, здесь нет и
+быть не может: в этом окружении нет механизма порождать отдельный
+самостоятельный процесс-исполнитель.
+
+Поэтому то, что раньше называлось "агентами", на самом деле — ПРОЕКТЫ:
+именованные контейнеры контекста (роль, инструкции, накопленные знания,
+задачи, логи) для разных клиентов/направлений работы. Когда пользователь
+просит заняться конкретным проектом, именно этот единственный исполнитель
+открывает его папку, читает `metadata.json`, `instructions.json`/
+`INSTRUCTIONS.md` и `knowledge/`, и затем сам, напрямую, выполняет работу —
+а не "запускает" какого-то отдельного бота.
+
+Раньше `create_agent`/`add_skill` генерировали `agent.py` (класс-заглушку
+с методом `run()`) и `skills/*.py` (функции-заглушки вида
+`return "... ещё не реализован"`), которые никогда реально не исполнялись —
+это создавало иллюзию отдельных работающих модулей. Это поведение
+полностью убрано: вместо кода теперь создаются и читаются обычные
+текстовые инструкции (`instructions.json` + человекочитаемый
+`INSTRUCTIONS.md`), которые исполнитель держит в голове/перечитывает
+перед работой над проектом.
+
+Context-Driven часть не изменилась: Оркестратор принимает произвольные
+текстовые команды (через handle_chat_message), с помощью "ИИ-мозга"
+(orchestrator.brain) понимает намерение пользователя и материализует его
+в реальной файловой структуре monorepo (projects/, global_knowledge/,
+tasks.json, логи и т.д.).
 
 Дашборд — лишь "зеркало": он не создаёт сущности напрямую, а только
 отображает то, что здесь, в ядре, уже произошло и записано на диск.
@@ -48,7 +74,14 @@ def _translit(text: str) -> str:
 
 
 class Orchestrator:
-    """Главный Агент (Оркестратор) Context-Driven многоагентной системы."""
+    """
+    Единственный исполнитель (ИИ-агент Arena.ai), управляемый через чат.
+
+    "Оркестратор" здесь — не отдельная программа, принимающая решения сама
+    по себе, а просто название этого файла-ядра: он хранит на диске
+    структуру проектов/задач/знаний и применяет к ней команды, которые
+    отдаёт исполнитель (я) по ходу разговора с пользователем.
+    """
 
     VALID_STATUSES = ("todo", "in_progress", "done")
 
@@ -57,7 +90,7 @@ class Orchestrator:
         self.brain = Brain(self.config)
 
         self.base_dir = self.config.base_dir
-        self.agents_dir = self.config.agents_dir
+        self.projects_dir = self.config.projects_dir
         self.global_knowledge_dir = self.config.global_knowledge_dir
         self.global_logs_dir = self.config.global_logs_dir
         self.log_file = self.config.orchestrator_log_file
@@ -70,7 +103,7 @@ class Orchestrator:
         self.export_dir = self.base_dir / "exports"
         self.settings_file = self.base_dir / "orchestrator_settings.json"
 
-        for d in (self.agents_dir, self.global_knowledge_dir, self.global_logs_dir, self.export_dir):
+        for d in (self.projects_dir, self.global_knowledge_dir, self.global_logs_dir, self.export_dir):
             d.mkdir(parents=True, exist_ok=True)
         (self.export_dir / "history").mkdir(parents=True, exist_ok=True)
 
@@ -92,8 +125,8 @@ class Orchestrator:
     # ------------------------------------------------------------------ #
 
     AUTONOMY_LEVELS = {
-        "full_auto": "Полная автономия — создаю агентов/скилы/задачи сразу по ходу работы.",
-        "confirm_agents_only": "Создаю скилы и задачи сразу, но для НОВОГО агента сначала спрашиваю подтверждение.",
+        "full_auto": "Полная автономия — веду проекты/инструкции/задачи сразу по ходу работы, без лишних вопросов.",
+        "confirm_agents_only": "Веду инструкции и задачи сразу, но для НОВОГО проекта сначала спрашиваю подтверждение.",
         "confirm_all": "Перед любым изменением системы сначала предлагаю план и жду подтверждения.",
     }
 
@@ -158,7 +191,7 @@ class Orchestrator:
     def auto_push(self, reason: str = "автоматическая синхронизация") -> dict:
         """
         Выполняет push в GitHub прямо сейчас (используется и автоматикой, и
-        Оркестратором вручную, когда он сам решает, что пора сохранить прогресс).
+        мной вручную, когда я сам решаю, что пора сохранить прогресс).
         Никогда не бросает исключение наружу — любая ошибка просто логируется.
         """
         try:
@@ -246,9 +279,9 @@ class Orchestrator:
         return self._load_chat_history()
 
     def _brain_context(self) -> dict:
-        agents = [self._read_agent_metadata(p) for p in self._agent_dirs()]
+        projects = [self._read_project_metadata(p) for p in self._project_dirs()]
         tasks = self._load_tasks()
-        return {"agents": agents, "tasks": tasks}
+        return {"projects": projects, "tasks": tasks}
 
     def handle_chat_message(self, text: str) -> dict:
         """
@@ -264,27 +297,27 @@ class Orchestrator:
         reply = "Не понял команду 🤔"
 
         try:
-            if action == "create_agent":
-                reply = self._apply_create_agent(intent)
-            elif action == "add_skill":
-                reply = self._apply_add_skill(intent)
+            if action == "create_project":
+                reply = self._apply_create_project(intent)
+            elif action == "add_instruction":
+                reply = self._apply_add_instruction(intent)
             elif action == "create_task":
                 reply = self._apply_create_task(intent)
             elif action == "update_task_status":
                 reply = self._apply_update_task_status(intent)
             elif action == "add_knowledge":
                 reply = self._apply_add_knowledge(intent)
-            elif action == "delete_agent":
-                reply = self._apply_delete_agent(intent)
+            elif action == "delete_project":
+                reply = self._apply_delete_project(intent)
             elif action == "query_status":
                 reply = self._apply_query_status()
             elif action == "empty":
-                reply = "Напишите команду, например: «Создай SEO-агента для анализа ключевых слов»."
+                reply = "Напишите команду, например: «Заведи проект SEO для анализа ключевых слов»."
             else:
                 reply = (
                     "Не удалось распознать команду. Попробуйте, например:\n"
-                    "• «Создай агента-переводчика для перевода документов»\n"
-                    "• «Добавь переводчику скилл работы со словарями»\n"
+                    "• «Заведи проект-переводчик для перевода документов»\n"
+                    "• «Добавь переводчику инструкцию по работе со словарями»\n"
                     "• «Создай задачу для переводчика: перевести отчёт»\n"
                     "• «Запомни паттерн: всегда проверяй источники»"
                 )
@@ -302,38 +335,40 @@ class Orchestrator:
     # Применение намерений
     # ------------------------------------------------------------------ #
 
-    def _apply_create_agent(self, intent: dict) -> str:
-        name_hint = intent.get("name") or "agent"
-        role = intent.get("role") or f"{name_hint.capitalize()}-агент"
+    def _apply_create_project(self, intent: dict) -> str:
+        name_hint = intent.get("name") or "project"
+        role = intent.get("role") or f"{name_hint.capitalize()}-проект"
         task_description = intent.get("task_description") or "Задача не уточнена."
-        result = self.create_agent(name_hint, role=role, task_description=task_description)
+        result = self.create_project(name_hint, role=role, task_description=task_description)
         if result["status"] == "exists":
-            return f"Агент «{result['name']}» уже существует в системе (папка `{result['path']}`)."
-        self.maybe_auto_push(f"создан агент {result['name']}")
+            return f"Проект «{result['name']}» уже существует в системе (папка `{result['path']}`)."
+        self.maybe_auto_push(f"создан проект {result['name']}")
         return (
-            f"✅ Создан новый субагент **{result['name']}**\n"
-            f"- Роль: {role}\n"
+            f"✅ Создан новый проектный профиль **{result['name']}**\n"
+            f"- Роль (для меня в контексте этого проекта): {role}\n"
             f"- Задача: {task_description}\n"
-            f"- Папка: `{result['path']}`"
+            f"- Папка: `{result['path']}`\n"
+            f"Это не отдельный бот — работу по этому проекту по-прежнему делаю я сам, "
+            f"просто теперь у меня есть именованный контекст для него."
         )
 
-    def _apply_add_skill(self, intent: dict) -> str:
-        agent_name = intent.get("agent")
-        if not agent_name:
-            hint = intent.get("agent_hint")
-            return self._agent_not_found_reply(hint)
-        skill_name = intent.get("skill_name") or "новый_скил"
-        result = self.add_skill(agent_name, skill_name)
+    def _apply_add_instruction(self, intent: dict) -> str:
+        project_name = intent.get("project")
+        if not project_name:
+            hint = intent.get("project_hint")
+            return self._project_not_found_reply(hint)
+        instruction_title = intent.get("instruction_name") or "новая инструкция"
+        result = self.add_instruction(project_name, instruction_title)
         return (
-            f"🛠 Агенту **{agent_name}** добавлен новый скил: «{result['skill_title']}»\n"
-            f"Файл: `{result['path']}`"
+            f"🛠 В проект **{project_name}** добавлена инструкция: «{result['instruction_title']}»\n"
+            f"Файл: `{result['path']}` — я буду сверяться с ним, когда работаю над этим проектом."
         )
 
     def _apply_create_task(self, intent: dict) -> str:
-        agent_name = intent.get("agent")
+        project_name = intent.get("project")
         title = intent.get("title") or "Новая задача"
-        task = self.create_task(agent_name, title)
-        who = agent_name or "без привязки к агенту"
+        task = self.create_task(project_name, title)
+        who = project_name or "без привязки к проекту"
         return f"📋 Создана задача #{task['id']} ({who}): {task['title']}"
 
     def _apply_update_task_status(self, intent: dict) -> str:
@@ -352,25 +387,25 @@ class Orchestrator:
 
     def _apply_add_knowledge(self, intent: dict) -> str:
         scope = intent.get("scope", "global")
-        agent_name = intent.get("agent")
-        if scope == "local" and not agent_name:
-            return self._agent_not_found_reply(None)
+        project_name = intent.get("project")
+        if scope == "local" and not project_name:
+            return self._project_not_found_reply(None)
         kind = intent.get("kind", "approved")
         content = intent.get("content") or "Без описания."
-        entry = self.add_knowledge(scope=scope, kind=kind, content=content, agent_name=agent_name)
+        entry = self.add_knowledge(scope=scope, kind=kind, content=content, project_name=project_name)
         kind_ru = "✅ успешный паттерн" if kind == "approved" else "⚠️ ошибка, которой нужно избегать"
-        where = f"глобальную базу" if scope == "global" else f"локальную базу агента «{agent_name}»"
+        where = "глобальную базу" if scope == "global" else f"локальную базу проекта «{project_name}»"
         return f"📚 В {where} добавлена запись ({kind_ru}): {entry['title']}"
 
-    def _apply_delete_agent(self, intent: dict) -> str:
-        agent_name = intent.get("agent")
-        if not agent_name:
-            return self._agent_not_found_reply(intent.get("raw_mention"))
-        ok = self.delete_agent(agent_name)
+    def _apply_delete_project(self, intent: dict) -> str:
+        project_name = intent.get("project")
+        if not project_name:
+            return self._project_not_found_reply(intent.get("raw_mention"))
+        ok = self.delete_project(project_name)
         if ok:
-            self.maybe_auto_push(f"удалён агент {agent_name}")
-            return f"🗑 Агент «{agent_name}» и все его файлы удалены из системы."
-        return f"Агент «{agent_name}» не найден."
+            self.maybe_auto_push(f"удалён проект {project_name}")
+            return f"🗑 Проект «{project_name}» и все его файлы удалены из системы."
+        return f"Проект «{project_name}» не найден."
 
     def _apply_query_status(self) -> str:
         state = self.run_audit()
@@ -379,24 +414,25 @@ class Orchestrator:
             counts[t["status"]] = counts.get(t["status"], 0) + 1
         return (
             f"📊 Текущее состояние системы:\n"
-            f"- Агентов: {state['agents_count']}\n"
-            f"- Скилов всего: {sum(a['skills_count'] for a in state['agents'])}\n"
+            f"- Исполнитель: один (я), проекты ниже — это контекст, а не отдельные боты.\n"
+            f"- Проектов: {state['projects_count']}\n"
+            f"- Инструкций всего: {sum(p['instructions_count'] for p in state['projects'])}\n"
             f"- Задач: {len(state['tasks'])} (todo: {counts['todo']}, "
             f"в процессе: {counts['in_progress']}, готово: {counts['done']})\n"
             f"- Записей в глобальной базе знаний: {len(state['global_knowledge_entries'])}"
         )
 
-    def _agent_not_found_reply(self, hint: Optional[str]) -> str:
-        agents = [self._read_agent_metadata(p) for p in self._agent_dirs()]
-        names = ", ".join(a["name"] for a in agents) if agents else "пока нет ни одного агента"
+    def _project_not_found_reply(self, hint: Optional[str]) -> str:
+        projects = [self._read_project_metadata(p) for p in self._project_dirs()]
+        names = ", ".join(p["name"] for p in projects) if projects else "пока нет ни одного проекта"
         hint_part = f" (искал похожее на «{hint}»)" if hint else ""
         return (
-            f"Не нашёл подходящего агента{hint_part}. Существующие агенты: {names}. "
-            f"Сначала создайте агента, например: «Создай агента {hint or 'Имя'} для ...»."
+            f"Не нашёл подходящего проекта{hint_part}. Существующие проекты: {names}. "
+            f"Сначала заведите проект, например: «Заведи проект {hint or 'Имя'} для ...»."
         )
 
     # ------------------------------------------------------------------ #
-    # Работа с агентами
+    # Работа с проектами (контейнеры контекста для единственного исполнителя)
     # ------------------------------------------------------------------ #
 
     @staticmethod
@@ -412,47 +448,49 @@ class Orchestrator:
 
     @classmethod
     def _sanitize_name(cls, name: str) -> str:
-        return cls._slugify(name, fallback_prefix="agent")
+        return cls._slugify(name, fallback_prefix="project")
 
-    def _agent_dirs(self) -> list[Path]:
-        if not self.agents_dir.exists():
+    def _project_dirs(self) -> list[Path]:
+        if not self.projects_dir.exists():
             return []
-        return sorted(p for p in self.agents_dir.iterdir() if p.is_dir() and not p.name.startswith("."))
+        return sorted(p for p in self.projects_dir.iterdir() if p.is_dir() and not p.name.startswith("."))
 
-    def create_agent(self, name: str, role: Optional[str] = None, task_description: str = "") -> dict:
+    def create_project(self, name: str, role: Optional[str] = None, task_description: str = "") -> dict:
+        """
+        Создаёт на диске новый проектный профиль: просто папку с метаданными,
+        пустым списком инструкций и базой знаний. НИКАКОГО исполняемого кода
+        (ни agent.py, ни skills/*.py) не генерируется — это сознательное
+        решение: единственный исполнитель — я, и мне не нужен код-заглушка,
+        чтобы "представлять" проект, достаточно текста, который я прочитаю.
+        """
         safe_name = self._sanitize_name(name)
-        agent_path = self.agents_dir / safe_name
+        project_path = self.projects_dir / safe_name
 
-        if agent_path.exists():
-            self._log(f"Попытка создать агента '{safe_name}' отклонена: уже существует.",
-                       level="WARNING", action="create_agent_skipped", agent=safe_name)
-            return {"status": "exists", "name": safe_name, "path": str(agent_path.relative_to(self.base_dir))}
+        if project_path.exists():
+            self._log(f"Попытка создать проект '{safe_name}' отклонена: уже существует.",
+                       level="WARNING", action="create_project_skipped", project=safe_name)
+            return {"status": "exists", "name": safe_name, "path": str(project_path.relative_to(self.base_dir))}
 
-        role = role or f"{name.capitalize()}-агент"
+        role = role or f"{name.capitalize()}-проект"
 
-        agent_path.mkdir(parents=True)
-        (agent_path / "skills").mkdir()
-        (agent_path / "knowledge").mkdir()
-        (agent_path / "logs").mkdir()
-        (agent_path / "__init__.py").write_text("", encoding="utf-8")
+        project_path.mkdir(parents=True)
+        (project_path / "knowledge").mkdir()
+        (project_path / "logs").mkdir()
 
-        (agent_path / "agent.py").write_text(self._render_agent_code(safe_name, role, task_description),
-                                              encoding="utf-8")
+        (project_path / "instructions.json").write_text("[]", encoding="utf-8")
+        self._render_instructions_md(project_path, safe_name, role, task_description, [])
 
-        (agent_path / "skills" / "__init__.py").write_text("# Локальные скилы агента.\n", encoding="utf-8")
-        (agent_path / "skills" / "manifest.json").write_text("[]", encoding="utf-8")
-
-        (agent_path / "knowledge" / "notes.md").write_text(
-            f"# База знаний агента `{safe_name}`\n\n## Роль\n{role}\n\n## Задача\n{task_description}\n",
+        (project_path / "knowledge" / "notes.md").write_text(
+            f"# База знаний проекта `{safe_name}`\n\n## Роль\n{role}\n\n## Задача\n{task_description}\n",
             encoding="utf-8",
         )
-        (agent_path / "knowledge" / "entries.json").write_text("[]", encoding="utf-8")
+        (project_path / "knowledge" / "entries.json").write_text("[]", encoding="utf-8")
 
         created_at = datetime.now().isoformat(timespec="seconds")
-        agent_log_path = agent_path / "logs" / f"{safe_name}.log"
-        agent_log_path.write_text(
+        project_log_path = project_path / "logs" / f"{safe_name}.log"
+        project_log_path.write_text(
             f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [INFO] "
-            f"Агент '{safe_name}' создан Оркестратором. Роль: {role}. Задача: {task_description}\n",
+            f"Проект '{safe_name}' заведён в системе. Роль: {role}. Задача: {task_description}\n",
             encoding="utf-8",
         )
 
@@ -462,147 +500,119 @@ class Orchestrator:
             "role": role,
             "task_description": task_description,
             "created_at": created_at,
-            "path": str(agent_path.relative_to(self.base_dir)),
+            "path": str(project_path.relative_to(self.base_dir)),
         }
-        (agent_path / "metadata.json").write_text(
+        (project_path / "metadata.json").write_text(
             json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8"
         )
 
         self._log(
-            f"Создан новый субагент '{safe_name}' (роль: {role}).",
-            action="create_agent", agent=safe_name,
+            f"Заведён новый проект '{safe_name}' (роль: {role}).",
+            action="create_project", project=safe_name,
         )
-        return {"status": "created", "name": safe_name, "path": str(agent_path.relative_to(self.base_dir))}
+        return {"status": "created", "name": safe_name, "path": str(project_path.relative_to(self.base_dir))}
 
-    def delete_agent(self, agent_name: str) -> bool:
+    def delete_project(self, project_name: str) -> bool:
         import shutil
 
-        safe_name = self._sanitize_name(agent_name)
-        agent_path = self.agents_dir / safe_name
-        if not agent_path.exists():
+        safe_name = self._sanitize_name(project_name)
+        project_path = self.projects_dir / safe_name
+        if not project_path.exists():
             return False
-        shutil.rmtree(agent_path)
-        self._log(f"Агент '{safe_name}' удалён из системы.", level="WARNING",
-                   action="delete_agent", agent=safe_name)
+        shutil.rmtree(project_path)
+        self._log(f"Проект '{safe_name}' удалён из системы.", level="WARNING",
+                   action="delete_project", project=safe_name)
         return True
 
-    @staticmethod
-    def _render_agent_code(agent_name: str, role: str, task_description: str) -> str:
-        class_name = "".join(part.capitalize() for part in agent_name.split("_")) + "Agent"
-        return f'''"""
-agent.py — автоматически сгенерированный субагент "{agent_name}".
-
-Роль: {role}
-Задача: {task_description}
-
-Сгенерировано Оркестратором (orchestrator/core.py) по текстовой команде
-пользователя из чата (Context-Driven создание).
-"""
-
-from __future__ import annotations
-
-from datetime import datetime
-from pathlib import Path
-
-AGENT_NAME = "{agent_name}"
-ROLE = "{role}"
-TASK_DESCRIPTION = "{task_description}"
-AGENT_DIR = Path(__file__).resolve().parent
-LOG_FILE = AGENT_DIR / "logs" / f"{{AGENT_NAME}}.log"
-
-
-class {class_name}:
-    """Автосгенерированный субагент."""
-
-    def __init__(self):
-        self.name = AGENT_NAME
-        self.role = ROLE
-        self.task_description = TASK_DESCRIPTION
-
-    def log(self, message: str, level: str = "INFO") -> None:
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        with open(LOG_FILE, "a", encoding="utf-8") as f:
-            f.write(f"[{{timestamp}}] [{{level}}] {{message}}\\n")
-
-    def run(self, *args, **kwargs):
-        """Точка входа агента. Реализуйте логику под конкретную задачу."""
-        self.log(f"Агент '{{self.name}}' ({{self.role}}) запущен: {{self.task_description}}")
-        # TODO: реализовать конкретную логику субагента.
-        self.log(f"Агент '{{self.name}}' завершил выполнение.")
-
-
-if __name__ == "__main__":
-    {class_name}().run()
-'''
-
-    def _read_agent_metadata(self, agent_dir: Path) -> dict:
-        metadata_path = agent_dir / "metadata.json"
+    def _read_project_metadata(self, project_dir: Path) -> dict:
+        metadata_path = project_dir / "metadata.json"
         if metadata_path.exists():
             try:
                 data = json.loads(metadata_path.read_text(encoding="utf-8"))
-                data.setdefault("name", agent_dir.name)
+                data.setdefault("name", project_dir.name)
                 return data
             except json.JSONDecodeError:
                 pass
-        return {"name": agent_dir.name, "display_name": agent_dir.name, "role": "", "task_description": "",
-                "created_at": "", "path": str(agent_dir.relative_to(self.base_dir))}
+        return {"name": project_dir.name, "display_name": project_dir.name, "role": "", "task_description": "",
+                "created_at": "", "path": str(project_dir.relative_to(self.base_dir))}
 
-    def find_agent(self, name_or_mention: str) -> Optional[dict]:
-        agents = [self._read_agent_metadata(p) for p in self._agent_dirs()]
+    def find_project(self, name_or_mention: str) -> Optional[dict]:
+        projects = [self._read_project_metadata(p) for p in self._project_dirs()]
         safe = self._sanitize_name(name_or_mention)
-        for a in agents:
-            if a["name"] == safe:
-                return a
-        return self.brain.find_agent_mention(name_or_mention, agents)
+        for p in projects:
+            if p["name"] == safe:
+                return p
+        return self.brain.find_project_mention(name_or_mention, projects)
 
     # ------------------------------------------------------------------ #
-    # Скилы
+    # Инструкции (то, что раньше называлось "скилами")
+    #
+    # Это ПРОСТОЙ ТЕКСТ, который читаю я сам, когда берусь за работу по
+    # проекту — не отдельный исполняемый модуль и не "способность" у
+    # какого-то другого бота. instructions.json хранит структурированный
+    # список, INSTRUCTIONS.md — его человекочитаемое отражение.
     # ------------------------------------------------------------------ #
 
-    def add_skill(self, agent_name: str, skill_title: str, description: str = "") -> dict:
-        agent = self.find_agent(agent_name)
-        if agent is None:
-            raise ValueError(f"Агент '{agent_name}' не найден.")
+    @staticmethod
+    def _render_instructions_md(project_path: Path, project_name: str, role: str,
+                                 task_description: str, instructions: list[dict]) -> None:
+        lines = [
+            f"# Инструкции для проекта `{project_name}`",
+            "",
+            "Это не код и не отдельный бот — это памятка для меня (единственного",
+            "исполнителя), которую я перечитываю перед тем, как взяться за работу",
+            "по этому проекту.",
+            "",
+            f"## Роль в этом проекте\n{role}",
+            "",
+            f"## Задача\n{task_description}",
+            "",
+            "## Инструкции",
+        ]
+        if not instructions:
+            lines.append("")
+            lines.append("_Пока не добавлено ни одной инструкции._")
+        else:
+            for ins in instructions:
+                lines.append("")
+                lines.append(f"### {ins['name']}")
+                lines.append(ins.get("description") or "_Без описания._")
+        (project_path / "INSTRUCTIONS.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-        agent_dir = self.base_dir / agent["path"]
-        skills_dir = agent_dir / "skills"
-        skills_dir.mkdir(exist_ok=True)
-        manifest_path = skills_dir / "manifest.json"
+    def add_instruction(self, project_name: str, instruction_title: str, description: str = "") -> dict:
+        project = self.find_project(project_name)
+        if project is None:
+            raise ValueError(f"Проект '{project_name}' не найден.")
+
+        project_dir = self.base_dir / project["path"]
+        manifest_path = project_dir / "instructions.json"
 
         try:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, FileNotFoundError):
             manifest = []
 
-        slug = self._slugify(skill_title, fallback_prefix="skill")[:40]
-        file_name = f"{slug}.py"
-        func_name = slug if not slug[0].isdigit() else f"s_{slug}"
-
-        (skills_dir / file_name).write_text(
-            f'"""\n'
-            f'Скил "{skill_title}" агента "{agent["name"]}".\n'
-            f'{description}\n'
-            f'"""\n\n\n'
-            f"def {func_name}(*args, **kwargs):\n"
-            f'    """Реализация скила "{skill_title}". Заполните логику."""\n'
-            f'    return "{skill_title} ещё не реализован"\n',
-            encoding="utf-8",
-        )
-
         entry = {
-            "name": skill_title,
-            "file": file_name,
+            "name": instruction_title,
             "description": description,
             "created_at": datetime.now().isoformat(timespec="seconds"),
         }
         manifest.append(entry)
         manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
 
-        self._log(
-            f"Агенту '{agent['name']}' добавлен скил: «{skill_title}».",
-            action="add_skill", agent=agent["name"],
+        self._render_instructions_md(
+            project_dir, project["name"], project.get("role", ""),
+            project.get("task_description", ""), manifest,
         )
-        return {"skill_title": skill_title, "path": str((skills_dir / file_name).relative_to(self.base_dir))}
+
+        self._log(
+            f"В проект '{project['name']}' добавлена инструкция: «{instruction_title}».",
+            action="add_instruction", project=project["name"],
+        )
+        return {
+            "instruction_title": instruction_title,
+            "path": str((project_dir / "INSTRUCTIONS.md").relative_to(self.base_dir)),
+        }
 
     # ------------------------------------------------------------------ #
     # Задачи
@@ -617,18 +627,18 @@ if __name__ == "__main__":
     def _save_tasks(self, tasks: list[dict]) -> None:
         self.tasks_file.write_text(json.dumps(tasks, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    def create_task(self, agent_name: Optional[str], title: str) -> dict:
+    def create_task(self, project_name: Optional[str], title: str) -> dict:
         tasks = self._load_tasks()
         next_id = (max((t["id"] for t in tasks), default=0)) + 1
 
-        resolved_agent = None
-        if agent_name:
-            agent = self.find_agent(agent_name)
-            resolved_agent = agent["name"] if agent else agent_name
+        resolved_project = None
+        if project_name:
+            project = self.find_project(project_name)
+            resolved_project = project["name"] if project else project_name
 
         task = {
             "id": next_id,
-            "agent": resolved_agent,
+            "project": resolved_project,
             "title": title,
             "status": "todo",
             "created_at": datetime.now().isoformat(timespec="seconds"),
@@ -638,8 +648,8 @@ if __name__ == "__main__":
         self._save_tasks(tasks)
 
         self._log(
-            f"Создана задача #{task['id']} для '{resolved_agent or 'системы'}': {title}",
-            action="create_task", agent=resolved_agent, task_id=task["id"],
+            f"Создана задача #{task['id']} для '{resolved_project or 'системы'}': {title}",
+            action="create_task", project=resolved_project, task_id=task["id"],
         )
         return task
 
@@ -671,7 +681,7 @@ if __name__ == "__main__":
         with open(path, "a", encoding="utf-8") as f:
             f.write(block)
 
-    def add_knowledge(self, scope: str, kind: str, content: str, agent_name: Optional[str] = None) -> dict:
+    def add_knowledge(self, scope: str, kind: str, content: str, project_name: Optional[str] = None) -> dict:
         title = content.strip().split(". ")[0][:80] or "Новая запись"
         entry = {
             "id": datetime.now().strftime("%Y%m%d%H%M%S%f"),
@@ -679,7 +689,7 @@ if __name__ == "__main__":
             "kind": kind,
             "title": title,
             "content": content,
-            "agent": None,
+            "project": None,
             "created_at": datetime.now().isoformat(timespec="seconds"),
         }
 
@@ -696,12 +706,12 @@ if __name__ == "__main__":
             self._log(f"Добавлена запись в глобальную базу знаний: «{title}».",
                        action="add_knowledge", scope="global")
         else:
-            agent = self.find_agent(agent_name) if agent_name else None
-            if agent is None:
-                raise ValueError(f"Агент '{agent_name}' не найден для локальной записи знаний.")
-            entry["agent"] = agent["name"]
-            agent_dir = self.base_dir / agent["path"]
-            entries_path = agent_dir / "knowledge" / "entries.json"
+            project = self.find_project(project_name) if project_name else None
+            if project is None:
+                raise ValueError(f"Проект '{project_name}' не найден для локальной записи знаний.")
+            entry["project"] = project["name"]
+            project_dir = self.base_dir / project["path"]
+            entries_path = project_dir / "knowledge" / "entries.json"
             try:
                 local_manifest = json.loads(entries_path.read_text(encoding="utf-8"))
             except (json.JSONDecodeError, FileNotFoundError):
@@ -709,13 +719,13 @@ if __name__ == "__main__":
             local_manifest.append(entry)
             entries_path.write_text(json.dumps(local_manifest, ensure_ascii=False, indent=2), encoding="utf-8")
 
-            notes_path = agent_dir / "knowledge" / "notes.md"
+            notes_path = project_dir / "knowledge" / "notes.md"
             kind_label = "✅ Сработало хорошо" if kind == "approved" else "⚠️ Следует избегать"
             with open(notes_path, "a", encoding="utf-8") as f:
                 f.write(f"\n### {kind_label}: {title}\n{content}\n")
 
-            self._log(f"Добавлена локальная запись знаний агенту '{agent['name']}': «{title}».",
-                       action="add_knowledge", scope="local", agent=agent["name"])
+            self._log(f"Добавлена локальная запись знаний проекту '{project['name']}': «{title}».",
+                       action="add_knowledge", scope="local", project=project["name"])
 
         return entry
 
@@ -747,16 +757,16 @@ if __name__ == "__main__":
                 })
         return entries
 
-    def _audit_agent(self, agent_dir: Path) -> dict:
-        metadata = self._read_agent_metadata(agent_dir)
+    def _audit_project(self, project_dir: Path) -> dict:
+        metadata = self._read_project_metadata(project_dir)
 
-        manifest_path = agent_dir / "skills" / "manifest.json"
+        manifest_path = project_dir / "instructions.json"
         try:
-            skills = json.loads(manifest_path.read_text(encoding="utf-8"))
+            instructions = json.loads(manifest_path.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, FileNotFoundError):
-            skills = []
+            instructions = []
 
-        knowledge_entries_path = agent_dir / "knowledge" / "entries.json"
+        knowledge_entries_path = project_dir / "knowledge" / "entries.json"
         try:
             knowledge_entries = json.loads(knowledge_entries_path.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, FileNotFoundError):
@@ -764,7 +774,7 @@ if __name__ == "__main__":
 
         total_log_lines = 0
         log_files = []
-        logs_dir = agent_dir / "logs"
+        logs_dir = project_dir / "logs"
         if logs_dir.exists():
             for log_file in sorted(logs_dir.glob("*.log")):
                 lines = self._count_lines(log_file)
@@ -777,9 +787,9 @@ if __name__ == "__main__":
             "role": metadata.get("role", ""),
             "task_description": metadata.get("task_description", ""),
             "created_at": metadata.get("created_at", ""),
-            "path": metadata.get("path", str(agent_dir.relative_to(self.base_dir))),
-            "skills": skills,
-            "skills_count": len(skills),
+            "path": metadata.get("path", str(project_dir.relative_to(self.base_dir))),
+            "instructions": instructions,
+            "instructions_count": len(instructions),
             "knowledge_entries": knowledge_entries,
             "log_files": log_files,
             "log_lines": total_log_lines,
@@ -788,14 +798,21 @@ if __name__ == "__main__":
     def run_audit(self) -> dict:
         """
         Полностью пересканирует репозиторий и формирует актуальный JSON-снимок
-        архитектуры системы (system_state.json): агенты, скилы, задачи,
+        состояния системы (system_state.json): проекты, инструкции, задачи,
         глобальная/локальная база знаний, логи.
         """
-        agents = [self._audit_agent(p) for p in self._agent_dirs()]
+        projects = [self._audit_project(p) for p in self._project_dirs()]
         tasks = self._load_tasks()
 
         state = {
             "generated_at": datetime.now().isoformat(timespec="seconds"),
+            "executor": {
+                "note": (
+                    "Всю работу выполняет один ИИ-исполнитель. 'Проекты' ниже — "
+                    "это контейнеры контекста (роль/инструкции/знания/задачи), "
+                    "а не отдельные автономные боты."
+                ),
+            },
             "config": self.config.summary(),
             "settings": self.get_settings(),
             "orchestrator": {
@@ -804,8 +821,8 @@ if __name__ == "__main__":
             },
             "global_knowledge_files": self._audit_global_knowledge_files(),
             "global_knowledge_entries": self._load_global_knowledge_entries(),
-            "agents_count": len(agents),
-            "agents": agents,
+            "projects_count": len(projects),
+            "projects": projects,
             "tasks": tasks,
             "chat_messages_count": len(self._load_chat_history()),
         }
@@ -822,37 +839,43 @@ if __name__ == "__main__":
     def export_meta_prompt(self) -> dict:
         state = self.run_audit()
         lines = []
-        lines.append("# МЕТА-ПРОМТ АРХИТЕКТУРЫ МУЛЬТИАГЕНТНОЙ СИСТЕМЫ")
+        lines.append("# МЕТА-ПРОМТ АРХИТЕКТУРЫ СИСТЕМЫ (ОДИН ИСПОЛНИТЕЛЬ + ПРОЕКТЫ)")
         lines.append("")
         lines.append(f"_Сформировано автоматически: {state['generated_at']}_")
         lines.append("")
         lines.append(
-            "Этот файл — полный, самодостаточный снимок текущей архитектуры системы. "
-            "Передайте его новому Оркестратору в чистом окружении, чтобы он восстановил "
-            "структуру агентов, их скилы, задачи и базу знаний."
+            "Это полный, самодостаточный снимок текущей архитектуры системы. "
+            "ВАЖНО: это не описание мультиагентной системы ботов. Работу всегда "
+            "выполняет один ИИ-исполнитель (в чате Arena.ai). «Проекты» ниже — "
+            "это именованные профили контекста (роль, инструкции, задачи, "
+            "накопленные знания), которые исполнитель читает перед тем, как "
+            "взяться за работу по конкретному направлению. Передайте этот файл "
+            "новому чистому окружению, чтобы восстановить те же проекты, "
+            "инструкции, задачи и базу знаний."
         )
         lines.append("")
         lines.append("## 1. Обзор системы")
-        lines.append(f"- Всего субагентов: {state['agents_count']}")
+        lines.append("- Исполнитель: один (ИИ-агент), не разделяется на независимые суб-процессы.")
+        lines.append(f"- Всего проектов: {state['projects_count']}")
         lines.append(f"- Всего задач: {len(state['tasks'])}")
         lines.append(f"- Записей в глобальной базе знаний: {len(state['global_knowledge_entries'])}")
         lines.append("")
 
-        lines.append("## 2. Субагенты")
-        if not state["agents"]:
-            lines.append("_Субагенты пока не созданы._")
-        for agent in state["agents"]:
-            lines.append(f"### 🤖 {agent['display_name']} (`{agent['name']}`)")
-            lines.append(f"- Роль: {agent['role']}")
-            lines.append(f"- Задача: {agent['task_description']}")
-            lines.append(f"- Путь в репозитории: `{agent['path']}`")
-            if agent["skills"]:
-                lines.append("- Скилы:")
-                for s in agent["skills"]:
-                    lines.append(f"  - **{s['name']}** — {s.get('description') or 'без описания'}")
-            if agent["knowledge_entries"]:
+        lines.append("## 2. Проекты")
+        if not state["projects"]:
+            lines.append("_Проекты пока не созданы._")
+        for project in state["projects"]:
+            lines.append(f"### 📁 {project['display_name']} (`{project['name']}`)")
+            lines.append(f"- Роль (контекст для исполнителя): {project['role']}")
+            lines.append(f"- Задача: {project['task_description']}")
+            lines.append(f"- Путь в репозитории: `{project['path']}`")
+            if project["instructions"]:
+                lines.append("- Инструкции для исполнителя:")
+                for ins in project["instructions"]:
+                    lines.append(f"  - **{ins['name']}** — {ins.get('description') or 'без описания'}")
+            if project["knowledge_entries"]:
                 lines.append("- Локальная база знаний:")
-                for k in agent["knowledge_entries"]:
+                for k in project["knowledge_entries"]:
                     label = "✅" if k["kind"] == "approved" else "⚠️"
                     lines.append(f"  - {label} {k['title']}")
             lines.append("")
@@ -861,7 +884,7 @@ if __name__ == "__main__":
         if not state["tasks"]:
             lines.append("_Задач пока нет._")
         for t in state["tasks"]:
-            lines.append(f"- [{t['status']}] #{t['id']} ({t['agent'] or 'без агента'}): {t['title']}")
+            lines.append(f"- [{t['status']}] #{t['id']} ({t.get('project') or 'без проекта'}): {t['title']}")
         lines.append("")
 
         lines.append("## 4. Глобальная база знаний")
@@ -873,17 +896,18 @@ if __name__ == "__main__":
 
         lines.append("## 5. Инструкция по развёртыванию в новом окружении")
         lines.append(
-            "Разверните чистый Оркестратор (`orchestrator/`, `dashboard/`, `run_orchestrator.py`), "
-            "затем последовательно отправьте в чат следующие команды, чтобы воссоздать систему:"
+            "Разверните чистое ядро (`orchestrator/`, `dashboard/`, `run_orchestrator.py`) "
+            "рядом с тем же единственным ИИ-исполнителем, затем последовательно отправьте "
+            "в чат следующие команды, чтобы воссоздать те же проектные профили:"
         )
         lines.append("")
         step = 1
-        for agent in state["agents"]:
-            lines.append(f"{step}. Создай агента {agent['display_name']} с ролью {agent['role']} "
-                          f"для {agent['task_description']}")
+        for project in state["projects"]:
+            lines.append(f"{step}. Заведи проект {project['display_name']} с ролью {project['role']} "
+                          f"для {project['task_description']}")
             step += 1
-            for s in agent["skills"]:
-                lines.append(f"{step}. Добавь агенту {agent['display_name']} скилл {s['name']}")
+            for ins in project["instructions"]:
+                lines.append(f"{step}. Добавь проекту {project['display_name']} инструкцию: {ins['name']}")
                 step += 1
         lines.append("")
 

@@ -11,7 +11,7 @@ def render(state: dict, orchestrator) -> None:
     st.markdown('<div class="ark-eyebrow">Управление работой</div>', unsafe_allow_html=True)
     st.title("Задачи")
     st.caption(
-        "Ставьте задачи через чат: «Создай задачу для <агент>: ...». "
+        "Ставьте задачи через чат: «Создай задачу для <проект>: ...». "
         "Меняйте статус командой: «Отметь задачу 3 как готово»."
     )
 
