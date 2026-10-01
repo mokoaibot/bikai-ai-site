@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T23:47:01",
+  "generated_at": "2026-10-01T23:47:56",
   "executor": {
     "note": "Всю работу выполняет один ИИ-исполнитель. 'Проекты' ниже — это контейнеры контекста (роль/инструкции/знания/задачи), а не отдельные автономные боты."
   },
@@ -24,7 +24,7 @@
   },
   "orchestrator": {
     "log_file": "global_logs/orchestrator.log",
-    "log_lines": 82
+    "log_lines": 94
   },
   "global_knowledge_files": [
     {
@@ -308,5 +308,5 @@
       "project": "bikai"
     }
   ],
-  "chat_messages_count": 10
+  "chat_messages_count": 12
 }
