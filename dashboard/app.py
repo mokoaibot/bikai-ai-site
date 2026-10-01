@@ -32,8 +32,9 @@ inject_css()
 orchestrator = get_orchestrator()
 state = orchestrator.run_audit()
 
-# icon — используется только в свёрнутой иконочной панели (видна, когда
-# боковая панель скрыта), в самой боковой панели иконки не дублируются.
+# Одни и те же иконки используются и в раскрытом сайдбаре (иконка + текст),
+# и в свёрнутой иконочной панели (только иконка) — чтобы разделы было легко
+# соотнести между собой в обоих состояниях.
 PAGES = {
     "overview": {"label": "Обзор", "icon": ":material/space_dashboard:", "module": view_overview},
     "agents": {"label": "Агенты", "icon": ":material/groups:", "module": view_agents},
@@ -65,6 +66,7 @@ with st.sidebar:
         active = st.session_state.page == key
         if st.button(
             meta["label"],
+            icon=meta["icon"],
             key=f"nav_{key}",
             type="primary" if active else "secondary",
             use_container_width=True,
