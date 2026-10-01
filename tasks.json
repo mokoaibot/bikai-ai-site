@@ -150,13 +150,5 @@
     "created_at": "2026-10-01T21:32:07",
     "updated_at": "2026-10-01T21:32:07",
     "project": "bikai"
-  },
-  {
-    "id": 20,
-    "project": "test",
-    "title": "проверить рендер дашборда",
-    "status": "todo",
-    "created_at": "2026-10-01T23:46:23",
-    "updated_at": "2026-10-01T23:46:23"
   }
 ]

@@ -81,5 +81,18 @@
     "text": "Удали проект тест-демо",
     "timestamp": "2026-10-01T23:46:23",
     "meta": {}
+  },
+  {
+    "role": "assistant",
+    "text": "🗑 Проект «test» и все его файлы удалены из системы.",
+    "timestamp": "2026-10-01T23:46:25",
+    "meta": {
+      "intent": {
+        "action": "delete_project",
+        "project": "test",
+        "raw_mention": "Удали",
+        "source": "rules"
+      }
+    }
   }
 ]

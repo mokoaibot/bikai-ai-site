@@ -65,3 +65,9 @@
 {"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
 {"timestamp": "2026-10-01T23:46:23", "level": "INFO", "action": "chat_in", "message": "Получена команда в чате: \"Удали проект тест-демо\""}
 {"timestamp": "2026-10-01T23:46:23", "level": "WARNING", "action": "delete_project", "message": "Проект 'test' удалён из системы.", "project": "test"}
+{"timestamp": "2026-10-01T23:46:25", "level": "INFO", "action": "auto_push", "message": "Авто-push выполнен (удалён проект test)."}
+{"timestamp": "2026-10-01T23:46:25", "level": "INFO", "action": "chat_out", "message": "Ответ ассистента: \"🗑 Проект «test» и все его файлы удалены из системы.\""}
+{"timestamp": "2026-10-01T23:46:25", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-01T23:46:30", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-01T23:47:01", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-01T23:47:01", "level": "INFO", "action": "export", "message": "Сформирован мета-промт экспорта системы: META_PROMPT.md"}
