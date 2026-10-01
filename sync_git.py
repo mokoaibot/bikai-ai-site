@@ -204,6 +204,14 @@ class GitSync:
             return {"status": "rejected", "log": log, "details": push_result.stderr}
 
         log.append(f"✅ Изменения отправлены в {self._display_url()} (ветка {self.branch}).")
+
+        # Обновляем локальную remote-tracking ссылку и upstream, чтобы обычные
+        # `git status` / `git log` в терминале корректно показывали связь с origin/<branch>.
+        head_sha = self._run(["rev-parse", "HEAD"], check=False).stdout.strip()
+        if head_sha:
+            self._run(["update-ref", f"refs/remotes/origin/{self.branch}", head_sha], check=False)
+            self._run(["branch", f"--set-upstream-to=origin/{self.branch}", self.branch], check=False)
+
         return {"status": "ok", "log": log}
 
     def status(self) -> dict:
