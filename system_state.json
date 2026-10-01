@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-10-01T21:03:21",
+  "config": {
+    "environment": "arena-cloud",
+    "model_name": "gpt-4o-mini",
+    "base_dir": "/home/user",
+    "available_keys": [],
+    "missing_keys": [
+      "OPENAI_API_KEY",
+      "ANTHROPIC_API_KEY",
+      "ARENA_API_KEY",
+      "GOOGLE_API_KEY",
+      "GROQ_API_KEY",
+      "XAI_API_KEY"
+    ]
+  },
+  "orchestrator": {
+    "log_file": "global_logs/orchestrator.log",
+    "log_lines": 1
+  },
+  "global_knowledge_files": [
+    {
+      "file": "approved_patterns.md",
+      "size_bytes": 664,
+      "lines": 7
+    },
+    {
+      "file": "avoid_mistakes.md",
+      "size_bytes": 571,
+      "lines": 6
+    }
+  ],
+  "global_knowledge_entries": [],
+  "agents_count": 0,
+  "agents": [],
+  "tasks": [],
+  "chat_messages_count": 0
+}
