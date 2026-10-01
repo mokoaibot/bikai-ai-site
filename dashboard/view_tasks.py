@@ -1,15 +1,15 @@
-"""view_tasks.py — Задачи: канбан-доска со статусами todo / in_progress / done."""
+"""view_tasks.py — Задачи: компактный список со статусами todo / in_progress / done."""
 
 from __future__ import annotations
 
 import streamlit as st
 
-from components import task_row
+from components import task_list_row
 
 
 def render(state: dict, orchestrator) -> None:
     st.markdown('<div class="ark-eyebrow">Управление работой</div>', unsafe_allow_html=True)
-    st.title("📋 Задачи")
+    st.title("Задачи")
     st.caption(
         "Ставьте задачи через чат: «Создай задачу для <агент>: ...». "
         "Меняйте статус командой: «Отметь задачу 3 как готово»."
@@ -20,13 +20,20 @@ def render(state: dict, orchestrator) -> None:
         st.info("Задач пока нет.")
         return
 
-    columns = {"todo": "🗂 К выполнению", "in_progress": "⚙️ В процессе", "done": "✅ Готово"}
-    cols = st.columns(3)
-    for col, (status, title) in zip(cols, columns.items()):
-        with col:
-            st.subheader(title)
-            filtered = [t for t in tasks if t["status"] == status]
-            if not filtered:
-                st.caption("Пусто")
-            for t in filtered:
-                task_row(t)
+    sections = [
+        ("todo", "К выполнению"),
+        ("in_progress", "В процессе"),
+        ("done", "Готово"),
+    ]
+
+    for status, title in sections:
+        filtered = [t for t in tasks if t["status"] == status]
+        st.markdown(
+            f'<div class="ark-eyebrow" style="margin-top:0.8rem;">{title} · {len(filtered)}</div>',
+            unsafe_allow_html=True,
+        )
+        if not filtered:
+            st.caption("Пусто")
+            continue
+        for t in filtered:
+            task_list_row(t)

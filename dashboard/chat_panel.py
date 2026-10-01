@@ -20,12 +20,7 @@ from components import esc
 
 def render_chat(orchestrator) -> None:
     """Показывает последние команды и ответы Оркестратора (без возможности ввода)."""
-    st.markdown(
-        '<div class="ark-logo">'
-        '<span class="material-symbols-rounded" style="color:#7CE6A6;font-size:20px;">forum</span>'
-        'Лента команд</div>',
-        unsafe_allow_html=True,
-    )
+    st.markdown('<div class="ark-logo"><span class="dot"></span>Лента команд</div>', unsafe_allow_html=True)
     st.caption(
         "Управление системой происходит в чате с Оркестратором в Arena. "
         "Здесь — только журнал уже выполненных команд (зеркало)."
@@ -44,7 +39,7 @@ def render_chat(orchestrator) -> None:
             )
         for msg in history[-60:]:
             role_class = "user" if msg["role"] == "user" else "assistant"
-            prefix = "🧑 Команда" if msg["role"] == "user" else "🧠 Оркестратор"
+            prefix = "Команда" if msg["role"] == "user" else "Оркестратор"
             text = esc(msg["text"]).replace("\n", "<br/>")
             st.markdown(
                 f'<div class="ark-chat-msg {role_class}"><strong>{prefix}:</strong><br/>{text}</div>',

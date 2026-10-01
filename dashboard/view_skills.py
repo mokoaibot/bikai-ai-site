@@ -9,7 +9,7 @@ from components import skill_card
 
 def render(state: dict, orchestrator) -> None:
     st.markdown('<div class="ark-eyebrow">Инструменты агентов</div>', unsafe_allow_html=True)
-    st.title("🛠 Навыки")
+    st.title("Навыки")
 
     agents = state.get("agents", [])
     all_skills = [(a, s) for a in agents for s in a.get("skills", [])]

@@ -25,23 +25,6 @@ def inject_css() -> None:
         f"""
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0');
-
-        .material-symbols-rounded {{
-            font-family: 'Material Symbols Rounded';
-            font-weight: normal;
-            font-style: normal;
-            font-size: 22px;
-            line-height: 1;
-            letter-spacing: normal;
-            text-transform: none;
-            display: inline-block;
-            white-space: nowrap;
-            word-wrap: normal;
-            direction: ltr;
-            vertical-align: middle;
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }}
 
         html, body, [class*="css"] {{
             font-family: 'Inter', -apple-system, sans-serif !important;
@@ -133,13 +116,105 @@ def inject_css() -> None:
         .ark-card {{
             background: {BG_PANEL};
             border: 1px solid {BORDER};
-            border-radius: 14px;
-            padding: 1.1rem 1.3rem;
-            margin-bottom: 0.9rem;
+            border-radius: 10px;
+            padding: 0.85rem 1.05rem;
+            margin-bottom: 0.6rem;
         }}
 
         .ark-card:hover {{
             border-color: {ACCENT_DIM};
+        }}
+
+        .ark-card-title {{
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: {TEXT};
+            margin: 0 0 0.25rem 0;
+            letter-spacing: -0.01em;
+        }}
+        .ark-card-title-lg {{
+            font-size: 1.02rem;
+        }}
+
+        .ark-meta-list {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem 0.9rem;
+            font-size: 0.76rem;
+            color: {TEXT_MUTED};
+            margin-top: 0.5rem;
+        }}
+        .ark-meta-list code {{
+            color: {TEXT_MUTED};
+            background: transparent;
+            padding: 0;
+        }}
+
+        /* --- Компактный список (задачи и т.п.) --- */
+        .ark-list-row {{
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.45rem 0.1rem;
+            border-bottom: 1px solid {BORDER};
+            font-size: 0.85rem;
+        }}
+        .ark-list-row:last-child {{
+            border-bottom: none;
+        }}
+        .ark-list-id {{
+            color: {TEXT_MUTED};
+            font-size: 0.76rem;
+            min-width: 2rem;
+        }}
+        .ark-list-title {{
+            flex: 1;
+            color: {TEXT};
+        }}
+        .ark-list-agent {{
+            color: {TEXT_MUTED};
+            font-size: 0.76rem;
+        }}
+        .ark-task-status {{
+            font-size: 0.74rem;
+            min-width: 4.6rem;
+            text-align: right;
+            color: {TEXT_MUTED};
+        }}
+        .ark-task-status.done {{
+            color: {ACCENT};
+        }}
+        .ark-task-status.in_progress {{
+            color: {WARNING};
+        }}
+
+        /* --- Статус-индикатор (точка) --- */
+        .ark-status-dot {{
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: {TEXT_MUTED};
+        }}
+        .ark-status-dot.on {{
+            background: {ACCENT};
+            box-shadow: 0 0 6px {ACCENT};
+        }}
+        .ark-status-dot.off {{
+            background: {BORDER};
+        }}
+
+        /* --- Тег действия в логе --- */
+        .ark-tag {{
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: {TEXT_MUTED};
+            border: 1px solid {BORDER};
+            border-radius: 4px;
+            padding: 0.05rem 0.4rem;
+            margin-right: 0.4rem;
         }}
 
         .ark-metric {{

@@ -11,13 +11,13 @@ import streamlit as st
 
 def render(state: dict, orchestrator) -> None:
     st.markdown('<div class="ark-eyebrow">Перенос системы</div>', unsafe_allow_html=True)
-    st.title("📤 Экспорт (Мета-Промт)")
+    st.title("Экспорт (Мета-Промт)")
     st.caption(
         "Соберите всю текущую архитектуру — агентов, скилы, задачи и базу знаний — "
         "в один Markdown-файл, которым можно развернуть эту систему в новом окружении."
     )
 
-    if st.button("⚡ Сгенерировать мета-промт системы", type="primary"):
+    if st.button("Сгенерировать мета-промт системы", type="primary"):
         with st.spinner("Собираю архитектуру в единый документ..."):
             result = orchestrator.export_meta_prompt()
         st.success(f"Готово! Сохранено в `{result['path']}`")
@@ -30,12 +30,12 @@ def render(state: dict, orchestrator) -> None:
 
     if content:
         st.download_button(
-            "⬇️ Скачать META_PROMPT.md",
+            "Скачать META_PROMPT.md",
             data=content,
             file_name="META_PROMPT.md",
             mime="text/markdown",
         )
-        with st.expander("👁 Предпросмотр документа", expanded=True):
+        with st.expander("Предпросмотр документа", expanded=True):
             st.markdown(content)
     else:
         st.info("Мета-промт ещё не сформирован.")

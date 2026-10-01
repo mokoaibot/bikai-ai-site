@@ -4,12 +4,14 @@ from __future__ import annotations
 
 import streamlit as st
 
-from components import agent_card
+from components import agent_card, badge
+
+KIND_LABELS = {"approved": "Подтверждено", "avoid": "Избегать"}
 
 
 def render(state: dict, orchestrator) -> None:
     st.markdown('<div class="ark-eyebrow">Субагенты</div>', unsafe_allow_html=True)
-    st.title("🤖 Агенты")
+    st.title("Агенты")
 
     agents = state.get("agents", [])
     if not agents:
@@ -30,11 +32,13 @@ def render(state: dict, orchestrator) -> None:
     with col_detail:
         agent_card(selected)
         if selected["skills"]:
-            st.markdown("**🛠 Скилы:**")
+            st.markdown('<div class="ark-card-title">Скилы</div>', unsafe_allow_html=True)
             for s in selected["skills"]:
                 st.markdown(f"- {s['name']}")
         if selected["knowledge_entries"]:
-            st.markdown("**📚 Локальные знания:**")
+            st.markdown('<div class="ark-card-title" style="margin-top:0.6rem;">Локальные знания</div>', unsafe_allow_html=True)
             for k in selected["knowledge_entries"]:
-                icon = "✅" if k["kind"] == "approved" else "⚠️"
-                st.markdown(f"- {icon} {k['title']}")
+                st.markdown(
+                    f"{badge(KIND_LABELS.get(k['kind'], k['kind']), k['kind'])} {k['title']}",
+                    unsafe_allow_html=True,
+                )

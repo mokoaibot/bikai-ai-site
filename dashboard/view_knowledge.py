@@ -4,18 +4,18 @@ from __future__ import annotations
 
 import streamlit as st
 
-from components import knowledge_card
+from components import knowledge_card, esc
 
 
 def render(state: dict, orchestrator) -> None:
     st.markdown('<div class="ark-eyebrow">Опыт системы</div>', unsafe_allow_html=True)
-    st.title("📚 База знаний")
+    st.title("База знаний")
     st.caption(
         "Добавляйте записи через чат: «Запомни паттерн: ...» (глобально) или "
         "«Запомни ошибку <агента>: ...» (локально для агента)."
     )
 
-    tab_global, tab_local = st.tabs(["🌍 Глобальная", "🏠 Локальная (по агентам)"])
+    tab_global, tab_local = st.tabs(["Глобальная", "Локальная (по агентам)"])
 
     with tab_global:
         entries = state.get("global_knowledge_entries", [])
@@ -25,11 +25,11 @@ def render(state: dict, orchestrator) -> None:
         approved = [e for e in entries if e["kind"] == "approved"]
         avoid = [e for e in entries if e["kind"] == "avoid"]
         with col1:
-            st.markdown("**✅ Что сработало хорошо**")
+            st.markdown('<div class="ark-card-title">Что сработало хорошо</div>', unsafe_allow_html=True)
             for e in approved:
                 knowledge_card(e, "Глобально")
         with col2:
-            st.markdown("**⚠️ Чего избегать**")
+            st.markdown('<div class="ark-card-title">Чего избегать</div>', unsafe_allow_html=True)
             for e in avoid:
                 knowledge_card(e, "Глобально")
 
@@ -42,7 +42,7 @@ def render(state: dict, orchestrator) -> None:
             entries = agent.get("knowledge_entries", [])
             if not entries:
                 continue
-            st.markdown(f"#### 🤖 {agent['display_name']}")
+            st.markdown(f'<div class="ark-card-title ark-card-title-lg">{esc(agent["display_name"])}</div>', unsafe_allow_html=True)
             cols = st.columns(2)
             for i, e in enumerate(entries):
                 with cols[i % 2]:

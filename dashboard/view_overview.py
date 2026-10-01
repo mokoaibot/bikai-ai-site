@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from components import render_metrics, render_tree, activity_item
+from components import render_metrics, render_tree, activity_item, status_dot
 
 
 def _last_push_info(orchestrator) -> str:
@@ -21,7 +21,7 @@ def _last_push_info(orchestrator) -> str:
 
 def render(state: dict, orchestrator) -> None:
     st.markdown('<div class="ark-eyebrow">Обзор системы</div>', unsafe_allow_html=True)
-    st.title("🧠 Архитектура в реальном времени")
+    st.title("Архитектура в реальном времени")
     st.caption(
         "Это зеркало текущего состояния репозитория. Любое изменение, которое Оркестратор "
         "применяет по вашей команде в чате Arena, мгновенно отражается здесь."
@@ -29,14 +29,13 @@ def render(state: dict, orchestrator) -> None:
 
     autonomy = state.get("settings", {}).get("autonomy_level", "confirm_all")
     autonomy_labels = {
-        "full_auto": ("🟢", "Полная автономия", "Агенты/скилы/задачи создаются сразу по ходу работы."),
-        "confirm_agents_only": ("🟡", "Подтверждение для новых агентов", "Новые агенты — по согласованию, остальное сразу."),
-        "confirm_all": ("⚪", "Подтверждение для всего", "Любое изменение сначала предлагается, затем выполняется."),
+        "full_auto": ("Полная автономия", "Агенты/скилы/задачи создаются сразу по ходу работы.", True),
+        "confirm_agents_only": ("Подтверждение для новых агентов", "Новые агенты — по согласованию, остальное сразу.", False),
+        "confirm_all": ("Подтверждение для всего", "Любое изменение сначала предлагается, затем выполняется.", False),
     }
-    icon, label, desc = autonomy_labels.get(autonomy, ("⚪", autonomy, ""))
+    label, desc, is_on = autonomy_labels.get(autonomy, (autonomy, "", False))
 
     auto_push = state.get("settings", {}).get("auto_push", False)
-    push_icon = "🟢" if auto_push else "⚪"
     push_label = "включён" if auto_push else "выключен"
     last_push = _last_push_info(orchestrator)
 
@@ -44,7 +43,7 @@ def render(state: dict, orchestrator) -> None:
     with col_a:
         st.markdown(
             f'<div class="ark-card" style="display:flex;align-items:center;gap:0.6rem;height:100%;">'
-            f'<span style="font-size:1.1rem;">{icon}</span>'
+            f'{status_dot(is_on)}'
             f'<div><strong>Режим автономии: {label}</strong>'
             f'<div style="color:#8FA398;font-size:0.82rem;">{desc}</div></div></div>',
             unsafe_allow_html=True,
@@ -52,7 +51,7 @@ def render(state: dict, orchestrator) -> None:
     with col_b:
         st.markdown(
             f'<div class="ark-card" style="display:flex;align-items:center;gap:0.6rem;height:100%;">'
-            f'<span style="font-size:1.1rem;">{push_icon}</span>'
+            f'{status_dot(auto_push)}'
             f'<div><strong>Авто-push в GitHub: {push_label}</strong>'
             f'<div style="color:#8FA398;font-size:0.82rem;">{last_push}</div></div></div>',
             unsafe_allow_html=True,
@@ -73,11 +72,11 @@ def render(state: dict, orchestrator) -> None:
     col_tree, col_activity = st.columns([2, 1])
 
     with col_tree:
-        st.subheader("🗂️ Дерево связей")
+        st.markdown('<div class="ark-card-title ark-card-title-lg">Дерево связей</div>', unsafe_allow_html=True)
         render_tree(state)
 
     with col_activity:
-        st.subheader("📜 Последние действия")
+        st.markdown('<div class="ark-card-title ark-card-title-lg">Последние действия</div>', unsafe_allow_html=True)
         records = orchestrator.get_recent_activity(limit=10)
         if not records:
             st.caption("Пока нет записей активности.")

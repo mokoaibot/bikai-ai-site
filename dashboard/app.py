@@ -27,21 +27,20 @@ import view_knowledge
 import view_activity
 import view_export
 
-st.set_page_config(page_title="Orchestrator · Live Mirror", page_icon="🌲", layout="wide")
+st.set_page_config(page_title="Orchestrator · Live Mirror", layout="wide")
 inject_css()
 
 orchestrator = get_orchestrator()
 state = orchestrator.run_audit()
 
-# Material Symbols — см. https://fonts.google.com/icons (иконка на каждую вкладку)
 PAGES = {
-    "overview": {"label": "Обзор", "icon": ":material/dashboard:", "module": view_overview},
-    "agents": {"label": "Агенты", "icon": ":material/smart_toy:", "module": view_agents},
-    "tasks": {"label": "Задачи", "icon": ":material/task_alt:", "module": view_tasks},
-    "skills": {"label": "Навыки", "icon": ":material/bolt:", "module": view_skills},
-    "knowledge": {"label": "База знаний", "icon": ":material/auto_stories:", "module": view_knowledge},
-    "activity": {"label": "Логи", "icon": ":material/receipt_long:", "module": view_activity},
-    "export": {"label": "Экспорт", "icon": ":material/ios_share:", "module": view_export},
+    "overview": {"label": "Обзор", "module": view_overview},
+    "agents": {"label": "Агенты", "module": view_agents},
+    "tasks": {"label": "Задачи", "module": view_tasks},
+    "skills": {"label": "Навыки", "module": view_skills},
+    "knowledge": {"label": "База знаний", "module": view_knowledge},
+    "activity": {"label": "Логи", "module": view_activity},
+    "export": {"label": "Экспорт", "module": view_export},
 }
 
 if "page" not in st.session_state:
@@ -49,9 +48,7 @@ if "page" not in st.session_state:
 
 with st.sidebar:
     st.markdown(
-        '<div class="ark-logo">'
-        '<span class="material-symbols-rounded" style="color:#7CE6A6;">hub</span>'
-        'ORCHESTRATOR</div>'
+        '<div class="ark-logo"><span class="dot"></span>ORCHESTRATOR</div>'
         '<div style="color:#8FA398;font-size:0.8rem;margin-bottom:1.1rem;">'
         'Зеркало системы в реальном времени</div>',
         unsafe_allow_html=True,
@@ -61,7 +58,6 @@ with st.sidebar:
         active = st.session_state.page == key
         if st.button(
             meta["label"],
-            icon=meta["icon"],
             key=f"nav_{key}",
             type="primary" if active else "secondary",
             use_container_width=True,
