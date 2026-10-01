@@ -672,7 +672,7 @@ if __name__ == "__main__":
             f.write(block)
 
     def add_knowledge(self, scope: str, kind: str, content: str, agent_name: Optional[str] = None) -> dict:
-        title = content.strip().split(".")[0][:80] or "Новая запись"
+        title = content.strip().split(". ")[0][:80] or "Новая запись"
         entry = {
             "id": datetime.now().strftime("%Y%m%d%H%M%S%f"),
             "scope": scope,

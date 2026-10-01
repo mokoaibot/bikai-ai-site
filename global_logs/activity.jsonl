@@ -35,3 +35,5 @@
 {"timestamp": "2026-10-01T21:32:21", "level": "INFO", "action": "add_knowledge", "message": "Добавлена локальная запись знаний агенту 'bikai': «Единственный бренд с англоязычной версией».", "scope": "local", "agent": "bikai"}
 {"timestamp": "2026-10-01T21:32:21", "level": "INFO", "action": "add_knowledge", "message": "Добавлена локальная запись знаний агенту 'bikai': «Рост после запуска».", "scope": "local", "agent": "bikai"}
 {"timestamp": "2026-10-01T21:32:21", "level": "INFO", "action": "add_knowledge", "message": "Добавлена локальная запись знаний агенту 'bikai': «Договор №260930-1 от 30».", "scope": "local", "agent": "bikai"}
+{"timestamp": "2026-10-01T21:32:22", "level": "INFO", "action": "auto_push", "message": "Авто-push выполнен (наполнен план работ по проекту BIKAI (агент, задачи, знания))."}
+{"timestamp": "2026-10-01T21:32:35", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
