@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Коммерческое предложение — ИП Анищенко И. А. | Сайты · kedi.by · Переводы</title>
+<!--
+  ============================================================================
+  КАК ПРАВИТЬ ЭТОТ ФАЙЛ
+  ----------------------------------------------------------------------------
+  1. Все цифры стоят прямо в тексте, в ячейках вида:  <td class="money">4 900</td>
+     Просто меняйте число — итоги внизу пересчитаются автоматически.
+  2. Строки смет помечены атрибутом data-money="ЧИСЛО" — его тоже правьте,
+     иначе итог разойдётся с тем, что написано в ячейке.
+  3. Строки, которые можно включать/выключать, помечены data-opt="1"
+     и имеют чекбокс. data-opt="0" — обязательная часть.
+  4. Плейсхолдеры для заполнения: УНП, телефон, e-mail, расчётный счёт,
+     имя заказчика. Ищите по слову  ____________  (Ctrl+F).
+  5. В браузере есть кнопка «Режим правки» — можно править текст мышкой
+     и скачать исправленный HTML.
+  6. Вкладки: #sites (новые сайты), #kedi (обновление kedi.by), #trans (переводы).
+  ============================================================================
+-->
+<style>
+:root{
+  --ink:#0e1c2b; --ink2:#3c4d61; --mut:#6b7c90;
+  --bg:#eef2f6; --card:#ffffff; --line:#dde5ec;
+  --acc:#0c6b62; --acc-d:#08504a; --acc-l:#e6f2f0;
+  --warn:#a8580b; --warn-l:#fdf1e2;
+  --ok:#14713f; --ok-l:#e8f4ec;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font:16px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-feature-settings:"tnum" 0;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* ---------- шапка документа ---------- */
+header.doc{background:linear-gradient(135deg,#0b2f34 0%,#0c6b62 100%);color:#fff;padding:34px 0 30px}
+.doc-top{display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap;justify-content:space-between}
+.mark{display:flex;gap:14px;align-items:center}
+.mark svg{flex:none}
+.mark .who{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.72;margin:0 0 4px}
+.mark h1{margin:0;font-size:23px;line-height:1.25;font-weight:650;letter-spacing:-.2px}
+.doc-nums{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:12px;padding:12px 16px;font-size:13.5px;line-height:1.75;min-width:250px}
+.doc-nums b{font-weight:600}
+.doc-nums span{opacity:.75;display:inline-block;min-width:88px}
+.lead{margin:22px 0 0;font-size:15.5px;max-width:860px;color:#dcebe9}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:4px 12px;font-size:12.5px}
+
+/* ---------- вкладки: вертикальное меню слева ---------- */
+.shell{display:flex;align-items:flex-start;max-width:1420px;margin:0 auto}
+.tabbar{position:sticky;top:0;align-self:flex-start;flex:none;width:266px;max-height:100vh;
+  overflow-y:auto;background:#fff;border-right:1px solid var(--line);padding:18px 12px 26px;z-index:40}
+.side-h{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);
+  font-weight:700;padding:0 12px 10px}
+.tabbar .wrap{display:flex;flex-direction:column;gap:4px;max-width:none;margin:0;padding:0}
+.tab{appearance:none;border:1px solid transparent;background:transparent;color:var(--ink2);
+  font:inherit;font-size:14.2px;font-weight:560;padding:10px 12px;border-radius:10px;cursor:pointer;
+  display:flex;align-items:flex-start;gap:9px;text-align:left;line-height:1.35;
+  width:100%;transition:.16s}
+.tab:hover{background:#f2f6f8;color:var(--ink)}
+.tab .n{display:grid;place-items:center;width:21px;height:21px;border-radius:50%;
+  background:#e6edf2;color:var(--mut);font-size:12px;font-weight:700;flex:none;margin-top:1px}
+.tab .lb{min-width:0}
+.tab[aria-selected="true"]{background:var(--acc);color:#fff}
+.tab[aria-selected="true"] .n{background:rgba(255,255,255,.22);color:#fff}
+
+/* ---------- панели ---------- */
+main{flex:1 1 auto;min-width:0;padding:30px 0 8px}
+
+/* ---------- средний экран: колонка уже, но остаётся слева ---------- */
+@media(max-width:1180px){
+  .tabbar{width:206px;padding:14px 8px 22px}
+  .side-h{padding:0 10px 8px;font-size:11px}
+  .tab{font-size:13.4px;padding:9px 10px;gap:7px}
+  .tab .n{width:19px;height:19px;font-size:11.5px}
+}
+
+/* ---------- телефон: колонка не влезает, меню возвращается наверх ---------- */
+@media(max-width:620px){
+  .shell{display:block;max-width:none}
+  .tabbar{position:sticky;top:0;width:auto;max-height:none;overflow:visible;
+    border-right:none;border-bottom:1px solid var(--line);
+    box-shadow:0 6px 18px -14px rgba(14,28,43,.5);padding:0}
+  .side-h{display:none}
+  .tabbar .wrap{flex-direction:row;overflow-x:auto;padding:10px 20px;max-width:1120px;margin:0 auto}
+  .tab{width:auto;flex-wrap:nowrap;white-space:nowrap;padding:10px 16px;font-size:14.5px}
+  .tab .n{width:21px;height:21px;font-size:12px}
+}
+.panel{display:none}
+.subtabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.subtab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 22px;font:inherit;font-size:14px;font-weight:660;color:var(--mut);cursor:pointer;transition:.16s}
+.subtab:hover{border-color:var(--acc);color:var(--acc-d)}
+.subtab.on{background:var(--acc-d);border-color:var(--acc-d);color:#fff}
+.subpanel{display:none}
+.subpanel.on{display:block;animation:fade .28s ease}
+.panel.on{display:block;animation:fade .28s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin:0 0 18px}
+.card.tight{padding:18px 20px}
+h2.sec{font-size:20px;margin:0 0 4px;letter-spacing:-.2px;font-weight:660}
+h3.sub{font-size:15.5px;margin:26px 0 10px;font-weight:660;color:var(--acc-d)}
+.card > p.mut{margin:4px 0 0;color:var(--mut);font-size:14px}
+p{margin:0 0 12px}
+ul{margin:0 0 12px;padding-left:20px}
+li{margin:0 0 6px}
+li::marker{color:var(--acc)}
+a{color:var(--acc-d)}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.6px;background:#f1f5f8;border:1px solid var(--line);border-radius:5px;padding:1px 5px;word-break:break-all}
+
+/* ---------- таблицы ---------- */
+.tw{overflow-x:auto;margin:0 0 4px;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:14.3px;min-width:620px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:#f5f8fa;font-size:12.2px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:700;border-bottom:1px solid var(--line)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#fafcfd}
+td.money,th.money{text-align:right;white-space:nowrap;font-weight:640;font-variant-numeric:tabular-nums}
+td.money{color:var(--acc-d)}
+tfoot td{background:var(--acc-l);font-weight:700;font-size:15px}
+tfoot td.money{color:var(--acc-d)}
+td.n{width:34px;color:var(--mut);font-variant-numeric:tabular-nums}
+td.w{width:118px}
+.opt-cell{width:30px;text-align:center}
+input[type=checkbox]{width:17px;height:17px;accent-color:var(--acc);cursor:pointer}
+
+/* ---------- бейджи и плашки ---------- */
+.b{display:inline-block;border-radius:999px;padding:2px 10px;font-size:11.8px;font-weight:660;letter-spacing:.02em;white-space:nowrap}
+.b.rec{background:var(--acc);color:#fff}
+.b.opt{background:#eef2f6;color:var(--ink2)}
+.b.ok{background:var(--ok-l);color:var(--ok)}
+.b.warn{background:var(--warn-l);color:var(--warn)}
+.b.err{background:#fdecec;color:#a32020}
+.b.acc{background:var(--acc-l);color:var(--acc-d)}
+
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.g3,.g4,.g2{grid-template-columns:1fr}}
+
+.pack{border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;background:#fff}
+.pack.best{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-l)}
+.pack h4{margin:0 0 2px;font-size:16.5px;font-weight:660}
+.pack .price{font-size:26px;font-weight:700;letter-spacing:-.6px;margin:8px 0 2px;color:var(--acc-d);font-variant-numeric:tabular-nums}
+.pack .per{font-size:12.5px;color:var(--mut);margin-bottom:12px}
+.pack ul{font-size:13.6px;padding-left:18px;margin:0}
+.pack .foot{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.8px;color:var(--mut)}
+
+.note{border-left:3px solid var(--acc);background:var(--acc-l);border-radius:0 10px 10px 0;padding:13px 16px;font-size:14.2px;margin:0 0 16px}
+.note.warn{border-color:var(--warn);background:var(--warn-l)}
+.note b{font-weight:680}
+
+.finding{display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:14.3px}
+.finding:last-child{border-bottom:none}
+.finding .ic{flex:none;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:#fdecec;color:#a32020;font-size:12.5px;font-weight:800}
+.finding .ic.y{background:var(--warn-l);color:var(--warn)}
+.finding .ic.g{background:var(--ok-l);color:var(--ok)}
+.finding .tx{flex:1}
+.finding .ev{display:block;font-size:12.6px;color:var(--mut);margin-top:3px}
+
+.steps{counter-reset:s;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:s;position:relative;padding:0 0 16px 42px;margin:0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;
+  background:var(--acc);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
+.steps li::after{content:"";position:absolute;left:13.5px;top:30px;bottom:2px;width:1px;background:var(--line)}
+.steps li:last-child::after{display:none}
+.steps b{display:block;font-weight:660}
+.steps span{font-size:13.8px;color:var(--ink2)}
+
+/* ---------- сводка ---------- */
+.summary{background:#0b2f34;color:#fff;padding:30px 0;margin-top:20px}
+.summary h2{margin:0 0 16px;font-size:19px;font-weight:660}
+.srow{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:14.6px}
+.srow .v{font-variant-numeric:tabular-nums;font-weight:650;white-space:nowrap}
+.srow .d{font-size:12.6px;opacity:.62;display:block}
+.stotal{display:flex;justify-content:space-between;gap:16px;align-items:baseline;margin-top:16px;padding-top:14px;border-top:2px solid rgba(255,255,255,.34)}
+.stotal .lbl{font-size:13px;text-transform:uppercase;letter-spacing:.1em;opacity:.75}
+.stotal .v{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.8px}
+.sub-total{font-size:12.5px;opacity:.7;margin-top:10px}
+
+footer.f{background:#08262b;color:#c9dcda;padding:26px 0 40px;font-size:13.8px}
+footer.f h4{color:#fff;margin:0 0 8px;font-size:14px;font-weight:660}
+footer.f .grid{gap:26px}
+footer.f p{margin:0 0 8px;line-height:1.7}
+footer.f a{color:#7fd1c8}
+.fill{color:#8fb0ad;border-bottom:1px dashed #4c736f;padding:0 2px}
+
+/* ---------- панель правки ---------- */
+.tools{position:fixed;right:18px;bottom:18px;z-index:60;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:92vw}
+.tools button{font:inherit;font-size:13.2px;font-weight:620;border:1px solid var(--line);background:#fff;color:var(--ink);
+  padding:9px 14px;border-radius:10px;cursor:pointer;box-shadow:0 6px 20px -8px rgba(14,28,43,.45)}
+.tools button:hover{background:#f5f8fa}
+.tools button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+body.editing [contenteditable="true"]{outline:1px dashed #9dc4bf;outline-offset:2px;border-radius:3px;background:#fcfffe}
+body.editing .card{background:#feffff}
+
+@media print{
+  body{background:#fff;font-size:11.5pt}
+  .tabbar,.tools{display:none!important}
+  .shell{display:block;max-width:none}
+  .panel{display:block!important;page-break-before:always}
+  .card{border-color:#ccc;box-shadow:none;break-inside:avoid}
+  header.doc{background:#0c6b62!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .summary{background:#0b2f34!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .tw{overflow:visible}
+  table{min-width:0}
+  a{color:inherit;text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="doc">
+  <div class="wrap">
+    <div class="doc-top">
+      <div class="mark">
+        <svg width="46" height="46" viewBox="0 0 48 48" fill="none" role="img" aria-label="Знак: две пирамиды">
+          <path d="M27.98 9.08L46 33.44L30.58 39.61Z" fill="#17a394"/>
+          <path d="M17.41 8.39L22.77 15.53L18.54 21.7Z" fill="#17a394"/>
+          <path d="M27.98 9.08L30.58 39.61L10.61 34.9Z" fill="#7fd9ca"/>
+          <path d="M17.18 8.76L11.42 32.3L2 29.87Z" fill="#7fd9ca"/>
+          <path d="M17.42 8.44L18.56 21.67L11.42 32.3L2 29.87Z" fill="#7fd9ca"/>
+        </svg>
+        <div>
+          <p class="who">Коммерческое предложение</p>
+          <h1>Сайты, поддержка и переводы<br>для мед- и аналитического оборудования</h1>
+        </div>
+      </div>
+      <div class="doc-nums">
+        <div><span>КП №</span> <b>____________</b></div>
+        <div><span>от</span> <b>19.09.2026</b></div>
+        <div><span>Исполнитель</span> <b>ИП Анищенко И. А.</b></div>
+        <div><span>Валюта</span> <b>BYN (бел. руб.)</b></div>
+      </div>
+    </div>
+    <p class="lead">Три направления работы по вашему брифу «Маркетинг и разработка сайтов»: запуск сайтов для трёх новых брендов (Winmedic, Chiwell, BIKAI/UVTech), приведение в порядок действующего сайта kedi.by и переводы технической документации под медицинскую регистрацию. </p>
+    <div class="tags">
+      <span class="tag">Winmedic — цифровая патология</span>
+      <span class="tag">Chiwell — реактивы и автоматы окраски</span>
+      <span class="tag">BIKAI / UVTech — хроматография</span>
+      <span class="tag">Kedi (KEDEE) — гистология</span>
+      <span class="tag">Переводы EN / ZH → RU</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+
+<nav class="tabbar" aria-label="Направления">
+  <div class="side-h">Разделы</div>
+  <div class="wrap" role="tablist">
+    <button class="tab" role="tab" id="t-approach" aria-controls="p-approach" aria-selected="true">
+      <span class="n">0</span><span class="lb">Подход к работе</span></button>
+    <button class="tab" role="tab" id="t-sites" aria-controls="p-sites" aria-selected="false" tabindex="-1">
+      <span class="n">1</span><span class="lb">Разработка новых сайтов</span></button>
+    <button class="tab" role="tab" id="t-kedi" aria-controls="p-kedi" aria-selected="false" tabindex="-1">
+      <span class="n">2</span><span class="lb">Обновление сайта Kedi</span></button>
+    <button class="tab" role="tab" id="t-trans" aria-controls="p-trans" aria-selected="false" tabindex="-1">
+      <span class="n">3</span><span class="lb">Переводы</span></button>
+    <button class="tab" role="tab" id="t-support" aria-controls="p-support" aria-selected="false" tabindex="-1">
+      <span class="n">4</span><span class="lb">Поддержка и развитие</span></button>
+    <button class="tab" role="tab" id="t-price" aria-controls="p-price" aria-selected="false" tabindex="-1">
+      <span class="n">5</span><span class="lb">Сравнение и обоснование цен</span></button>
+    <button class="tab" role="tab" id="t-info" aria-controls="p-info" aria-selected="false" tabindex="-1">
+      <span class="n">6</span><span class="lb">Дополнительная информация</span></button>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ============================================================= -->
+<!-- ВКЛАДКА 0: ПОДХОД К РАБОТЕ -->
+<!-- ============================================================= -->
+<section class="panel on" id="p-approach" role="tabpanel" aria-labelledby="t-approach">
+
+  <div class="card">
+    <h2 class="sec">Подход к работе</h2>
+    <p class="mut">Коротко, прежде чем смотреть цифры: как устроена работа, почему цены посчитаны именно так, с чего можно начать и что из этого вырастет дальше</p>
+    <p>Все работы здесь делаются на <b>ИИ-станках</b> и в <b>общих репозиториях</b>. Техническая документация и сайты — это не два разных проекта, а одна экосистема. То, что разобрано и переведено для документов, сразу становится содержанием сайтов: карточки приборов, характеристики, описания, материалы. Отсюда прямой эффект на продвижение — наполненный сайт лучше читается и поиском, и ИИ-выдачей.</p>
+    <div class="grid g4" style="margin-top:6px">
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">Шаг 1</div>
+        <div style="font-weight:660;margin:10px 0 4px">ИИ-станки разбирают материал</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Каталоги и документация производителей, терминология, характеристики — всё, что нужно для работы.</p>
+      </div>
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">Шаг 2</div>
+        <div style="font-weight:660;margin:10px 0 4px">Всё уходит в общий репозиторий</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Единая база: термины, переводы, описания, структуры. Не по проекту, а по всем четырём брендам сразу.</p>
+      </div>
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">Шаг 3</div>
+        <div style="font-weight:660;margin:10px 0 4px">Из базы наполняются сайты</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Карточки, разделы, материалы берутся из той же базы, а не пишутся заново под каждый сайт.</p>
+      </div>
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">Шаг 4</div>
+        <div style="font-weight:660;margin:10px 0 4px">SEO и GEO идут быстрее</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Полнота и согласованность содержания — это ровно то, за что сайт поднимают поиск и ИИ-ответы.</p>
+      </div>
+    </div>
+    <div class="note" style="margin-bottom:0"><b>База одна, и она обучается.</b> Каждая следующая задача делает её точнее, а не начинается с нуля: переведённые термины, найденные характеристики и отлаженные шаблоны остаются в репозитории и работают на всех последующих работах.</div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Что можно строить на общей базе</h3>
+    <p>Когда база одна, новые инструменты достраиваются к ней, а не строятся заново. Что уже видно как следующая очередь:</p>
+    <div class="grid g2">
+      <ul style="margin:0">
+        <li><b>Обобщённые каталоги с поиском</b> — единый каталог по всем брендам, подбор по параметрам и парт-номерам</li>
+        <li><b>Разные версии отображения</b> — один и тот же материал в виде карточки товара, статьи, сравнительной таблицы или печатной страницы</li>
+        <li><b>Готовые описания для соцсетей и YouTube</b> — из карточки прибора сразу текст поста и основа сценария ролика</li>
+      </ul>
+      <ul style="margin:0">
+        <li><b>Прорисовка иконок</b> — единый визуальный язык для каталогов и сайтов</li>
+        <li><b>Презентации</b> — для выставок, тендеров и переговоров, собираются из той же базы</li>
+        <li><b>И то, чего в этом списке пока нет</b> — часть возможностей станет видна только по ходу, когда появится понимание, как вы с этим работаете</li>
+      </ul>
+    </div>
+    <div class="note" style="margin-bottom:0">Это направление, а не обещание конкретных продуктов. Смысл в том, что база позволяет достраивать инструменты, не начиная каждый раз с нуля.</div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">О ценах в этом предложении</h3>
+    <p>Цены посчитаны <b>условно</b> — без привязки к срокам исполнения и к точным объёмам. Иначе быть не может на этом этапе, и вот почему. Недельные оценки в таблицах ниже — это трудозатраты для расчёта стоимости, а не обязательство по датам: календарный график согласуем отдельно.</p>
+    <div class="grid g2">
+      <div class="pack tight" style="padding:16px">
+        <h4 style="font-size:15px">Что осталось за рамками расчёта</h4>
+        <ul style="margin-top:10px">
+          <li>По разработке сайтов остаётся много вопросов, которые всплывают уже в процессе</li>
+          <li>По переводам объём зависит от того, какой комплект документов отдаст завод</li>
+          <li>Часть работ станет видна только после первого круга</li>
+        </ul>
+      </div>
+      <div class="pack tight" style="padding:16px">
+        <h4 style="font-size:15px">Что при этом ясно</h4>
+        <ul style="margin-top:10px">
+          <li>Общая картина и то, к чему мы стремимся</li>
+          <li>Состав работ и их последовательность</li>
+          <li>Порядок сумм по каждому направлению</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note" style="margin-bottom:0">Поэтому перед расчётом был сделан <b>анализ рынка</b> — чтобы первично обсудить бюджет за весь комплекс работ: приемлем он или нет. В рамках этого ТЗ бюджет может быть и урезан, и увеличен. Речь про создание общей экосистемы, которую можно дополнять и улучшать, а не про разовый заказ.</div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Как я оценивал и кто делает работу</h3>
+    <div class="grid g3">
+      <div>
+        <h3 class="sub" style="margin-top:0">Как считались цифры</h3>
+        <p class="mut" style="margin:0">Оценить объёмы при комплексном подходе сложнее, чем при обычном: работы связаны между собой и идут из одной базы. Поэтому часть цифр взята из открытого доступа — они приведены в разделе «Сравнение и обоснование цен».</p>
+      </div>
+      <div>
+        <h3 class="sub" style="margin-top:0">Ручной работы больше, чем кажется</h3>
+        <p class="mut" style="margin:0 0 8px">Помимо написания сайтов и управления ИИ-агентами, большой пласт — ручная работа, которую станку не отдать:</p>
+        <ul style="margin:0;padding-left:18px;font-size:13.5px">
+          <li><b>Оркестрирование</b> — связать репозитории, ИИ-агентов, локальные машины и хостинг в одну работающую схему</li>
+          <li><b>Настройка связей</b> — кто откуда берёт данные, куда кладёт результат, что запускается по расписанию и где граница между агентом и человеком</li>
+          <li><b>Интеграция и настройка SEO</b></li>
+          <li><b>Проверка</b> — прогнать результат и убедиться, что он верный, а не просто получился</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="sub" style="margin-top:0">Кто делает</h3>
+        <p class="mut" style="margin:0">Дизайнерские и узкопрограммные задачи идут исключительно через одного меня. При необходимости привлекаю своих узких специалистов в нужной области — контроль при этом всеобщий, и отвечаю за всё я.</p>
+      </div>
+    </div>
+    <div class="note warn" style="margin-bottom:0"><b>При этом качество выше, чем при старом подходе — и это факт, а не обещание.</b> В процессе много тестирования: проверяется перевод, вёрстка, поведение страниц и то, как их читают поиск и ИИ-выдача. Ошибки находятся до сдачи, а не после.</div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Предложение: начать с пилотной недели</h3>
+    <p>При согласовании бюджетов предлагаю начать с <b>предоплаты</b>. В течение недели я демонстрирую три вещи — этого достаточно, чтобы оценить и качество работы, и то, что вообще даёт такой подход.</p>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">1</div>
+        <div style="font-weight:660;margin:10px 0 4px">Перевод</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Один реальный документ через станок: перевод по глоссарию бренда и выдача в фирменном виде — DOCX, PDF и HTML одним файлом.</p>
+      </div>
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">2</div>
+        <div style="font-weight:660;margin:10px 0 4px">Один сайт</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Не макет, а работающий сайт по одному бренду: каталог, карточки, структура — то, что можно открыть и потрогать.</p>
+      </div>
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">3</div>
+        <div style="font-weight:660;margin:10px 0 4px">Одно доменное имя</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Первичная настройка: домен, хостинг, SSL — чтобы сайт был доступен по живому адресу, а не в предпросмотре.</p>
+      </div>
+    </div>
+    <p class="mut" style="margin:12px 0 0">Размер предоплаты обсуждается вместе с бюджетом. Логичный кандидат на первый сайт — Winmedic: у него первая поставка в октябре, и это уже заложено в вариант «один сайт как пилот» в разделе про цены.</p>
+    <p style="margin-bottom:0">Смысл недели — не показать демо, а дать вам понять качество работы и возможности подхода <b>до</b> того, как согласован весь объём.</p>
+    <div class="note" style="margin-bottom:0">Если обе стороны согласны продолжать, тестовые репозитории переходят в <b>режим разработки</b> и дополняются необходимыми агентами, субагентами и программами. Ничего не выбрасывается: сделанное за неделю становится основой, а не черновиком.</div>
+    <div class="note warn" style="margin:14px 0 0"><b>Реальный прогресс будет виден каждый день</b>, и на любом этапе есть возможность корректировки. В этом главное отличие подхода: не ожидание результата к назначенному сроку, а ежедневная сверка — вы видите, что сделано, и можете повернуть работу, пока это дёшево.</div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Об этом документе</h3>
+    <p>Это предложение сделано <b>моими ИИ-агентами совместно со мной</b> — тем же способом, которым будут делаться сами работы.</p>
+    <div class="grid g4">
+      <div class="pack tight" style="padding:14px;text-align:center"><div style="font-weight:660;font-size:14px">База знаний</div><p class="mut" style="margin:6px 0 0;font-size:12.8px">для просчёта любых дополнений</p></div>
+      <div class="pack tight" style="padding:14px;text-align:center"><div style="font-weight:660;font-size:14px">Карта расчётов</div><p class="mut" style="margin:6px 0 0;font-size:12.8px">общая, по всему комплексу работ</p></div>
+      <div class="pack tight" style="padding:14px;text-align:center"><div style="font-weight:660;font-size:14px">Учёт работ</div><p class="mut" style="margin:6px 0 0;font-size:12.8px">что выполнено и в каком объёме</p></div>
+      <div class="pack tight" style="padding:14px;text-align:center"><div style="font-weight:660;font-size:14px">Модификация</div><p class="mut" style="margin:6px 0 0;font-size:12.8px">документ правится, а не переписывается</p></div>
+    </div>
+    <div class="note" style="margin-bottom:0">То есть это не разовый файл, а рабочая заготовка. Когда появятся ответы на открытые вопросы, цифры в нём уточняются — а не пересчитываются с нуля.</div>
+  </div>
+
+</section>
+
+<!-- ============================================================= -->
+<!-- ВКЛАДКА 1 -->
+<!-- ============================================================= -->
+<section class="panel" id="p-sites" role="tabpanel" aria-labelledby="t-sites">
+
+  <div class="card">
+    <h2 class="sec">1. Разработка новых сайтов</h2>
+    <p class="mut">Три сайта дистрибьютора: Winmedic, Chiwell, BIKAI / UVTech. Работа идёт по семи этапам, без готовых «пакетов»</p>
+
+    <p>Пакетов здесь нет намеренно. Сайт дистрибьютора собирается под конкретную задачу, и объём работ виден только после того, как разобран сайт производителя. Поэтому считаем по этапам — каждый этап отдельной строкой, и можно убрать или добавить любой из них.</p>
+
+    <div class="note"><b>Ключевой момент, который меняет всё остальное:</b> это сайты дистрибьютора, а не производителя. Значит, акцент подачи другой. Не история завода и не бренд-сторителлинг, а то, что нужно белорусской лаборатории: что есть в наличии, номер регистрационного удостоверения, сроки поставки, монтаж и сервис в Беларуси, гарантия, кто отвечает и как связаться. Это закладывается в ТЗ на первом этапе и дальше влияет и на каталог, и на дизайн, и на семантику.</div>
+  </div>
+
+<div class="card">
+    <h3 class="sub" style="margin-top:0">Семь этапов</h3>
+
+    <div class="finding" style="padding-top:0"><div class="ic g">1</div><div class="tx">
+      <b>Подготовительный этап и утверждение первичного ТЗ</b>
+      <span class="ev">Фиксируем, что это сайт дистрибьютора и какие акценты в подаче. Дальше — техническая база: анализ и настройка хостинга, регистрация доменов, SSL-сертификаты, регистрация в БелГИЭ, почта, аналитика, резервное копирование.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic g">2</div><div class="tx">
+      <b>Парсинг, каталоги, дизайн, оптимизация</b>
+      <span class="ev">Разбираем сайт производителя в соответствии с целевой направленностью дистрибьютора, строим каталоги и категории, адаптируем дизайн и вычищаем всё лишнее, чтобы сайт летал. Некоторые исходники сильно перегружены — это лечится на этом этапе, а не потом.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic g">3</div><div class="tx">
+      <b>Выкладка первичных макетов на хостинг</b>
+      <span class="ev">Сайты начинают работать сразу, статикой, без админки — но уже с улучшенным дизайном. Их можно показывать по ссылке производителю и заказчикам, и они начинают индексироваться, не дожидаясь админки.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic g">4</div><div class="tx">
+      <b>Правки и улучшения под требования, согласование</b>
+      <span class="ev">Идёт одновременно с этапами 5 и 6 — они пересекаются по времени и правятся параллельно.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic g">5</div><div class="tx">
+      <b>Прикрутка админки</b>
+      <span class="ev">Будет однозначно. Открытый вопрос — уровень абстракции и автоматизации. Это отдельный разговор, см. блок ниже.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic g">6</div><div class="tx">
+      <b>Согласование сайта и старт SEO: семантическое ядро, поисковики и ИИ-выдача</b>
+      <span class="ev">Классическое ядро под Google и Яндекс плюс работа под ИИ-выдачу — Google AI Overviews и Яндекс Нейро. Тоже идёт параллельно с этапами 4 и 5.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic g">7</div><div class="tx">
+      <b>Продакшен и переход на поддержку</b>
+      <span class="ev">Финальная выкладка, контроль, передача доступа, регламент обновления, переход на абонентское обслуживание.</span>
+    </div></div>
+
+    <div class="note" style="margin:14px 0 0"><b>Пояснения к этапам 1, 5 и 6</b> — почему БелГИЭ надо запускать сразу, какие развилки по админке требуют вашего решения и что входит в SEO с ИИ-выдачей — вынесены в раздел «Дополнительная информация». Там же справка по каждому бренду.</div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Смета по этапам</h3>
+    <p class="mut" style="margin-bottom:14px">Ставка 50 BYN/час. В последней колонке — сумма по трём сайтам, именно она попадает в итог.</p>
+    <div class="tw">
+      <table id="tbl-sites">
+        <thead><tr><th class="opt-cell"></th><th class="n">№</th><th>Этап</th><th style="text-align:right">Winmedic</th><th style="text-align:right">Chiwell</th><th style="text-align:right">BIKAI</th><th class="money">Сумма</th></tr></thead>
+        <tbody>
+          <tr data-dir="sites" data-money="2850" data-opt="0">
+            <td class="opt-cell"></td><td class="n">1.1</td>
+            <td><b>Подготовка и ТЗ.</b> Акценты дистрибьютора, анализ и настройка хостинга, домены .by, SSL, регистрация в БелГИЭ, почта, аналитика и настройка целей в ней, бэкапы<br><span style="font-size:12.6px;color:var(--mut)">19 часов на сайт</span></td>
+            <td style="text-align:right">950</td><td style="text-align:right">950</td><td style="text-align:right">950</td><td class="money">2 850</td></tr>
+          <tr data-dir="sites" data-money="6350" data-opt="0">
+            <td class="opt-cell"></td><td class="n">1.2</td>
+            <td><b>Парсинг, каталоги, дизайн, оптимизация.</b> Разбор сайта производителя, структура каталога, адаптация дизайна, вычитка скорости<br><span style="font-size:12.6px;color:var(--mut)">Winmedic 40 ч · Chiwell 33 ч · BIKAI 54 ч</span></td>
+            <td style="text-align:right">2 000</td><td style="text-align:right">1 650</td><td style="text-align:right">2 700</td><td class="money">6 350</td></tr>
+          <tr data-dir="sites" data-money="1300" data-opt="0">
+            <td class="opt-cell"></td><td class="n">1.3</td>
+            <td><b>Выкладка макетов на хостинг.</b> Сайты работают статикой, без админки, с улучшенным дизайном</td>
+            <td style="text-align:right">400</td><td style="text-align:right">400</td><td style="text-align:right">500</td><td class="money">1 300</td></tr>
+          <tr data-dir="sites" data-money="3250" data-opt="0">
+            <td class="opt-cell"></td><td class="n">1.4</td>
+            <td><b>Правки и согласование.</b> Идёт параллельно с этапами 1.5 и 1.6</td>
+            <td style="text-align:right">1000</td><td style="text-align:right">1000</td><td style="text-align:right">1250</td><td class="money">3 250</td></tr>
+          <tr data-dir="sites" data-money="4750" data-opt="0">
+            <td class="opt-cell"></td><td class="n">1.5</td>
+            <td><b>Админка.</b> Оценка рабочая, с запасом — до решений по развилкам из блока выше<br><span style="font-size:12.6px;color:var(--mut)">Winmedic 30 ч · Chiwell 25 ч · BIKAI 40 ч</span></td>
+            <td style="text-align:right">1 500</td><td style="text-align:right">1 250</td><td style="text-align:right">2 000</td><td class="money">4 750</td></tr>
+          <tr data-dir="sites" data-money="5500" data-opt="0">
+            <td class="opt-cell"></td><td class="n">1.6</td>
+            <td><b>SEO и ИИ-выдача.</b> Семантическое ядро, Google и Яндекс, микроразметка, Q&A-блоки, работа под AI Overviews и Яндекс Нейро<br><span style="font-size:12.6px;color:var(--mut)">Winmedic 35 ч · Chiwell 30 ч · BIKAI 45 ч</span></td>
+            <td style="text-align:right">1 750</td><td style="text-align:right">1 500</td><td style="text-align:right">2 250</td><td class="money">5 500</td></tr>
+          <tr data-dir="sites" data-money="1600" data-opt="0">
+            <td class="opt-cell"></td><td class="n">1.7</td>
+            <td><b>Продакшен и переход на поддержку.</b> Финальная выкладка, передача доступа, регламент</td>
+            <td style="text-align:right">500</td><td style="text-align:right">500</td><td style="text-align:right">600</td><td class="money">1 600</td></tr>
+        </tbody>
+        <tfoot><tr><td colspan="3">Итого по этапам 1.1–1.7</td><td style="text-align:right">8 100</td><td style="text-align:right">7 250</td><td style="text-align:right">10 250</td><td class="money" data-sum-static="sites-total">25 600</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="note" style="margin:14px 0 0"><b>Обоснование цен и сравнение с рынком</b> вынесены на вкладку 5 — «Сравнение и обоснование цен». Там же мониторинг прайсов белорусских студий и разбор, из каких часов складывается сумма за каждый сайт.</div>
+  </div>
+
+
+
+
+
+
+</section>
+
+<!-- ============================================================= -->
+<!-- ВКЛАДКА 2 -->
+<!-- ============================================================= -->
+<section class="panel" id="p-kedi" role="tabpanel" aria-labelledby="t-kedi">
+
+  <div class="card">
+    <h2 class="sec">2. Обновление сайта kedi.by</h2>
+    <p class="mut">Аудит выполнен 19.09.2026 по живым запросам к сайту — не по описанию, а по факту</p>
+
+    <p>Сайт kedi.by — официальный дилерский ресурс гистологического оборудования KEDEE (Zhejiang Jinhua Kedee Instrumental Equipment Co. Ltd). В каталоге <b>49 товаров</b> в <b>8 категориях</b>: микротомы, гистопроцессоры, криостаты, станции заливки в парафин, автостейнеры, биомедицинские шкафы, водяные бани, расходные материалы.</p>
+
+    <p>База хорошая: CMS на месте, SEO-плагин подключён, структура категорий логичная. Но ресурс не обновлялся несколько лет, и это видно и поисковику, и покупателю. Ниже — то, что мы проверили запросами, с указанием, как именно проверяли.</p>
+    <div class="note" style="margin-bottom:0"><b>Подробный разбор всех найденных проблем</b> — с указанием, как именно проверяли, — вынесен в раздел «Дополнительная информация».</div>
+  </div>
+
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Смета на обновление</h3>
+    <p class="mut" style="margin-bottom:14px">В смете — обязательный состав обновления. Дополнительные работы (вторая языковая версия, видео и т.п.) оцениваются отдельно.</p>
+    <div class="tw">
+      <table id="tbl-kedi">
+        <thead><tr><th class="opt-cell"></th><th class="n">№</th><th>Работа</th><th class="w">Срок</th><th class="money">Стоимость</th></tr></thead>
+        <tbody>
+          <tr data-dir="kedi" data-money="800" data-opt="0">
+            <td class="opt-cell"></td><td class="n">2.1</td>
+            <td><b>Техническое оздоровление</b><br><span style="font-size:12.6px;color:var(--mut)">Обновление WooCommerce, Slider Revolution и зависимостей, полный бэкап, замена 18 картинок-заглушек в слайдере, заполнение H1 и 8 пустых H2, исправление опечатки, устранение лишнего редиректа, отключение неиспользуемого Elementor, оптимизация загрузки (19 CSS / 38 JS)</span></td>
+            <td>1 нед. <span style="font-size:12.6px;color:var(--mut)">· 16 часов</span></td><td class="money">800</td>
+          </tr>
+          <tr data-dir="kedi" data-money="1715" data-opt="0">
+            <td class="opt-cell"></td><td class="n">2.2</td>
+            <td><b>Актуализация каталога — 49 товаров</b> по 35 BYN за позицию<br><span style="font-size:12.6px;color:var(--mut)">Единый шаблон карточки: таблица ТТХ, описание, фото, PDF-инструкция, привязка к регистрационному удостоверению, блок совместимости и расходников</span></td>
+            <td>2 нед.</td><td class="money">1 715</td>
+          </tr>
+          <tr data-dir="kedi" data-money="550" data-opt="0">
+            <td class="opt-cell"></td><td class="n">2.3</td>
+            <td><b>Контрактные и дилерские данные</b><br><span style="font-size:12.6px;color:var(--mut)">Страница «О компании», статус официального дилера Zhejiang Jinhua Kedee, сертификаты и РУ, условия поставки, монтажа и гарантии, сервисное обслуживание, реквизиты</span></td>
+            <td>3 дня <span style="font-size:12.6px;color:var(--mut)">· 11 часов</span></td><td class="money">550</td>
+          </tr>
+          <tr data-dir="kedi" data-money="1600" data-opt="0">
+            <td class="opt-cell"></td><td class="n">2.4</td>
+            <td><b>Дизайн-рефреш</b> на текущей теме, без смены CMS<br><span style="font-size:12.6px;color:var(--mut)">Главная, страница категории, карточка товара. Задача — чтобы сайт выглядел актуально, а переезд и потеря позиций не понадобились</span></td>
+            <td>1,5 нед. <span style="font-size:12.6px;color:var(--mut)">· 32 часов</span></td><td class="money">1 600</td>
+          </tr>
+          <tr data-dir="kedi" data-money="1100" data-opt="0">
+            <td class="opt-cell"></td><td class="n">2.5</td>
+            <td><b>Раздел «Статьи и методики» + 8 материалов</b><br><span style="font-size:12.6px;color:var(--mut)">Например: как выбрать микротом, криостатная резка, заливка в парафин, сравнение гистопроцессоров, расходники под конкретные модели</span></td>
+            <td>1 нед. <span style="font-size:12.6px;color:var(--mut)">· 22 часов</span></td><td class="money">1 100</td>
+          </tr>
+          <tr data-dir="kedi" data-money="700" data-opt="0">
+            <td class="opt-cell"></td><td class="n">2.6</td>
+            <td><b>SEO-базис</b><br><span style="font-size:12.6px;color:var(--mut)">Мета-теги по 49 карточкам и 8 категориям, микроразметка Product, sitemap, внутренняя перелинковка, контроль скорости, повторная индексация</span></td>
+            <td>4 дня <span style="font-size:12.6px;color:var(--mut)">· 14 часов</span></td><td class="money">700</td>
+          </tr>
+          <tr data-dir="kedi" data-money="300" data-opt="0">
+            <td class="opt-cell"></td><td class="n">2.7</td>
+            <td><b>Обучение и регламент</b><br><span style="font-size:12.6px;color:var(--mut)">Как добавлять товар и статью самостоятельно; письменный регламент обновления сайта</span></td>
+            <td>1 день <span style="font-size:12.6px;color:var(--mut)">· 6 часов</span></td><td class="money">300</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pack tight" style="padding:16px">
+      <div style="font-size:12.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;font-weight:700">Разовые работы</div>
+      <div class="price" style="font-size:23px" data-sum-static="kedi-once">6 765 BYN</div>
+      <div class="per">позиции 2.1–2.7 · срок 5–6 недель · далее — сопровождение по вкладке 4</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Заключение: kedi.by — по той же схеме, что и три новых сайта</h3>
+    <p>Обновление kedi.by — это не отдельный проект «подлатать старый сайт», а приведение действующей площадки к той же схеме, по которой запускаются три новых бренда. Тот же порядок работ: каталог по единому шаблону, дизайн-рефреш, наполнение, SEO и видимость в ИИ-выдаче, продакшен. Те же общие репозитории, терминологическая база и ИИ-станки для контента и документации.</p>
+    <p>В итоге все четыре сайта живут в одной системе и поддерживаются как одно целое — а не как четыре разрозненные площадки, каждую из которых приходится чинить по отдельности.</p>
+  </div>
+
+</section>
+
+<!-- ============================================================= -->
+<!-- ВКЛАДКА 3 -->
+<!-- ============================================================= -->
+<section class="panel" id="p-trans" role="tabpanel" aria-labelledby="t-trans">
+
+  <div class="card">
+    <h2 class="sec">3. Переводы</h2>
+    <p class="mut">Разовая настройка станка под бренд и тип документа — и работа за станком по два часа на документ, независимо от его объёма</p>
+
+    <div class="grid g3">
+      <div class="pack" style="padding:18px">
+        <h4>А. Настройка станка</h4>
+        <div class="price" style="font-size:20px">3 400 BYN</div>
+        <div class="per">разово · 68 человеко-часов</div>
+        <ul>
+          <li>Терминология и глоссарий бренда</li>
+          <li>Репозиторий под каждый тип документа — их десять</li>
+          <li>Фирменный макет и его согласование</li>
+        </ul>
+      </div>
+      <div class="pack best" style="padding:18px">
+        <h4>Б. Работа за станком</h4>
+        <div class="price" style="font-size:20px">2 ч на документ</div>
+        <div class="per">100 BYN · объём не влияет</div>
+        <ul>
+          <li>Час на прогон через станок</li>
+          <li>Час на вёрстку в фирменный вид</li>
+          <li>Одна страница или сорок пять — одинаково</li>
+        </ul>
+      </div>
+      <div class="pack" style="padding:18px;border-color:var(--warn);box-shadow:0 0 0 3px var(--warn-l)">
+        <h4>В. Опции</h4>
+        <div class="price" style="font-size:20px;color:var(--warn)">по факту</div>
+        <div class="per">включаются по желанию</div>
+        <ul>
+          <li>Отчёт о слабых местах исходника — 300 за бренд</li>
+          <li>Дополнительный час на правки — 50 за документ</li>
+          <li>Дообучение под новый тип документа</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note" style="margin:14px 0 0"><b>Как устроен станок, что находит отчёт о слабых местах и где брать исходники</b> — разобрано в разделе «Дополнительная информация». Здесь оставил только то, что нужно для понимания цены.</div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Почему цена не зависит от объёма документа</h3>
+    <p>Перевод обычно считают за страницу. Здесь это не работает — и вот почему, по вашему же реестру из 95 документов.</p>
+    <div class="grid g2">
+      <div>
+        <h3 class="sub" style="margin-top:0">Что показывает реестр</h3>
+        <ul>
+          <li>Самый большой документ — 45 страниц, самый маленький — 1. Медиана — 6 страниц</li>
+          <li>55 документов из 95 — меньше десяти страниц</li>
+          <li>22 методики Chiwell — по одной странице каждая</li>
+          <li>Документов больше 50 страниц в проекте нет вообще</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="sub" style="margin-top:0">Что из этого следует</h3>
+        <ul>
+          <li>Тарифная сетка «за страницы» описывает объёмы, которых у вас нет</li>
+          <li>Моя работа на документ одинаковая: загрузить, проверить выдачу, собрать в фирменный вид</li>
+          <li>Разницу в объёме делает станок, а не человек — за неё платить не за что</li>
+          <li>Поэтому считаю часы своей работы: два часа на документ, точка</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note" style="margin-bottom:0">Что действительно стоит денег — настройка: терминология бренда, репозиторий под тип документа, фирменный макет. Она делается один раз и дальше работает на всех 95 документах. В смете ниже эти две части разделены.</div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Что входит в два часа на документ</h3>
+    <div class="grid g2">
+      <div>
+        <h3 class="sub" style="margin-top:0">Входит всегда</h3>
+        <ul>
+          <li>Оба прогона через станок — начальный и повторный</li>
+          <li>Перевод с учётом глоссария и репозитория бренда</li>
+          <li>Сборка в фирменном виде: титул, хедер, футер, нумерация</li>
+          <li>Три формата: DOCX, PDF и HTML одним файлом</li>
+          <li>Один круг мелких доводок после выдачи</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="sub" style="margin-top:0">Не тарифицируется</h3>
+        <ul>
+          <li>Время, которое документ лежит у вас на правках — моя работа в этот момент остановлена</li>
+          <li>Объём ваших правок: вернётся документ с тремя пометками или с тремястами — цена та же</li>
+          <li>Количество страниц: методика на страницу и руководство на сорок пять идут по одной цене</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note" style="margin-bottom:0">Отдельно считаются только опции из блока В в смете: отчёт о слабых местах, дополнительный час, если правки потребовали второго круга доводки, дообучение под новый тип документа и нотариальное заверение.</div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Список документов к переводу — 95 позиций, 1 638 страниц</h3>
+    <p class="mut" style="margin-bottom:12px">Полный построчный реестр вынесен в файл <b>«Список документов к переводу.xlsx»</b> — там каждая позиция отдельно, с фильтром по бренду, типу и фазе. Здесь — сводка.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Бренд</th><th>Что входит</th><th class="w">Документов</th><th class="w">Страниц</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>Winmedic</b></td>
+            <td>Руководства пользователя на 10 слайд-сканеров (5 светлого поля + 5 флуоресцентных) и 2 гистопроцессора · паспорта и спецификации на все 12 приборов · руководства на 5 программных продуктов (WinTele, WinQuant, Pathology Workflow, Management, Education)</td>
+            <td>29</td><td>692</td></tr>
+          <tr>
+            <td><b>Chiwell</b></td>
+            <td>Руководства на 7 автоматов (CW-1000+CW-800, E7, E6, CW-1000, HD-400i, CW-800, CW-400) · паспорта на все 7 · методики 22 специальных окрасок · каталог реагентов</td>
+            <td>37</td><td>287</td></tr>
+          <tr>
+            <td><b>BIKAI / UVTech</b></td>
+            <td>Руководства на 6 хроматографов и 4 масс-спектрометра · руководства на 3 модуля и hExtractor 20 · паспорта на все 14 приборов · каталог расходников (лампы под 11 брендов)</td>
+            <td>29</td><td>659</td></tr>
+        </tbody>
+        <tfoot><tr><td colspan="2">Итого</td><td>95</td><td>1 638</td></tr></tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Смета</h3>
+    <p class="mut" style="margin-bottom:14px">Две части: разовая настройка станка и работа за станком по документам. Рабочий день — 8 часов, ставка 50 BYN. Отметьте галочками то, что оставляем.</p>
+    <div class="tw">
+      <table id="tbl-trans">
+        <thead><tr><th class="opt-cell"></th><th class="n">№</th><th>Позиция</th><th class="w">Объём</th><th class="money">Стоимость</th></tr></thead>
+        <tbody>
+          <tr style="background:#f7fafb"><td colspan="5" style="font-weight:700;color:var(--acc-d)">А. Настройка станка — разово, человеко-часы по 50 BYN</td></tr>
+          <tr data-dir="trans" data-money="800" data-opt="0">
+            <td class="opt-cell"></td><td class="n">3.1</td>
+            <td>Настройка под Winmedic: терминология, глоссарий, репозитории 3 типов документа</td>
+            <td>2 дня · 16 ч</td><td class="money">800</td></tr>
+          <tr data-dir="trans" data-money="1000" data-opt="0">
+            <td class="opt-cell"></td><td class="n">3.2</td>
+            <td>Настройка под Chiwell: репозитории 4 типов документа</td>
+            <td>2,5 дня · 20 ч</td><td class="money">1 000</td></tr>
+          <tr data-dir="trans" data-money="800" data-opt="0">
+            <td class="opt-cell"></td><td class="n">3.3</td>
+            <td>Настройка под BIKAI / UVTech: репозитории 3 типов документа</td>
+            <td>2 дня · 16 ч</td><td class="money">800</td></tr>
+          <tr data-dir="trans" data-money="400" data-opt="0">
+            <td class="opt-cell"></td><td class="n">3.4</td>
+            <td>Фирменный макет выходного документа для первого бренда, с согласованием</td>
+            <td>1 день · 8 ч</td><td class="money">400</td></tr>
+          <tr data-dir="trans" data-money="400" data-opt="0">
+            <td class="opt-cell"></td><td class="n">3.5</td>
+            <td>Адаптация макета под второй и третий бренд, с согласованием</td>
+            <td>1 день · 8 ч</td><td class="money">400</td></tr>
+
+          <tr style="background:#f7fafb"><td colspan="5" style="font-weight:700;color:var(--acc-d)">Б. Работа за станком — 2 часа на документ, независимо от объёма</td></tr>
+          <tr data-dir="trans" data-money="2900" data-opt="0">
+            <td class="opt-cell"></td><td class="n">3.6</td>
+            <td>Winmedic — руководства на 12 приборов, 12 паспортов, 5 руководств на ПО</td>
+            <td>29 док. · 58 ч</td><td class="money">2 900</td></tr>
+          <tr data-dir="trans" data-money="3700" data-opt="0">
+            <td class="opt-cell"></td><td class="n">3.7</td>
+            <td>Chiwell — руководства на 7 автоматов, 7 паспортов, 22 методики, каталог реагентов</td>
+            <td>37 док. · 74 ч</td><td class="money">3 700</td></tr>
+          <tr data-dir="trans" data-money="2900" data-opt="0">
+            <td class="opt-cell"></td><td class="n">3.8</td>
+            <td>BIKAI / UVTech — руководства на 14 приборов, 14 паспортов, каталог расходников</td>
+            <td>29 док. · 58 ч</td><td class="money">2 900</td></tr>
+
+          <tr style="background:#f7fafb"><td colspan="5" style="font-weight:700;color:var(--acc-d)">В. Дополнительно — включается по желанию</td></tr>
+          <tr data-dir="trans" data-money="900" data-opt="1">
+            <td class="opt-cell"><input type="checkbox" data-calc></td><td class="n">3.9</td>
+            <td>Отчёт о слабых местах исходника — 6 часов настройки на бренд, три бренда</td>
+            <td>18 ч</td><td class="money">900</td></tr>
+          <tr data-dir="trans" data-money="4750" data-opt="1">
+            <td class="opt-cell"><input type="checkbox" data-calc></td><td class="n">3.10</td>
+            <td>Дополнительный час на правки заказчика — 50 BYN за документ, считается по факту; здесь показан максимум на все 95</td>
+            <td>до 95 ч</td><td class="money">4 750</td></tr>
+          <tr data-dir="trans" data-money="300" data-opt="1">
+            <td class="opt-cell"><input type="checkbox" data-calc></td><td class="n">3.11</td>
+            <td>Дообучение станка под новый тип документа</td>
+            <td>6 ч</td><td class="money">300</td></tr>
+          <tr data-dir="trans" data-money="450" data-opt="1">
+            <td class="opt-cell"><input type="checkbox" data-calc></td><td class="n">3.12</td>
+            <td>Подключение HTML-версий документов к сайтам — 3 сайта по 3 часа</td>
+            <td>9 ч</td><td class="money">450</td></tr>
+          <tr data-dir="trans" data-money="400" data-opt="1">
+            <td class="opt-cell"><input type="checkbox" data-calc></td><td class="n">3.13</td>
+            <td>Нотариальное заверение, 10 документов</td>
+            <td>10 док.</td><td class="money">400</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid g3" style="margin-top:16px">
+      <div class="pack tight" style="padding:16px">
+        <div style="font-size:12.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;font-weight:700">Настройка, разово</div>
+        <div class="price" style="font-size:23px" data-sum-static="trans-setup">3 400 BYN</div>
+        <div class="per">68 человеко-часов · 1–2 недели</div>
+      </div>
+      <div class="pack tight" style="padding:16px">
+        <div style="font-size:12.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;font-weight:700">Работа за станком</div>
+        <div class="price" style="font-size:23px" data-sum-static="trans-docs">9 500 BYN</div>
+        <div class="per">95 документов · 190 часов · 1 638 страниц</div>
+      </div>
+      <div class="pack tight" style="padding:16px">
+        <div style="font-size:12.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;font-weight:700">Итого по проекту</div>
+        <div class="price" style="font-size:23px" data-sum-static="trans-total">12 900 BYN</div>
+        <div class="per">258 часов · без опций</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">С чего начать — под сроки поставок</h3>
+    <p class="mut" style="margin-bottom:12px">В брифе первая поставка Winmedic в октябре, Chiwell — в четвёртом квартале. Порядок взят из реестра, там же он разложен построчно.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th class="w">Фаза</th><th>Что переводим</th><th class="w">Объём</th><th class="money">Сумма</th></tr></thead>
+        <tbody>
+          <tr><td><b>Фаза 1</b><br><span style="font-size:12.3px;color:var(--mut)">под октябрь</span></td>
+            <td>Winmedic и BIKAI / UVTech — руководства и паспорта: то, что нужно для регистрации и ввода в эксплуатацию</td>
+            <td>48 док. · 96 ч</td><td class="money">4 800</td></tr>
+          <tr><td><b>Фаза 1б</b><br><span style="font-size:12.3px;color:var(--mut)">IV квартал</span></td>
+            <td>Chiwell — руководства на 7 автоматов и паспорта: под первую поставку</td>
+            <td>14 док. · 28 ч</td><td class="money">1 400</td></tr>
+          <tr><td><b>Фаза 2</b><br><span style="font-size:12.3px;color:var(--mut)">для сайтов и продаж</span></td>
+            <td>Методики окрасок Chiwell, руководства на ПО Winmedic, каталоги — то, что публикуется на сайтах</td>
+            <td>33 док. · 66 ч</td><td class="money">3 300</td></tr>
+        </tbody>
+        <tfoot><tr><td colspan="2">Итого работа за станком</td><td>95 док. · 190 ч</td><td class="money">9 500</td></tr></tfoot>
+      </table>
+    </div>
+    <p class="mut" style="margin-top:10px">Фаза 1 — это 48 документов и 1 076 страниц, но моей работы на неё 96 часов. Узкое место здесь не станок, а скорость согласования на вашей стороне: пока документ у вас на правках, работа остановлена и не тарифицируется.</p>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Что нужно от вас</h3>
+    <div class="grid g4">
+      <div><b>Исходники</b><p class="mut" style="margin:4px 0 0">У всех трёх производителей на сайтах нет скачиваемых документов — комплект надо запросить у завода. Могу составить запрос.</p></div>
+      <div><b>Терминология</b><p class="mut" style="margin:4px 0 0">Что уже утверждено — внесём в глоссарий до первого прогона.</p></div>
+      <div><b>Непереводимое</b><p class="mut" style="margin:4px 0 0">Модели и торговые названия: WinTele, WinQuant, HS480, DP450, CW-1000, E7, UHPLC 1521 Pro и подобные.</p></div>
+      <div><b>Фирменный вид</b><p class="mut" style="margin:4px 0 0">Логотип и пожелания к хедеру и футеру. Если нет — предложим свой вариант.</p></div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<!-- ============================================================= -->
+<!-- ВКЛАДКА 4 -->
+<!-- ============================================================= -->
+
+<!-- ============================================================= -->
+<!-- ВКЛАДКА 4 -->
+<!-- ============================================================= -->
+<section class="panel" id="p-support" role="tabpanel" aria-labelledby="t-support">
+
+  <div class="card">
+    <h2 class="sec">4. Поддержка и развитие</h2>
+    <p class="mut">Не поддержка одного сайта и даже не четырёх сайтов — поддержка всей инфраструктуры</p>
+    <p>К моменту сдачи основных работ у вас появляется не набор сайтов, а <b>инфраструктура</b>: четыре сайта, общие репозитории и терминологические базы по трём брендам, фирменные шаблоны документов, переведённая документация и каналы продвижения. Всё это связано между собой и живёт в одной системе, поэтому поддерживать её нужно как одно целое, а не по частям.</p>
+    <p>Работает всё это на двух ИИ-станках — переводческом и парсинговом. <b>Станки остаются моими и работают под моим операторством:</b> я их не передаю и не разворачиваю на вашей стороне. Вам переходит результат их работы — сайты, документация, контент, — а не сам инструмент, который всё это производит.</p>
+    <p>Так получается потому, что работа построена на собственных ИИ-агентах. Рутину — мониторинг позиций, контроль видимости в ИИ-выдаче, проверку доступности и скорости, обновление контента — выполняет агент, а не человек вручную. Поэтому один исполнитель закрывает весь digital компании: это договорные отношения, а не разовые заказы.</p>
+    <div class="note warn" style="margin-bottom:0"><b>Когда это обсуждать.</b> Состав и стоимость сопровождения согласовываются <b>во время или после завершения основных работ</b>. Сейчас инфраструктура ещё только строится, и заранее зафиксировать её объём нельзя. Раздел очерчен, чтобы было видно направление и порядок цифр, а не чтобы зафиксировать цену сегодня.</div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Точка входа</h3>
+    <p>Прайса на поддержку нет и быть не может: объём работ каждый месяц разный. Поэтому фиксируем только <b>минимальную стоимость месяца</b> — всё, что сверху, оценивается по конкретной задаче до начала работ.</p>
+    <div class="tw">
+      <table id="tbl-support">
+        <thead><tr><th class="opt-cell"></th><th class="n">№</th><th>Позиция</th><th class="w">Период</th><th class="money">Стоимость</th></tr></thead>
+        <tbody>
+          <tr data-dir="sites" data-money="1850" data-opt="1">
+            <td class="opt-cell"><input type="checkbox" data-calc checked></td><td class="n">4.1</td>
+            <td><b>Минимальное сопровождение всей инфраструктуры</b> <b>в месяц</b> <span class="b acc">один договор</span><br><span style="font-size:12.6px;color:var(--mut)">Четыре сайта, репозитории, работа ИИ-станков и документация — в одном договоре. Одна абонентская плата, один исполнитель, один сводный отчёт. Состав — в списках ниже.</span></td>
+            <td>ежемесячно</td><td class="money">от 1 850</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mut" style="margin:10px 0 0">Мелкие доработки сверх минимума идут по ставке <b>ориентировочно 50 BYN/час</b> — той же, что и в разработке. Ориентировочно: сколько часов уйдёт на задачу, определяем вместе, и цену называем <b>до</b> начала работ.</p>
+    <p class="mut" style="margin-bottom:0">Комплексный формат дешевле, чем сопровождение каждой части по отдельности, — потому что рутину закрывают ИИ-агенты, а не четыре разных специалиста.</p>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Как задача превращается в прайс</h3>
+    <p>Большие изменения и отдельные проекты оцениваются индивидуально — готовых цен на них нет и не будет. Но если задача повторяется, она уходит на поток и получает фиксированную цену. Ровно так это работает и сейчас.</p>
+    <div class="grid g3">
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">Шаг 1</div>
+        <div style="font-weight:660;margin:10px 0 4px">Разовая задача</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Оцениваем индивидуально. Часы и стоимость называем до начала работ, а не выставляем по факту.</p>
+      </div>
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">Шаг 2</div>
+        <div style="font-weight:660;margin:10px 0 4px">Задача повторяется</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Выносим на поток: описываем, настраиваем, отдаём ИИ-агенту всё, что можно автоматизировать.</p>
+      </div>
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">Шаг 3</div>
+        <div style="font-weight:660;margin:10px 0 4px">Появляется прайс</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Поточная работа получает фиксированную цену — и дальше считается без обсуждений.</p>
+      </div>
+    </div>
+    <div class="note" style="margin-bottom:0">Этот путь уже пройден внутри текущего предложения. Разработка сайтов была расчётом под задачу — стала прайсом по семи этапам. Переводы считались по объёму страниц — стали фиксированным циклом «два часа на документ». Если понадобится ещё один сайт, у нас уже будет согласованный прайс, а не новый расчёт с нуля. То же самое произойдёт с работами, которые сейчас выглядят разовыми.</div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Что можно поддерживать</h3>
+    <p class="mut">Всё это делается в рамках сопровождения. Конкретный состав месяца определяем вместе: что-то нужно постоянно, что-то раз в квартал.</p>
+    <div class="grid g2">
+      <div>
+        <h3 class="sub" style="margin-top:0">Сайты и продвижение</h3>
+        <ul style="margin:0">
+          <li><b>SEO:</b> семантическое ядро, контроль позиций, контент-план, подготовка материалов</li>
+          <li><b>Видимость в ИИ-выдаче:</b> Google AI Overviews и Яндекс Нейро — попадает ли сайт в ответы и цитируется ли</li>
+          <li><b>Наполнение:</b> новые товары, статьи, методики, видео</li>
+          <li><b>Техническая часть:</b> обновления CMS и зависимостей, бэкапы, мониторинг доступности и скорости, устранение сбоев</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="sub" style="margin-top:0">База и инструменты</h3>
+        <ul style="margin:0">
+          <li><b>Репозитории и терминология:</b> пополнение глоссариев, сверка названий, контроль единообразия по брендам</li>
+          <li><b>ИИ-станки:</b> поддержание в рабочем состоянии, дообучение под новые типы документов и контента. Станки остаются моими и работают под моим операторством — в поддержку входит их работа на вас, а не передача вам</li>
+          <li><b>Документация:</b> новые документы через станок по уже согласованному циклу</li>
+          <li><b>Отчётность и консультации:</b> один сводный отчёт по всей инфраструктуре и разговор о том, что делать дальше</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Какие работы могут понадобиться</h3>
+    <p class="mut">Это уже за рамками минимума. Каждая задача оценивается отдельно — часы и цена согласуются до начала, а не выставляются по факту.</p>
+    <ul>
+      <li>Новые разделы, страницы и посадочные под конкретные запросы</li>
+      <li>Доработка карточек товара и каталога, новые фильтры</li>
+      <li>Изменение дизайна и структуры, редизайн отдельных страниц</li>
+      <li>Интеграции: CRM, заявки в Telegram (чтобы ни одна не потерялась в почте), ЕРИП — станет возможен после регистрации в Торговом реестре, то есть после этапа 1.1</li>
+      <li>Мультиязычность и переводы — свой ИИ-станок, см. вкладку 3. У Winmedic производитель держит десять языковых версий сайта, у дистрибьютора одна</li>
+      <li>Съёмка и монтаж демо-видео, вебинары и онлайн-демо — запись потом работает и на сайте, и на YouTube</li>
+      <li>Новые домены, хостинг, SSL, регистрация в БелГИЭ</li>
+      <li>Перенос сайта, смена CMS, восстановление из бэкапа</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Что можно достроить позже</h3>
+    <p>Не входит ни в разработку, ни в сопровождение. Это появилось, пока разбирал сайты производителей и kedi.by. Часы и цены по каждому пункту обсуждаются отдельно — здесь только направление, чтобы было видно, куда проект может расти.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:250px">Что</th><th>Зачем</th></tr></thead>
+        <tbody>
+          <tr><td><b>Парсинг сайтов производителей по расписанию</b></td><td>Сейчас парсинг разовый, а каталоги заводов меняются и модели обновляются. Периодическая сверка и добавление новых позиций</td></tr>
+          <tr><td><b>Поиск расходников по парт-номеру</b></td><td>Для BIKAI: страница «лампа под ваш прибор». Самый конверсионный сценарий из всех — такие запросы приходят уже с готовым номером</td></tr>
+          <tr><td><b>Подбор прибора по параметрам</b></td><td>Интерактивный фильтр. Для BIKAI с 14 приборами и 11 брендами расходников особенно ценно</td></tr>
+          <tr><td><b>База знаний по методикам</b></td><td>У Chiwell двадцать с лишним методик специальных окрасок — каждая готовая посадочная страница под конкретный запрос</td></tr>
+          <tr><td><b>Расширенный мониторинг ИИ-выдачи</b></td><td>Фиксация того, как ChatGPT, Perplexity и Яндекс Нейро отвечают на ключевые запросы и цитируют ли сайт. Базовый контроль уже входит в минимум</td></tr>
+          <tr><td><b>Мультиязычность Winmedic и Chiwell</b></td><td>Сейчас в планах только BIKAI. У Winmedic производитель держит десять языковых версий сайта, у дистрибьютора одна</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mut" style="margin-bottom:0">Решать сейчас ничего не нужно. Список — чтобы потом не переделывать архитектуру заново.</p>
+    <div class="note" style="margin:14px 0 0"><b>Каналы продвижения</b> — разбор по каждому бренду, развилка по BIKAI и рекомендация, с каких двух каналов начать, — вынесены в раздел «Дополнительная информация».</div>
+  </div>
+
+</section>
+
+<section class="panel" id="p-price" role="tabpanel" aria-labelledby="t-price">
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Зачем эта вкладка</h3>
+    <p>Цены в этом предложении не взяты «с потолка» и не списаны у конкурентов. Они посчитаны от часов работы, а часы — от фактического объёма на сайтах производителей, который я разобрал перед расчётом. Здесь показано, из чего складывается каждая сумма, как она соотносится с рынком Беларуси и что можно убрать, если надо удешевить.</p>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Почему ставка 50 BYN в час</h3>
+    <ul>
+      <li><b>Это середина рыночной вилки — не демпинг и не верхняя планка.</b> landingpro.by приводит 40–60 BYN/час по данным минских студий (со ссылкой на itg-soft.by), maximov.by — 40–80 USD/час за senior-разработчика. Ниже 40 BYN/час в Беларуси это либо студент без гарантии, либо работа, которую потом переделывают за ваш счёт. Верхние 60 берут студии с большим менеджерским аппаратом</li>
+      <li><b>Работу ведёт комплексный инженер, а не цепочка подрядчиков.</b> Разработка, инфраструктура, SEO и работа с ИИ-инструментами замыкаются на одного человека, смежные задачи закрывают специалисты внутри компании. Заказчику не нужно искать их отдельно, согласовывать между собой и платить каждому его наценку, а контекст задачи не теряется на переходах между исполнителями</li>
+      <li><b>Часы напечатаны в каждой строке сметы.</b> Любую цифру можно перепроверить: часы × 50. Если считаете, что этап переоценён — спор идёт про часы, а не про абстрактную сумму. Это честнее для обеих сторон</li>
+      <li><b>Работы вне этапов считаются по той же ставке.</b> Никакой отдельной «срочной» наценки нет</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Из чего складывается цена каждого сайта</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Этап</th><th class="money">Часов: Winmedic / Chiwell / BIKAI</th><th class="money">Winmedic</th><th class="money">Chiwell</th><th class="money">BIKAI</th></tr></thead>
+        <tbody>
+          <tr><td>1.1 Подготовка и ТЗ, хостинг, домены, SSL, БелГИЭ, аналитика</td><td class="money">19 / 19 / 19</td><td class="money">950</td><td class="money">950</td><td class="money">950</td></tr>
+          <tr><td>1.2 Парсинг каталога, адаптация дизайна, оптимизация скорости</td><td class="money">40 / 33 / 54</td><td class="money">2 000</td><td class="money">1 650</td><td class="money">2 700</td></tr>
+          <tr><td>1.3 Выкладка макетов на хостинг</td><td class="money">8 / 8 / 10</td><td class="money">400</td><td class="money">400</td><td class="money">500</td></tr>
+          <tr><td>1.4 Правки и согласование</td><td class="money">20 / 20 / 25</td><td class="money">1 000</td><td class="money">1 000</td><td class="money">1 250</td></tr>
+          <tr><td>1.5 Админка</td><td class="money">30 / 25 / 40</td><td class="money">1 500</td><td class="money">1 250</td><td class="money">2 000</td></tr>
+          <tr><td>1.6 SEO и ИИ-выдача</td><td class="money">35 / 30 / 45</td><td class="money">1 750</td><td class="money">1 500</td><td class="money">2 250</td></tr>
+          <tr><td>1.7 Продакшен и передача на поддержку</td><td class="money">10 / 10 / 12</td><td class="money">500</td><td class="money">500</td><td class="money">600</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td>Итого часов</td><td class="money">162 / 145 / 205</td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+          <tr><td><b>Итого BYN</b></td><td class="money">×</td><td class="money"><b>8 100</b></td><td class="money"><b>7 250</b></td><td class="money"><b>10 250</b></td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <p class="mut">Каждая сумма — это часы × 50 BYN. Никаких скрытых коэффициентов и надбавок «за сложность» нет.</p>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Почему сайты стоят по-разному</h3>
+    <p>Разброс 145–205 часов объясняется фактическим объёмом, который я снял с сайтов производителей:</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:150px">Сайт</th><th class="money">Часов</th><th>Что даёт объём</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>BIKAI / UVTech</b></td><td class="money">205</td>
+            <td>Самый большой и самый разнородный каталог: 14 приборов (6 хроматографов, 4 масс-спектрометра, 3 функциональных модуля, система пробоподготовки hExtractor 20) плюс расходники под 11 сторонних брендов — Waters, Agilent, Shimadzu, Hitachi, Beckman, AB SCIEX, Perkin Elmer, HACH, JASCO, PUXI, Analytik Jena. По каждой лампе нужны парт-номер, оригинальный номер и привязка к прибору — это самая трудоёмкая часть каталога из всех трёх брендов. Плюс единственный сайт, где нужна англоязычная версия</td>
+          </tr>
+          <tr>
+            <td><b>Winmedic</b></td><td class="money">162</td>
+            <td>12 приборов (5 сканеров светлого поля, 5 флуоресцентных, 2 гистопроцессора) и 5 программных линеек. Каталог меньше, чем у BIKAI, но время уходит не на карточки, а на то, чтобы объяснить сложное ПО: телеконсультация, количественный анализ, лабораторный workflow. В брифе прямо написано, что ПО «специфическое и достаточно сложное»</td>
+          </tr>
+          <tr>
+            <td><b>Chiwell</b></td><td class="money">145</td>
+            <td>Компактнее всех: 8 карточек — 7 приборов и 1 реагент. Но у Chiwell самая большая документная работа — двадцать с лишним методик специальных окрасок. Она ушла во вкладку «Переводы», поэтому сайт здесь дешевле, а общая нагрузка по бренду — нет</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Ориентиры по рынку Беларуси</h3>
+    <div class="note warn"><b>Мониторинг составлен ИИ</b> 19.09.2026 по открытым страницам с ценами белорусских веб-студий и агентств. Цены проверены прямыми запросами к сайтам, а не взяты из пересказов. Это публичные прайсы «от и до», а не коммерческие предложения: реальная смета студии почти всегда выше нижней границы. Цифры нужны, чтобы было с чем сравнить, а не чтобы по ним торговаться.</div>
+
+    <h3 class="sub" style="margin-top:6px">Разработка корпоративного сайта, BYN</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Источник</th><th>Что указано на сайте</th><th class="money">Корпоративный</th><th class="money">Каталог / магазин</th></tr></thead>
+        <tbody>
+          <tr><td>its-hka.by</td><td>Ориентиры 2026 года, цены «от»</td><td class="money">от 1 100</td><td class="money">от 2 000</td></tr>
+          <tr><td>beltechsoft.by</td><td>Проектирование, уникальный дизайн, ТЗ</td><td class="money">от 1 500</td><td class="money">—</td></tr>
+          <tr><td>makit.by</td><td>Прайс «под ключ», одностраничный от 995</td><td class="money">1 850</td><td class="money">2 500</td></tr>
+          <tr><td>websfera.by</td><td>Индивидуальная разработка</td><td class="money">от 2 300</td><td class="money">от 2 500</td></tr>
+          <tr><td>brightcode.by</td><td>Средний бизнес 3 000–6 000</td><td class="money">от 2 500</td><td class="money">от 4 000</td></tr>
+          <tr><td>webviki.by</td><td>Каталог от 2 000, корпоративный портал от 4 300</td><td class="money">от 2 900</td><td class="money">от 2 300</td></tr>
+          <tr><td>landingpro.by</td><td>Обзор студий: Redline от 2 500, премиум 3 000–10 000</td><td class="money">790 – 10 000</td><td class="money">—</td></tr>
+          <tr><td>maximov.by</td><td>Студия 2 200–3 500, независимый разработчик 3 000–7 000</td><td class="money">2 200 – 7 000</td><td class="money">3 500 – 6 000</td></tr>
+          <tr><td>itwebs.by</td><td>Обзор 25 студий Минска: от 1 200 до 10 000+</td><td class="money">2 000 – 5 500</td><td class="money">—</td></tr>
+        </tbody>
+        <tfoot><tr><td colspan="2">Сводный ориентир по рынку</td><td class="money">1 100 – 7 000</td><td class="money">2 000 – 6 000</td></tr></tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Ориентиры по рынку: SEO-продвижение в месяц</h3>
+    <p class="mut" style="margin-bottom:12px">Тот же мониторинг ИИ от 19.09.2026, проверенный прямыми запросами к страницам с тарифами.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Источник</th><th>Тарифы на странице</th><th class="money">Диапазон</th></tr></thead>
+        <tbody>
+          <tr><td>seologic.by</td><td>Стандарт 750 · Продвинутый 1 250 · Премиум от 1 850. Оптимизация под ИИ-выдачу в «Продвинутом» прямо помечена как невходящая</td><td class="money">750 – 1 850</td></tr>
+          <tr><td>makit.by</td><td>Базовый 950 · Бизнес 1 400 · Премиум 2 100. Заявлен упор на GEO и E-E-A-T</td><td class="money">950 – 2 100</td></tr>
+          <tr><td>seopilot.by</td><td>Малый бизнес 200–400 USD/мес, средний 400–900 USD/мес</td><td class="money">в USD</td></tr>
+          <tr><td>bmg.by</td><td>Базовое продвижение от 300 USD/мес</td><td class="money">в USD</td></tr>
+          <tr><td>seobrest.by</td><td>Региональные тарифы: по позициям, по трафику, по лидам</td><td class="money">200 – 950</td></tr>
+        </tbody>
+        <tfoot><tr><td colspan="2">Сводный ориентир по Минску</td><td class="money">750 – 2 100 / мес</td></tr></tfoot>
+      </table>
+    </div>
+    <p class="mut" style="margin-top:8px">Тарифы в USD намеренно не пересчитаны в рубли — курс меняется, и перевод «на глаз» дал бы ложную точность.</p>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Наши цены против рынка</h3>
+    <p>Прямое сравнение «корпоративный сайт от 1 100 BYN» и «8 100 BYN» было бы нечестным: за 1 100–3 500 студия собирает сайт с нуля по брифу заказчика. Честнее сравнивать часы и состав работ.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Что сравниваем</th><th>Рынок Беларуси</th><th>У нас</th><th class="money">Разница</th></tr></thead>
+        <tbody>
+          <tr><td>Ставка разработчика</td><td>40–60 BYN/час (landingpro.by по данным минских студий)</td><td>50 BYN/час</td><td class="money">середина вилки</td></tr>
+          <tr><td>Winmedic — 162 часа работ</td><td>6 480 – 9 720</td><td>8 100</td><td class="money">−17 % к верхней границе</td></tr>
+          <tr><td>Chiwell — 145 часов работ</td><td>5 800 – 8 700</td><td>7 250</td><td class="money">−17 % к верхней границе</td></tr>
+          <tr><td>BIKAI — 205 часов работ</td><td>8 200 – 12 300</td><td>10 250</td><td class="money">−17 % к верхней границе</td></tr>
+          <tr><td>Сайт с уникальной разработкой и интеграциями (максимально близкий формат у maximov.by)</td><td>3 000 – 7 000 за сайт</td><td>7 250 – 10 250 за сайт</td><td class="money">выше вилки — см. ниже</td></tr>
+          <tr><td>SEO-продвижение в месяц</td><td>750 – 2 100</td><td>750</td><td class="money">нижняя граница</td></tr>
+          <tr><td>Оптимизация под ИИ-выдачу (GEO)</td><td>отдельная строка в верхнем тарифе: у seologic.by — «Премиум» от 1 850/мес</td><td>входит в 750/мес</td><td class="money">−1 100 / мес</td></tr>
+          <tr><td>SEO и GEO как этап запуска сайта</td><td>в цену сайта не входит, это ежемесячная услуга. Три месяца абонентки по нижней границе — 2 250</td><td>этап 1.6, разово 1 500 – 2 250</td><td class="money">сопоставимо, Chiwell −750</td></tr>
+          <tr><td>БелГИЭ, хостинг, домены, SSL, аналитика с целями</td><td>обычно не входит, заказчик делает сам</td><td>входит в этап 1.1</td><td class="money">включено</td></tr>
+          <tr><td>Парсинг каталога с сайта производителя</td><td>как отдельная услуга прайсами студий не покрывается</td><td>входит в этап 1.2</td><td class="money">включено</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Что из этого следует для нашей сметы</h3>
+    <ul>
+      <li><b>Ставка 50 BYN/час — середина рыночной вилки 40–60.</b> landingpro.by приводит 40–60 BYN/час по данным минских студий (со ссылкой на itg-soft.by), maximov.by — 40–80 USD/час за senior-разработчика</li>
+      <li><b>7 250–10 250 BYN за сайт — выше и массового сегмента (1 100–3 500), и вилки maximov.by (3 000–7 000). Называю это прямо.</b> В прайсах студий за такие деньги собирают сайт с нуля по брифу заказчика, типовые 30–50 часов. Здесь другой состав: парсинг чужого каталога, 162–205 часов, админка, SEO и работа под ИИ-выдачу, БелГИЭ и хостинг в цене. Смета студии на тот же объём вышла бы не ниже</li>
+      <li><b>SEO за 750 BYN/мес с GEO — нижняя граница рынка.</b> У seologic.by 750 — это тариф «Стандарт», где оптимизация под ИИ не входит и появляется только в «Премиум» от 1 850. У нас она включена в базовые 750</li>
+      <li><b>Где мы берём за то, что другие не делают:</b> этап 1.1 — БелГИЭ, хостинг, домены, SSL. Большинство студий это вообще не берёт на себя и отдаёт заказчику. Здесь входит в цену</li>
+    </ul>
+  </div>
+
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Что не входит в цену</h3>
+    <p class="mut" style="margin-bottom:10px">Домен .BY/.БЕЛ, хостинг в Беларуси, SSL-сертификат и госпошлина БелГИЭ идут напрямую провайдерам и регистраторам — они перечислены с ориентирами в блоке «Оплачивается отдельно» (вкладка «Дополнительная информация»). Здесь только то, что относится к содержанию работ.</p>
+    <ul>
+      <li><b>Исходные материалы от производителей</b> — фото, инструкции, методики. Ни один из пяти сайтов не опубликовал ни одного PDF, DOC или ZIP: всё приходится запрашивать у заводов напрямую</li>
+      <li><b>Съёмка демо-видео</b> — отдельная работа, около 320 BYN за смену; в смету разработки не входит</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Как можно удешевить — честно</h3>
+    <p>Если бюджет жмёт, вот что реально можно убрать и чем это обернётся. Я специально не прячу эти варианты: лучше решить сейчас, чем переделывать потом.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Что убираем</th><th class="money">Экономия</th><th>Чем обернётся</th></tr></thead>
+        <tbody>
+          <tr><td>Упростить админку (1.5): оставить правку текстов и фото, без конструктора блоков</td><td class="money">−500…−1 250 на сайт</td><td>Новую страницу или раздел сможет добавить только разработчик, по 50 BYN/час</td></tr>
+          <tr><td>Сократить этап правок (1.4) вдвое</td><td class="money">−500…−650 на сайт</td><td>Правки сверх лимита пойдут по той же ставке 50 BYN/час, итог может выйти тем же</td></tr>
+          <tr><td>Отложить англоязычную версию BIKAI — она зашита в часы этапов 1.2 и 1.6 по BIKAI</td><td class="money">пересчитаем часы</td><td>Потеря части экспортного трафика; добавить можно позже, но переделывать вёрстку дороже</td></tr>
+          <tr><td>Не брать комплексное сопровождение (4.1) первые месяцы</td><td class="money">−1 850 / мес</td><td>Самая ощутимая потеря: позиции и цитируемость в ИИ-выдаче без сопровождения не растут</td></tr>
+          <tr><td>Сделать один сайт как пилот — Winmedic, у него первая поставка в октябре</td><td class="money">−17 500 сразу</td><td>Разумный вариант, если надо проверить работу на одном бренде. Chiwell и BIKAI стартуют позже, время есть</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note warn" style="margin-bottom:0"><b>Что убирать нельзя.</b> Этап 1.1 — без регистрации в БелГИЭ сайт не попадёт в Торговый реестр и к нему нельзя подключить ЕРИП. Этап 1.6 — без SEO и разметки сайт не найдут ни поисковики, ни ИИ-ответы, и весь остальной бюджет уйдёт впустую. Этап 1.7 — без финальной сборки и передачи сайт останется «макетом на хостинге».</div>
+  </div>
+
+</section>
+
+<!-- ============================================================= -->
+<!-- ВКЛАДКА 6: ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ -->
+<!-- ============================================================= -->
+<section class="panel" id="p-info" role="tabpanel" aria-labelledby="t-info">
+
+  <div class="card">
+    <h2 class="sec">6. Дополнительная информация</h2>
+    <p class="mut">Справочные и объяснительные материалы. Здесь нет цен — только то, из чего эти цены выросли</p>
+    <p>В рабочие разделы я оставил главное: что делаем, за сколько и что нужно от вас. Всё остальное — нормативные требования, результаты аудитов, разбор того, как устроен переводческий станок, и анализ каналов продвижения — собрано здесь, чтобы не разрывать сметы.</p>
+    <p class="mut" style="margin-bottom:0">Смотреть по порядку не нужно: это справочник, к которому возвращаются, когда по конкретному этапу или бренду возникает вопрос.</p>
+  </div>
+
+  <div class="grpband" style="background:#f7fafb;border:1px solid var(--line);border-radius:12px;padding:12px 18px">
+    <div style="font-size:12.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;font-weight:700">Справка по этапам разработки</div>
+    <div style="font-size:13.6px;color:var(--ink2);margin-top:4px">Что стоит за этапами 1, 5 и 6 из вкладки 1 — и что известно про каждый бренд</div>
+  </div>
+<div class="card">
+    <h3 class="sub" style="margin-top:0">Этап 1 · Регистрация в БелГИЭ — почему это надо делать сразу</h3>
+    <p>Для сайтов дистрибьютора это не формальность, а блокирующее требование. Разобрал, как оно устроено:</p>
+    <ul>
+      <li>Обязанность установлена <b>Указом Президента РБ № 60 от 01.02.2010</b> и <b>Постановлением Совмина № 644 от 29.04.2010</b>. Регистрирует РУП «БелГИЭ»</li>
+      <li>Подпадает не только интернет-магазин. Достаточно формы заявки, обратного звонка или прайса — то есть любой наш сайт дистрибьютора</li>
+      <li>Обязательно для юрлиц и ИП, которые продают товары или оказывают услуги в РБ через интернет</li>
+      <li>Подача идёт <b>не напрямую, а через хостинг-провайдера</b> — поэтому хостинг выбираем на этом же этапе, иначе заявку подать некому</li>
+      <li>Нужны домен в зоне <b>.BY или .БЕЛ</b> и хостинг на территории Беларуси</li>
+      <li>Срок рассмотрения заявления — <b>15 календарных дней</b>. Значит, запускаем параллельно с разработкой, а не после неё</li>
+      <li>Без регистрации в БелГИЭ нельзя встать в Торговый реестр и нельзя подключить приём платежей через ЕРИП</li>
+    </ul>
+    <div class="note warn" style="margin-bottom:0">Если оставить регистрацию на конец проекта, сайт готов, а работать не может — потеряем две недели простоя. Поэтому она стоит в этапе 1.</div>
+  </div>
+<div class="card">
+    <h3 class="sub" style="margin-top:0">Этап 5 · Админка — вопросы, которые надо решить вместе</h3>
+    <p>Вы правильно отметили: уровень абстракции и автоматизации — это философия, и она пересекается с SEO. Вот конкретные развилки, по которым нужно решение.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:250px">Развилка</th><th>Варианты и на что влияет</th></tr></thead>
+        <tbody>
+          <tr><td><b>Насколько свободный редактор</b></td><td>Готовые поля под тип контента — быстрее и безопаснее, но жёстче. Свободный редактор — гибче, но через полгода на сайте начинается разнобой. Для каталога приборов я бы брал готовые поля</td></tr>
+          <tr><td><b>Что автоматизировать</b></td><td>Импорт каталога из Excel, автогенерация мета-тегов по шаблону, автопубликация, автообновление наличия. Каждая автоматизация экономит часы в месяц, но каждую надо один раз построить</td></tr>
+          <tr><td><b>Что НЕ отдавать в админку</b></td><td>URL, редиректы, schema.org, структуру заголовков. Если это можно сломать одним кликом — рано или поздно сломают, и позиции уедут</td></tr>
+          <tr><td><b>Роли и доступы</b></td><td>Кто публикует товары, кто статьи, кто видит заявки. Нужен ли доступ производителю</td></tr>
+          <tr><td><b>Версионирование</b></td><td>Откат правок, черновики, предварительный просмотр. Дёшево добавить сразу и дорого прикручивать потом</td></tr>
+          <tr><td><b>Многоязычность</b></td><td>Закладывать структуру сразу или добавить позже. Заложить дешевле, но не нужно, если EN-версия не планируется</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note" style="margin-bottom:0">Пока эти решения не приняты, оценка этапа 5 в смете — рабочая, с запасом. После разговора уточним в любую сторону, и строка пересчитается.</div>
+  </div>
+<div class="card">
+    <h3 class="sub" style="margin-top:0">Этап 6 · SEO и ИИ-выдача</h3>
+    <div class="grid g2">
+      <div>
+        <h3 class="sub" style="margin-top:0">Классическое SEO</h3>
+        <ul>
+          <li>Семантическое ядро под Google и Яндекс</li>
+          <li>Посадочные страницы под запросы лабораторий</li>
+          <li>Мета-теги, внутренняя перелинковка, sitemap</li>
+          <li>Скорость и Core Web Vitals</li>
+          <li>Коммерческие факторы: реквизиты, условия, гарантии</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="sub" style="margin-top:0">GEO — видимость в ИИ-ответах</h3>
+        <ul>
+          <li>Микроразметка Schema.org: Product, Organization, FAQPage, BreadcrumbList</li>
+          <li>Q&A- и FAQ-блоки на страницах приборов</li>
+          <li>Таблицы характеристик в разметке, а не картинкой — иначе ИИ их не читает</li>
+          <li>Единые названия сущностей: бренд, модель, категория — чтобы ИИ связывал их между собой</li>
+          <li>Авторство, даты, источники — факторы доверия</li>
+          <li>Файл llms.txt и понятная структура для краулеров</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note" style="margin-bottom:0"><b>Ожидания по срокам.</b> GEO строится на фундаменте классического SEO — без технической базы ИИ-системы источник цитировать не будут. Реалистичный горизонт: первые цитирования в ИИ-ответах через 2–3 месяца, заметный эффект — около полугода. Метрика успеха здесь не только позиции, но и частота цитирования.</div>
+  </div>
+<div class="card">
+    <h3 class="sub" style="margin-top:0">Что мы знаем о каждом бренде</h3>
+    <p class="mut" style="margin-bottom:12px">По сайтам производителей, проверено запросами. От этого зависит объём этапов 2 и 5.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:120px">Бренд</th><th>Продукция</th><th>Что это значит для структуры сайта</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>Winmedic</b><br><span style="font-size:12px;color:var(--mut)">winmedic.com.cn</span></td>
+            <td>12 приборов: 5 сканеров светлого поля, 5 флуоресцентных, 2 гистопроцессора. Плюс 5 программных продуктов: WinTele, WinQuant, Pathology Workflow, Management, Education</td>
+            <td>Оборудование плюс сложное ПО — нужны отдельные страницы под каждый модуль ПО: сценарии работы, скриншоты, системные требования, форматы файлов. Есть русская версия сайта производителя, но это машинный перевод — брать за основу нельзя</td>
+          </tr>
+          <tr>
+            <td><b>Chiwell</b><br><span style="font-size:12px;color:var(--mut)">chiwell.com.cn</span></td>
+            <td>7 автоматов: CW-1000+CW-800, E7, E6, CW-1000, HD-400i, CW-800, CW-400. Плюс 22 специальных красителя и реагенты</td>
+            <td>Много SKU плюс методическая часть. На сайте производителя страницы категорий пустые — структуру каталога придётся строить с нуля, а не копировать</td>
+          </tr>
+          <tr>
+            <td><b>BIKAI / UVTech</b><br><span style="font-size:12px;color:var(--mut)">uvtech-cc.com, bikai.jp</span></td>
+            <td>14 приборов: 6 хроматографов, 4 масс-спектрометра, 3 модуля, hExtractor 20. Плюс расходники — лампы под 11 брендов приборов</td>
+            <td>Самый большой каталог и самый большой объём контента. Две категории на сайте производителя пустые. Структура расходников на bikai.jp подробная — её можно переносить почти как есть</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grpband" style="background:#f7fafb;border:1px solid var(--line);border-radius:12px;padding:12px 18px">
+    <div style="font-size:12.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;font-weight:700">Аудит kedi.by</div>
+    <div style="font-size:13.6px;color:var(--ink2);margin-top:4px">Что именно проверено на сайте и как</div>
+  </div>
+<div class="card">
+    <h3 class="sub" style="margin-top:0">Аудит kedi.by — найденные проблемы</h3>
+    <p class="mut" style="margin-bottom:12px">Проверено 19.09.2026 прямыми запросами к сайту. Полный разбор того, что нашлось: от отсутствия H1 до незакрытых уязвимостей в плагинах.</p>
+<h3 class="sub">Найденные проблемы</h3>
+
+    <div class="finding"><div class="ic">!</div><div class="tx">
+      <b>На главной странице нет заголовка H1</b>
+      <span class="ev">Проверено: в HTML главной 0 тегов &lt;h1&gt;. Это главный сигнал релевантности по запросу «гистологическое оборудование».</span>
+    </div></div>
+
+    <div class="finding"><div class="ic">!</div><div class="tx">
+      <b>Все 8 заголовков разделов пустые</b> — в них стоит одна точка: <code>&lt;h2&gt;.&lt;/h2&gt;</code>
+      <span class="ev">Проверено: 8 из 8 тегов &lt;h2&gt; на главной содержат только символ «.». Поисковик не видит структуру страницы, скринридер читает «точка».</span>
+    </div></div>
+
+    <div class="finding"><div class="ic">!</div><div class="tx">
+      <b>Слайдер на главной показывает картинки-заглушки</b> вместо фото оборудования
+      <span class="ev">Проверено: 18 ссылок на <code>wp-content/plugins/revslider/public/assets/assets/dummy.png</code>. Это первое, что видит посетитель.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic y">!</div><div class="tx">
+      <b>Опечатка в названии товара на главной:</b> «Полувтоматический микротом Kedi KD-3390»
+      <span class="ev">Проверено: 1 вхождение в HTML главной страницы.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic">!</div><div class="tx">
+      <b>В карточках товаров нет технических характеристик и инструкций</b>
+      <span class="ev">Проверено на карточке микротома KD-ST 5500: 0 таблиц, нет блока характеристик, 0 ссылок на PDF. Фото при этом 10 штук — то есть визуал есть, а данных для сравнения нет.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic">!</div><div class="tx">
+      <b>Контент-раздела фактически нет</b>
+      <span class="ev">Проверено: в <code>post-sitemap.xml</code> — 1 запись. Нет статей, методик и новостей, поэтому сайт не получает поисковый трафик по информационным запросам.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic">!</div><div class="tx">
+      <b>Ядро и плагины устарели</b>: WooCommerce 6.5.2 (релиз 2022 года), Slider Revolution 6.5.21
+      <span class="ev">Проверено по мета-тегам generator и версиям подключаемых файлов. Это вопрос безопасности: обновления не ставились несколько лет.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic y">!</div><div class="tx">
+      <b>Главная страница перегружена</b>: 19 файлов CSS и 38 файлов JS
+      <span class="ev">Проверено: только первые 12 JS-файлов весят 594 КБ. Медленная загрузка напрямую влияет на позиции и на отказы.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic y">!</div><div class="tx">
+      <b>Elementor подключён, но не используется</b>
+      <span class="ev">Проверено: <code>e-landing-page-sitemap.xml</code> содержит 0 адресов. Плагин добавляет вес страницам, не давая ничего взамен.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic y">!</div><div class="tx">
+      <b>Нет англоязычной версии</b>
+      <span class="ev">Проверено: атрибут <code>hreflang</code> отсутствует, <code>lang="ru-RU"</code>, WPML/Polylang не подключены. Запросы на KEDEE на английском не собираются.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic y">!</div><div class="tx">
+      <b>Одна ссылка отдаёт лишний редирект</b> — адрес микротома KD-ST 5500 в слайдере без финального слэша
+      <span class="ev">Проверено: адрес без <code>/</code> на конце отдаёт 301 и только потом открывается страница. Мелочь, но на 49 карточках такие вещи накапливаются.</span>
+    </div></div>
+
+    <div class="finding"><div class="ic g">✓</div><div class="tx">
+      <b>Что в порядке</b> — отдельно проверяли и не подтвердилось
+      <span class="ev">Ссылки «Подробнее» в слайдере ведут на корректные карточки товаров, битых ссылок там нет. SEO-плагин Yoast установлен, микроразметка schema.org присутствует, GTM подключён, фавикон и <code>og:</code>-теги на месте. То есть переделывать сайт с нуля не нужно — его нужно привести в порядок и наполнить.</span>
+    </div></div>
+  </div>
+
+  <div class="grpband" style="background:#f7fafb;border:1px solid var(--line);border-radius:12px;padding:12px 18px">
+    <div style="font-size:12.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;font-weight:700">Переводческий станок и документация</div>
+    <div style="font-size:13.6px;color:var(--ink2);margin-top:4px">Как устроен цикл работы, что находит станок и где брать исходники</div>
+  </div>
+<div class="card">
+    <h3 class="sub" style="margin-top:0">Как работает станок</h3>
+    <div class="grid g4">
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">Шаг 1</div>
+        <div style="font-weight:660;margin:10px 0 4px">Загрузка и перевод</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Вы присылаете документ. Я запускаю станок — ИИ переводит его с учётом глоссария бренда и попутно фиксирует проблемные места.</p>
+      </div>
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">Шаг 2</div>
+        <div style="font-weight:660;margin:10px 0 4px">Правки на вашей стороне</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Отдаю черновик вместе с отчётом о слабых местах. Дальше работаете вы. Моя работа остановлена и не тарифицируется.</p>
+      </div>
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">Шаг 3</div>
+        <div style="font-weight:660;margin:10px 0 4px">Повторный прогон</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Вы возвращаете документ, я загружаю его снова и довожу с помощью ИИ: подправки, единообразие, нумерация, ссылки.</p>
+      </div>
+      <div class="pack tight" style="padding:16px">
+        <div class="b acc">Шаг 4</div>
+        <div style="font-weight:660;margin:10px 0 4px">Фирменный документ</div>
+        <p class="mut" style="margin:0;font-size:13.4px">Отдаю готовый документ: <b>DOCX</b>, <b>PDF</b> и <b>HTML одним файлом</b> — для пересылки и для публикации на сайте.</p>
+      </div>
+    </div>
+    <div class="note" style="margin-bottom:0">Я здесь оператор станка. На документ уходит два часа моего времени: час на прогон и час на вёрстку в фирменный вид. Объём на это почти не влияет — станок читает хоть страницу, хоть сорок пять, а моя работа одинаковая: загрузить, проверить выдачу, собрать.</div>
+  </div>
+<div class="card">
+    <h3 class="sub" style="margin-top:0">Отчёт о слабых местах — что находит станок</h3>
+    <p>Китайские и английские исходники технической документации почти никогда не бывают чистыми. Станок разбирает документ на сегменты и помечает то, что нельзя переводить «как есть». Отчёт идёт отдельным файлом вместе с черновиком: страница, фрагмент, что не так, что предлагаю.</p>
+    <div class="note warn" style="margin:0 0 14px">Это опция, не базовая часть. Включается отдельно на бренд: 6 часов настройки, 300 BYN — позиция 3.9 в смете. Без неё станок переводит так же, но проблемные места исходника вы ищете сами.</div>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:230px">Что находит</th><th>Почему это важно</th></tr></thead>
+        <tbody>
+          <tr><td><b>Кальки и неверные термины</b></td><td>Прямой перевод технического термина, который в русской практике называется иначе. В регистрации такой термин — повод к вопросам</td></tr>
+          <tr><td><b>Переведённые торговые названия</b></td><td>Название модели должно оставаться в оригинале. Переведённое имя прибора невозможно найти ни в каталоге, ни в договоре</td></tr>
+          <tr><td><b>Разнобой в пределах документа</b></td><td>Один и тот же узел назван по-разному в разных разделах — станок сводит к одному варианту</td></tr>
+          <tr><td><b>Опечатки производителя</b></td><td>Опечатки в моделях, каталожных номерах, названиях реагентов. В переводе они молча уезжают дальше</td></tr>
+          <tr><td><b>Расхождение чисел</b></td><td>Значение в тексте не совпадает с таблицей характеристик или с другим разделом. Самое опасное для регистрации</td></tr>
+          <tr><td><b>Обрывы и неполные фразы</b></td><td>Частая болезнь китайских исходников: предложение обрывается, пункт списка без продолжения</td></tr>
+          <tr><td><b>Пропущенные разделы</b></td><td>Например, нет мер предосторожности, условий хранения или порядка утилизации — а для медизделия они обязательны</td></tr>
+          <tr><td><b>Устаревшие данные</b></td><td>Даты, версии ПО, адреса и сертификаты, которые производитель не обновил</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<div class="card">
+    <h3 class="sub" style="margin-top:0">Живой пример: ru.winmedic.com.cn</h3>
+    <p class="mut" style="margin-bottom:10px">У производителя уже есть русская версия сайта — это машинный перевод без редактуры. Вот что в нём находится за пять минут, ровно тот класс ошибок, который ловит станок.</p>
+    <div class="finding"><div class="ic">!</div><div class="tx">
+      <b>«Процессор тканей» вместо «гистопроцессор»</b>
+      <span class="ev">Так в русском меню называется Tissue Processor — на каждой странице сайта. В русской лабораторной практике прибор называется «гистопроцессор»; «процессор тканей» не ищут и не пользуют.</span>
+    </div></div>
+    <div class="finding"><div class="ic">!</div><div class="tx">
+      <b>«ВинТеле» вместо WinTele</b>
+      <span class="ev">Переведено торговое название программного продукта. В договоре, счёте и регистрационном удостоверении прибор будет называться WinTele — найти «ВинТеле» невозможно.</span>
+    </div></div>
+    <div class="finding"><div class="ic">!</div><div class="tx">
+      <b>Один прибор назван по-разному на одной странице</b>
+      <span class="ev">480-Slide Brightfield Slide Scanner в меню — «Патологический слайд-сканер», в заголовке — «Сканер слайдов светлого поля», в тексте — «Сканер для микроскопических препаратов в светлом поле». Три названия одного изделия.</span>
+    </div></div>
+    <div class="finding"><div class="ic y">!</div><div class="tx">
+      <b>«Патологический» как калька с pathology</b>
+      <span class="ev">Pathology Slide Scanner и Pathology Management переведены как «патологический» и «управление патологиями». По-русски «патологический» — это про болезнь, а не про раздел медицины.</span>
+    </div></div>
+    <div class="note warn" style="margin-bottom:0">Вывод по этому примеру: брать готовый перевод производителя нельзя. Но и переводить заново вслепую тоже — надо знать, где именно исходник врёт. Это и делает станок, если включить отчёт.</div>
+  </div>
+<div class="card">
+    <h3 class="sub" style="margin-top:0">Аудит сайтов производителей</h3>
+    <p class="mut" style="margin-bottom:12px">Проверено 19.09.2026 прямыми запросами к сайтам. Это отвечает на вопрос, откуда брать исходники.</p>
+
+    <h3 class="sub" style="margin-top:6px">Winmedic · winmedic.com.cn</h3>
+    <div class="finding"><div class="ic y">!</div><div class="tx"><b>Есть русская версия — ru.winmedic.com.cn, и это машинный перевод</b>
+      <span class="ev">Проверено: lang="ru", 1 326 русских слов, следы Google Translate. Ошибки разобраны выше. Использовать как основу нельзя.</span></div></div>
+    <div class="finding"><div class="ic g">✓</div><div class="tx"><b>Каталог больше, чем видно на главной</b>
+      <span class="ev">По карте сайта: 5 сканеров светлого поля, 5 флуоресцентных, 2 гистопроцессора (включая DP450 на 450 кассет) и 5 программных продуктов. Всего 12 приборов.</span></div></div>
+    <div class="finding"><div class="ic">!</div><div class="tx"><b>Скачиваемых документов на сайте нет</b>
+      <span class="ev">Проверено: 0 ссылок на PDF, DOC или ZIP по всему сайту. Руководства придётся запрашивать у производителя напрямую.</span></div></div>
+
+    <h3 class="sub">Chiwell · chiwell.com.cn</h3>
+    <div class="finding"><div class="ic">!</div><div class="tx"><b>Страницы категорий пустые</b>
+      <span class="ev">Проверено на всех 10 категориях (all.php?lm=14…39): отдаётся только меню и футер, список товаров не выводится. Товары доступны лишь по прямым ссылкам.</span></div></div>
+    <div class="finding"><div class="ic y">!</div><div class="tx"><b>На витрине всего 8 карточек</b>
+      <span class="ev">product.php: CW-1000+CW-800, E7, E6 (замороженные срезы), CW-1000, HD-400i, CW-800, CW-400 и «Fast Staining Reagent». При этом спецкрасителей на странице-списке 22 наименования.</span></div></div>
+    <div class="finding"><div class="ic">!</div><div class="tx"><b>Раздел Download пустой</b>
+      <span class="ev">Проверено: download.php не содержит ни одной ссылки на файл.</span></div></div>
+
+    <h3 class="sub">BIKAI / UVTech · uvtech-cc.com, bikai.jp</h3>
+    <div class="finding"><div class="ic y">!</div><div class="tx"><b>Две категории каталога пустые</b>
+      <span class="ev">Проверено: в Consumables и Spectroscopy по 0 товаров, хотя разделы есть в меню. Рабочих категорий четыре: 6 хроматографов, 4 масс-спектрометра, 3 модуля, 1 система пробоподготовки — всего 14 приборов.</span></div></div>
+    <div class="finding"><div class="ic">!</div><div class="tx"><b>Раздел Download — три записи и ни одного файла</b>
+      <span class="ev">Проверено: «LAMP PRICE ADJUSTMENT NOTICE» (20.05.2026), «RID D40» (26.06.2025), «BIKAI Analytical Instrument» (23.05.2025). Ссылок на документы нет.</span></div></div>
+    <div class="finding"><div class="ic g">✓</div><div class="tx"><b>Расходники описаны подробно — это готовая база для каталога</b>
+      <span class="ev">На bikai.jp по каждой лампе есть парт-номер, модель прибора, производитель и оригинальный номер. Структура удобная, можно переносить почти как есть.</span></div></div>
+
+    <div class="note warn" style="margin-bottom:0"><b>Общий вывод по всем трём:</b> ни у одного производителя на сайте нет скачиваемой документации. Значит, первый шаг по каждому бренду — запросить у завода комплект документов. Список того, что запросить, — ниже.</div>
+  </div>
+
+  <div class="grpband" style="background:#f7fafb;border:1px solid var(--line);border-radius:12px;padding:12px 18px">
+    <div style="font-size:12.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;font-weight:700">Каналы продвижения</div>
+    <div style="font-size:13.6px;color:var(--ink2);margin-top:4px">Разбор по фактическому состоянию сайтов: что подойдёт каждому бренду, а что нет</div>
+  </div>
+<div class="card">
+    <h3 class="sub" style="margin-top:0">Каналы продвижения — что подойдёт, а что нет</h3>
+    <div class="note warn">Разбирал по фактическому состоянию сайтов производителей, а не по общим соображениям. Главный вывод: единого набора каналов на три бренда нет — аудитории разные, и то, что работает для одного, для другого будет потраченными силами. Перед стартом обсуждаем и выбираем, а не запускаем всё сразу.</div>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:150px">Канал</th><th style="width:95px">Winmedic</th><th style="width:95px">Chiwell</th><th style="width:95px">BIKAI / UVTech</th><th>Почему так</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>YouTube</b></td>
+            <td><span class="b ok">да, основной</span></td><td><span class="b ok">да</span></td><td><span class="b warn">только приборы</span></td>
+            <td>Winmedic — ПО невозможно продать текстом, нужны сценарии: сканирование, телеконсультация, что считает WinQuant. Chiwell — окраска и покрытие предельно визуальны, микрофотографии сами по себе контент. BIKAI — работает для приборов, но не для расходников</td>
+          </tr>
+          <tr>
+            <td><b>Вебинары и онлайн-демо</b></td>
+            <td><span class="b ok">да</span></td><td><span class="b opt">не нужно</span></td><td><span class="b opt">не нужно</span></td>
+            <td>Основной инструмент продажи сложного ПО. Запись вебинара потом живёт и на YouTube, и на сайте</td>
+          </tr>
+          <tr>
+            <td><b>Telegram</b></td>
+            <td><span class="b err">нет</span></td><td><span class="b ok">да</span></td><td><span class="b ok">да</span></td>
+            <td>Работает там, где есть повторные покупки расходников. У Winmedic покупка разовая — удерживать нечего. У BIKAI есть прямой повод: у производителя в разделе Download лежит «LAMP PRICE ADJUSTMENT NOTICE» от 20.05.2026, цены на лампы меняются</td>
+          </tr>
+          <tr>
+            <td><b>Хабр</b></td>
+            <td><span class="b warn">только под ПО</span></td><td><span class="b err">нет</span></td><td><span class="b err">нет</span></td>
+            <td>WinQuant построен на глубоком обучении, цифровая патология и ИИ в морфологии — это буквально тема Хабра. Продавать через него микротомы или хроматографы не выйдет, аудитория не та</td>
+          </tr>
+          <tr>
+            <td><b>Дзен</b></td>
+            <td><span class="b err">нет</span></td><td><span class="b err">нет</span></td><td><span class="b err">нет</span></td>
+            <td>Массовая аудитория и алгоритмическая выдача. Трафик будет, но заявки оттуда почти не приходят. Оправдан только при образовательном угле — лабораторная диагностика, обучение, разборы случаев</td>
+          </tr>
+          <tr>
+            <td><b>Instagram</b></td>
+            <td><span class="b err">нет</span></td><td><span class="b err">нет</span></td><td><span class="b err">нет</span></td>
+            <td>В этой нише — витрина и фактор доверия, а не источник заявок. Красивые микрофотографии не конвертируются в тендер</td>
+          </tr>
+          <tr>
+            <td><b>Отраслевые каталоги и тендерные площадки</b></td>
+            <td><span class="b ok">да</span></td><td><span class="b opt">частично</span></td><td><span class="b ok">да</span></td>
+            <td>Дорогое оборудование закупается через тендеры. Здесь деньги решаются не охватами</td>
+          </tr>
+          <tr>
+            <td><b>Контент с выставок производителя</b></td>
+            <td><span class="b ok">да</span></td><td><span class="b opt">—</span></td><td><span class="b ok">да</span></td>
+            <td>Готовый контент без затрат на съёмку. Winmedic заявлен на ECP 2026 (European Society of Pathology), был ECP 2025. BIKAI выставляется на ARABLAB Dubai, analytica USA (стенд 1105), China International Environment Expo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mut" style="margin-top:10px"><b>Отдельные работы вне этапов</b> идут по ставке 50 BYN/час. Ориентиры для обсуждения, а не прайс: съёмка демо-видео около 320 BYN за смену, монтаж ролика до 3 минут около 250, тот же ролик с субтитрами RU и EN около 420, карточка товара «под ключ» около 35, статья для сайта около 120. Точную стоимость называем до начала работ.</p>
+  </div>
+<div class="card">
+    <h3 class="sub" style="margin-top:0">Развилка по BIKAI: приборы и расходники — два разных бизнеса</h3>
+    <p>Смешать их в одну стратегию — главная ошибка, которую тут можно совершить.</p>
+    <ul>
+      <li><b>Расходники</b> (лампы под Waters, Agilent, Shimadzu, Hitachi, Beckman, AB SCIEX, Perkin Elmer, HACH, JASCO, PUXI, Analytik Jena) — <b>только SEO и ничего больше</b>. Их ищут по парт-номеру и оригинальному номеру: «201000281», «G1314-60100». Никто не смотрит видео, чтобы найти дейтериевую лампу. Каталог с парт-номерами — самый конверсионный актив из всех трёх брендов</li>
+      <li><b>Приборы</b> (UHPLC 1521 Pro, HPLC 1511 Pro, Prep / 2D / Bio, GC 7000, масс-спектрометры) — YouTube, демонстрация методики, разбор хроматограммы, установка</li>
+    </ul>
+
+    <div class="note" style="margin-bottom:0"><b>Отдельно про kedi.by:</b> тут проблема не в каналах, а в том, что пока нечего продвигать — в <code>post-sitemap.xml</code> одна запись, в карточках товаров нет ТТХ и инструкций. Сначала контент, потом каналы, иначе трафик придёт на пустые карточки.</div>
+  </div>
+<div class="card">
+    <h3 class="sub" style="margin-top:0">Если выбирать два канала на всех</h3>
+    <div class="note" style="margin-bottom:0"><b>YouTube и Telegram.</b> YouTube — потому что все три бренда продают то, что надо показать в работе. Telegram — потому что почти бесплатный и закрывает повторные продажи расходников у Chiwell и BIKAI.<br><br><b>Чего не делать ни для кого: Дзен и Instagram.</b> В этой нише они дают активность в отчётах и почти не дают заявок — ровно тот случай, когда силы потрачены впустую.<br><br><b>И главное условие:</b> каждый канал должен вести обратно на сайт и называть бренд одинаково. Упоминания и цитируемость напрямую учитывает ИИ-выдача из этапа 1.6. Видео на YouTube без ссылки на карточку товара или статья без обратной ссылки — потраченные силы, которые не складываются в результат.</div>
+  </div>
+
+  <div class="card">
+    <h3 class="sub" style="margin-top:0">Оплачивается отдельно, не входит в стоимость работ</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Позиция</th><th>Зачем нужно</th><th class="money">Ориентир</th></tr></thead>
+        <tbody>
+          <tr><td>Домен .BY / .БЕЛ</td><td>Обязателен для регистрации в БелГИЭ</td><td class="money">от 25 / год</td></tr>
+          <tr><td>Хостинг на территории РБ</td><td>Обязательное условие, без него заявку в БелГИЭ не подать</td><td class="money">от 15 / мес</td></tr>
+          <tr><td>SSL-сертификат</td><td>Let&#8209; Encrypt бесплатно; платный с гарантией — по тарифу</td><td class="money">0 – 60 / год</td></tr>
+          <tr><td>Госпошлина за регистрацию в БелГИЭ</td><td>Платит собственник сайта, по тарифу РУП «БелГИЭ»</td><td class="money">по тарифу</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mut" style="margin-top:10px">Эти платежи идут напрямую провайдерам и регистраторам. Могу организовать и сопровождать, но в стоимость работ они не входят.</p>
+    <div class="note warn" style="margin-top:10px"><b>Также не входит в стоимость работ:</b> профессиональная фотосъёмка оборудования, разработка фирменного стиля и логотипа, реклама, юридическая экспертиза рекламных формулировок для медизделий.</div>
+  </div>
+
+</section>
+
+
+
+</main>
+
+</div><!-- /.shell -->
+
+<!-- ============================================================= -->
+<!-- СВОДКА -->
+<!-- ============================================================= -->
+<section class="summary">
+  <div class="wrap">
+    <h2>Сводка бюджета</h2>
+    <div class="grid g2" style="gap:34px">
+      <div>
+        <div class="srow"><span>1. Разработка новых сайтов <span class="d">три сайта по семи этапам</span></span><span class="v" data-total="sites">—</span></div>
+        <div class="srow"><span>2. Обновление kedi.by <span class="d">разовые работы + отмеченные опции</span></span><span class="v" data-total="kedi">—</span></div>
+        <div class="srow"><span>3. Переводы <span class="d">95 документов · 1 638 страниц</span></span><span class="v" data-total="trans">—</span></div>
+      </div>
+      <div>
+        <div class="srow"><span>Ежемесячное сопровождение <span class="d">Минимум на всю инфраструктуру; мелкие доработки сверх него — ориентировочно 50 BYN/час</span></span><span class="v" data-total="monthly">—</span></div>
+        <div class="srow"><span>Срок реализации <span class="d">при параллельном запуске направлений</span></span><span class="v">10–14 нед.</span></div>
+        <div class="srow"><span>Действительность цен <span class="d">с даты КП</span></span><span class="v">обсуждается в договоре</span></div>
+        <div class="stotal">
+          <span class="lbl">Разовые работы, итого</span>
+          <span class="v" data-total="grand">—</span>
+        </div>
+      </div>
+    </div>
+    <p class="sub-total">Итог пересчитывается автоматически: уберите или поставьте галочку в строке сметы — сумма здесь изменится. Периодические позиции (SEO, техподдержка, абонентское сопровождение) показаны отдельной строкой за месяц и в «разовые работы» не входят.</p>
+  </div>
+</section>
+
+<footer class="f">
+  <div class="wrap">
+    <div class="grid g3">
+      <div>
+        <h4>Исполнитель</h4>
+        <p>Индивидуальный предприниматель<br><b>Анищенко Иван Александрович</b></p>
+        <p>УНП <span class="fill">____________</span><br>
+           Адрес <span class="fill">____________</span><br>
+           Р/с <span class="fill">____________</span></p>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <p>Телефон <span class="fill">____________</span><br>
+           E-mail <span class="fill">____________</span><br>
+           Telegram <span class="fill">____________</span></p>
+        <p>Заказчик: <span class="fill">____________</span></p>
+      </div>
+      <div>
+        <h4>Условия</h4>
+        <p>Цены указаны в белорусских рублях, НДС не облагается (ИП). Оплата — безналичный расчёт по договору, поэтапно.</p>
+        <p>Цены и состав работ — предварительные и обсуждаются при оформлении договора. Объёмы по переводам уточняются после получения исходных документов.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="tools">
+  <button id="btnEdit" type="button">✎ Режим правки</button>
+  <button id="btnSave" type="button" style="display:none">⬇ Скачать HTML</button>
+  <button id="btnPrint" type="button">🖨 Печать / PDF</button>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- разбор суммы из текста ячейки ---------- */
+  function parseMoney(el){
+    var t = (el.textContent || '').replace(/[^\d]/g,'');
+    return t ? parseInt(t,10) : 0;
+  }
+  function fmt(n){
+    return n.toLocaleString('ru-RU').replace(/\u00A0/g,' ');
+  }
+
+  /* периодические позиции — по ключевым словам в тексте строки */
+  function isMonthly(tr){
+    var t = (tr.textContent||'').toLowerCase();
+    return /в месяц|ежемесячно/.test(t);
+  }
+
+  function active(tr){
+    if (tr.dataset.opt === '1'){
+      var cb = tr.querySelector('input[type=checkbox]');
+      return !!(cb && cb.checked);
+    }
+    return true;
+  }
+
+  function recalc(){
+    var dirs = {sites:0, kedi:0, trans:0}, monthly = 0;
+
+    document.querySelectorAll('tr[data-money][data-dir]').forEach(function(tr){
+      if (!active(tr)) return;
+      var val = parseInt(tr.dataset.money,10) || parseMoney(tr.querySelector('.money'));
+      if (isMonthly(tr)) monthly += val;
+      else dirs[tr.dataset.dir] += val;
+    });
+
+    set('[data-total="sites"]',   fmt(dirs.sites) + ' BYN');
+    set('[data-total="kedi"]',    fmt(dirs.kedi)  + ' BYN');
+    set('[data-total="trans"]',   fmt(dirs.trans) + ' BYN');
+    set('[data-total="monthly"]', fmt(monthly)    + ' BYN/мес');
+    set('[data-total="grand"]',   fmt(dirs.sites + dirs.kedi + dirs.trans) + ' BYN');
+
+
+    // промежуточные блоки на вкладке kedi
+    set('[data-sum-static="sites-total"]', fmt(sumRange('tbl-sites', 0)));
+    set('[data-sum-static="kedi-once"]', fmt(sumRange('tbl-kedi', 0)) + ' BYN');
+    set('[data-sum-static="trans-setup"]', fmt(sumChecked('tbl-trans', ['3.1','3.2','3.3','3.4','3.5'])) + ' BYN');
+    set('[data-sum-static="trans-docs"]',  fmt(sumChecked('tbl-trans', ['3.6','3.7','3.8'])) + ' BYN');
+    set('[data-sum-static="trans-total"]', fmt(sumChecked('tbl-trans', ['3.1','3.2','3.3','3.4','3.5','3.6','3.7','3.8'])) + ' BYN');
+  }
+
+  function set(sel, txt){ var e = document.querySelector(sel); if (e) e.textContent = txt; }
+
+  function rows(tblId){
+    var t = document.getElementById(tblId);
+    return t ? Array.prototype.slice.call(t.querySelectorAll('tr[data-money]')) : [];
+  }
+  function sumRange(tblId){
+    var s = 0;
+    rows(tblId).forEach(function(tr){ if (tr.dataset.opt === '0' && !isMonthly(tr)) s += parseInt(tr.dataset.money,10)||0; });
+    return s;
+  }
+  function sumChecked(tblId, nums){
+    var s = 0;
+    rows(tblId).forEach(function(tr){
+      var n = (tr.querySelector('.n')||{}).textContent;
+      if (nums.indexOf((n||'').trim()) > -1) s += parseInt(tr.dataset.money,10)||0;
+    });
+    return s;
+  }
+
+  /* ---------- вкладки ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var panels = {approach:document.getElementById('p-approach'), sites:document.getElementById('p-sites'), kedi:document.getElementById('p-kedi'), trans:document.getElementById('p-trans'), support:document.getElementById('p-support'), price:document.getElementById('p-price'), info:document.getElementById('p-info')};
+  var ids = {'t-approach':'approach', 't-sites':'sites','t-kedi':'kedi','t-trans':'trans','t-support':'support','t-price':'price','t-info':'info'};
+
+  function select(name, push){
+    tabs.forEach(function(t){
+      var on = ids[t.id] === name;
+      t.setAttribute('aria-selected', on ? 'true':'false');
+      t.tabIndex = on ? 0 : -1;
+    });
+    Object.keys(panels).forEach(function(k){ panels[k].classList.toggle('on', k === name); });
+    if (push !== false && history.replaceState) history.replaceState(null,'','#'+name);
+    // не в самый верх страницы, а к границе между шапкой и полезным содержимым
+    if (push !== false){
+      var edge = document.querySelector('.shell');
+      var y = edge ? Math.max(0, Math.round(edge.getBoundingClientRect().top + (window.pageYOffset || 0))) : 0;
+      window.scrollTo({top:y, behavior:'smooth'});
+    }
+  }
+
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ select(ids[t.id]); });
+    t.addEventListener('keydown', function(e){
+      var i = tabs.indexOf(t), n = null;
+      if (e.key === 'ArrowRight') n = tabs[(i+1)%tabs.length];
+      if (e.key === 'ArrowLeft')  n = tabs[(i-1+tabs.length)%tabs.length];
+      if (n){ e.preventDefault(); n.focus(); select(ids[n.id]); }
+    });
+  });
+
+  var hash = (location.hash||'').replace('#','');
+  select(panels[hash] ? hash : 'approach', false);
+
+  /* ---------- подвкладки «Разработка» / «Поддержка» ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.subtab'), function(b){
+    b.addEventListener('click', function(){
+      var g = b.getAttribute('data-group'), id = b.getAttribute('data-sub');
+      Array.prototype.forEach.call(document.querySelectorAll('.subtab[data-group="'+g+'"]'),
+        function(x){ x.classList.toggle('on', x === b); });
+      Array.prototype.forEach.call(document.querySelectorAll('.subpanel'),
+        function(p){ p.classList.toggle('on', p.id === id); });
+      window.scrollTo({top: b.getBoundingClientRect().top + window.pageYOffset - 90, behavior:'smooth'});
+    });
+  });
+
+  /* ---------- пересчёт при изменении галочек ---------- */
+  document.querySelectorAll('input[type=checkbox][data-calc]').forEach(function(cb){
+    cb.addEventListener('change', recalc);
+  });
+
+  /* ---------- режим правки ---------- */
+  var edit = false;
+  var btnEdit = document.getElementById('btnEdit');
+  var btnSave = document.getElementById('btnSave');
+
+  btnEdit.addEventListener('click', function(){
+    edit = !edit;
+    document.body.classList.toggle('editing', edit);
+    btnEdit.classList.toggle('on', edit);
+    btnEdit.textContent = edit ? '✓ Завершить правку' : '✎ Режим правки';
+    btnSave.style.display = edit ? '' : 'none';
+    document.querySelectorAll('.card, header.doc .doc-nums, footer.f p, .note, .srow span, .stotal .lbl, td, th')
+      .forEach(function(el){
+        if (el.querySelector('input,button')) return;
+        if (edit) el.setAttribute('contenteditable','true');
+        else el.removeAttribute('contenteditable');
+      });
+  });
+
+  btnSave.addEventListener('click', function(){
+    document.querySelectorAll('[contenteditable]').forEach(function(el){ el.removeAttribute('contenteditable'); });
+    document.body.classList.remove('editing');
+    var clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('[contenteditable]').forEach(function(el){ el.removeAttribute('contenteditable'); });
+    var html = '<!DOCTYPE html>\n' + clone.outerHTML;
+    var blob = new Blob([html], {type:'text/html;charset=utf-8'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'KP-Anishchenko.html';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+    document.body.classList.add('editing');
+  });
+
+  document.getElementById('btnPrint').addEventListener('click', function(){ window.print(); });
+
+  /* ---------- правка цифр прямо в ячейках ---------- */
+  document.addEventListener('input', function(e){
+    var td = e.target.closest && e.target.closest('td.money');
+    if (td){
+      var tr = td.closest('tr[data-money]');
+      var num = parseInt((td.textContent||'').replace(/[^\d]/g,''),10);
+      if (tr && !isNaN(num)) tr.dataset.money = num;
+      recalc();
+    }
+  });
+
+  recalc();
+})();
+</script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3e8f0083e487907',t:'MTc4OTk5MjMyMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
