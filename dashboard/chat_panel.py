@@ -1,10 +1,14 @@
 """
-chat_panel.py — единственный интерфейс управления системой.
+chat_panel.py — лента команд (read-only "зеркало" чата).
 
-Рендерится в сайдбаре на каждой странице дашборда: пользователь пишет
-текстовую команду, Orchestrator.handle_chat_message() интерпретирует её
-("ИИ-мозг" из orchestrator.brain) и применяет изменения к файловой системе
-monorepo. Дашборд после этого просто перечитывает state и перерисовывается.
+ВАЖНО: это НЕ интерфейс управления. Управление системой происходит в чате
+с Оркестратором в Arena (та беседа, где пользователь разговаривает с
+ИИ-агентом напрямую — это и есть "мозг" системы). Здесь, в дашборде, мы
+только отображаем историю уже выполненных команд (chat_history.json),
+которую ведёт orchestrator.core.Orchestrator.handle_chat_message().
+
+Так дашборд остаётся честным "зеркалом": он ничего не решает и не
+принимает ввод — он просто показывает, что Оркестратор уже сделал.
 """
 
 from __future__ import annotations
@@ -13,21 +17,19 @@ import streamlit as st
 
 from components import esc
 
-EXAMPLES = [
-    "Создай SEO-агента для анализа ключевых слов",
-    "Добавь SEO скилл анализа конкурентов",
-    "Создай задачу для SEO: собрать топ-10 запросов",
-    "Запомни паттерн: всегда проверяй источники",
-]
-
 
 def render_chat(orchestrator) -> None:
+    """Показывает последние команды и ответы Оркестратора (без возможности ввода)."""
     st.markdown(
-        '<div class="ark-eyebrow">Управление системой</div>'
-        '<div class="ark-logo"><span class="dot"></span>Командный чат</div>',
+        '<div class="ark-logo">'
+        '<span class="material-symbols-rounded" style="color:#7CE6A6;font-size:20px;">forum</span>'
+        'Лента команд</div>',
         unsafe_allow_html=True,
     )
-    st.caption("Единственный инструмент управления. Просто опишите, что нужно сделать.")
+    st.caption(
+        "Управление системой происходит в чате с Оркестратором в Arena. "
+        "Здесь — только журнал уже выполненных команд (зеркало)."
+    )
 
     history = orchestrator.get_chat_history()
 
@@ -35,26 +37,16 @@ def render_chat(orchestrator) -> None:
     with chat_box:
         if not history:
             st.markdown(
-                '<div class="ark-chat-msg assistant">👋 Привет! Я Оркестратор. Опишите, какого '
-                "агента создать, какой скилл добавить или какую задачу поставить — я сам пойму "
-                "и применю изменения к системе.</div>",
+                '<div class="ark-chat-msg assistant">Команд пока не было. Напишите Оркестратору '
+                "в основном чате Arena, например: «Создай SEO-агента для анализа ключевых слов» — "
+                "и результат появится здесь и во всех разделах дашборда.</div>",
                 unsafe_allow_html=True,
             )
         for msg in history[-60:]:
             role_class = "user" if msg["role"] == "user" else "assistant"
-            prefix = "🧑 Вы" if msg["role"] == "user" else "🧠 Оркестратор"
+            prefix = "🧑 Команда" if msg["role"] == "user" else "🧠 Оркестратор"
             text = esc(msg["text"]).replace("\n", "<br/>")
             st.markdown(
                 f'<div class="ark-chat-msg {role_class}"><strong>{prefix}:</strong><br/>{text}</div>',
                 unsafe_allow_html=True,
             )
-
-    with st.expander("💡 Примеры команд", expanded=False):
-        for ex in EXAMPLES:
-            st.markdown(f"- _{ex}_")
-
-    user_input = st.chat_input("Например: «Создай агента для ...»")
-    if user_input:
-        with st.spinner("Оркестратор обрабатывает команду..."):
-            orchestrator.handle_chat_message(user_input)
-        st.rerun()

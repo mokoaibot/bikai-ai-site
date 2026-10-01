@@ -25,6 +25,23 @@ def inject_css() -> None:
         f"""
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0');
+
+        .material-symbols-rounded {{
+            font-family: 'Material Symbols Rounded';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 22px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            vertical-align: middle;
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }}
 
         html, body, [class*="css"] {{
             font-family: 'Inter', -apple-system, sans-serif !important;
@@ -39,6 +56,56 @@ def inject_css() -> None:
             background: {BG_PANEL} !important;
             border-right: 1px solid {BORDER};
         }}
+
+        /* --- Навигация: вертикальный список материальных "плиток" --- */
+        section[data-testid="stSidebar"] div[data-testid="stButton"] {{
+            margin-bottom: 0.5rem;
+        }}
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button {{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.7rem;
+            text-align: left;
+            border-radius: 16px;
+            padding: 0.7rem 1rem;
+            border: 1px solid {BORDER};
+            background: {BG_PANEL_2};
+            color: {TEXT_MUTED};
+            font-weight: 500;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.35);
+            transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+        }}
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button p {{
+            font-size: 0.92rem;
+            font-weight: 600;
+        }}
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button:hover {{
+            border-color: {ACCENT_DIM};
+            background: {ACCENT_SOFT_BG};
+            color: {TEXT};
+            box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+            transform: translateY(-1px);
+        }}
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button:active {{
+            transform: translateY(0px);
+        }}
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button[kind="primary"] {{
+            background: {ACCENT};
+            border-color: {ACCENT};
+            color: #07140D;
+            box-shadow: 0 6px 16px rgba(124,230,166,0.3);
+        }}
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button[kind="primary"]:hover {{
+            background: {ACCENT};
+            color: #07140D;
+            transform: none;
+        }}
+        section[data-testid="stSidebar"] div[data-testid="stButton"] button[kind="primary"] span {{
+            color: #07140D !important;
+        }}
+
 
         #MainMenu, footer, header[data-testid="stHeader"] {{
             background: transparent;

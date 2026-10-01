@@ -12,8 +12,10 @@ Context-Driven архитектура: Оркестратор принимает
 
 from __future__ import annotations
 
+import importlib.util
 import json
 import re
+import sys
 import unicodedata
 from datetime import datetime
 from pathlib import Path
@@ -66,6 +68,7 @@ class Orchestrator:
         self.activity_file = self.global_logs_dir / "activity.jsonl"
         self.global_knowledge_manifest = self.global_knowledge_dir / "entries.json"
         self.export_dir = self.base_dir / "exports"
+        self.settings_file = self.base_dir / "orchestrator_settings.json"
 
         for d in (self.agents_dir, self.global_knowledge_dir, self.global_logs_dir, self.export_dir):
             d.mkdir(parents=True, exist_ok=True)
@@ -79,7 +82,107 @@ class Orchestrator:
             if not f.exists():
                 f.write_text(default, encoding="utf-8")
 
+        if not self.settings_file.exists():
+            self._write_settings(self._default_settings())
+
         self._log("Оркестратор инициализирован.", action="system_init")
+
+    # ------------------------------------------------------------------ #
+    # Настройки системы (например, уровень автономии)
+    # ------------------------------------------------------------------ #
+
+    AUTONOMY_LEVELS = {
+        "full_auto": "Полная автономия — создаю агентов/скилы/задачи сразу по ходу работы.",
+        "confirm_agents_only": "Создаю скилы и задачи сразу, но для НОВОГО агента сначала спрашиваю подтверждение.",
+        "confirm_all": "Перед любым изменением системы сначала предлагаю план и жду подтверждения.",
+    }
+
+    @staticmethod
+    def _default_settings() -> dict:
+        return {
+            "autonomy_level": "confirm_all",
+            "auto_push": False,
+            "updated_at": datetime.now().isoformat(timespec="seconds"),
+        }
+
+    def _write_settings(self, settings: dict) -> None:
+        self.settings_file.write_text(json.dumps(settings, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    def get_settings(self) -> dict:
+        try:
+            settings = json.loads(self.settings_file.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, FileNotFoundError):
+            settings = {}
+        merged = {**self._default_settings(), **settings}
+        if merged != settings:
+            self._write_settings(merged)
+        return merged
+
+    def set_autonomy_level(self, level: str) -> dict:
+        if level not in self.AUTONOMY_LEVELS:
+            raise ValueError(f"Неизвестный уровень автономии: {level}. Доступны: {list(self.AUTONOMY_LEVELS)}")
+        settings = self.get_settings()
+        settings["autonomy_level"] = level
+        settings["updated_at"] = datetime.now().isoformat(timespec="seconds")
+        self._write_settings(settings)
+        self._log(
+            f"Уровень автономии Оркестратора изменён на '{level}': {self.AUTONOMY_LEVELS[level]}",
+            action="settings_change",
+        )
+        return settings
+
+    def set_auto_push(self, enabled: bool) -> dict:
+        settings = self.get_settings()
+        settings["auto_push"] = bool(enabled)
+        settings["updated_at"] = datetime.now().isoformat(timespec="seconds")
+        self._write_settings(settings)
+        state_label = "включён" if enabled else "выключен"
+        self._log(f"Автоматический Git-push {state_label}.", action="settings_change")
+        return settings
+
+    # ------------------------------------------------------------------ #
+    # Git-синхронизация (автономный push без явной команды пользователя)
+    # ------------------------------------------------------------------ #
+
+    def _load_sync_git_module(self):
+        """Динамически импортирует sync_git.py из корня monorepo (не пакет, а скрипт)."""
+        module_name = "sync_git"
+        if module_name in sys.modules:
+            return sys.modules[module_name]
+        spec = importlib.util.spec_from_file_location(module_name, self.base_dir / "sync_git.py")
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[module_name] = module
+        spec.loader.exec_module(module)
+        return module
+
+    def auto_push(self, reason: str = "автоматическая синхронизация") -> dict:
+        """
+        Выполняет push в GitHub прямо сейчас (используется и автоматикой, и
+        Оркестратором вручную, когда он сам решает, что пора сохранить прогресс).
+        Никогда не бросает исключение наружу — любая ошибка просто логируется.
+        """
+        try:
+            sync_git = self._load_sync_git_module()
+            git_sync = sync_git.GitSync(base_dir=self.base_dir)
+            result = git_sync.push(message=f"Авто-синхронизация: {reason}")
+        except Exception as exc:  # noqa: BLE001
+            self._log(f"Авто-push не удался ({reason}): {exc}", level="ERROR", action="auto_push_failed")
+            return {"status": "error", "error": str(exc)}
+
+        if result["status"] == "ok":
+            self._log(f"Авто-push выполнен ({reason}).", action="auto_push")
+        else:
+            self._log(
+                f"Авто-push не завершён ({reason}): статус {result['status']}.",
+                level="WARNING", action="auto_push_failed",
+            )
+        return result
+
+    def maybe_auto_push(self, reason: str) -> Optional[dict]:
+        """Вызывает auto_push(), только если включена настройка auto_push."""
+        if self.get_settings().get("auto_push"):
+            return self.auto_push(reason)
+        return None
 
     # ------------------------------------------------------------------ #
     # Логирование (текстовый лог + структурированная лента активности)
@@ -206,6 +309,7 @@ class Orchestrator:
         result = self.create_agent(name_hint, role=role, task_description=task_description)
         if result["status"] == "exists":
             return f"Агент «{result['name']}» уже существует в системе (папка `{result['path']}`)."
+        self.maybe_auto_push(f"создан агент {result['name']}")
         return (
             f"✅ Создан новый субагент **{result['name']}**\n"
             f"- Роль: {role}\n"
@@ -264,6 +368,7 @@ class Orchestrator:
             return self._agent_not_found_reply(intent.get("raw_mention"))
         ok = self.delete_agent(agent_name)
         if ok:
+            self.maybe_auto_push(f"удалён агент {agent_name}")
             return f"🗑 Агент «{agent_name}» и все его файлы удалены из системы."
         return f"Агент «{agent_name}» не найден."
 
@@ -692,6 +797,7 @@ if __name__ == "__main__":
         state = {
             "generated_at": datetime.now().isoformat(timespec="seconds"),
             "config": self.config.summary(),
+            "settings": self.get_settings(),
             "orchestrator": {
                 "log_file": str(self.log_file.relative_to(self.base_dir)),
                 "log_lines": self._count_lines(self.log_file),

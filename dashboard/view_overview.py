@@ -11,8 +11,23 @@ def render(state: dict, orchestrator) -> None:
     st.markdown('<div class="ark-eyebrow">Обзор системы</div>', unsafe_allow_html=True)
     st.title("🧠 Архитектура в реальном времени")
     st.caption(
-        "Это зеркало текущего состояния репозитория. Любое изменение, сделанное через чат, "
-        "мгновенно отражается здесь."
+        "Это зеркало текущего состояния репозитория. Любое изменение, которое Оркестратор "
+        "применяет по вашей команде в чате Arena, мгновенно отражается здесь."
+    )
+
+    autonomy = state.get("settings", {}).get("autonomy_level", "confirm_all")
+    autonomy_labels = {
+        "full_auto": ("🟢", "Полная автономия", "Агенты/скилы/задачи создаются сразу по ходу работы."),
+        "confirm_agents_only": ("🟡", "Подтверждение для новых агентов", "Новые агенты — по согласованию, остальное сразу."),
+        "confirm_all": ("⚪", "Подтверждение для всего", "Любое изменение сначала предлагается, затем выполняется."),
+    }
+    icon, label, desc = autonomy_labels.get(autonomy, ("⚪", autonomy, ""))
+    st.markdown(
+        f'<div class="ark-card" style="display:flex;align-items:center;gap:0.6rem;">'
+        f'<span style="font-size:1.1rem;">{icon}</span>'
+        f'<div><strong>Режим автономии: {label}</strong>'
+        f'<div style="color:#8FA398;font-size:0.82rem;">{desc}</div></div></div>',
+        unsafe_allow_html=True,
     )
 
     tasks = state.get("tasks", [])

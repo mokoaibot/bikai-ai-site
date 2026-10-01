@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T21:03:21",
+  "generated_at": "2026-10-01T21:22:22",
   "config": {
     "environment": "arena-cloud",
     "model_name": "gpt-4o-mini",
@@ -14,9 +14,13 @@
       "XAI_API_KEY"
     ]
   },
+  "settings": {
+    "autonomy_level": "full_auto",
+    "updated_at": "2026-10-01T21:20:28"
+  },
   "orchestrator": {
     "log_file": "global_logs/orchestrator.log",
-    "log_lines": 1
+    "log_lines": 6
   },
   "global_knowledge_files": [
     {

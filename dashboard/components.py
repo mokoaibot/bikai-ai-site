@@ -150,6 +150,7 @@ ACTION_ICONS = {
     "chat_in": "💬",
     "chat_out": "🤝",
     "export": "📤",
+    "settings_change": "⚙️",
     "error": "⚠️",
     "info": "ℹ️",
 }

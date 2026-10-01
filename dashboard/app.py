@@ -2,9 +2,10 @@
 dashboard/app.py — минималистичный премиальный дашборд: "зеркало"
 Context-Driven мультиагентной системы.
 
-Единственный инструмент управления системой — чат в сайдбаре (chat_panel.py).
-Дашборд ничего не создаёт сам: он лишь читает system_state.json (через
-Orchestrator.run_audit) и визуализирует актуальное состояние репозитория.
+Чат в сайдбаре (chat_panel.py) — единственный способ вносить изменения.
+Сам дашборд ничего не создаёт: он лишь читает system_state.json (через
+Orchestrator.run_audit) и визуализирует актуальное состояние репозитория
+в реальном времени.
 
 Запуск:
     streamlit run dashboard/app.py --server.port 8501 --server.address 0.0.0.0
@@ -26,48 +27,49 @@ import view_knowledge
 import view_activity
 import view_export
 
-st.set_page_config(page_title="Orchestrator · Control Tower", page_icon="🌲", layout="wide")
+st.set_page_config(page_title="Orchestrator · Live Mirror", page_icon="🌲", layout="wide")
 inject_css()
 
 orchestrator = get_orchestrator()
 state = orchestrator.run_audit()
 
+# Material Symbols — см. https://fonts.google.com/icons (иконка на каждую вкладку)
 PAGES = {
-    "Обзор": view_overview,
-    "Агенты": view_agents,
-    "Задачи": view_tasks,
-    "Навыки": view_skills,
-    "База знаний": view_knowledge,
-    "Логи": view_activity,
-    "Экспорт": view_export,
+    "overview": {"label": "Обзор", "icon": ":material/dashboard:", "module": view_overview},
+    "agents": {"label": "Агенты", "icon": ":material/smart_toy:", "module": view_agents},
+    "tasks": {"label": "Задачи", "icon": ":material/task_alt:", "module": view_tasks},
+    "skills": {"label": "Навыки", "icon": ":material/bolt:", "module": view_skills},
+    "knowledge": {"label": "База знаний", "icon": ":material/auto_stories:", "module": view_knowledge},
+    "activity": {"label": "Логи", "icon": ":material/receipt_long:", "module": view_activity},
+    "export": {"label": "Экспорт", "icon": ":material/ios_share:", "module": view_export},
 }
 
-ICONS = {
-    "Обзор": "🧠",
-    "Агенты": "🤖",
-    "Задачи": "📋",
-    "Навыки": "🛠",
-    "База знаний": "📚",
-    "Логи": "📜",
-    "Экспорт": "📤",
-}
+if "page" not in st.session_state:
+    st.session_state.page = "overview"
 
 with st.sidebar:
     st.markdown(
-        '<div class="ark-logo"><span class="dot"></span>ORCHESTRATOR</div>'
-        '<div style="color:#8FA398;font-size:0.8rem;margin-bottom:1rem;">Context-Driven Control Tower</div>',
+        '<div class="ark-logo">'
+        '<span class="material-symbols-rounded" style="color:#7CE6A6;">hub</span>'
+        'ORCHESTRATOR</div>'
+        '<div style="color:#8FA398;font-size:0.8rem;margin-bottom:1.1rem;">'
+        'Зеркало системы в реальном времени</div>',
         unsafe_allow_html=True,
     )
 
-    page_label = st.radio(
-        "Навигация",
-        list(PAGES.keys()),
-        format_func=lambda p: f"{ICONS[p]}  {p}",
-        label_visibility="collapsed",
-    )
+    for key, meta in PAGES.items():
+        active = st.session_state.page == key
+        if st.button(
+            meta["label"],
+            icon=meta["icon"],
+            key=f"nav_{key}",
+            type="primary" if active else "secondary",
+            use_container_width=True,
+        ):
+            st.session_state.page = key
+            st.rerun()
 
     st.divider()
     render_chat(orchestrator)
 
-page_module = PAGES[page_label]
-page_module.render(state, orchestrator)
+PAGES[st.session_state.page]["module"].render(state, orchestrator)
