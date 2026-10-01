@@ -1,8 +1,0 @@
-{
-  "name": "testovogo",
-  "display_name": "тестового",
-  "role": "Тестового-агент",
-  "task_description": "проверки автопуша",
-  "created_at": "2026-10-01T21:23:20",
-  "path": "agents/testovogo"
-}

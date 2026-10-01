@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T21:22:22",
+  "generated_at": "2026-10-01T21:23:22",
   "config": {
     "environment": "arena-cloud",
     "model_name": "gpt-4o-mini",
@@ -16,11 +16,12 @@
   },
   "settings": {
     "autonomy_level": "full_auto",
-    "updated_at": "2026-10-01T21:20:28"
+    "auto_push": true,
+    "updated_at": "2026-10-01T21:23:18"
   },
   "orchestrator": {
     "log_file": "global_logs/orchestrator.log",
-    "log_lines": 6
+    "log_lines": 16
   },
   "global_knowledge_files": [
     {
@@ -35,8 +36,27 @@
     }
   ],
   "global_knowledge_entries": [],
-  "agents_count": 0,
-  "agents": [],
+  "agents_count": 1,
+  "agents": [
+    {
+      "name": "testovogo",
+      "display_name": "тестового",
+      "role": "Тестового-агент",
+      "task_description": "проверки автопуша",
+      "created_at": "2026-10-01T21:23:20",
+      "path": "agents/testovogo",
+      "skills": [],
+      "skills_count": 0,
+      "knowledge_entries": [],
+      "log_files": [
+        {
+          "file": "testovogo.log",
+          "lines": 1
+        }
+      ],
+      "log_lines": 1
+    }
+  ],
   "tasks": [],
-  "chat_messages_count": 0
+  "chat_messages_count": 2
 }

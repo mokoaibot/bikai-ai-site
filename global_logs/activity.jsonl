@@ -9,3 +9,8 @@
 {"timestamp": "2026-10-01T21:23:20", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
 {"timestamp": "2026-10-01T21:23:20", "level": "INFO", "action": "chat_in", "message": "Получена команда в чате: \"Создай тестового агента Пробник для проверки автопуша\""}
 {"timestamp": "2026-10-01T21:23:20", "level": "INFO", "action": "create_agent", "message": "Создан новый субагент 'testovogo' (роль: Тестового-агент).", "agent": "testovogo"}
+{"timestamp": "2026-10-01T21:23:22", "level": "INFO", "action": "auto_push", "message": "Авто-push выполнен (создан агент testovogo)."}
+{"timestamp": "2026-10-01T21:23:22", "level": "INFO", "action": "chat_out", "message": "Ответ ассистента: \"✅ Создан новый субагент **testovogo**\n- Роль: Тестового-агент\n- Задача: проверки автопуша\n- Папка: `agents/testovogo`\""}
+{"timestamp": "2026-10-01T21:23:44", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-01T21:23:44", "level": "INFO", "action": "chat_in", "message": "Получена команда в чате: \"Создай тестового агента Пробник для проверки автопуша\""}
+{"timestamp": "2026-10-01T21:23:44", "level": "INFO", "action": "create_agent", "message": "Создан новый субагент 'probnik' (роль: Пробник-агент).", "agent": "probnik"}

@@ -1,7 +1,7 @@
 """
-agent.py — автоматически сгенерированный субагент "testovogo".
+agent.py — автоматически сгенерированный субагент "probnik".
 
-Роль: Тестового-агент
+Роль: Пробник-агент
 Задача: проверки автопуша
 
 Сгенерировано Оркестратором (orchestrator/core.py) по текстовой команде
@@ -13,14 +13,14 @@ from __future__ import annotations
 from datetime import datetime
 from pathlib import Path
 
-AGENT_NAME = "testovogo"
-ROLE = "Тестового-агент"
+AGENT_NAME = "probnik"
+ROLE = "Пробник-агент"
 TASK_DESCRIPTION = "проверки автопуша"
 AGENT_DIR = Path(__file__).resolve().parent
 LOG_FILE = AGENT_DIR / "logs" / f"{AGENT_NAME}.log"
 
 
-class TestovogoAgent:
+class ProbnikAgent:
     """Автосгенерированный субагент."""
 
     def __init__(self):
@@ -41,4 +41,4 @@ class TestovogoAgent:
 
 
 if __name__ == "__main__":
-    TestovogoAgent().run()
+    ProbnikAgent().run()

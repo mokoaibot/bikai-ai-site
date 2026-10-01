@@ -355,13 +355,24 @@ class Brain:
 
         # Слово непосредственно перед "агент(а)" / "субагент(а)" через пробел,
         # например "SEO агента" (но не глагол-команда вроде "Создай агента").
+        before = None
         m = re.search(r"([A-Za-zА-Яа-яЁё0-9]+)\s+(?:суб)?агент", text, re.IGNORECASE)
         if m and not _is_verb_or_stop(m.group(1)):
-            return m.group(1)
+            before = m.group(1)
 
         # Слово сразу после "агент(а)" / "субагент(а)" через пробел.
+        after = None
         m = re.search(r"(?:суб)?агент[а-яё]*\s+([A-Za-zА-Яа-яЁё0-9]+)", text, re.IGNORECASE)
         if m and not _is_verb_or_stop(m.group(1)):
-            return m.group(1)
+            after = m.group(1)
+
+        # Если одно из слов начинается с заглавной буквы (похоже на имя собственное),
+        # а другое — нет (похоже на прилагательное/описание), предпочитаем заглавное.
+        if after and after[0].isupper() and not (before and before[0].isupper()):
+            return after
+        if before:
+            return before
+        if after:
+            return after
 
         return None
