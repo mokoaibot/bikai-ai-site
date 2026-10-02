@@ -40,6 +40,19 @@ Ask (don't assume) if not already specified:
    the actual slide elements in the raw HTML (view-source, not a markdown-ified
    fetch, which can silently collapse carousels to one image). If more than
    one distinct photo exists, capture all of them.
+   - **Do this check for every single product, not a sample.** A real
+     incident: on one catalog, only the one product a user happened to
+     notice had a gallery was ever actually checked; it was wrongly assumed
+     the rest followed the same single-photo pattern without verifying. Loop
+     over the full product list and fetch every source page — there is no
+     shortcut that's safe to skip, since different products on the same
+     domain/template can still vary (promotional galleries are often added
+     per-product by marketing, not uniformly).
+   - A second embedded image elsewhere on the page (e.g. mid-description,
+     different upload path/CDN folder, empty alt text) is not automatically
+     a second real photo — it's often the *same* hero shot re-rendered as a
+     styled marketing banner. Visually compare before adding it as a gallery
+     entry (see byte-diff rule below, or just look at both renders).
 3. If two URLs look like they *might* be two photos of the same item (e.g. a
    listing-page thumbnail vs. the detail-page hero), **diff the actual
    downloaded bytes (md5sum) before treating them as different photos.**

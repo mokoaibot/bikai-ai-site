@@ -30,6 +30,30 @@ Run through this list every time a product is **added or re-scraped**
       gallery** (bikaicorp.com uses a `swiper` block with one `swiper-slide`
       per photo — count them). If there's more than one slide, capture **all**
       of them, not just the first.
+  - **This check must be done for every single product, not a sample** — a
+    user caught that this had only ever been verified for the one product
+    that turned out to have a gallery (`gc-sampler`), never ruling out that
+    others were missed too. Full audit completed 2026-10-02: fetched and
+    manually inspected the source page for **all 55 catalog products** (all
+    24 `bikaicorp.com` pages + all 31 `www.uvtech-cc.com` pages). Result:
+    `gc-sampler` is confirmed as the **only** product with a real 2-photo
+    gallery; every other product genuinely has just one photo on its source
+    page — nothing else was missed. Detection pattern used for
+    `bikaicorp.com`: count the markdown-image tags with alt text literally
+    `$data['title']` between the breadcrumb and the "Related Products"
+    section (excludes other products' thumbnails and WhatsApp/WeChat icons).
+  - **`www.uvtech-cc.com` has no gallery feature at all** — every product
+    template on that domain (lamps, column, cuvette, hExtractor) renders
+    exactly one "Product Description" image, repeated verbatim as the
+    breadcrumb thumbnail. There is no swiper/carousel there; don't spend time
+    looking for one on that domain, just confirm the single image is present.
+  - Some `bikaicorp.com` pages (`lc-pump`, `prep-hplc-1511-pro`,
+    `2d-hplc-1511-pro`, `bio-hplc-1511-pro`, `gc-7000`) also embed a second
+    image mid-description from a different upload path (`uploads/file/...`
+    vs. `uploads/images/...`, empty alt text). Checked: this is a **duplicate
+    stylized/marketing re-render of the same hero photo**, not a distinct
+    angle — confirmed by visually comparing the two files for `prep-hplc-1511-
+    pro`. Do not add these as `gallery_urls`; they are not new content.
 - [ ] If two different image URLs for the "same" product are found (e.g. a
       listing-page thumbnail vs. a detail-page hero), don't assume they're
       different photos — **diff the actual downloaded bytes (md5sum)** before
