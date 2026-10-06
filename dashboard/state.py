@@ -12,7 +12,9 @@ from core import Orchestrator
 
 @st.cache_resource(show_spinner=False)
 def get_orchestrator() -> Orchestrator:
-    return Orchestrator(base_dir=BASE_DIR)
+    # base_dir=None -> Config сам вычислит корень репозитория
+    # (на уровень выше dashboard/, где лежит этот файл).
+    return Orchestrator(base_dir=None)
 
 
 def refresh_state() -> dict:
