@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
 """
-run_orchestrator.py — удобный CLI для управления системой прямо из
-терминала Arena AI (для тестирования без дашборда).
+cli.py — удобный терминальный вход в движок (core.py), для тестирования
+без дашборда.
 
-Напоминание: исполнитель один — ИИ-агент. "Проекты" ниже — это именованные
-профили контекста, а не отдельные боты.
+Напоминание: исполнитель один — ИИ-агент. "Направления" ниже — это
+именованные профили контекста, а не отдельные боты.
 
 Главный способ управления системой — ЧАТ:
 
-    python3 run_orchestrator.py chat "Заведи проект SEO для анализа ключевых слов"
-    python3 run_orchestrator.py chat "Добавь SEO инструкцию анализа конкурентов"
-    python3 run_orchestrator.py chat "Создай задачу для SEO: собрать топ-10 запросов"
-    python3 run_orchestrator.py chat "Запомни паттерн: всегда проверяй источники"
+    python3 engine/cli.py chat "Заведи направление SEO для анализа ключевых слов"
+    python3 engine/cli.py chat "Добавь SEO инструкцию анализа конкурентов"
+    python3 engine/cli.py chat "Создай задачу для SEO: собрать топ-10 запросов"
+    python3 engine/cli.py chat "Запомни паттерн: всегда проверяй источники"
 
 Служебные команды:
 
-    python3 run_orchestrator.py audit          # пересканировать репозиторий
-    python3 run_orchestrator.py list-projects  # краткий список проектов
-    python3 run_orchestrator.py export         # собрать META_PROMPT.md
-    python3 run_orchestrator.py config         # сводка конфигурации/ключей
+    python3 engine/cli.py audit          # пересканировать репозиторий
+    python3 engine/cli.py list-projects  # краткий список направлений
+    python3 engine/cli.py export         # собрать META_PROMPT.md
+    python3 engine/cli.py config         # сводка конфигурации/ключей
 """
 
 from __future__ import annotations

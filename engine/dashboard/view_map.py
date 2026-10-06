@@ -15,7 +15,7 @@ def _pipeline_section(orchestrator) -> None:
         <div class="ark-card">
         <ul style="margin:0;padding-left:1.1rem;line-height:1.7;">
         <li><strong>Управление</strong> (проект/задача/инструкция/знание) — запускаю
-        <code>run_orchestrator.py chat "..."</code> → intent → запись на диск.</li>
+        <code>cli.py chat "..."</code> → intent → запись на диск.</li>
         <li><strong>Сама работа</strong> (каталог, перевод, картинка, сайт) — делаю сам
         инструментами, без Оркестратора.</li>
         <li>После изменений — <code>run_audit()</code> → <code>system_state.json</code>.</li>
