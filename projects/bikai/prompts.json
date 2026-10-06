@@ -1,0 +1,11 @@
+[
+  {
+    "title": "Логотип BIKAI для Telegram-канала",
+    "used_for": "bikai_catalog/bikai_telegram_logo.png",
+    "tool": "generate_image",
+    "prompt": "Minimalist, no-text logo icon for BIKAI (laboratory/analytical instruments brand): abstract lab symbol, violet and white color scheme, clean flat modern style, suitable as a small Telegram channel avatar.",
+    "exact": false,
+    "note": "Восстановлено по заметкам сессии при введении этого журнала (06.10.2026) — дословная формулировка исходного вызова не сохранялась. С этого момента веду точные промты сюда при каждой генерации для проекта BIKAI.",
+    "created_at": "2026-10-06T14:45:00"
+  }
+]

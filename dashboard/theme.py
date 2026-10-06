@@ -251,6 +251,16 @@ def inject_css() -> None:
         .ark-badge.approved {{ color: {ACCENT}; border-color: {ACCENT}; background: {ACCENT_SOFT_BG}; }}
         .ark-badge.avoid {{ color: {DANGER}; border-color: {DANGER}; background: rgba(230,124,124,0.08); }}
 
+        .ark-card code, .ark-tree code, .ark-chat-msg code {{
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            background: {BG_PANEL_2};
+            border: 1px solid {BORDER};
+            border-radius: 4px;
+            padding: 0.03rem 0.35rem;
+            font-size: 0.85em;
+            color: {ACCENT};
+        }}
+
         /* --- Дерево архитектуры --- */
         .ark-tree details {{
             margin: 0.15rem 0 0.15rem 0;
