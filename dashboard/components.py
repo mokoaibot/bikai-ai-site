@@ -87,7 +87,7 @@ def project_card(project: dict) -> None:
     st.markdown(
         f"""
         <div class="ark-card">
-            <div class="ark-eyebrow">Проект (контекст для единственного исполнителя)</div>
+            <div class="ark-eyebrow">Проект</div>
             <div class="ark-card-title ark-card-title-lg">{esc(project['display_name'])}</div>
             <p style="color:#8FA398;margin:0 0 0.5rem 0;">{esc(project.get('role',''))}</p>
             <p style="margin:0 0 0.6rem 0;">{esc(project.get('task_description',''))}</p>
@@ -120,17 +120,20 @@ def instruction_card(project_display_name: str, instruction: dict) -> None:
     )
 
 
-def knowledge_card(entry: dict, scope_label: str) -> None:
+def knowledge_card(entry: dict, meta: str | None = None) -> None:
     kind = entry.get("kind", "approved")
     kind_badge = badge("Подтверждено" if kind == "approved" else "Избегать", kind)
+    meta_html = f'<div class="ark-meta-list">{esc(meta)}</div>' if meta else ""
     st.markdown(
         f"""
         <div class="ark-card">
-            <div class="ark-eyebrow">{esc(scope_label)}</div>
-            {kind_badge}
-            <div class="ark-card-title" style="margin-top:0.4rem;">{esc(entry.get('title',''))}</div>
-            <p style="color:#8FA398;margin:0;">{esc(entry.get('content',''))}</p>
-            <div class="ark-meta-list"><span>{esc(entry.get('created_at','—'))}</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:0.6rem;">
+                {kind_badge}
+                <span style="color:#8FA398;font-size:0.76rem;white-space:nowrap;">{esc(entry.get('created_at','—'))}</span>
+            </div>
+            <div class="ark-card-title" style="margin-top:0.5rem;">{esc(entry.get('title',''))}</div>
+            <p style="color:#8FA398;margin:0.25rem 0 0 0;line-height:1.55;">{esc(entry.get('content',''))}</p>
+            {meta_html}
         </div>
         """,
         unsafe_allow_html=True,

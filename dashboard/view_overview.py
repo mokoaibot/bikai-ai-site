@@ -22,21 +22,7 @@ def _last_push_info(orchestrator) -> str:
 def render(state: dict, orchestrator) -> None:
     st.markdown('<div class="ark-eyebrow">Обзор системы</div>', unsafe_allow_html=True)
     st.title("Архитектура в реальном времени")
-    st.caption(
-        "Это зеркало текущего состояния репозитория. Любое изменение, которое я применяю "
-        "по вашей команде в чате Arena, мгновенно отражается здесь."
-    )
-
-    st.markdown(
-        '<div class="ark-card" style="margin-bottom:0.9rem;">'
-        '<strong>Как это устроено на самом деле:</strong> исполнитель здесь один — я, '
-        'ИИ-агент. «Проекты» ниже — это не отдельные автономные боты, а именованные '
-        'профили контекста (роль, инструкции, задачи, накопленные знания) для разных '
-        'направлений работы. Когда вы просите заняться конкретным проектом, я открываю '
-        'его профиль, перечитываю инструкции и знания — и выполняю работу напрямую сам.'
-        '</div>',
-        unsafe_allow_html=True,
-    )
+    st.caption("Текущее состояние репозитория — обновляется мгновенно.")
 
     autonomy = state.get("settings", {}).get("autonomy_level", "confirm_all")
     autonomy_labels = {

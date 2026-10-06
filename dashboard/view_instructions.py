@@ -1,10 +1,4 @@
-"""
-view_instructions.py — Инструкции: текстовые памятки по проектам, которые
-я (единственный исполнитель) перечитываю перед тем, как взяться за работу.
-
-Это НЕ код отдельных модулей и не "способности" независимых ботов — просто
-структурированные заметки, привязанные к конкретному проекту.
-"""
+"""view_instructions.py — Инструкции: текстовые памятки по проектам."""
 
 from __future__ import annotations
 
@@ -14,7 +8,7 @@ from components import instruction_card
 
 
 def render(state: dict, orchestrator) -> None:
-    st.markdown('<div class="ark-eyebrow">Что я держу в голове по каждому проекту</div>', unsafe_allow_html=True)
+    st.markdown('<div class="ark-eyebrow">По проектам</div>', unsafe_allow_html=True)
     st.title("Инструкции")
 
     projects = state.get("projects", [])

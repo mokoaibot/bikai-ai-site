@@ -21,6 +21,7 @@ import streamlit as st
 from theme import inject_css
 from state import get_orchestrator
 
+import view_map
 import view_overview
 import view_projects
 import view_tasks
@@ -39,6 +40,7 @@ state = orchestrator.run_audit()
 # и в свёрнутой иконочной панели (только иконка) — чтобы разделы было легко
 # соотнести между собой в обоих состояниях.
 PAGES = {
+    "map": {"label": "Карта системы", "icon": ":material/account_tree:", "module": view_map},
     "overview": {"label": "Обзор", "icon": ":material/space_dashboard:", "module": view_overview},
     "projects": {"label": "Проекты", "icon": ":material/folder:", "module": view_projects},
     "tasks": {"label": "Задачи", "icon": ":material/checklist:", "module": view_tasks},
@@ -49,7 +51,7 @@ PAGES = {
 }
 
 if "page" not in st.session_state:
-    st.session_state.page = "overview"
+    st.session_state.page = "map"
 
 
 def _go(key: str) -> None:

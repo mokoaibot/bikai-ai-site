@@ -31,7 +31,7 @@ class Config:
     ]
 
     def __init__(self, base_dir: Path | None = None):
-        # Корень репозитория (monorepo). По умолчанию — на уровень выше orchestrator/.
+        # Корень репозитория (monorepo). По умолчанию — на уровень выше dashboard/.
         self.base_dir = Path(base_dir) if base_dir else Path(__file__).resolve().parent.parent
 
         # Чтение ключей API из окружения Arena AI.

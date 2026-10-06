@@ -28,7 +28,7 @@ core.py — ядро Оркестратора.
 
 Context-Driven часть не изменилась: Оркестратор принимает произвольные
 текстовые команды (через handle_chat_message), с помощью "ИИ-мозга"
-(orchestrator.brain) понимает намерение пользователя и материализует его
+(brain.py) понимает намерение пользователя и материализует его
 в реальной файловой структуре monorepo (projects/, global_knowledge/,
 tasks.json, логи и т.д.).
 
@@ -47,8 +47,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-from .config import Config
-from .brain import Brain
+from config import Config
+from brain import Brain
 
 
 _TRANSLIT_MAP = {
@@ -896,7 +896,7 @@ class Orchestrator:
 
         lines.append("## 5. Инструкция по развёртыванию в новом окружении")
         lines.append(
-            "Разверните чистое ядро (`orchestrator/`, `dashboard/`, `run_orchestrator.py`) "
+            "Разверните чистое ядро (`dashboard/`, `run_orchestrator.py`) "
             "рядом с тем же единственным ИИ-исполнителем, затем последовательно отправьте "
             "в чат следующие команды, чтобы воссоздать те же проектные профили:"
         )

@@ -77,3 +77,29 @@
 {"timestamp": "2026-10-01T23:47:53", "level": "INFO", "action": "chat_in", "message": "Получена команда в чате: \"Покажи статус системы\""}
 {"timestamp": "2026-10-01T23:47:53", "level": "INFO", "action": "chat_out", "message": "Ответ ассистента: \"📊 Текущее состояние системы:\n- Исполнитель: один (я), проекты ниже — это контекст, а не отдельные боты.\n- Проектов: 1\n- Инструкций всего: 4\n- Задач: 19 (todo: 19, в процессе: 0, готово: 0)\n- Записей в\""}
 {"timestamp": "2026-10-01T23:47:56", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-01T23:47:57", "level": "INFO", "action": "auto_push", "message": "Авто-push выполнен (финальная синхронизация логов после проверки)."}
+{"timestamp": "2026-10-06T14:04:37", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:38:54", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:38:54", "level": "INFO", "action": "chat_in", "message": "Получена команда в чате: \"Добавь BIKAI инструкцию Брендбук и маркетинговые материалы: логотип, фирменный стиль и визуалы для каналов BIKAI\""}
+{"timestamp": "2026-10-06T14:38:54", "level": "INFO", "action": "add_instruction", "message": "В проект 'bikai' добавлена инструкция: «Брендбук и маркетинговые материалы: логотип, фирменный стиль и визуалы для каналов BIKAI».", "project": "bikai"}
+{"timestamp": "2026-10-06T14:38:54", "level": "INFO", "action": "chat_out", "message": "Ответ ассистента: \"🛠 В проект **bikai** добавлена инструкция: «Брендбук и маркетинговые материалы: логотип, фирменный стиль и визуалы для каналов BIKAI»\nФайл: `projects/bikai/INSTRUCTIONS.md` — я буду сверяться с ним, к\""}
+{"timestamp": "2026-10-06T14:39:12", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:40:57", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:40:58", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:40:59", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:40:59", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:41:00", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:41:00", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:41:01", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:41:02", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:41:10", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:41:16", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:49:38", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T14:53:56", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T15:37:56", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T15:37:56", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T15:37:57", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T15:37:59", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T15:37:59", "level": "INFO", "action": "chat_in", "message": "Получена команда в чате: \"Статус системы\""}
+{"timestamp": "2026-10-06T15:37:59", "level": "INFO", "action": "chat_out", "message": "Ответ ассистента: \"📊 Текущее состояние системы:\n- Исполнитель: один (я), проекты ниже — это контекст, а не отдельные боты.\n- Проектов: 1\n- Инструкций всего: 5\n- Задач: 19 (todo: 19, в процессе: 0, готово: 0)\n- Записей в\""}
+{"timestamp": "2026-10-06T15:38:11", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}

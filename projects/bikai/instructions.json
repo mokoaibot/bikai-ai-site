@@ -2,21 +2,54 @@
   {
     "name": "Парсинг каталога производителя",
     "description": "Снять структуру и карточки с uvtech-cc.com и bikai.jp: 14 приборов + расходники.",
-    "created_at": "2026-10-01T21:31:58"
+    "created_at": "2026-10-01T21:31:58",
+    "status": "done",
+    "files": [
+      "bikai_catalog/scripts/build_data.py",
+      "bikai_catalog/scripts/download_images.py",
+      "bikai_catalog/scripts/convert_images_to_webp.py",
+      "bikai_catalog/scripts/qa_check_links.py",
+      "bikai_catalog/data/products.json",
+      "bikai_catalog/SCRAPING_AND_QA_CHECKLIST.md"
+    ]
   },
   {
     "name": "Перевод технической документации",
     "description": "Перевод руководств/паспортов через станок с выдачей DOCX/PDF/HTML.",
-    "created_at": "2026-10-01T21:31:58"
+    "created_at": "2026-10-01T21:31:58",
+    "status": "in_progress",
+    "files": [
+      "bikai_catalog/scripts/translate_catalog.py",
+      "bikai_catalog/scripts/ru_glossary.py"
+    ]
   },
   {
     "name": "SEO и GEO оптимизация",
     "description": "Семантическое ядро, микроразметка Schema.org, оптимизация под ИИ-выдачу.",
-    "created_at": "2026-10-01T21:31:58"
+    "created_at": "2026-10-01T21:31:58",
+    "status": "not_started",
+    "files": []
   },
   {
     "name": "Вёрстка карточек товара",
     "description": "Единый шаблон карточки: характеристики, фото, PDF, привязка к РУ.",
-    "created_at": "2026-10-01T21:31:58"
+    "created_at": "2026-10-01T21:31:58",
+    "status": "in_progress",
+    "files": [
+      "bikai_catalog/scripts/build_db.py",
+      "bikai_catalog/scripts/build_site.py",
+      "bikai_catalog/data/bikai_catalog.db",
+      "bikai_catalog/site",
+      "bikai_catalog/README.md"
+    ]
+  },
+  {
+    "name": "Брендбук и маркетинговые материалы",
+    "description": "Логотип, фирменный стиль и визуалы для каналов BIKAI (сейчас: логотип для Telegram-канала).",
+    "created_at": "2026-10-06T14:38:54",
+    "status": "in_progress",
+    "files": [
+      "bikai_catalog/bikai_telegram_logo.png"
+    ]
   }
 ]

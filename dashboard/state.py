@@ -1,22 +1,13 @@
 """
-state.py — доступ дашборда к ядру Оркестратора. Дашборд ничего не создаёт
-напрямую: он лишь читает system_state.json (через run_audit) и вызывает
-Orchestrator.handle_chat_message() для чата — единственного канала
-управления системой.
+state.py — доступ дашборда к ядру Оркестратора: кэширует Orchestrator,
+обновляет state через run_audit().
 """
 
 from __future__ import annotations
 
-import sys
-from pathlib import Path
-
 import streamlit as st
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-if str(BASE_DIR) not in sys.path:
-    sys.path.insert(0, str(BASE_DIR))
-
-from orchestrator.core import Orchestrator  # noqa: E402
+from core import Orchestrator
 
 
 @st.cache_resource(show_spinner=False)
