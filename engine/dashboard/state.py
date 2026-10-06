@@ -12,8 +12,8 @@ from core import Orchestrator
 
 @st.cache_resource(show_spinner=False)
 def get_orchestrator() -> Orchestrator:
-    # base_dir=None -> Config сам вычислит корень репозитория
-    # (на уровень выше dashboard/, где лежит этот файл).
+    # base_dir=None -> Config сам найдёт корень репозитория (ищет вверх
+    # ближайшую папку с .git), независимо от вложенности dashboard/.
     return Orchestrator(base_dir=None)
 
 
