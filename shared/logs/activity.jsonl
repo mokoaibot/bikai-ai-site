@@ -110,3 +110,5 @@
 {"timestamp": "2026-10-06T21:42:33", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
 {"timestamp": "2026-10-06T21:42:50", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
 {"timestamp": "2026-10-06T21:42:55", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T21:48:53", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-06T21:49:05", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}

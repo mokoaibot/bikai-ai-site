@@ -97,9 +97,9 @@ CURATED_DESC = {
 
 # Как вызывается файл — то, что нельзя вытащить из докстринга.
 INVOCATION = {
-    "engine/run_orchestrator.py": "`python3 engine/run_orchestrator.py chat \"текст\"` — так я веду направления/задачи/инструкции/знания.",
+    "engine/cli.py": "`python3 engine/cli.py chat \"текст\"` — так я веду направления/задачи/инструкции/знания.",
     "engine/sync_git.py": "Руками (`python3 engine/sync_git.py push|pull|status`) и автоматически из core.py при auto_push().",
-    "engine/dashboard/core.py": "Импортируется run_orchestrator.py и dashboard/state.py как класс Orchestrator.",
+    "engine/dashboard/core.py": "Импортируется cli.py и dashboard/state.py как класс Orchestrator.",
     "engine/dashboard/brain.py": "Импортируется core.py — разбирает текст в intent (LLM или ключевые слова).",
     "engine/dashboard/config.py": "Импортируется core.py и brain.py — ключи API и пути репозитория.",
     "engine/dashboard/app.py": "`streamlit run engine/dashboard/app.py --server.port 8501 --server.address 0.0.0.0`.",
