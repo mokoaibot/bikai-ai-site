@@ -96,14 +96,22 @@ class Orchestrator:
         self.log_file = self.config.orchestrator_log_file
         self.state_file = self.config.system_state_file
 
-        self.tasks_file = self.base_dir / "tasks.json"
+        self.tasks_file = self.base_dir / "engine" / "state" / "tasks.json"
         self.chat_history_file = self.global_logs_dir / "chat_history.json"
         self.activity_file = self.global_logs_dir / "activity.jsonl"
         self.global_knowledge_manifest = self.global_knowledge_dir / "entries.json"
-        self.export_dir = self.base_dir / "exports"
-        self.settings_file = self.base_dir / "orchestrator_settings.json"
+        self.export_dir = self.base_dir / "shared" / "exports"
+        self.settings_file = self.base_dir / "engine" / "state" / "orchestrator_settings.json"
 
-        for d in (self.projects_dir, self.global_knowledge_dir, self.global_logs_dir, self.export_dir):
+        for d in (
+            self.projects_dir,
+            self.global_knowledge_dir,
+            self.global_logs_dir,
+            self.export_dir,
+            self.tasks_file.parent,
+            self.settings_file.parent,
+            self.state_file.parent,
+        ):
             d.mkdir(parents=True, exist_ok=True)
         (self.export_dir / "history").mkdir(parents=True, exist_ok=True)
 
@@ -178,11 +186,11 @@ class Orchestrator:
     # ------------------------------------------------------------------ #
 
     def _load_sync_git_module(self):
-        """Динамически импортирует sync_git.py из корня monorepo (не пакет, а скрипт)."""
+        """Динамически импортирует engine/sync_git.py (не пакет, а скрипт)."""
         module_name = "sync_git"
         if module_name in sys.modules:
             return sys.modules[module_name]
-        spec = importlib.util.spec_from_file_location(module_name, self.base_dir / "sync_git.py")
+        spec = importlib.util.spec_from_file_location(module_name, self.base_dir / "engine" / "sync_git.py")
         module = importlib.util.module_from_spec(spec)
         sys.modules[module_name] = module
         spec.loader.exec_module(module)

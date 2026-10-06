@@ -13,101 +13,119 @@ import ast
 import html
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+def _find_repo_root(start: Path) -> Path:
+    current = start if start.is_dir() else start.parent
+    for _ in range(8):
+        if (current / ".git").exists():
+            return current
+        if current.parent == current:
+            break
+        current = current.parent
+    return start.resolve().parent.parent.parent
+
+
+BASE_DIR = _find_repo_root(Path(__file__).resolve())
 
 # Папки, которые не показываем вообще (служебные/системные, не часть
 # архитектуры, которую имеет смысл объяснять пользователю).
 EXCLUDE_DIRS = {
     ".git", "__pycache__", ".mypy_cache", ".pytest_cache", ".ruff_cache",
-    ".venv", ".cache", ".streamlit", "node_modules", "Unselected files",
+    ".venv", ".cache", ".streamlit", "node_modules",
 }
 
 # Папки, у которых МНОГО однотипных сгенерированных/бинарных файлов —
 # разворачивать их по одному файлу бессмысленно, показываем одной строкой.
 COLLAPSE_DIRS = {
-    "bikai_catalog/images": "Фото товаров (WEBP/PNG) — наполняет download_images.py.",
-    "bikai_catalog/site": "Собранный сайт каталога (EN + site/ru/) — генерирует build_site.py.",
-    "exports/history": "Архив прежних META_PROMPT.md, по файлу на экспорт.",
-    "local_dropzone/ТЗ": "Файлы, загруженные вручную (бриф по договору) — не код.",
-    "image-search": "Кэш картинок из поиска изображений — рабочие файлы.",
+    "directions/bikai/catalog/images": "Фото товаров (WEBP/PNG) — наполняет download_images.py.",
+    "directions/bikai/catalog/site": "Собранный сайт каталога (EN + site/ru/) — генерирует build_site.py.",
+    "directions/bikai/raw_inputs": "Файлы от клиента (бриф/договор) — не код.",
+    "shared/exports/history": "Архив прежних META_PROMPT.md, по файлу на экспорт.",
 }
 
 # Описания папок, которые не самоочевидны из содержимого (нет README).
 DIR_DESCRIPTIONS = {
-    "": "Корень monorepo — один репозиторий на Оркестратор и все проекты.",
-    "dashboard": "Ядро (core/brain/config.py) + Streamlit-интерфейс поверх него в одной папке.",
-    "projects": "Контекстные профили направлений работы (роль/инструкции/знания/задачи), не боты.",
-    "bikai_catalog": "Проект BIKAI-каталога: скрипты сборки, данные, фото, готовый сайт.",
-    "bikai_catalog/scripts": "Ручной пайплайн пересборки каталога — 8 скриптов, запускаются по очереди.",
-    "bikai_catalog/data": "Исходные данные каталога: JSON-источник и собранная из него SQLite-база.",
-    "global_knowledge": "Знания уровня всей системы, не привязаны к проекту.",
-    "global_logs": "Общесистемные логи: история чата и лента событий.",
-    "exports": "Снимки архитектуры системы одним Markdown-файлом — для переноса.",
-    "playbooks": "Общие методички по типам задач.",
-    "local_dropzone": "«Приёмная» для файлов, загружаемых вручную.",
+    "": "Корень monorepo. Начни с README.md — там главная инструкция и ссылки на остальное.",
+    "directions": "По одной папке на каждое направление/клиента (сейчас: bikai).",
+    "directions/bikai": "Всё по BIKAI: инструкции, знания, логи, сырые файлы клиента, сам сайт-каталог.",
+    "directions/bikai/catalog": "Сайт-каталог BIKAI: скрипты сборки, данные, фото, готовый сайт.",
+    "directions/bikai/catalog/scripts": "Ручной пайплайн пересборки каталога — 8 скриптов, запускаются по очереди.",
+    "directions/bikai/catalog/data": "Исходные данные каталога: JSON-источник и собранная из него SQLite-база.",
+    "directions/bikai/knowledge": "Опыт именно по BIKAI (approved/avoid), отдельно от общего.",
+    "directions/bikai/logs": "Лог действий именно по BIKAI.",
+    "directions/bikai/raw_inputs": "Файлы, которые прислал клиент по BIKAI (ТЗ, договор и т.п.).",
+    "shared": "Общее для всех направлений: знания, логи, методички, экспорт — не привязано к одному клиенту.",
+    "shared/knowledge": "Знания уровня всей системы, не привязаны к направлению.",
+    "shared/logs": "Общесистемные логи: история чата и лента событий по всем направлениям.",
+    "shared/exports": "Снимки архитектуры системы одним Markdown-файлом — для переноса в другую сессию.",
+    "shared/playbooks": "Общие методички по типам задач, переиспользуются между направлениями.",
+    "engine": "Техника: движок (бывший «оркестратор») + Streamlit-дашборд + файлы состояния. Сюда можно не заглядывать.",
+    "engine/dashboard": "Код движка (core/brain/config.py) + Streamlit-интерфейс поверх него.",
+    "engine/state": "Файлы состояния движка: system_state.json, tasks.json, orchestrator_settings.json.",
+    "local_dropzone": "«Приёмная» для файлов, загружаемых вручную — я разбираю их по папкам directions/*/raw_inputs.",
 }
 
 # Руками собранные описания для файлов без докстринга/заголовка
 # (JSON/БД/логи/конфиги).
 CURATED_DESC = {
-    "system_state.json": "Снимок состояния системы (run_audit()): проекты, задачи, знания, логи, настройки.",
-    "tasks.json": "Единый список задач по всем проектам.",
-    "orchestrator_settings.json": "Настройки: autonomy_level (самостоятельность) и auto_push (авто-пуш в GitHub).",
+    "README.md": "Главная инструкция: что это за репозиторий и куда идти дальше.",
+    "engine/state/system_state.json": "Снимок состояния системы (run_audit()): направления, задачи, знания, логи, настройки.",
+    "engine/state/tasks.json": "Единый список задач по всем направлениям.",
+    "engine/state/orchestrator_settings.json": "Настройки: autonomy_level (самостоятельность) и auto_push (авто-пуш в GitHub).",
     "requirements.txt": "Зависимости дашборда (streamlit, requests). Не сохраняются между запусками песочницы.",
     ".env": "Реальные секреты (токены/ключи). Не коммитится, не показывается.",
     ".env.example": "Шаблон .env — какие переменные нужно заполнить.",
     ".gitignore": "Что Git должен игнорировать (прежде всего .env).",
-    "projects/bikai/metadata.json": "Паспорт проекта BIKAI: роль, задача, дата создания.",
-    "projects/bikai/instructions.json": "Инструкции BIKAI структурированно — то же, что в INSTRUCTIONS.md.",
-    "projects/bikai/INSTRUCTIONS.md": "Инструкции BIKAI текстом — перечитываю перед работой по проекту.",
-    "projects/bikai/knowledge/entries.json": "Локальные записи опыта BIKAI: approved/avoid.",
-    "projects/bikai/knowledge/notes.md": "Те же локальные знания BIKAI читаемыми заметками.",
-    "projects/bikai/logs/bikai.log": "Лог действий по проекту BIKAI.",
-    "global_knowledge/approved_patterns.md": "Глобальные паттерны, которые сработали.",
-    "global_knowledge/avoid_mistakes.md": "Глобальные ошибки, которые нельзя повторять.",
-    "global_knowledge/entries.json": "Те же глобальные знания структурированно.",
-    "global_logs/orchestrator.log": "Построчный лог всех действий системы.",
-    "global_logs/activity.jsonl": "Та же история, но в JSON — источник вкладок «Логи»/«Обзор».",
-    "global_logs/chat_history.json": "История сообщений чата с Оркестратором.",
-    "bikai_catalog/data/products.json": "Данные каталога — товар на словарь (55 шт.). Источник правды.",
-    "bikai_catalog/data/bikai_catalog.db": "SQLite-база из products.json (двуязычная), читает build_site.py.",
-    "exports/META_PROMPT.md": "Последний снимок архитектуры — из вкладки «Экспорт».",
-    "bikai_catalog/bikai_telegram_logo.png": "Логотип BIKAI для Telegram-канала (без текста).",
-    "bikai_catalog/README.md": "README каталога: структура, порядок пересборки, покрытие.",
-    "projects/bikai/prompts.json": "Журнал реальных промтов для генераций (картинки/тексты) по проекту.",
+    "directions/bikai/metadata.json": "Паспорт направления BIKAI: роль, задача, дата создания.",
+    "directions/bikai/instructions.json": "Инструкции BIKAI структурированно — то же, что в INSTRUCTIONS.md.",
+    "directions/bikai/INSTRUCTIONS.md": "Инструкции BIKAI текстом — перечитываю перед работой по направлению.",
+    "directions/bikai/knowledge/entries.json": "Локальные записи опыта BIKAI: approved/avoid.",
+    "directions/bikai/knowledge/notes.md": "Те же локальные знания BIKAI читаемыми заметками.",
+    "directions/bikai/logs/bikai.log": "Лог действий по направлению BIKAI.",
+    "shared/knowledge/approved_patterns.md": "Глобальные паттерны, которые сработали.",
+    "shared/knowledge/avoid_mistakes.md": "Глобальные ошибки, которые нельзя повторять.",
+    "shared/knowledge/entries.json": "Те же глобальные знания структурированно.",
+    "shared/logs/orchestrator.log": "Построчный лог всех действий системы.",
+    "shared/logs/activity.jsonl": "Та же история, но в JSON — источник вкладок «Логи»/«Обзор».",
+    "shared/logs/chat_history.json": "История сообщений чата с движком.",
+    "directions/bikai/catalog/data/products.json": "Данные каталога — товар на словарь (55 шт.). Источник правды.",
+    "directions/bikai/catalog/data/bikai_catalog.db": "SQLite-база из products.json (двуязычная), читает build_site.py.",
+    "shared/exports/META_PROMPT.md": "Последний снимок архитектуры — из вкладки «Экспорт».",
+    "directions/bikai/catalog/bikai_telegram_logo.png": "Логотип BIKAI для Telegram-канала (без текста).",
+    "directions/bikai/catalog/README.md": "README каталога: структура, порядок пересборки, покрытие.",
+    "directions/bikai/prompts.json": "Журнал реальных промтов для генераций (картинки/тексты) по направлению.",
 }
 
 # Как вызывается файл — то, что нельзя вытащить из докстринга.
 INVOCATION = {
-    "run_orchestrator.py": "`python3 run_orchestrator.py chat \"текст\"` — так я веду проекты/задачи/инструкции/знания.",
-    "sync_git.py": "Руками (`python3 sync_git.py push|pull|status`) и автоматически из core.py при auto_push().",
-    "dashboard/core.py": "Импортируется run_orchestrator.py и dashboard/state.py как класс Orchestrator.",
-    "dashboard/brain.py": "Импортируется core.py — разбирает текст в intent (LLM или ключевые слова).",
-    "dashboard/config.py": "Импортируется core.py и brain.py — ключи API и пути репозитория.",
-    "dashboard/app.py": "`streamlit run dashboard/app.py --server.port 8501 --server.address 0.0.0.0`.",
-    "dashboard/state.py": "Импортируется app.py — кэширует Orchestrator на процесс дашборда.",
-    "dashboard/theme.py": "Импортируется один раз в app.py (inject_css()) — только CSS.",
-    "dashboard/components.py": "Импортируется каждым view_*.py — общие визуальные блоки.",
-    "dashboard/filemap.py": "Импортируется view_map.py — сканирует файлы для этой вкладки.",
-    "bikai_catalog/scripts/build_data.py": "Шаг 1: `python3 scripts/build_data.py` → products.json.",
-    "bikai_catalog/scripts/translate_catalog.py": "Шаг 2: `python3 scripts/translate_catalog.py` → ru-блок в products.json.",
-    "bikai_catalog/scripts/ru_glossary.py": "Не запускается отдельно — импортируется translate_catalog.py.",
-    "bikai_catalog/scripts/download_images.py": "Шаг 3: `python3 scripts/download_images.py` → фото в images/.",
-    "bikai_catalog/scripts/convert_images_to_webp.py": "Шаг 4: `python3 scripts/convert_images_to_webp.py` → PNG→WEBP.",
-    "bikai_catalog/scripts/build_db.py": "Шаг 5: `python3 scripts/build_db.py` → bikai_catalog.db.",
-    "bikai_catalog/scripts/build_site.py": "Шаг 6: `python3 scripts/build_site.py` → site/ (EN+RU).",
-    "bikai_catalog/scripts/qa_check_links.py": "Шаг 7, QA: `python3 scripts/qa_check_links.py` (нужен локальный сервер).",
+    "engine/run_orchestrator.py": "`python3 engine/run_orchestrator.py chat \"текст\"` — так я веду направления/задачи/инструкции/знания.",
+    "engine/sync_git.py": "Руками (`python3 engine/sync_git.py push|pull|status`) и автоматически из core.py при auto_push().",
+    "engine/dashboard/core.py": "Импортируется run_orchestrator.py и dashboard/state.py как класс Orchestrator.",
+    "engine/dashboard/brain.py": "Импортируется core.py — разбирает текст в intent (LLM или ключевые слова).",
+    "engine/dashboard/config.py": "Импортируется core.py и brain.py — ключи API и пути репозитория.",
+    "engine/dashboard/app.py": "`streamlit run engine/dashboard/app.py --server.port 8501 --server.address 0.0.0.0`.",
+    "engine/dashboard/state.py": "Импортируется app.py — кэширует Orchestrator на процесс дашборда.",
+    "engine/dashboard/theme.py": "Импортируется один раз в app.py (inject_css()) — только CSS.",
+    "engine/dashboard/components.py": "Импортируется каждым view_*.py — общие визуальные блоки.",
+    "engine/dashboard/filemap.py": "Импортируется view_map.py — сканирует файлы для этой вкладки.",
+    "directions/bikai/catalog/scripts/build_data.py": "Шаг 1: `python3 scripts/build_data.py` → products.json.",
+    "directions/bikai/catalog/scripts/translate_catalog.py": "Шаг 2: `python3 scripts/translate_catalog.py` → ru-блок в products.json.",
+    "directions/bikai/catalog/scripts/ru_glossary.py": "Не запускается отдельно — импортируется translate_catalog.py.",
+    "directions/bikai/catalog/scripts/download_images.py": "Шаг 3: `python3 scripts/download_images.py` → фото в images/.",
+    "directions/bikai/catalog/scripts/convert_images_to_webp.py": "Шаг 4: `python3 scripts/convert_images_to_webp.py` → PNG→WEBP.",
+    "directions/bikai/catalog/scripts/build_db.py": "Шаг 5: `python3 scripts/build_db.py` → bikai_catalog.db.",
+    "directions/bikai/catalog/scripts/build_site.py": "Шаг 6: `python3 scripts/build_site.py` → site/ (EN+RU).",
+    "directions/bikai/catalog/scripts/qa_check_links.py": "Шаг 7, QA: `python3 scripts/qa_check_links.py` (нужен локальный сервер).",
 }
 
 VIEW_PAGE_LABEL = {
-    "dashboard/view_map.py": "Карта системы",
-    "dashboard/view_overview.py": "Обзор",
-    "dashboard/view_projects.py": "Проекты",
-    "dashboard/view_tasks.py": "Задачи",
-    "dashboard/view_instructions.py": "Инструкции",
-    "dashboard/view_knowledge.py": "База знаний",
-    "dashboard/view_activity.py": "Логи",
-    "dashboard/view_export.py": "Экспорт",
+    "engine/dashboard/view_map.py": "Карта системы",
+    "engine/dashboard/view_overview.py": "Обзор",
+    "engine/dashboard/view_projects.py": "Проекты",
+    "engine/dashboard/view_tasks.py": "Задачи",
+    "engine/dashboard/view_instructions.py": "Инструкции",
+    "engine/dashboard/view_knowledge.py": "База знаний",
+    "engine/dashboard/view_activity.py": "Логи",
+    "engine/dashboard/view_export.py": "Экспорт",
 }
 
 TYPE_LABEL = {

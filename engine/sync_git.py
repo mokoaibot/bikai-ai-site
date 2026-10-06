@@ -27,7 +27,20 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent
+def _find_repo_root(start: Path) -> Path:
+    """Ищет вверх от `start` ближайшую папку с `.git` (корень репозитория),
+    чтобы sync_git.py работал одинаково из корня и из engine/."""
+    current = start if start.is_dir() else start.parent
+    for _ in range(8):
+        if (current / ".git").exists():
+            return current
+        if current.parent == current:
+            break
+        current = current.parent
+    return start.resolve().parent.parent
+
+
+BASE_DIR = _find_repo_root(Path(__file__).resolve())
 ENV_FILE = BASE_DIR / ".env"
 
 

@@ -30,7 +30,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "dashboard"))
 
-from core import Orchestrator
+from core import Orchestrator  # base_dir=None -> ядро само найдёт корень репозитория (.git)
 
 
 def main() -> None:
