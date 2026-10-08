@@ -43,3 +43,6 @@ Thumbs.db
 # local_dropzone/ (например, большие изображения) попадало в Git:
 # local_dropzone/*
 # !local_dropzone/.gitkeep
+
+# --- Бандлы/архивы для переноса репозитория — не коммитить ---
+*.bundle
