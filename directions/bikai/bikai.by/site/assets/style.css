@@ -1,0 +1,215 @@
+/* BIKAI.by — дилерский сайт, 2026. Светлая, чистая, "техно" тема:
+   осознанно уходим от тёмно-синего корпоративного градиента и мелкого
+   шрифта bikaicorp.com в сторону крупной типографики, воздуха и
+   карточного UI. */
+
+:root {
+  --bg: #f6f7f9;
+  --bg-card: #ffffff;
+  --ink: #0b1220;
+  --ink-soft: #4b5567;
+  --ink-mute: #8893a3;
+  --line: #e4e8ef;
+  --accent: #0ea5a4;
+  --accent-dark: #0b7f7e;
+  --accent-ink: #042f2e;
+  --accent-soft: rgba(14, 165, 164, 0.10);
+  --navy: #0b1220;
+  --radius: 18px;
+  --shadow: 0 10px 30px -14px rgba(11, 18, 32, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 12px; }
+p { margin: 0 0 14px; color: var(--ink-soft); }
+img { max-width: 100%; display: block; }
+
+/* ---------- header ---------- */
+
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(246, 247, 249, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  max-width: 1180px; margin: 0 auto;
+  display: flex; align-items: center; gap: 20px;
+  padding: 16px 24px;
+}
+
+.brand { font-size: 1.25rem; font-weight: 800; display: flex; align-items: baseline; gap: 2px; }
+.brand-mark { color: var(--ink); }
+.brand-sub { color: var(--accent-dark); }
+
+.main-nav { display: flex; gap: 22px; margin-left: 12px; flex: 1; }
+.main-nav a { font-weight: 600; font-size: 0.95rem; color: var(--ink-soft); padding: 6px 0; border-bottom: 2px solid transparent; }
+.main-nav a:hover, .main-nav a.active { color: var(--ink); border-bottom-color: var(--accent); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 10px 18px; border-radius: 999px; font-weight: 650; font-size: 0.92rem;
+  white-space: nowrap; border: 1px solid transparent; transition: transform .12s ease, opacity .12s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-accent { background: var(--accent); color: #fff; }
+.btn-accent:hover { background: var(--accent-dark); }
+.btn-outline { border-color: var(--ink); color: var(--ink); }
+.btn-ghost { border-color: var(--line); color: var(--ink-soft); }
+.btn-lg { padding: 14px 26px; font-size: 1rem; }
+.nav-cta { display: none; }
+@media (min-width: 900px) { .nav-cta { display: inline-flex; } }
+
+/* ---------- hero ---------- */
+
+.hero { padding: 64px 24px 56px; background: var(--navy); color: #fff; }
+.hero-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+.eyebrow { color: var(--accent); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(2rem, 4vw, 2.9rem); color: #fff; margin-bottom: 18px; }
+.hero-desc { color: #c7cedb; font-size: 1.05rem; max-width: 640px; margin: 0 auto 28px; }
+.hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.hero .btn-outline { border-color: rgba(255,255,255,0.4); color: #fff; }
+
+/* ---------- value props ---------- */
+
+.value-props {
+  max-width: 1180px; margin: -34px auto 0; padding: 0 24px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+.vp {
+  background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 22px 18px; text-align: center;
+}
+.vp-num { display: block; font-size: 1.8rem; font-weight: 800; color: var(--accent-dark); }
+.vp-label { display: block; font-size: 0.85rem; color: var(--ink-mute); margin-top: 4px; }
+
+/* ---------- generic section ---------- */
+
+.section { max-width: 1180px; margin: 0 auto; padding: 56px 24px; }
+.section-title { font-size: 1.6rem; margin-bottom: 24px; }
+
+/* ---------- category grid (home) ---------- */
+
+.cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.cat-card {
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px; display: flex; flex-direction: column; gap: 6px; transition: box-shadow .15s, transform .15s;
+}
+.cat-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.cat-icon { font-size: 1.4rem; color: var(--accent); }
+.cat-name { font-weight: 700; }
+.cat-count { font-size: 0.85rem; color: var(--ink-mute); }
+
+/* ---------- split (instruments/consumables) ---------- */
+
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.split-col { background: var(--bg-card); border-radius: var(--radius); padding: 28px; border: 1px solid var(--line); }
+.link-arrow { color: var(--accent-dark); font-weight: 700; }
+
+/* ---------- cta banner ---------- */
+
+.cta-banner {
+  max-width: 1180px; margin: 0 auto 64px; padding: 44px 32px; text-align: center;
+  background: var(--accent-soft); border-radius: var(--radius);
+}
+.cta-banner h2 { margin-bottom: 8px; }
+
+/* ---------- footer ---------- */
+
+.site-footer { background: var(--navy); color: #c7cedb; margin-top: 40px; }
+.footer-inner {
+  max-width: 1180px; margin: 0 auto; padding: 48px 24px 24px;
+  display: grid; grid-template-columns: 2fr 1fr 1.3fr 1fr; gap: 28px;
+}
+.footer-col h4 { color: #fff; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+.footer-col a { display: block; margin-bottom: 8px; color: #c7cedb; }
+.footer-col a:hover { color: #fff; }
+.footer-col p { color: #9aa5b8; font-size: 0.88rem; }
+.footer-brand { margin-bottom: 12px; }
+.footer-lead { color: #9aa5b8; font-size: 0.92rem; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); text-align: center; padding: 16px; font-size: 0.8rem; color: #7e8aa0; }
+
+/* ---------- catalog page ---------- */
+
+.catalog-head { max-width: 1180px; margin: 0 auto; padding: 48px 24px 0; }
+.catalog-head h1 { font-size: 2rem; }
+.search-box {
+  width: 100%; max-width: 420px; padding: 12px 18px; border-radius: 999px;
+  border: 1px solid var(--line); font-size: 0.95rem; margin-top: 8px; background: var(--bg-card);
+}
+.cat-section { margin-bottom: 36px; }
+.cat-section-title { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; margin-bottom: 16px; }
+.cat-section-count { background: var(--accent-soft); color: var(--accent-dark); border-radius: 999px; padding: 2px 10px; font-size: 0.8rem; font-weight: 700; }
+
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.product-card {
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .15s, transform .15s;
+}
+.product-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.product-card-img { aspect-ratio: 4/3; background: #eef1f5; display: flex; align-items: center; justify-content: center; }
+.product-card-img img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
+.product-card-body { padding: 14px 16px 18px; }
+.product-card-name { font-weight: 700; font-size: 0.98rem; margin-bottom: 4px; }
+.product-card-tagline { font-size: 0.85rem; color: var(--ink-mute); }
+.card-partno { display: inline-block; margin-top: 8px; font-size: 0.78rem; background: var(--accent-soft); color: var(--accent-dark); padding: 2px 8px; border-radius: 999px; }
+
+/* ---------- product page ---------- */
+
+.breadcrumbs { max-width: 1180px; margin: 24px auto 0; padding: 0 24px; font-size: 0.85rem; color: var(--ink-mute); }
+.breadcrumbs a { color: var(--accent-dark); }
+
+.product-hero {
+  max-width: 1180px; margin: 0 auto; padding: 24px 24px 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;
+}
+.product-gallery { background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.product-gallery img { max-height: 340px; object-fit: contain; }
+.no-image { color: var(--ink-mute); padding: 60px 0; }
+
+.product-tagline { font-size: 1.1rem; color: var(--ink-soft); }
+.feature-list { list-style: none; padding: 0; margin: 18px 0; display: flex; flex-direction: column; gap: 8px; }
+.feature-list li { padding-left: 22px; position: relative; font-size: 0.95rem; }
+.feature-list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 800; }
+
+.product-cta { margin-top: 24px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.product-cta-note { font-size: 0.78rem; color: var(--ink-mute); }
+
+.product-body { max-width: 1180px; margin: 0 auto; padding: 40px 24px 64px; }
+.product-description { max-width: 760px; margin-bottom: 32px; }
+.spec-group { margin-bottom: 28px; }
+.spec-group h4 { font-size: 1.05rem; margin-bottom: 10px; }
+.spec-table { width: 100%; border-collapse: collapse; background: var(--bg-card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+.spec-table td { padding: 10px 16px; border-bottom: 1px solid var(--line); font-size: 0.92rem; }
+.spec-table tr:last-child td { border-bottom: none; }
+.spec-table tr:first-child { background: #f1f3f7; font-weight: 700; }
+
+/* ---------- contacts ---------- */
+
+.contacts-head { max-width: 1180px; margin: 0 auto; padding: 56px 24px 0; }
+.contacts-grid { max-width: 1180px; margin: 0 auto; padding: 32px 24px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.contacts-card { background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+.contacts-card a { color: var(--accent-dark); font-weight: 600; }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 860px) {
+  .value-props { grid-template-columns: repeat(2, 1fr); }
+  .split { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .product-hero { grid-template-columns: 1fr; }
+  .contacts-grid { grid-template-columns: 1fr; }
+  .main-nav { display: none; }
+}
