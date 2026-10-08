@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T21:49:05",
+  "generated_at": "2026-10-08T13:45:26",
   "executor": {
     "note": "Всю работу выполняет один ИИ-исполнитель. 'Проекты' ниже — это контейнеры контекста (роль/инструкции/знания/задачи), а не отдельные автономные боты."
   },
@@ -24,7 +24,7 @@
   },
   "orchestrator": {
     "log_file": "shared/logs/orchestrator.log",
-    "log_lines": 135
+    "log_lines": 136
   },
   "global_knowledge_files": [
     {
