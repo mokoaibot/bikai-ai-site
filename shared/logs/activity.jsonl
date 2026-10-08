@@ -112,3 +112,5 @@
 {"timestamp": "2026-10-06T21:42:55", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
 {"timestamp": "2026-10-06T21:48:53", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
 {"timestamp": "2026-10-06T21:49:05", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-08T13:45:26", "level": "INFO", "action": "system_init", "message": "Оркестратор инициализирован."}
+{"timestamp": "2026-10-08T13:45:26", "level": "INFO", "action": "export", "message": "Сформирован мета-промт экспорта системы: META_PROMPT.md"}
