@@ -48,7 +48,7 @@
   http://www.bikai.jp/wp-content/uploads/2024/06/logo2024.png
   и фавикон-эмблема: http://www.bikai.jp/wp-content/uploads/2024/06/logo-2.png
 - **uvtech-cc.com** — логотип скачать не дал (403 hotlink-защита CDN);
-  там anyway логотип UVTech, а не BIKAI.
+  там логотип UVTech, а не BIKAI.
 
 Цвета бренда: красный `#E73336`, чёрный `#000000`.
 
