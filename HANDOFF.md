@@ -61,9 +61,8 @@
   менять файлы в `.github/workflows/` этим токеном. Поэтому GitHub Pages
   для `bikai.by` развёрнут через прямой пуш ветки `gh-pages`
   (`engine/deploy_gh_pages.py`), а не через Actions.
-- **Миграция завершена**: репозиторий теперь публичный —
-  `github.com/mokoaibot/bikai-ai-site` (см. `MIGRATION.md`). `.env`
-  обновлён под новый репозиторий, GitHub Pages включён, сайт живой:
+- Репозиторий: публичный `github.com/mokoaibot/bikai-ai-site`, `.env`
+  настроен под него, GitHub Pages включён, сайт живой:
   `https://mokoaibot.github.io/bikai-ai-site/`.
 
 ## Текущее состояние по BIKAI (детали — в directions/bikai/)
