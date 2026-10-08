@@ -4,7 +4,7 @@
 BIKAI product catalog — source data builder.
 Produces catalog/data/products.json from manually transcribed scrape results
 (bikaicorp.com = primary source for instruments, uvtech-cc.com = source for
-Sample Treatment + all Consumables). See catalog/data/SOURCES.md for provenance.
+Sample Treatment + all Consumables). See directions/bikai/info/sources.md for provenance.
 
 Design goal: adding a new product later = append one dict to PRODUCTS below
 (or add a row directly to the DB / JSON) and re-run build_db.py + build_site.py.
