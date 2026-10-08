@@ -37,3 +37,28 @@
 - `bikai-logo-v4-lockup-wordmark-1280{,-white}.png` — знак + слово
 - `bikai-logo-v1-avatar-{512,1024}{,-white}.png` — квадратные аватары
   (знак по центру, поле 10%) — для Telegram и соцсетей
+
+### Официальный логотип (найден на сайтах завода 08.10.2026)
+
+Источники (оригиналы-растры лежат в `logo/sources/`):
+
+- **bikaicorp.com** — wordmark «BIKAI» (чёрный), в шапке сайта:
+  https://bikaicorp.com/uploads/images/20260610/20260610212423393254.png
+- **bikai.jp** — эмблема (красный круг с птицей) + lockup:
+  http://www.bikai.jp/wp-content/uploads/2024/06/logo2024.png
+  и фавикон-эмблема: http://www.bikai.jp/wp-content/uploads/2024/06/logo-2.png
+- **uvtech-cc.com** — логотип скачать не дал (403 hotlink-защита CDN);
+  там anyway логотип UVTech, а не BIKAI.
+
+Цвета бренда: красный `#E73336`, чёрный `#000000`.
+
+Векторы: `logo/svg/bikai-logo-official-{wordmark,emblem,lockup}.svg`,
+PNG — в `logo/png/` (префикс `bikai-logo-official-*`).
+
+Выводы:
+
+- Фиолетовая монограмма (v1–v4) — логотип Telegram-канала; на официальных
+  сайтах завода её нет. Считать неофициальной.
+- Эмблема восстановлена с фавикона 64px — контур слегка шершавый. Для
+  печати и крупных форматов запросить у завода векторный оригинал
+  (в комплекте с PDF-документацией, задача по договору).
