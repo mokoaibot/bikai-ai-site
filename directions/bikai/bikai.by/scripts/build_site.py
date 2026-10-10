@@ -228,20 +228,79 @@ for c in categories:
       <span class="cat-count">{count} {e(ru_plural(count, 'позиция', 'позиции', 'позиций'))}</span>
     </a>"""
 
-home_body = f"""
-<section class="hero">
-  <div class="hero-inner">
-    <p class="eyebrow">Официальный дилер BIKAI&nbsp;/&nbsp;UVTech в Беларуси</p>
-    <h1>Аналитическое оборудование BIKAI — поставка, подбор и расходные материалы в Беларуси</h1>
-    <p class="hero-desc">Хроматографы, масс-спектрометры, спектроскопия и функциональные модули —
-    {n_instruments} моделей приборов. Плюс {n_consumables} позиций расходных материалов и пробоподготовки
-    под 11 брендов оборудования.</p>
-    <div class="hero-actions">
-      <a href="catalog/index.html" class="btn btn-accent btn-lg">Смотреть каталог</a>
-      <a href="contacts.html" class="btn btn-outline btn-lg">Запросить консультацию</a>
+# --------------------------------------------------------------------- #
+# Home hero slider (design language: mindray.com / bikaicorp.com)
+# ---------------------------------------------------------------------
+
+def word_spans(text):
+    out = []
+    for i, w in enumerate(text.split()):
+        out.append(f'<span class="w" style="--d:{0.15 + i * 0.07:.2f}s"><span>{e(w)}</span></span>')
+    return " ".join(out)
+
+cat_count = {slug: sum(1 for p in products if p["category_slug"] == slug) for slug in
+             ("chromatography", "mass-spectrometry", "spectroscopy", "sample-treatment", "consumables")}
+
+SLIDES = [
+    ("chromatography", "Хроматография",
+     "HPLC и UHPLC-системы для вашей лаборатории",
+     f"{cat_count['chromatography']} систем: аналитические, препаративные и 2D — давление до 22 000 psi.",
+     "catalog/index.html#chromatography"),
+    ("mass-spectrometry", "Масс-спектрометрия",
+     "Тройные квадруполи для количественного анализа",
+     f"{cat_count['mass-spectrometry']} модели SQ/TQ-серий: безопасность пищевых продуктов, фармация, экологический мониторинг.",
+     "catalog/index.html#mass-spectrometry"),
+    ("spectroscopy", "Спектроскопия",
+     "UV-Vis спектроскопия для рутины и науки",
+     f"{cat_count['spectroscopy']} приборов: однолучевые и двухлучевые спектрофотометры для ежедневных измерений.",
+     "catalog/index.html#spectroscopy"),
+    ("consumables", "Расходные материалы",
+     "Лампы и расходники под 11 брендов оборудования",
+     f"{n_consumables} позиций: Waters, Agilent, Shimadzu, Hitachi и другие — подбор по парт-номеру.",
+     "catalog/index.html#consumables"),
+]
+
+hero_slider = '<section class="hero-slider">'
+for idx, (img, kicker, title, lead, href) in enumerate(SLIDES):
+    hero_slider += f"""
+  <div class="hs-slide{' is-active' if idx == 0 else ''}">
+    <div class="hs-img" style="background-image:url('assets/hero/{img}.jpg')"></div>
+    <div class="hs-overlay"></div>
+    <div class="hs-content">
+      <p class="hs-kicker">{e(kicker)}</p>
+      <h1 class="hs-title">{word_spans(title)}</h1>
+      <p class="hs-lead">{e(lead)}</p>
+      <div class="hs-actions">
+        <a href="{href}" class="btn btn-accent btn-lg">Смотреть категорию</a>
+        <a href="contacts.html" class="btn btn-light btn-lg">Консультация</a>
+      </div>
     </div>
-  </div>
-</section>
+  </div>"""
+hero_slider += '\n  <div class="hs-dots"><div class="hs-dots-in">'
+for idx, (img, kicker, *_r) in enumerate(SLIDES):
+    hero_slider += f'<button class="hs-dot{" is-active" if idx == 0 else ""}" aria-label="{e(kicker)}"></button>'
+hero_slider += "</div></div>\n</section>"
+
+SLIDER_JS = """
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.hs-slide'));
+  var dots=[].slice.call(document.querySelectorAll('.hs-dot'));
+  if(!slides.length) return;
+  var i=0;
+  function go(n){
+    slides[i].classList.remove('is-active'); dots[i].classList.remove('is-active');
+    i=(n+slides.length)%slides.length;
+    slides[i].classList.add('is-active'); dots[i].classList.add('is-active');
+  }
+  var t=setInterval(function(){go(i+1)},6000);
+  dots.forEach(function(d,k){ d.addEventListener('click',function(){ clearInterval(t); go(k); t=setInterval(function(){go(i+1)},6000); }); });
+})();
+</script>
+"""
+
+home_body = f"""
+{hero_slider}
 
 <section class="value-props">
   <div class="vp"><span class="vp-num">{n_products}</span><span class="vp-label">товаров в каталоге</span></div>
@@ -277,6 +336,8 @@ home_body = f"""
   <a href="contacts.html" class="btn btn-accent btn-lg">Связаться с нами</a>
 </section>
 """
+
+home_body += SLIDER_JS
 
 with open(os.path.join(SITE_DIR, "index.html"), "w", encoding="utf-8") as f:
     f.write(page_shell(
