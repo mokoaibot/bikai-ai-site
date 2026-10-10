@@ -112,8 +112,6 @@ main{min-height:60vh}
 .is-active .hs-img{transform:scale(1)}
 .hs-overlay{position:absolute;inset:0;
   background:
-    radial-gradient(circle 900px at -12% 118%, transparent 60%, rgba(52,108,188,.5) 61.5%, rgba(52,108,188,0) 65%),
-    radial-gradient(circle 1250px at -8% 132%, transparent 60.5%, rgba(255,255,255,.9) 61.5%, rgba(255,255,255,0) 63.5%),
     radial-gradient(420px 720px at 56% 42%, rgba(120,170,235,.16), rgba(120,170,235,0) 70%),
     radial-gradient(760px 540px at 10% -10%, rgba(255,255,255,.95), rgba(255,255,255,0) 72%),
     linear-gradient(90deg, rgba(228,239,251,.98) 0%, rgba(222,235,250,.94) 40%, rgba(222,235,250,.28) 62%, rgba(222,235,250,0) 80%)}
@@ -141,7 +139,6 @@ main{min-height:60vh}
   .hero-slider{height:72vh;min-height:480px}
   .hs-img{background-position:center}
   .hs-overlay{background:
-    radial-gradient(circle 900px at -12% 118%, transparent 60%, rgba(52,108,188,.5) 61.5%, rgba(52,108,188,0) 65%),
     linear-gradient(180deg, rgba(228,239,251,.97) 0%, rgba(222,235,250,.9) 52%, rgba(222,235,250,.45) 100%)}
 }
 @media(prefers-reduced-motion:reduce){
