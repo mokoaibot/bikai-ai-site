@@ -101,6 +101,9 @@ products = cur.execute("SELECT * FROM products ORDER BY id").fetchall()
 
 os.makedirs(os.path.join(SITE_DIR, "product"), exist_ok=True)
 os.makedirs(os.path.join(SITE_DIR, "catalog"), exist_ok=True)
+os.makedirs(os.path.join(SITE_DIR, "brandbook"), exist_ok=True)
+shutil.copy(os.path.join(HERE, "..", "..", "brandbook", "index.html"),
+            os.path.join(SITE_DIR, "brandbook", "index.html"))
 if os.path.isdir(IMAGES_DST):
     shutil.rmtree(IMAGES_DST)
 shutil.copytree(IMAGES_SRC, IMAGES_DST)
@@ -184,6 +187,7 @@ def page_shell(title, description, depth, body, active=""):
       <a href="{root}catalog/index.html">Каталог приборов</a>
       <a href="{root}catalog/index.html#consumables">Расходные материалы</a>
       <a href="{root}contacts.html">Контакты</a>
+      <a href="{root}brandbook/index.html">Брендбук · дизайн-система</a>
     </div>
     <div class="footer-col">
       <h4>Реквизиты</h4>
@@ -199,7 +203,8 @@ def page_shell(title, description, depth, body, active=""):
       <a href="mailto:{e(COMPANY['email'])}">{e(COMPANY['email'])}</a>
     </div>
   </div>
-  <div class="footer-bottom">© 2026 {e(COMPANY['name'])}. Сайт — рабочая версия, наполняется.</div>
+  <div class="footer-bottom">© 2026 {e(COMPANY['name'])}. Сайт — рабочая версия, наполняется.
+  &nbsp;·&nbsp; <a href="{root}brandbook/index.html">Брендбук</a></div>
 </footer>
 </body>
 </html>
