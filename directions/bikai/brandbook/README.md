@@ -5,15 +5,16 @@
 
 ## Логотип
 
-- Официальный вектор — от заказчика (09.10.2026):
-  `logo/sources/bikai-logo-source-user.svg`. При разборе удалены
-  дублирующие пути, закрашивавшие отверстия (птица, контуры букв B/K).
+- Официальный вектор — refined-версия от заказчика (гладкие контуры):
+  `logo/sources/bikai-logo-source-user.svg`.
+  Первая (полигональная) версия — в архиве:
+  `logo/sources/bikai-logo-source-user-v1.svg`.
 - Файлы:
   - `logo/svg/bikai-logo-official-lockup.svg` — эмблема + слово;
   - `logo/svg/bikai-logo-official-emblem.svg` — эмблема;
   - `logo/svg/bikai-logo-official-wordmark.svg` — слово;
   - `logo/png/` — PNG-рендеры (512/1024/1280, прозрачный и белый фон).
-- Цвета: красный `#E64B3C`, чёрный `#050505`.
+- Цвета: красный `#F02F1D`, чёрный `#050505`.
 - Витрина: `index.html` (self-contained, открывается в браузере и в превью).
 
 ## История
