@@ -156,12 +156,13 @@ def page_shell(title, description, depth, body, active=""):
 <title>{e(title)}</title>
 <meta name="description" content="{e(description)}">
 <link rel="stylesheet" href="{root}assets/style.css">
+<link rel="icon" type="image/svg+xml" href="{root}assets/logo-emblem.svg">
 </head>
 <body>
 <header class="site-header">
   <div class="header-inner">
-    <a href="{root}index.html" class="brand">
-      <span class="brand-mark">BIKAI</span><span class="brand-sub">.by</span>
+    <a href="{root}index.html" class="brand" aria-label="BIKAI — на главную">
+      <img src="{root}assets/logo-wordmark.svg" alt="BIKAI" class="brand-img">
     </a>
     <nav class="main-nav">{nav_html}</nav>
     <a href="{root}catalog/index.html#consumables" class="btn btn-ghost nav-cta">Подбор расходников</a>
@@ -174,7 +175,7 @@ def page_shell(title, description, depth, body, active=""):
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-col">
-      <div class="brand footer-brand"><span class="brand-mark">BIKAI</span><span class="brand-sub">.by</span></div>
+      <div class="brand footer-brand"><img src="{root}assets/logo-wordmark.svg" alt="BIKAI" class="brand-img"></div>
       <p class="footer-lead">Официальный дилер оборудования BIKAI&nbsp;/&nbsp;UVTech в Беларуси:
       хроматографы, масс-спектрометры, спектроскопия и расходные материалы.</p>
     </div>
@@ -325,6 +326,7 @@ consumable_blocks = "".join(category_block(c["slug"]) for c in categories if c["
 
 catalog_body = f"""
 <section class="catalog-head">
+  <p class="eyebrow">Приборы и расходные материалы</p>
   <h1>Каталог BIKAI / UVTech</h1>
   <p>{n_products} позиций: {n_instruments} приборов и {n_consumables} расходных материалов.</p>
   <input id="search" class="search-box" type="search" placeholder="Поиск по названию или артикулу…" oninput="filterCards(this.value)">
@@ -452,6 +454,7 @@ for p in products:
 
 contacts_body = f"""
 <section class="contacts-head">
+  <p class="eyebrow">Связаться с нами</p>
   <h1>Контакты</h1>
   <p>Напишите или позвоните — поможем подобрать прибор или расходный материал, уточним сроки поставки.</p>
 </section>
