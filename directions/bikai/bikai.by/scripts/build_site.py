@@ -339,13 +339,42 @@ home_body = f"""
 
 home_body += SLIDER_JS
 
+# --------------------------------------------------------------------- #
+# Self-contained build of the home page: CSS/fonts/logos/hero images are
+# embedded as data-URI so the page renders identically in an offline
+# viewer (Arena file preview), when downloaded, and on GitHub Pages.
+# ---------------------------------------------------------------------
+
+import base64 as _b64
+
+def _data_uri(path, mime):
+    with open(path, "rb") as fh:
+        return f"data:{mime};base64," + _b64.b64encode(fh.read()).decode()
+
+def inline_home(html_text):
+    css = open(os.path.join(SITE_DIR, "assets", "style.css"), encoding="utf-8").read()
+    for w in (400, 600):
+        css = css.replace(f'url("fonts/ss3-{w}.woff2")',
+                          f'url("{_data_uri(os.path.join(SITE_DIR, "assets", "fonts", f"ss3-{w}.woff2"), "font/woff2")}")')
+    html_text = html_text.replace(
+        '<link rel="stylesheet" href="./assets/style.css">', f"<style>{css}</style>")
+    html_text = html_text.replace(
+        'href="./assets/logo-emblem.svg"', f'href="{_data_uri(os.path.join(SITE_DIR, "assets", "logo-emblem.svg"), "image/svg+xml")}"')
+    html_text = html_text.replace(
+        'src="./assets/logo-wordmark.svg"', f'src="{_data_uri(os.path.join(SITE_DIR, "assets", "logo-wordmark.svg"), "image/svg+xml")}"')
+    for img, _k, *_r in SLIDES:
+        p = os.path.join(SITE_DIR, "assets", "hero", f"{img}.jpg")
+        html_text = html_text.replace(
+            f"url('assets/hero/{img}.jpg')", f"url('{_data_uri(p, 'image/jpeg')}')")
+    return html_text
+
 with open(os.path.join(SITE_DIR, "index.html"), "w", encoding="utf-8") as f:
-    f.write(page_shell(
+    f.write(inline_home(page_shell(
         "BIKAI.by — дилер оборудования BIKAI/UVTech в Беларуси",
         "Официальный дилер BIKAI/UVTech в Беларуси: хроматографы, масс-спектрометры, "
         "спектроскопия, функциональные модули и расходные материалы.",
         depth=0, body=home_body, active="/index.html",
-    ))
+    )))
 
 # --------------------------------------------------------------------- #
 # Catalog page (grouped: instruments first, consumables second)
