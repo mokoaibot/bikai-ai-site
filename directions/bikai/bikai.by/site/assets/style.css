@@ -49,7 +49,8 @@ a:hover{color:var(--red-dark)}
   max-width:var(--wrap);margin:0 auto;padding:0 24px;
   min-height:72px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;
 }
-.brand{display:flex;align-items:center}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-emblem{height:34px;width:auto}
 .brand-img{height:30px;width:auto}
 .main-nav{display:flex;gap:28px;margin-left:auto}
 .main-nav a{
@@ -293,6 +294,7 @@ main{min-height:60vh}
 @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.footer-inner{grid-template-columns:1fr}}
 .footer-brand .brand-img{height:26px}
+.footer-brand .brand-emblem{height:28px}
 .footer-lead{font-size:13px;margin-top:var(--s4)}
 .footer-col h4{
   font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);
