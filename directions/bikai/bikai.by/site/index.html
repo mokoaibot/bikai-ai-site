@@ -164,19 +164,29 @@ main{min-height:60vh}
 .vp-label{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray)}
 @media(max-width:860px){.value-props{grid-template-columns:repeat(2,1fr)}}
 
-/* ---------- categories ---------- */
-.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-@media(max-width:1000px){.cat-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.cat-grid{grid-template-columns:1fr}}
-.cat-card{
-  display:flex;flex-direction:column;gap:10px;
-  background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
-  padding:var(--s5);color:var(--ink);transition:border-color .15s;
-}
-.cat-card:hover{border-color:var(--red);color:var(--ink)}
-.cat-icon{color:var(--red);font-size:22px;line-height:1}
-.cat-name{font-weight:600;font-size:16px;color:var(--ink)}
-.cat-count{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray)}
+/* ---------- категории: вкладки в стиле hero ---------- */
+.cat-tabs-sec{background:
+  radial-gradient(760px 420px at 8% -10%, rgba(255,255,255,.9), rgba(255,255,255,0) 70%),
+  radial-gradient(900px 520px at 96% 112%, rgba(120,170,235,.18), rgba(120,170,235,0) 70%),
+  linear-gradient(180deg,#f3f8fd 0%,#e7f0fa 100%)}
+.ct-bar{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid #d8e4f2;margin-bottom:28px}
+.ct-tab{appearance:none;background:transparent;border:0;border-bottom:3px solid transparent;
+  padding:14px 18px 12px;font:inherit;font-weight:600;font-size:15px;color:#5a6165;cursor:pointer;
+  display:flex;align-items:center;gap:8px;transition:color .25s,border-color .25s,background .25s}
+.ct-tab:hover{color:var(--ink)}
+.ct-tab em{font-style:normal;font-size:12px;color:var(--gray);background:rgba(255,255,255,.7);padding:2px 8px}
+.ct-tab.is-active{color:var(--ink-strong);border-bottom-color:var(--red);background:rgba(255,255,255,.65)}
+.ct-tab.is-active em{color:var(--red)}
+.ct-panel{display:none}
+.ct-panel.is-active{display:block;animation:hsFade .5s ease}
+.ct-lead{color:#4d5254;max-width:760px;margin-bottom:24px}
+.ct-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media(max-width:1000px){.ct-thumbs{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.ct-thumbs{grid-template-columns:1fr}}
+.ct-item{display:block;background:#fff;border:1px solid #dfe9f5;border-radius:var(--radius);padding:16px;color:var(--ink);transition:border-color .25s}
+.ct-item:hover{border-color:var(--red)}
+.ct-item img{width:100%;height:150px;object-fit:contain;background:#fff}
+.ct-item span{display:block;margin-top:12px;font-size:14px;line-height:1.35;color:var(--ink);min-height:2.7em}
 
 /* ---------- split ---------- */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:48px}
@@ -386,44 +396,47 @@ main{min-height:60vh}
   <div class="vp"><span class="vp-num">11</span><span class="vp-label">брендов оборудования для ламп</span></div>
 </section>
 
-<section class="section">
-  <h2 class="section-title">Каталог по категориям</h2>
-  <div class="cat-grid">
-    <a class="cat-card cat-instrument" href="catalog/index.html#chromatography">
-      <span class="cat-icon">⬢</span>
-      <span class="cat-name">Хроматография</span>
-      <span class="cat-count">6 позиций</span>
-    </a>
-    <a class="cat-card cat-instrument" href="catalog/index.html#mass-spectrometry">
-      <span class="cat-icon">◆</span>
-      <span class="cat-name">Масс-спектрометрия</span>
-      <span class="cat-count">4 позиции</span>
-    </a>
-    <a class="cat-card cat-instrument" href="catalog/index.html#spectroscopy">
-      <span class="cat-icon">▣</span>
-      <span class="cat-name">Спектроскопия</span>
-      <span class="cat-count">1 позиция</span>
-    </a>
-    <a class="cat-card cat-instrument" href="catalog/index.html#functional-modules">
-      <span class="cat-icon">⚙</span>
-      <span class="cat-name">Функциональные модули</span>
-      <span class="cat-count">12 позиций</span>
-    </a>
-    <a class="cat-card cat-instrument" href="catalog/index.html#gas-generators">
-      <span class="cat-icon">◎</span>
-      <span class="cat-name">Генераторы газов</span>
-      <span class="cat-count">1 позиция</span>
-    </a>
-    <a class="cat-card cat-consumable" href="catalog/index.html#sample-treatment">
-      <span class="cat-icon">⬡</span>
-      <span class="cat-name">Пробоподготовка</span>
-      <span class="cat-count">1 позиция</span>
-    </a>
-    <a class="cat-card cat-consumable" href="catalog/index.html#consumables">
-      <span class="cat-icon">●</span>
-      <span class="cat-name">Расходные материалы</span>
-      <span class="cat-count">30 позиций</span>
-    </a>
+<section class="cat-tabs-sec">
+  <div class="section">
+    <h2 class="section-title">Каталог по категориям</h2>
+    <div class="ct-bar" role="tablist"><button class="ct-tab is-active" data-tab="chromatography" role="tab">⬢ <span>Хроматография</span> <em>6</em></button><button class="ct-tab" data-tab="mass-spectrometry" role="tab">◆ <span>Масс-спектрометрия</span> <em>4</em></button><button class="ct-tab" data-tab="spectroscopy" role="tab">▣ <span>Спектроскопия</span> <em>1</em></button><button class="ct-tab" data-tab="functional-modules" role="tab">⚙ <span>Функциональные модули</span> <em>12</em></button><button class="ct-tab" data-tab="gas-generators" role="tab">◎ <span>Генераторы газов</span> <em>1</em></button><button class="ct-tab" data-tab="sample-treatment" role="tab">⬡ <span>Пробоподготовка</span> <em>1</em></button><button class="ct-tab" data-tab="consumables" role="tab">● <span>Расходные материалы</span> <em>30</em></button></div>
+    <div class="ct-panels">
+    <div class="ct-panel is-active" data-panel="chromatography">
+      <p class="ct-lead">Аналитические и препаративные HPLC/UHPLC-системы, 2D-конфигурации — давление до 22 000 psi.</p>
+      <div class="ct-thumbs"><a class="ct-item" href="catalog/index.html#chromatography"><img src="images/uhplc-1521-pro.webp" alt="UHPLC 1521 Pro" loading="lazy"><span>UHPLC 1521 Pro</span></a><a class="ct-item" href="catalog/index.html#chromatography"><img src="images/hplc-1511-pro.webp" alt="HPLC 1511 Pro" loading="lazy"><span>HPLC 1511 Pro</span></a><a class="ct-item" href="catalog/index.html#chromatography"><img src="images/prep-hplc-1511-pro.webp" alt="Prep HPLC 1511 Pro" loading="lazy"><span>Prep HPLC 1511 Pro</span></a><a class="ct-item" href="catalog/index.html#chromatography"><img src="images/2d-hplc-1511-pro.webp" alt="2D HPLC 1511 Pro" loading="lazy"><span>2D HPLC 1511 Pro</span></a></div>
+      <p style="margin-top:24px"><a class="link-arrow" href="catalog/index.html#chromatography">Смотреть все 6 позиций в каталоге →</a></p>
+    </div>
+    <div class="ct-panel" data-panel="mass-spectrometry">
+      <p class="ct-lead">Тройные квадруполи SQ/TQ для количественного анализа: пищевая безопасность, фармация, экологический мониторинг.</p>
+      <div class="ct-thumbs"><a class="ct-item" href="catalog/index.html#mass-spectrometry"><img src="images/tq-1621.webp" alt="TQ 1621" loading="lazy"><span>TQ 1621</span></a><a class="ct-item" href="catalog/index.html#mass-spectrometry"><img src="images/tq-1620.webp" alt="TQ 1620" loading="lazy"><span>TQ 1620</span></a><a class="ct-item" href="catalog/index.html#mass-spectrometry"><img src="images/sq-1610.webp" alt="SQ 1610" loading="lazy"><span>SQ 1610</span></a><a class="ct-item" href="catalog/index.html#mass-spectrometry"><img src="images/gc-ms-7500.webp" alt="GC-MS 7500" loading="lazy"><span>GC-MS 7500</span></a></div>
+      <p style="margin-top:24px"><a class="link-arrow" href="catalog/index.html#mass-spectrometry">Смотреть все 4 позиции в каталоге →</a></p>
+    </div>
+    <div class="ct-panel" data-panel="spectroscopy">
+      <p class="ct-lead">Однолучевые и двухлучевые UV-Vis спектрофотометры для рутины и науки.</p>
+      <div class="ct-thumbs"><a class="ct-item" href="catalog/index.html#spectroscopy"><img src="images/uv-3600-spectrophotometer.webp" alt="Спектрофотометр UV 3600 (Ultra-3000)" loading="lazy"><span>Спектрофотометр UV 3600 (Ultra-3000)</span></a></div>
+      <p style="margin-top:24px"><a class="link-arrow" href="catalog/index.html#spectroscopy">Смотреть все 1 позиция в каталоге →</a></p>
+    </div>
+    <div class="ct-panel" data-panel="functional-modules">
+      <p class="ct-lead">Дегазаторы, автодозаторы, детекторы и колоночные термостаты — сборка системы под вашу методику.</p>
+      <div class="ct-thumbs"><a class="ct-item" href="catalog/index.html#functional-modules"><img src="images/lc-pump.webp" alt="Насос для жидкостной хроматографии (ЖХ)" loading="lazy"><span>Насос для жидкостной хроматографии (ЖХ)</span></a><a class="ct-item" href="catalog/index.html#functional-modules"><img src="images/lc-sampler.webp" alt="Автосэмплер для жидкостной хроматографии (ЖХ)" loading="lazy"><span>Автосэмплер для жидкостной хроматографии (ЖХ)</span></a><a class="ct-item" href="catalog/index.html#functional-modules"><img src="images/lc-column-oven.webp" alt="Термостат колонок для жидкостной хроматографии (ЖХ)" loading="lazy"><span>Термостат колонок для жидкостной хроматографии (ЖХ)</span></a><a class="ct-item" href="catalog/index.html#functional-modules"><img src="images/lc-diode-array-detector.webp" alt="Диодно-матричный детектор (DAD) для жидкостной хроматографии (ЖХ)" loading="lazy"><span>Диодно-матричный детектор (DAD) для жидкостной хроматографии (ЖХ)</span></a></div>
+      <p style="margin-top:24px"><a class="link-arrow" href="catalog/index.html#functional-modules">Смотреть все 12 позиций в каталоге →</a></p>
+    </div>
+    <div class="ct-panel" data-panel="gas-generators">
+      <p class="ct-lead">Генераторы азота и водорода для LC-MS и GC.</p>
+      <div class="ct-thumbs"><a class="ct-item" href="catalog/index.html#gas-generators"><img src="images/nitrogen-generator.webp" alt="Генератор азота" loading="lazy"><span>Генератор азота</span></a></div>
+      <p style="margin-top:24px"><a class="link-arrow" href="catalog/index.html#gas-generators">Смотреть все 1 позиция в каталоге →</a></p>
+    </div>
+    <div class="ct-panel" data-panel="sample-treatment">
+      <p class="ct-lead">Пробоподготовка: экстракция, фильтрация, концентрирование.</p>
+      <div class="ct-thumbs"><a class="ct-item" href="catalog/index.html#sample-treatment"><img src="images/hextractor-20.webp" alt="Автоматизированная система пробоподготовки hExtractor 20" loading="lazy"><span>Автоматизированная система пробоподготовки hExtractor 20</span></a></div>
+      <p style="margin-top:24px"><a class="link-arrow" href="catalog/index.html#sample-treatment">Смотреть все 1 позиция в каталоге →</a></p>
+    </div>
+    <div class="ct-panel" data-panel="consumables">
+      <p class="ct-lead">Лампы D2/W, колонки, кюветы и расходники под 11 брендов — подбор по парт-номеру или модели прибора.</p>
+      <div class="ct-thumbs"><a class="ct-item" href="catalog/index.html#consumables"><img src="images/column.jpg" alt="Колонка" loading="lazy"><span>Колонка</span></a><a class="ct-item" href="catalog/index.html#consumables"><img src="images/cuvette.jpg" alt="Кювета" loading="lazy"><span>Кювета</span></a><a class="ct-item" href="catalog/index.html#consumables"><img src="images/equivalent-lamp.webp" alt="Эквивалентная лампа (универсальная)" loading="lazy"><span>Эквивалентная лампа (универсальная)</span></a><a class="ct-item" href="catalog/index.html#consumables"><img src="images/lamp-waters-996-2996.jpg" alt="Waters 2996 / 996 — аналог Wat052586" loading="lazy"><span>Waters 2996 / 996 — аналог Wat052586</span></a></div>
+      <p style="margin-top:24px"><a class="link-arrow" href="catalog/index.html#consumables">Смотреть все 30 позиций в каталоге →</a></p>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -461,6 +474,20 @@ main{min-height:60vh}
   }
   var t=setInterval(function(){go(i+1)},6000);
   dots.forEach(function(d,k){ d.addEventListener('click',function(){ clearInterval(t); go(k); t=setInterval(function(){go(i+1)},6000); }); });
+})();
+</script>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.ct-tab'));
+  var panels=[].slice.call(document.querySelectorAll('.ct-panel'));
+  if(!tabs.length) return;
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      tabs.forEach(function(x){ x.classList.toggle('is-active', x===t); });
+      panels.forEach(function(p){ p.classList.toggle('is-active', p.getAttribute('data-panel')===t.getAttribute('data-tab')); });
+    });
+  });
 })();
 </script>
 

@@ -215,18 +215,46 @@ def page_shell(title, description, depth, body, active=""):
 # Home page
 # --------------------------------------------------------------------- #
 
-cat_cards = ""
+CAT_LEADS = {
+    "chromatography": "Аналитические и препаративные HPLC/UHPLC-системы, 2D-конфигурации — давление до 22 000 psi.",
+    "mass-spectrometry": "Тройные квадруполи SQ/TQ для количественного анализа: пищевая безопасность, фармация, экологический мониторинг.",
+    "spectroscopy": "Однолучевые и двухлучевые UV-Vis спектрофотометры для рутины и науки.",
+    "functional-modules": "Дегазаторы, автодозаторы, детекторы и колоночные термостаты — сборка системы под вашу методику.",
+    "gas-generators": "Генераторы азота и водорода для LC-MS и GC.",
+    "sample-treatment": "Пробоподготовка: экстракция, фильтрация, концентрирование.",
+    "consumables": "Лампы D2/W, колонки, кюветы и расходники под 11 брендов — подбор по парт-номеру или модели прибора.",
+}
+
+ct_bar = ""
+ct_panels = ""
+_ct_first = True
 for c in categories:
-    count = sum(1 for p in products if p["category_slug"] == c["slug"])
-    if count == 0:
+    slug = c["slug"]
+    prods = [p for p in products if p["category_slug"] == slug]
+    if not prods:
         continue
-    group = "instrument" if c["slug"] in INSTRUMENT_CATS else "consumable"
-    cat_cards += f"""
-    <a class="cat-card cat-{group}" href="catalog/index.html#{e(c['slug'])}">
-      <span class="cat-icon">{CAT_ICONS.get(c['slug'], '○')}</span>
-      <span class="cat-name">{e(c['title_ru'] or c['title'])}</span>
-      <span class="cat-count">{count} {e(ru_plural(count, 'позиция', 'позиции', 'позиций'))}</span>
-    </a>"""
+    count = len(prods)
+    act = " is-active" if _ct_first else ""
+    ct_bar += (f'<button class="ct-tab{act}" data-tab="{slug}" role="tab">'
+               f'{CAT_ICONS.get(slug, "○")} <span>{e(c["title_ru"] or c["title"])}</span> <em>{count}</em></button>')
+    thumbs = ""
+    shown = 0
+    for p in prods:
+        imgs_p = per_product[p["id"]]["images"]
+        if shown >= 4 or not imgs_p:
+            continue
+        name = rf(p, "name")
+        thumbs += (f'<a class="ct-item" href="catalog/index.html#{slug}">'
+                   f'<img src="{imgs_p[0]}" alt="{e(name)}" loading="lazy">'
+                   f'<span>{e(name)}</span></a>')
+        shown += 1
+    ct_panels += f"""
+    <div class="ct-panel{act}" data-panel="{slug}">
+      <p class="ct-lead">{e(CAT_LEADS.get(slug, ""))}</p>
+      <div class="ct-thumbs">{thumbs}</div>
+      <p style="margin-top:24px"><a class="link-arrow" href="catalog/index.html#{slug}">Смотреть все {count} {e(ru_plural(count, 'позиция', 'позиции', 'позиций'))} в каталоге →</a></p>
+    </div>"""
+    _ct_first = False
 
 # --------------------------------------------------------------------- #
 # Home hero slider (design language: mindray.com / bikaicorp.com)
@@ -309,9 +337,12 @@ home_body = f"""
   <div class="vp"><span class="vp-num">11</span><span class="vp-label">брендов оборудования для ламп</span></div>
 </section>
 
-<section class="section">
-  <h2 class="section-title">Каталог по категориям</h2>
-  <div class="cat-grid">{cat_cards}
+<section class="cat-tabs-sec">
+  <div class="section">
+    <h2 class="section-title">Каталог по категориям</h2>
+    <div class="ct-bar" role="tablist">{ct_bar}</div>
+    <div class="ct-panels">{ct_panels}
+    </div>
   </div>
 </section>
 
@@ -337,7 +368,23 @@ home_body = f"""
 </section>
 """
 
-home_body += SLIDER_JS
+TABS_JS = """
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.ct-tab'));
+  var panels=[].slice.call(document.querySelectorAll('.ct-panel'));
+  if(!tabs.length) return;
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      tabs.forEach(function(x){ x.classList.toggle('is-active', x===t); });
+      panels.forEach(function(p){ p.classList.toggle('is-active', p.getAttribute('data-panel')===t.getAttribute('data-tab')); });
+    });
+  });
+})();
+</script>
+"""
+
+home_body += SLIDER_JS + TABS_JS
 
 # --------------------------------------------------------------------- #
 # Self-contained build of the home page: CSS/fonts/logos/hero images are
