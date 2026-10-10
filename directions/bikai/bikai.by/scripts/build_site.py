@@ -165,6 +165,7 @@ def page_shell(title, description, depth, body, active=""):
 <header class="site-header">
   <div class="header-inner">
     <a href="{root}index.html" class="brand" aria-label="BIKAI — на главную">
+      <img src="{root}assets/logo-emblem.svg" alt="" class="brand-emblem">
       <img src="{root}assets/logo-wordmark.svg" alt="BIKAI" class="brand-img">
     </a>
     <nav class="main-nav">{nav_html}</nav>
@@ -178,7 +179,7 @@ def page_shell(title, description, depth, body, active=""):
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-col">
-      <div class="brand footer-brand"><img src="{root}assets/logo-wordmark.svg" alt="BIKAI" class="brand-img"></div>
+      <div class="brand footer-brand"><img src="{root}assets/logo-emblem.svg" alt="" class="brand-emblem"><img src="{root}assets/logo-wordmark.svg" alt="BIKAI" class="brand-img"></div>
       <p class="footer-lead">Официальный дилер оборудования BIKAI&nbsp;/&nbsp;UVTech в Беларуси:
       хроматографы, масс-спектрометры, спектроскопия и расходные материалы.</p>
     </div>
@@ -409,6 +410,8 @@ def inline_home(html_text):
         'href="./assets/logo-emblem.svg"', f'href="{_data_uri(os.path.join(SITE_DIR, "assets", "logo-emblem.svg"), "image/svg+xml")}"')
     html_text = html_text.replace(
         'src="./assets/logo-wordmark.svg"', f'src="{_data_uri(os.path.join(SITE_DIR, "assets", "logo-wordmark.svg"), "image/svg+xml")}"')
+    html_text = html_text.replace(
+        'src="./assets/logo-emblem.svg"', f'src="{_data_uri(os.path.join(SITE_DIR, "assets", "logo-emblem.svg"), "image/svg+xml")}"')
     for img, _k, *_r in SLIDES:
         p = os.path.join(SITE_DIR, "assets", "hero", f"{img}.jpg")
         html_text = html_text.replace(
