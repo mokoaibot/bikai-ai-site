@@ -224,7 +224,7 @@ for c in categories:
         continue
     cat_tiles += f"""
     <a class="cat-tile" href="catalog/index.html#{slug}">
-      <img class="cat-tile-bg" src="assets/cat-covers/{slug}.jpg" alt="{e(c['title_ru'] or c['title'])}">
+      <img class="cat-tile-bg" src="assets/cat-covers/{slug}.webp" alt="{e(c['title_ru'] or c['title'])}">
       <div class="cat-tile-cap"><span>{e(c['title_ru'] or c['title'])}</span>
       <em>{count} {e(ru_plural(count, 'позиция', 'позиции', 'позиций'))}</em></div>
     </a>"""
@@ -265,7 +265,7 @@ hero_slider = '<section class="hero-slider">'
 for idx, (img, kicker, title, lead, href) in enumerate(SLIDES):
     hero_slider += f"""
   <div class="hs-slide{' is-active' if idx == 0 else ''}">
-    <div class="hs-img" style="background-image:url('assets/hero/{img}.jpg')"></div>
+    <div class="hs-img" style="background-image:url('assets/hero/{img}.webp')"></div>
     <div class="hs-overlay"></div>
     <div class="hs-content">
       <p class="hs-kicker">{e(kicker)}</p>
@@ -368,11 +368,11 @@ def inline_home(html_text):
     html_text = html_text.replace(
         'src="./assets/logo-emblem.svg"', f'src="{_data_uri(os.path.join(SITE_DIR, "assets", "logo-emblem.svg"), "image/svg+xml")}"')
     html_text = html_text.replace(
-        'url("cat-covers/_ice-1600x900.jpg")', f'url("{_data_uri(os.path.join(SITE_DIR, "assets", "cat-covers", "_ice-1600x900.jpg"), "image/jpeg")}")')
+        'url("cat-covers/_ice-1600x900.webp")', f'url("{_data_uri(os.path.join(SITE_DIR, "assets", "cat-covers", "_ice-1600x900.webp"), "image/webp")}")')
     for img, _k, *_r in SLIDES:
-        p = os.path.join(SITE_DIR, "assets", "hero", f"{img}.jpg")
+        p = os.path.join(SITE_DIR, "assets", "hero", f"{img}.webp")
         html_text = html_text.replace(
-            f"url('assets/hero/{img}.jpg')", f"url('{_data_uri(p, 'image/jpeg')}')")
+            f"url('assets/hero/{img}.webp')", f"url('{_data_uri(p, 'image/webp')}')")
     return html_text
 
 with open(os.path.join(SITE_DIR, "index.html"), "w", encoding="utf-8") as f:

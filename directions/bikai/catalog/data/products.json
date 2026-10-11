@@ -3178,9 +3178,9 @@
     "slug": "gc-sampler",
     "category": "functional-modules",
     "name": "GC Sampler",
-    "image_url": "https://bikaicorp.com/uploads/images/20260702/20260702132625790317.jpg",
+    "image_url": "https://bikaicorp.com/uploads/images/20260702/20260702132625790317.webp",
     "gallery_urls": [
-      "https://bikaicorp.com/uploads/images/20260703/20260703141013543802.jpg"
+      "https://bikaicorp.com/uploads/images/20260703/20260703141013543802.webp"
     ],
     "source_url": "https://bikaicorp.com/functional-module/51.html",
     "spec_groups": [
@@ -3213,10 +3213,10 @@
     "features": [],
     "consumable": null,
     "description": "",
-    "image_file": "images/gc-sampler.jpg",
+    "image_file": "images/gc-sampler.webp",
     "gallery_files": [
-      "images/gc-sampler.jpg",
-      "images/gc-sampler-2.jpg"
+      "images/gc-sampler.webp",
+      "images/gc-sampler-2.webp"
     ],
     "ru": {
       "name": "Автосэмплер для газовой хроматографии (ГХ)",
@@ -3519,7 +3519,7 @@
     "slug": "column",
     "category": "consumables",
     "name": "Column",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/9178baa2-03af-4d13-b930-7ef02ff851db.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/9178baa2-03af-4d13-b930-7ef02ff851db.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/23.html",
     "tagline": "HPLC / GC chromatography columns — specifications on request",
@@ -3528,9 +3528,9 @@
     "consumable": null,
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/column.jpg",
+    "image_file": "images/column.webp",
     "gallery_files": [
-      "images/column.jpg"
+      "images/column.webp"
     ],
     "ru": {
       "name": "Колонка",
@@ -3544,7 +3544,7 @@
     "slug": "cuvette",
     "category": "consumables",
     "name": "Cuvette",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/78b68a87-82e1-4f24-80dc-8d4bfc314d4d.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/78b68a87-82e1-4f24-80dc-8d4bfc314d4d.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/24.html",
     "tagline": "Spectrophotometer cuvettes — specifications on request",
@@ -3553,9 +3553,9 @@
     "consumable": null,
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/cuvette.jpg",
+    "image_file": "images/cuvette.webp",
     "gallery_files": [
-      "images/cuvette.jpg"
+      "images/cuvette.webp"
     ],
     "ru": {
       "name": "Кювета",
@@ -3595,7 +3595,7 @@
     "category": "consumables",
     "name": "Waters 2996 / 996 — Wat052586",
     "tagline": "Equivalent lamp for Waters Waters996/2996",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/a0d6dfa1-eb96-4aa3-ad29-5457d35febd9.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/a0d6dfa1-eb96-4aa3-ad29-5457d35febd9.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/d2lampwat052586.html",
     "consumable": {
@@ -3609,9 +3609,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-waters-996-2996.jpg",
+    "image_file": "images/lamp-waters-996-2996.webp",
     "gallery_files": [
-      "images/lamp-waters-996-2996.jpg"
+      "images/lamp-waters-996-2996.webp"
     ],
     "ru": {
       "name": "Waters 2996 / 996 — аналог Wat052586",
@@ -3634,7 +3634,7 @@
     "category": "consumables",
     "name": "Waters 2489/2998 equivalent deuterium lamp",
     "tagline": "Equivalent lamp for Waters Waters2489(2695)/2998",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/d08e155f-77b1-486b-84c0-9b3e699343c0.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/d08e155f-77b1-486b-84c0-9b3e699343c0.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/76.html",
     "consumable": {
@@ -3648,9 +3648,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-waters-2489-2998.jpg",
+    "image_file": "images/lamp-waters-2489-2998.webp",
     "gallery_files": [
-      "images/lamp-waters-2489-2998.jpg"
+      "images/lamp-waters-2489-2998.webp"
     ],
     "ru": {
       "name": "Waters 2489/2998 — эквивалентная дейтериевая лампа",
@@ -3673,7 +3673,7 @@
     "category": "consumables",
     "name": "Waters 2487 equivalent deuterium lamp",
     "tagline": "Equivalent lamp for Waters Waters2487",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/17e0e2f9-cd4e-44ea-91fb-b4d1fdb6b489.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/17e0e2f9-cd4e-44ea-91fb-b4d1fdb6b489.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/75.html",
     "consumable": {
@@ -3687,9 +3687,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-waters-2487.jpg",
+    "image_file": "images/lamp-waters-2487.webp",
     "gallery_files": [
-      "images/lamp-waters-2487.jpg"
+      "images/lamp-waters-2487.webp"
     ],
     "ru": {
       "name": "Waters 2487 — эквивалентная дейтериевая лампа",
@@ -3712,7 +3712,7 @@
     "category": "consumables",
     "name": "Thermo U3000 6074.1110 equivalent deuterium lamp",
     "tagline": "Equivalent lamp for Thermo ThermoFisher U3000 series",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/12a544d2-7574-49f7-8925-b11082af43af.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/12a544d2-7574-49f7-8925-b11082af43af.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/74.html",
     "consumable": {
@@ -3726,9 +3726,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-thermo-u3000-d2.jpg",
+    "image_file": "images/lamp-thermo-u3000-d2.webp",
     "gallery_files": [
-      "images/lamp-thermo-u3000-d2.jpg"
+      "images/lamp-thermo-u3000-d2.webp"
     ],
     "ru": {
       "name": "Thermo U3000 6074.1110 — эквивалентная дейтериевая лампа",
@@ -3751,7 +3751,7 @@
     "category": "consumables",
     "name": "ThermoFisher U3000 equivalent tungsten lamp",
     "tagline": "Equivalent lamp for ThermoFisher U3000 series",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/b59a6515-a42a-4bbd-9d96-18766c4ec6d7.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/b59a6515-a42a-4bbd-9d96-18766c4ec6d7.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/73.html",
     "consumable": {
@@ -3765,9 +3765,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-thermofisher-u3000-tungsten.jpg",
+    "image_file": "images/lamp-thermofisher-u3000-tungsten.webp",
     "gallery_files": [
-      "images/lamp-thermofisher-u3000-tungsten.jpg"
+      "images/lamp-thermofisher-u3000-tungsten.webp"
     ],
     "ru": {
       "name": "ThermoFisher U3000 — эквивалентная вольфрамовая лампа",
@@ -3790,7 +3790,7 @@
     "category": "consumables",
     "name": "ThermoFisher atomic absorption ICE3500",
     "tagline": "Equivalent lamp for ThermoFisher Atomic absorption ICE3500",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/3b279597-71fe-4791-b4ec-dcfea1d28a30.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/3b279597-71fe-4791-b4ec-dcfea1d28a30.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/72.html",
     "consumable": {
@@ -3804,9 +3804,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-thermofisher-ice3500.jpg",
+    "image_file": "images/lamp-thermofisher-ice3500.webp",
     "gallery_files": [
-      "images/lamp-thermofisher-ice3500.jpg"
+      "images/lamp-thermofisher-ice3500.webp"
     ],
     "ru": {
       "name": "ThermoFisher, атомно-абсорбционный ICE3500",
@@ -3829,7 +3829,7 @@
     "category": "consumables",
     "name": "Thermo Fisher VH-D1 6083.1110 equivalent deuterium lamp",
     "tagline": "Equivalent lamp for ThermoFisher VH-D1",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/86bc4a6e-67db-41c0-895d-6705ac73d0b8.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/86bc4a6e-67db-41c0-895d-6705ac73d0b8.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/71.html",
     "consumable": {
@@ -3843,9 +3843,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-thermofisher-vhd1.jpg",
+    "image_file": "images/lamp-thermofisher-vhd1.webp",
     "gallery_files": [
-      "images/lamp-thermofisher-vhd1.jpg"
+      "images/lamp-thermofisher-vhd1.webp"
     ],
     "ru": {
       "name": "Thermo Fisher VH-D1 6083.1110 — эквивалентная дейтериевая лампа",
@@ -3868,7 +3868,7 @@
     "category": "consumables",
     "name": "Shimadzu UV lamp L6380",
     "tagline": "Equivalent lamp for Shimadzu UV-3700/3600/2700/2550/2450/1700/1800/1240/1280",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/4afeb723-14d1-424c-8eff-ac9a93e4a58b.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/4afeb723-14d1-424c-8eff-ac9a93e4a58b.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/70.html",
     "consumable": {
@@ -3882,9 +3882,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-shimadzu-l6380.jpg",
+    "image_file": "images/lamp-shimadzu-l6380.webp",
     "gallery_files": [
-      "images/lamp-shimadzu-l6380.jpg"
+      "images/lamp-shimadzu-l6380.webp"
     ],
     "ru": {
       "name": "Shimadzu, УФ-лампа L6380",
@@ -3907,7 +3907,7 @@
     "category": "consumables",
     "name": "Shimadzu SPD-10A/20A/15C equivalent deuterium lamp",
     "tagline": "Equivalent lamp for Shimadzu SPD-10A/20A/15C",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/f2217af4-0d4d-4f36-a309-62e443a0d8b9.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/f2217af4-0d4d-4f36-a309-62e443a0d8b9.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/69.html",
     "consumable": {
@@ -3921,9 +3921,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-shimadzu-spd10a.jpg",
+    "image_file": "images/lamp-shimadzu-spd10a.webp",
     "gallery_files": [
-      "images/lamp-shimadzu-spd10a.jpg"
+      "images/lamp-shimadzu-spd10a.webp"
     ],
     "ru": {
       "name": "Shimadzu SPD-10A/20A/15C — эквивалентная дейтериевая лампа",
@@ -3946,7 +3946,7 @@
     "category": "consumables",
     "name": "Shimadzu LC-2010 equivalent deuterium lamp",
     "tagline": "Equivalent lamp for Shimadzu LC-2010/A/C",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/31a917ff-669c-478c-8903-8e09128f5fe0.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/31a917ff-669c-478c-8903-8e09128f5fe0.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/68.html",
     "consumable": {
@@ -3960,9 +3960,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-shimadzu-lc2010.jpg",
+    "image_file": "images/lamp-shimadzu-lc2010.webp",
     "gallery_files": [
-      "images/lamp-shimadzu-lc2010.jpg"
+      "images/lamp-shimadzu-lc2010.webp"
     ],
     "ru": {
       "name": "Shimadzu LC-2010 — эквивалентная дейтериевая лампа",
@@ -3985,7 +3985,7 @@
     "category": "consumables",
     "name": "Shimadzu LC-2030/2040 equivalent deuterium lamp",
     "tagline": "Equivalent lamp for Shimadzu LC-2030/2040",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/705c62f0-e722-4ba6-9cf5-7bfa737e91e6.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/705c62f0-e722-4ba6-9cf5-7bfa737e91e6.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/67.html",
     "consumable": {
@@ -3999,9 +3999,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-shimadzu-lc2030-2040.jpg",
+    "image_file": "images/lamp-shimadzu-lc2030-2040.webp",
     "gallery_files": [
-      "images/lamp-shimadzu-lc2030-2040.jpg"
+      "images/lamp-shimadzu-lc2030-2040.webp"
     ],
     "ru": {
       "name": "Shimadzu LC-2030/2040 — эквивалентная дейтериевая лампа",
@@ -4024,7 +4024,7 @@
     "category": "consumables",
     "name": "Perkin Elmer 365 series tungsten lamp N4101037",
     "tagline": "Equivalent lamp for Perkin Elmer 365 series",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/046c606c-92f3-48fc-89c7-45cf372a8e3d.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/046c606c-92f3-48fc-89c7-45cf372a8e3d.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/66.html",
     "consumable": {
@@ -4038,9 +4038,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-pe-365-tungsten.jpg",
+    "image_file": "images/lamp-pe-365-tungsten.webp",
     "gallery_files": [
-      "images/lamp-pe-365-tungsten.jpg"
+      "images/lamp-pe-365-tungsten.webp"
     ],
     "ru": {
       "name": "Perkin Elmer, серия 365, вольфрамовая лампа N4101037",
@@ -4063,7 +4063,7 @@
     "category": "consumables",
     "name": "Perkin Elmer Series 200 UV/vis B0114620",
     "tagline": "Equivalent lamp for Perkin Elmer Series 200 UV/vis",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/e4fd5ac0-af34-4ab8-98bb-ce4ee3f2f530.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/e4fd5ac0-af34-4ab8-98bb-ce4ee3f2f530.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/65.html",
     "consumable": {
@@ -4077,9 +4077,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-pe-series200.jpg",
+    "image_file": "images/lamp-pe-series200.webp",
     "gallery_files": [
-      "images/lamp-pe-series200.jpg"
+      "images/lamp-pe-series200.webp"
     ],
     "ru": {
       "name": "Perkin Elmer Series 200 UV/vis B0114620",
@@ -4102,7 +4102,7 @@
     "category": "consumables",
     "name": "Perkin Elmer Lambda series L6022728 deuterium lamp",
     "tagline": "Equivalent lamp for Perkin Elmer Lambda",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/bd6da430-ba52-4d46-a264-5c827bdc6344.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/bd6da430-ba52-4d46-a264-5c827bdc6344.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/64.html",
     "consumable": {
@@ -4116,9 +4116,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-pe-lambda-d2.jpg",
+    "image_file": "images/lamp-pe-lambda-d2.webp",
     "gallery_files": [
-      "images/lamp-pe-lambda-d2.jpg"
+      "images/lamp-pe-lambda-d2.webp"
     ],
     "ru": {
       "name": "Perkin Elmer, серия Lambda, дейтериевая лампа L6022728",
@@ -4141,7 +4141,7 @@
     "category": "consumables",
     "name": "PE Lambda365 equivalent deuterium lamp",
     "tagline": "Equivalent lamp for Perkin Elmer Lambda365",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/9a756faf-68ac-4234-8125-e72faa1d9c8e.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/9a756faf-68ac-4234-8125-e72faa1d9c8e.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/63.html",
     "consumable": {
@@ -4155,9 +4155,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-pe-lambda365.jpg",
+    "image_file": "images/lamp-pe-lambda365.webp",
     "gallery_files": [
-      "images/lamp-pe-lambda365.jpg"
+      "images/lamp-pe-lambda365.webp"
     ],
     "ru": {
       "name": "PE Lambda365 — эквивалентная дейтериевая лампа",
@@ -4180,7 +4180,7 @@
     "category": "consumables",
     "name": "Knauer 2520/2550 equivalent deuterium lamp",
     "tagline": "Equivalent lamp for Knauer 2520/2550",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/270dd2be-09a1-43bf-a093-1853666a66fd.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/270dd2be-09a1-43bf-a093-1853666a66fd.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/62.html",
     "consumable": {
@@ -4194,9 +4194,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-knauer-2520-2550.jpg",
+    "image_file": "images/lamp-knauer-2520-2550.webp",
     "gallery_files": [
-      "images/lamp-knauer-2520-2550.jpg"
+      "images/lamp-knauer-2520-2550.webp"
     ],
     "ru": {
       "name": "Knauer 2520/2550 — эквивалентная дейтериевая лампа",
@@ -4219,7 +4219,7 @@
     "category": "consumables",
     "name": "Knauer 2501 ALL",
     "tagline": "Equivalent lamp for Knauer 2501 ALL",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/b7a1740c-1903-4a6f-b35f-e89294e84914.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/b7a1740c-1903-4a6f-b35f-e89294e84914.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/61.html",
     "consumable": {
@@ -4233,9 +4233,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-knauer-2501.jpg",
+    "image_file": "images/lamp-knauer-2501.webp",
     "gallery_files": [
-      "images/lamp-knauer-2501.jpg"
+      "images/lamp-knauer-2501.webp"
     ],
     "ru": {
       "name": "Knauer 2501 ALL",
@@ -4258,7 +4258,7 @@
     "category": "consumables",
     "name": "Jasco 970B 975B 5330-0091B",
     "tagline": "Equivalent lamp for JASCO 970B/975B, 1570/1575, 2070/2075",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/5c79fede-133c-4d57-90d0-be2c0f6762a8.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/5c79fede-133c-4d57-90d0-be2c0f6762a8.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/60.html",
     "consumable": {
@@ -4272,9 +4272,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-jasco-970b.jpg",
+    "image_file": "images/lamp-jasco-970b.webp",
     "gallery_files": [
-      "images/lamp-jasco-970b.jpg"
+      "images/lamp-jasco-970b.webp"
     ],
     "ru": {
       "name": "Jasco 970B 975B 5330-0091B",
@@ -4297,7 +4297,7 @@
     "category": "consumables",
     "name": "Hitachi primaide DAD deuterium lamp",
     "tagline": "Equivalent lamp for Hitachi Primaide DAD",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/d3fd4f29-0925-4256-9e4f-71e10d0347e9.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/d3fd4f29-0925-4256-9e4f-71e10d0347e9.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/59.html",
     "consumable": {
@@ -4311,9 +4311,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-hitachi-primaide.jpg",
+    "image_file": "images/lamp-hitachi-primaide.webp",
     "gallery_files": [
-      "images/lamp-hitachi-primaide.jpg"
+      "images/lamp-hitachi-primaide.webp"
     ],
     "ru": {
       "name": "Hitachi primaide DAD, дейтериевая лампа",
@@ -4336,7 +4336,7 @@
     "category": "consumables",
     "name": "Hitachi LC-VWD",
     "tagline": "Equivalent lamp for Hitachi LC-VWD",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/774e522b-bca1-465c-b969-822349e4a1ab.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/774e522b-bca1-465c-b969-822349e4a1ab.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/58.html",
     "consumable": {
@@ -4350,9 +4350,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-hitachi-lc-vwd.jpg",
+    "image_file": "images/lamp-hitachi-lc-vwd.webp",
     "gallery_files": [
-      "images/lamp-hitachi-lc-vwd.jpg"
+      "images/lamp-hitachi-lc-vwd.webp"
     ],
     "ru": {
       "name": "Hitachi LC-VWD",
@@ -4375,7 +4375,7 @@
     "category": "consumables",
     "name": "Analytik Jena EA5000 equivalent deuterium lamp",
     "tagline": "Equivalent lamp for Analytikjena EA5000",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/cb174a49-0fbf-4b76-9e8b-336d4093f2e7.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/cb174a49-0fbf-4b76-9e8b-336d4093f2e7.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/57.html",
     "consumable": {
@@ -4389,9 +4389,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-analytikjena-ea5000.jpg",
+    "image_file": "images/lamp-analytikjena-ea5000.webp",
     "gallery_files": [
-      "images/lamp-analytikjena-ea5000.jpg"
+      "images/lamp-analytikjena-ea5000.webp"
     ],
     "ru": {
       "name": "Analytik Jena EA5000 — эквивалентная дейтериевая лампа",
@@ -4414,7 +4414,7 @@
     "category": "consumables",
     "name": "Analytikjena SPECORD PLUS equivalent deuterium lamp",
     "tagline": "Equivalent lamp for Analytikjena SPECORD PLUS",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/89afbe7f-7cbd-408f-87d4-8438b2a67385.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/89afbe7f-7cbd-408f-87d4-8438b2a67385.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/56.html",
     "consumable": {
@@ -4428,9 +4428,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-analytikjena-specord-plus.jpg",
+    "image_file": "images/lamp-analytikjena-specord-plus.webp",
     "gallery_files": [
-      "images/lamp-analytikjena-specord-plus.jpg"
+      "images/lamp-analytikjena-specord-plus.webp"
     ],
     "ru": {
       "name": "Analytikjena SPECORD PLUS — эквивалентная дейтериевая лампа",
@@ -4453,7 +4453,7 @@
     "category": "consumables",
     "name": "Analytikjena SPECORD 2xx 820-60021-0",
     "tagline": "Equivalent lamp for Analytikjena SPECORD 2xx (PLUS)/50(PLUS)/40/30, SPECORD S600, S100, SPEKOL 1200",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/1194523d-cdd2-4876-9d28-ab34a384979c.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/1194523d-cdd2-4876-9d28-ab34a384979c.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/55.html",
     "consumable": {
@@ -4467,9 +4467,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-analytikjena-specord-2xx.jpg",
+    "image_file": "images/lamp-analytikjena-specord-2xx.webp",
     "gallery_files": [
-      "images/lamp-analytikjena-specord-2xx.jpg"
+      "images/lamp-analytikjena-specord-2xx.webp"
     ],
     "ru": {
       "name": "Analytikjena SPECORD 2xx 820-60021-0",
@@ -4492,7 +4492,7 @@
     "category": "consumables",
     "name": "Agilent 1290 DAD 5190-0917",
     "tagline": "Equivalent lamp for Agilent 1290 DAD",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/d3436759-88d1-4cf7-95cc-301c61a7be39.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/d3436759-88d1-4cf7-95cc-301c61a7be39.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/54.html",
     "consumable": {
@@ -4506,9 +4506,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-agilent-1290-dad.jpg",
+    "image_file": "images/lamp-agilent-1290-dad.webp",
     "gallery_files": [
-      "images/lamp-agilent-1290-dad.jpg"
+      "images/lamp-agilent-1290-dad.webp"
     ],
     "ru": {
       "name": "Agilent 1290 DAD 5190-0917",
@@ -4531,7 +4531,7 @@
     "category": "consumables",
     "name": "Agilent (1100/1200/1220/1260) VWD equivalent deuterium lamp",
     "tagline": "Equivalent lamp for Agilent 1100/1200/1220/1260 VWD",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/b7316b24-5141-447d-ab78-d1101822e5ae.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/b7316b24-5141-447d-ab78-d1101822e5ae.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/53.html",
     "consumable": {
@@ -4545,9 +4545,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-agilent-vwd.jpg",
+    "image_file": "images/lamp-agilent-vwd.webp",
     "gallery_files": [
-      "images/lamp-agilent-vwd.jpg"
+      "images/lamp-agilent-vwd.webp"
     ],
     "ru": {
       "name": "Agilent (1100/1200/1220/1260) VWD — эквивалентная дейтериевая лампа",
@@ -4570,7 +4570,7 @@
     "category": "consumables",
     "name": "Agilent 1100/1200 DAD 2140-0820",
     "tagline": "Equivalent lamp for Agilent 1100/1200/1220/1260 DAD / 1260 MD",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/b01655b9-78bf-4f77-889a-2dc39228351a.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/b01655b9-78bf-4f77-889a-2dc39228351a.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/52.html",
     "consumable": {
@@ -4584,9 +4584,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-agilent-1100-1200-dad.jpg",
+    "image_file": "images/lamp-agilent-1100-1200-dad.webp",
     "gallery_files": [
-      "images/lamp-agilent-1100-1200-dad.jpg"
+      "images/lamp-agilent-1100-1200-dad.webp"
     ],
     "ru": {
       "name": "Agilent 1100/1200 DAD 2140-0820",
@@ -4609,7 +4609,7 @@
     "category": "consumables",
     "name": "AB SCIEX MDQ plus 144-667",
     "tagline": "Equivalent lamp for ABSCIEX P/ACE MDQ plus",
-    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/74727a0d-382a-4450-b202-ef62e0bdf45a.jpg",
+    "image_url": "https://omo-oss-image.thefastimg.com/portal-saas/pg2025032718364349704/cms/image/74727a0d-382a-4450-b202-ef62e0bdf45a.webp",
     "image_referer": "https://www.uvtech-cc.com/product/Consumables.html",
     "source_url": "https://www.uvtech-cc.com/products_details/51.html",
     "consumable": {
@@ -4623,9 +4623,9 @@
     "spec_groups": [],
     "description": "",
     "gallery_urls": [],
-    "image_file": "images/lamp-absciex-mdq-plus.jpg",
+    "image_file": "images/lamp-absciex-mdq-plus.webp",
     "gallery_files": [
-      "images/lamp-absciex-mdq-plus.jpg"
+      "images/lamp-absciex-mdq-plus.webp"
     ],
     "ru": {
       "name": "AB SCIEX MDQ plus 144-667",
