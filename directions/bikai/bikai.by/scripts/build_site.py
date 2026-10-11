@@ -266,7 +266,6 @@ for idx, (img, kicker, title, lead, href) in enumerate(SLIDES):
     hero_slider += f"""
   <div class="hs-slide{' is-active' if idx == 0 else ''}">
     <div class="hs-img" style="background-image:url('assets/hero/{img}.webp')"></div>
-    <div class="hs-veil"></div>
     <div class="hs-overlay"></div>
     <div class="hs-content">
       <p class="hs-kicker">{e(kicker)}</p>
