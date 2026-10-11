@@ -113,10 +113,12 @@ main{min-height:60vh}
 .is-active .hs-img{transform:scale(1)}
 .hs-overlay{position:absolute;inset:0;
   background:
-    linear-gradient(90deg, rgba(243,248,253,.92) 0%, rgba(243,248,253,.6) 42%, rgba(243,248,253,0) 72%),
-    url("cat-covers/_ice-soft-hero.webp") center/cover;
-  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 50%,transparent 85%);
-  mask-image:linear-gradient(90deg,#000 0%,#000 50%,transparent 85%)}
+    radial-gradient(420px 720px at 56% 42%, rgba(120,170,235,.16), rgba(120,170,235,0) 70%),
+    radial-gradient(760px 540px at 10% -10%, rgba(255,255,255,.95), rgba(255,255,255,0) 72%),
+    linear-gradient(90deg, rgba(228,239,251,.98) 0%, rgba(222,235,250,.94) 40%, rgba(222,235,250,.28) 62%, rgba(222,235,250,0) 80%),
+    url("cat-covers/_ice-1600x900.webp") center/cover;
+  -webkit-mask-image:linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.55) 38%, transparent 78%);
+  mask-image:linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.55) 38%, transparent 78%)}
 .hs-content{position:relative;max-width:var(--wrap);margin:0 auto;padding:0 24px;height:100%;
   display:flex;flex-direction:column;justify-content:center;color:var(--ink)}
 .hs-kicker{color:var(--red);font-weight:600;font-size:15px;letter-spacing:.02em;margin-bottom:var(--s4);opacity:0}
@@ -141,10 +143,10 @@ main{min-height:60vh}
   .hero-slider{height:72vh;min-height:480px}
   .hs-img{background-position:center}
   .hs-overlay{background:
-    linear-gradient(180deg, rgba(243,248,253,.95) 0%, rgba(243,248,253,.7) 55%, rgba(243,248,253,.2) 100%),
-    url("cat-covers/_ice-soft-hero.webp") center/cover;
-    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 90%);
-    mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 90%)}
+    linear-gradient(180deg, rgba(228,239,251,.97) 0%, rgba(222,235,250,.9) 52%, rgba(222,235,250,.45) 100%),
+    url("cat-covers/_ice-1600x900.webp") center/cover;
+    -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.5) 50%, transparent 88%);
+    mask-image:linear-gradient(180deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.5) 50%, transparent 88%)}
 }
 @media(prefers-reduced-motion:reduce){
   .hs-title .w>span{transform:none;animation:none}
