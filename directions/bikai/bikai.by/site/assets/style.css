@@ -111,6 +111,8 @@ main{min-height:60vh}
 .hs-img{position:absolute;inset:0;background-size:cover;background-position:center right;
   transform:scale(1.07);transition:transform 7s linear}
 .is-active .hs-img{transform:scale(1)}
+.hs-veil{position:absolute;inset:0;
+  background:linear-gradient(90deg, rgba(250,252,255,.92) 0%, rgba(250,252,255,.7) 40%, rgba(250,252,255,.3) 60%, rgba(250,252,255,0) 78%)}
 .hs-overlay{position:absolute;inset:0;
   background:
     radial-gradient(420px 720px at 56% 42%, rgba(120,170,235,.16), rgba(120,170,235,0) 70%),
@@ -142,6 +144,7 @@ main{min-height:60vh}
 @media(max-width:860px){
   .hero-slider{height:72vh;min-height:480px}
   .hs-img{background-position:center}
+  .hs-veil{background:linear-gradient(180deg, rgba(250,252,255,.94) 0%, rgba(250,252,255,.75) 50%, rgba(250,252,255,.25) 100%)}
   .hs-overlay{background:
     linear-gradient(180deg, rgba(228,239,251,.97) 0%, rgba(222,235,250,.9) 52%, rgba(222,235,250,.45) 100%),
     url("cat-covers/_ice-1600x900.webp") center/cover;
