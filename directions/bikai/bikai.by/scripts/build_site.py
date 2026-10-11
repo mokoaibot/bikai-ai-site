@@ -216,46 +216,18 @@ def page_shell(title, description, depth, body, active=""):
 # Home page
 # --------------------------------------------------------------------- #
 
-CAT_LEADS = {
-    "chromatography": "Аналитические и препаративные HPLC/UHPLC-системы, 2D-конфигурации — давление до 22 000 psi.",
-    "mass-spectrometry": "Тройные квадруполи SQ/TQ для количественного анализа: пищевая безопасность, фармация, экологический мониторинг.",
-    "spectroscopy": "Однолучевые и двухлучевые UV-Vis спектрофотометры для рутины и науки.",
-    "functional-modules": "Дегазаторы, автодозаторы, детекторы и колоночные термостаты — сборка системы под вашу методику.",
-    "gas-generators": "Генераторы азота и водорода для LC-MS и GC.",
-    "sample-treatment": "Пробоподготовка: экстракция, фильтрация, концентрирование.",
-    "consumables": "Лампы D2/W, колонки, кюветы и расходники под 11 брендов — подбор по парт-номеру или модели прибора.",
-}
-
-ct_bar = ""
-ct_panels = ""
-_ct_first = True
+cat_tiles = ""
 for c in categories:
     slug = c["slug"]
-    prods = [p for p in products if p["category_slug"] == slug]
-    if not prods:
+    count = sum(1 for p in products if p["category_slug"] == slug)
+    if not count:
         continue
-    count = len(prods)
-    act = " is-active" if _ct_first else ""
-    ct_bar += (f'<button class="ct-tab{act}" data-tab="{slug}" role="tab">'
-               f'{CAT_ICONS.get(slug, "○")} <span>{e(c["title_ru"] or c["title"])}</span> <em>{count}</em></button>')
-    thumbs = ""
-    shown = 0
-    for p in prods:
-        imgs_p = per_product[p["id"]]["images"]
-        if shown >= 4 or not imgs_p:
-            continue
-        name = rf(p, "name")
-        thumbs += (f'<a class="ct-item" href="catalog/index.html#{slug}">'
-                   f'<img src="{imgs_p[0]}" alt="{e(name)}" loading="lazy">'
-                   f'<span>{e(name)}</span></a>')
-        shown += 1
-    ct_panels += f"""
-    <div class="ct-panel{act}" data-panel="{slug}">
-      <p class="ct-lead">{e(CAT_LEADS.get(slug, ""))}</p>
-      <div class="ct-thumbs">{thumbs}</div>
-      <p style="margin-top:24px"><a class="link-arrow" href="catalog/index.html#{slug}">Смотреть все {count} {e(ru_plural(count, 'позиция', 'позиции', 'позиций'))} в каталоге →</a></p>
-    </div>"""
-    _ct_first = False
+    cat_tiles += f"""
+    <a class="cat-tile" href="catalog/index.html#{slug}">
+      <img class="cat-tile-bg" src="assets/cat-covers/{slug}.jpg" alt="{e(c['title_ru'] or c['title'])}">
+      <div class="cat-tile-cap"><span>{e(c['title_ru'] or c['title'])}</span>
+      <em>{count} {e(ru_plural(count, 'позиция', 'позиции', 'позиций'))}</em></div>
+    </a>"""
 
 # --------------------------------------------------------------------- #
 # Home hero slider (design language: mindray.com / bikaicorp.com)
@@ -341,8 +313,7 @@ home_body = f"""
 <section class="cat-tabs-sec">
   <div class="section">
     <h2 class="section-title">Каталог по категориям</h2>
-    <div class="ct-bar" role="tablist">{ct_bar}</div>
-    <div class="ct-panels">{ct_panels}
+    <div class="cat-tiles">{cat_tiles}
     </div>
   </div>
 </section>
@@ -369,23 +340,7 @@ home_body = f"""
 </section>
 """
 
-TABS_JS = """
-<script>
-(function(){
-  var tabs=[].slice.call(document.querySelectorAll('.ct-tab'));
-  var panels=[].slice.call(document.querySelectorAll('.ct-panel'));
-  if(!tabs.length) return;
-  tabs.forEach(function(t){
-    t.addEventListener('click',function(){
-      tabs.forEach(function(x){ x.classList.toggle('is-active', x===t); });
-      panels.forEach(function(p){ p.classList.toggle('is-active', p.getAttribute('data-panel')===t.getAttribute('data-tab')); });
-    });
-  });
-})();
-</script>
-"""
-
-home_body += SLIDER_JS + TABS_JS
+home_body += SLIDER_JS
 
 # --------------------------------------------------------------------- #
 # Self-contained build of the home page: CSS/fonts/logos/hero images are
