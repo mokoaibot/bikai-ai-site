@@ -367,6 +367,10 @@ def inline_home(html_text):
         'src="./assets/logo-wordmark.svg"', f'src="{_data_uri(os.path.join(SITE_DIR, "assets", "logo-wordmark.svg"), "image/svg+xml")}"')
     html_text = html_text.replace(
         'src="./assets/logo-emblem.svg"', f'src="{_data_uri(os.path.join(SITE_DIR, "assets", "logo-emblem.svg"), "image/svg+xml")}"')
+    html_text = html_text.replace(
+        'url("cat-covers/_ice-soft-hero.webp")', f'url("{_data_uri(os.path.join(SITE_DIR, "assets", "cat-covers", "_ice-soft-hero.webp"), "image/webp")}")')
+    html_text = html_text.replace(
+        'url("cat-covers/_ice-soft-sec.webp")', f'url("{_data_uri(os.path.join(SITE_DIR, "assets", "cat-covers", "_ice-soft-sec.webp"), "image/webp")}")')
     for img, _k, *_r in SLIDES:
         p = os.path.join(SITE_DIR, "assets", "hero", f"{img}.webp")
         html_text = html_text.replace(

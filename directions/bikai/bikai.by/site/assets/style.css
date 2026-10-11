@@ -113,9 +113,8 @@ main{min-height:60vh}
 .is-active .hs-img{transform:scale(1)}
 .hs-overlay{position:absolute;inset:0;
   background:
-    radial-gradient(420px 720px at 56% 42%, rgba(120,170,235,.16), rgba(120,170,235,0) 70%),
-    radial-gradient(760px 540px at 10% -10%, rgba(255,255,255,.95), rgba(255,255,255,0) 72%),
-    linear-gradient(90deg, rgba(228,239,251,.98) 0%, rgba(222,235,250,.94) 40%, rgba(222,235,250,.28) 62%, rgba(222,235,250,0) 80%)}
+    linear-gradient(90deg, rgba(243,248,253,.92) 0%, rgba(243,248,253,.6) 42%, rgba(243,248,253,0) 72%),
+    url("cat-covers/_ice-soft-hero.webp") center/cover}
 .hs-content{position:relative;max-width:var(--wrap);margin:0 auto;padding:0 24px;height:100%;
   display:flex;flex-direction:column;justify-content:center;color:var(--ink)}
 .hs-kicker{color:var(--red);font-weight:600;font-size:15px;letter-spacing:.02em;margin-bottom:var(--s4);opacity:0}
@@ -140,7 +139,8 @@ main{min-height:60vh}
   .hero-slider{height:72vh;min-height:480px}
   .hs-img{background-position:center}
   .hs-overlay{background:
-    linear-gradient(180deg, rgba(228,239,251,.97) 0%, rgba(222,235,250,.9) 52%, rgba(222,235,250,.45) 100%)}
+    linear-gradient(180deg, rgba(243,248,253,.95) 0%, rgba(243,248,253,.7) 55%, rgba(243,248,253,.2) 100%),
+    url("cat-covers/_ice-soft-hero.webp") center/cover}
 }
 @media(prefers-reduced-motion:reduce){
   .hs-title .w>span{transform:none;animation:none}
@@ -159,10 +159,7 @@ main{min-height:60vh}
 @media(max-width:860px){.value-props{grid-template-columns:repeat(2,1fr)}}
 
 /* ---------- категории: плитки с заставками в стиле hero ---------- */
-.cat-tabs-sec{background:
-  radial-gradient(760px 420px at 8% -10%, rgba(255,255,255,.9), rgba(255,255,255,0) 70%),
-  radial-gradient(900px 520px at 96% 112%, rgba(120,170,235,.18), rgba(120,170,235,0) 70%),
-  linear-gradient(180deg,#f3f8fd 0%,#e7f0fa 100%)}
+.cat-tabs-sec{background:#f3f8fd url("cat-covers/_ice-soft-sec.webp") center/cover}
 .cat-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .cat-tile{position:relative;display:block;aspect-ratio:1/1;overflow:hidden;
   border:1px solid #dfe9f5;border-radius:var(--radius);background:#e7f0fa;color:var(--ink)}
