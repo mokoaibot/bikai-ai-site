@@ -114,7 +114,9 @@ main{min-height:60vh}
 .hs-overlay{position:absolute;inset:0;
   background:
     linear-gradient(90deg, rgba(243,248,253,.92) 0%, rgba(243,248,253,.6) 42%, rgba(243,248,253,0) 72%),
-    url("cat-covers/_ice-soft-hero.webp") center/cover}
+    url("cat-covers/_ice-soft-hero.webp") center/cover;
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 50%,transparent 85%);
+  mask-image:linear-gradient(90deg,#000 0%,#000 50%,transparent 85%)}
 .hs-content{position:relative;max-width:var(--wrap);margin:0 auto;padding:0 24px;height:100%;
   display:flex;flex-direction:column;justify-content:center;color:var(--ink)}
 .hs-kicker{color:var(--red);font-weight:600;font-size:15px;letter-spacing:.02em;margin-bottom:var(--s4);opacity:0}
@@ -140,7 +142,9 @@ main{min-height:60vh}
   .hs-img{background-position:center}
   .hs-overlay{background:
     linear-gradient(180deg, rgba(243,248,253,.95) 0%, rgba(243,248,253,.7) 55%, rgba(243,248,253,.2) 100%),
-    url("cat-covers/_ice-soft-hero.webp") center/cover}
+    url("cat-covers/_ice-soft-hero.webp") center/cover;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 90%);
+    mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 90%)}
 }
 @media(prefers-reduced-motion:reduce){
   .hs-title .w>span{transform:none;animation:none}
@@ -159,7 +163,7 @@ main{min-height:60vh}
 @media(max-width:860px){.value-props{grid-template-columns:repeat(2,1fr)}}
 
 /* ---------- категории: плитки с заставками в стиле hero ---------- */
-.cat-tabs-sec{background:#f3f8fd url("cat-covers/_ice-soft-sec.webp") center/cover}
+.cat-tabs-sec{background:#f3f8fd url("cat-covers/_ice-sec-soft.webp") center/cover}
 .cat-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .cat-tile{position:relative;display:block;aspect-ratio:1/1;overflow:hidden;
   border:1px solid #dfe9f5;border-radius:var(--radius);background:#e7f0fa;color:var(--ink)}
