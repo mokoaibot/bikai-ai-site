@@ -106,7 +106,7 @@
   UV-Vis оригинал). Vulgar: вуали .hs-veil НЕТ.
 - Пересборка ледяных ассетов: `directions/bikai/bikai.by/scripts/rebuild_ice_assets.py`
   (consumables, functional-modules, ice-кропы) — исходники в brandbook/backgrounds/.
-- Папка фонов: brandbook/backgrounds/ (+archive/). Uploads чистятся без потерь.
+- Папка фонов: brandbook/backgrounds/ (только webp). Uploads чистятся без потерь.
 - Дубли: site/images = копия catalog/images (билд-артефакт, НЕ удалять — внешние коммиты
   пользователя трогают site/); hero_originals содержит осознанные дубли-оригиналы с
   provenance (см. его README).

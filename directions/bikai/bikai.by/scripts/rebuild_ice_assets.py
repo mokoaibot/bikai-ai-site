@@ -7,8 +7,8 @@
   - _ice-sec-soft.webp — прозрачный кроп льда для фона секции плиток;
   - _ice-1600x900.webp — рабочий кроп льда (оверлей hero, заставки).
 
-Исходники: ../../brandbook/backgrounds/ice-source.jpg,
-           ../../brandbook/backgrounds/consumables-showcase-source.jpg,
+Исходники: ../../brandbook/backgrounds/ice-source.webp,
+           ../../brandbook/backgrounds/consumables-showcase-source.webp,
            ../../catalog/images/lc-pump.webp
 Запуск: python3 scripts/rebuild_ice_assets.py
 """
@@ -22,8 +22,8 @@ BB = os.path.join(HERE, "..", "..", "brandbook", "backgrounds")
 CAT_IMG = os.path.join(HERE, "..", "..", "catalog", "images")
 COVERS = os.path.join(HERE, "..", "site", "assets", "cat-covers")
 
-ICE_SRC = os.path.join(BB, "ice-source.jpg")
-CONS_SRC = os.path.join(BB, "consumables-showcase-source.jpg")
+ICE_SRC = os.path.join(BB, "ice-source.webp")
+CONS_SRC = os.path.join(BB, "consumables-showcase-source.webp")
 PUMP_SRC = os.path.join(CAT_IMG, "lc-pump.webp")
 
 
