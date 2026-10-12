@@ -144,6 +144,17 @@ NAV = [
 ]
 
 
+BURGER_JS = """<script>
+(function(){
+  var b=document.getElementById('burgerBtn'), h=document.querySelector('.site-header');
+  if(!b||!h) return;
+  b.addEventListener('click',function(ev){ ev.stopPropagation(); var o=h.classList.toggle('open'); b.setAttribute('aria-expanded',o?'true':'false'); });
+  document.addEventListener('click',function(ev){ if(h.classList.contains('open') && !ev.target.closest('.nav-zone') && !ev.target.closest('.burger')) h.classList.remove('open'); });
+  h.addEventListener('click',function(ev){ if(ev.target.closest('.nav-zone a')) h.classList.remove('open'); });
+})();
+</script>"""
+
+
 def page_shell(title, description, depth, body, active=""):
     """depth = сколько '../' нужно до корня site/ с текущей страницы."""
     root = "../" * depth if depth else "./"
@@ -176,15 +187,7 @@ def page_shell(title, description, depth, body, active=""):
     <button class="burger" id="burgerBtn" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
-<script>
-(function(){
-  var b=document.getElementById('burgerBtn'), h=document.querySelector('.site-header');
-  if(!b||!h) return;
-  b.addEventListener('click',function(ev){ ev.stopPropagation(); var o=h.classList.toggle('open'); b.setAttribute('aria-expanded',o?'true':'false'); });
-  document.addEventListener('click',function(ev){ if(h.classList.contains('open') && !ev.target.closest('.nav-zone') && !ev.target.closest('.burger')) h.classList.remove('open'); });
-  h.addEventListener('click',function(ev){ if(ev.target.closest('.nav-zone a')) h.classList.remove('open'); });
-})();
-</script>
+{BURGER_JS}
 <main>
 {body}
 </main>
