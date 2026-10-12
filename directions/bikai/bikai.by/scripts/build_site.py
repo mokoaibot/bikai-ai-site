@@ -343,7 +343,7 @@ HERO_TUNER = """
     });
     function line(k,name){ return name+': прозрачность '+st[k]['ice-op']+'%, держать до '+st[k]['ice-hold']+'%, растворить к '+st[k]['ice-fade']+'% | белый '+st[k]['veil-op']+'% / '+st[k]['veil-hold']+'% / '+st[k]['veil-fade']+'%'; }
     function css(k){ return '--'+k+'-ice-op:'+(st[k]['ice-op']/100)+'; --'+k+'-ice-hold:'+st[k]['ice-hold']+'%; --'+k+'-ice-fade:'+st[k]['ice-fade']+'%; --'+k+'-veil-op:'+(st[k]['veil-op']/100)+'; --'+k+'-veil-hold:'+st[k]['veil-hold']+'%; --'+k+'-veil-fade:'+st[k]['veil-fade']+'%;'; }
-    out.value='ДЕСКТОП '+line('d')+'\nМОБИЛЬНЫЙ '+line('m')+'\n'+css('d')+'\n'+css('m');
+    out.value='ДЕСКТОП '+line('d')+'\\nМОБИЛЬНЫЙ '+line('m')+'\\n'+css('d')+'\\n'+css('m');
   }
   function renderRows(){
     body.innerHTML='';
