@@ -288,80 +288,99 @@ HERO_TUNER = """
 .ht-btn{position:fixed;right:14px;bottom:14px;z-index:99;width:44px;height:44px;border-radius:50%;
   background:rgba(36,39,40,.75);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;
   cursor:pointer;border:0;backdrop-filter:blur(4px)}
-.ht-panel{position:fixed;right:14px;bottom:66px;z-index:99;width:300px;max-height:80vh;overflow:auto;
+.ht-panel{position:fixed;right:14px;bottom:66px;z-index:99;width:310px;max-height:82vh;overflow:auto;
   background:#fff;border:1px solid #dfe9f5;border-radius:10px;box-shadow:0 12px 40px rgba(20,40,80,.18);
   padding:14px 16px;font:13px/1.45 system-ui,sans-serif;color:#242728}
-.ht-head{display:flex;align-items:center;gap:6px;font-weight:700;margin-bottom:8px}
-.ht-head button{margin-left:auto;font:11px system-ui;border:1px solid #dfe9f5;background:#f3f8fd;border-radius:6px;padding:3px 8px;cursor:pointer}
-.ht-head button+button{margin-left:0}
+.ht-head{display:flex;align-items:center;gap:6px;font-weight:700;margin-bottom:8px;flex-wrap:wrap}
+.ht-head button{font:11px system-ui;border:1px solid #dfe9f5;background:#f3f8fd;border-radius:6px;padding:3px 8px;cursor:pointer}
+.ht-head .ht-sp{margin-left:auto}
+.ht-tab{opacity:.55}
+.ht-tab.on{opacity:1;border-color:#F02F1D;color:#F02F1D;font-weight:700}
 .ht-group{margin:10px 0 4px;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#F02F1D}
 .ht-row{display:grid;grid-template-columns:88px 1fr 44px;align-items:center;gap:8px;margin:4px 0}
 .ht-row label{font-size:12px;color:#4d5254}
 .ht-row output{font-size:11px;text-align:right}
 .ht-row input[type=range]{width:100%}
-.ht-panel textarea{width:100%;height:70px;margin-top:8px;font:10px/1.4 monospace;border:1px solid #dfe9f5;border-radius:6px;padding:6px;color:#4d5254;box-sizing:border-box}
+.ht-panel textarea{width:100%;height:96px;margin-top:8px;font:10px/1.4 monospace;border:1px solid #dfe9f5;border-radius:6px;padding:6px;color:#4d5254;box-sizing:border-box}
 </style>
 <button class="ht-btn" id="htBtn" title="Тюнер HERO" aria-label="Тюнер HERO">🎛</button>
 <div class="ht-panel" id="htPanel" hidden>
-  <div class="ht-head">Тюнер HERO<button id="htCopy" type="button">копировать</button><button id="htReset" type="button">сброс</button></div>
+  <div class="ht-head">Тюнер HERO
+    <button id="htTabD" class="ht-tab on" type="button">десктоп</button><button id="htTabM" class="ht-tab" type="button">мобильный</button>
+    <span class="ht-sp"></span><button id="htCopy" type="button">копировать</button><button id="htReset" type="button">сброс</button></div>
   <div id="htBody"></div>
   <textarea id="htOut" readonly></textarea>
 </div>
 <script>
 (function(){
-  var CFG=[
-    ['Лёд — верхний слой','ice-op','Прозрачность',0,100,100],
-    [null,'ice-hold','Держать до',0,90,38],
-    [null,'ice-fade','Растворить к',20,100,78],
-    ['Белый слой — под льдом','veil-op','Прозрачность',0,100,0],
-    [null,'veil-hold','Держать до',0,90,30],
-    [null,'veil-fade','Растворить к',20,100,70]
+  var ROWS=[
+    ['Лёд — верхний слой','ice-op','Прозрачность',0,100],
+    [null,'ice-hold','Держать до',0,90],
+    [null,'ice-fade','Растворить к',20,100],
+    ['Белый слой — под льдом','veil-op','Прозрачность',0,100],
+    [null,'veil-hold','Держать до',0,90],
+    [null,'veil-fade','Растворить к',20,100]
   ];
+  var DEF={
+    d:{'ice-op':33,'ice-hold':12,'ice-fade':67,'veil-op':100,'veil-hold':36,'veil-fade':62},
+    m:{'ice-op':33,'ice-hold':10,'ice-fade':55,'veil-op':100,'veil-hold':30,'veil-fade':70}
+  };
   var root=document.documentElement,
       body=document.getElementById('htBody'),
       out=document.getElementById('htOut'),
       panel=document.getElementById('htPanel'),
-      st={};
-  try{ st=JSON.parse(localStorage.getItem('bikaiHeroTuner')||'{}')||{}; }catch(e){}
-  CFG.forEach(function(c){ if(typeof st[c[1]]!=='number') st[c[1]]=c[4]; });
-  function apply(){
-    CFG.forEach(function(c){
-      var v=st[c[1]];
-      root.style.setProperty('--'+c[1], c[1].indexOf('-op')>-1 ? (v/100) : v+'%');
-    });
-    out.value='ЛЁД: прозрачность '+st['ice-op']+'%, держать до '+st['ice-hold']+'%, растворить к '+st['ice-fade']+'%\\n'+
-              'БЕЛЫЙ: прозрачность '+st['veil-op']+'%, держать до '+st['veil-hold']+'%, растворить к '+st['veil-fade']+'%\\n'+
-              '--ice-op:'+(st['ice-op']/100)+'; --ice-hold:'+st['ice-hold']+'%; --ice-fade:'+st['ice-fade']+'%; --veil-op:'+(st['veil-op']/100)+'; --veil-hold:'+st['veil-hold']+'%; --veil-fade:'+st['veil-fade']+'%;';
-  }
-  CFG.forEach(function(c){
-    if(c[0]){ var g=document.createElement('div'); g.className='ht-group'; g.textContent=c[0]; body.appendChild(g); }
-    var row=document.createElement('div'); row.className='ht-row';
-    row.innerHTML='<label>'+c[2]+'</label><input type="range" min="'+c[3]+'" max="'+c[4]+'" step="1" value="'+st[c[1]]+'" data-v="'+c[1]+'"><output>'+st[c[1]]+'%</output>';
-    body.appendChild(row);
+      cur='d', st={};
+  ['d','m'].forEach(function(k){
+    try{ st[k]=Object.assign({},DEF[k],JSON.parse(localStorage.getItem('bikaiTuner_'+k)||'{}')); }
+    catch(e){ st[k]=Object.assign({},DEF[k]); }
   });
+  function apply(){
+    ['d','m'].forEach(function(k){
+      ROWS.forEach(function(r){
+        var v=st[k][r[1]];
+        root.style.setProperty('--'+k+'-'+r[1], r[1].indexOf('-op')>-1 ? (v/100) : v+'%');
+      });
+    });
+    function line(k,name){ return name+': прозрачность '+st[k]['ice-op']+'%, держать до '+st[k]['ice-hold']+'%, растворить к '+st[k]['ice-fade']+'% | белый '+st[k]['veil-op']+'% / '+st[k]['veil-hold']+'% / '+st[k]['veil-fade']+'%'; }
+    function css(k){ return '--'+k+'-ice-op:'+(st[k]['ice-op']/100)+'; --'+k+'-ice-hold:'+st[k]['ice-hold']+'%; --'+k+'-ice-fade:'+st[k]['ice-fade']+'%; --'+k+'-veil-op:'+(st[k]['veil-op']/100)+'; --'+k+'-veil-hold:'+st[k]['veil-hold']+'%; --'+k+'-veil-fade:'+st[k]['veil-fade']+'%;'; }
+    out.value='ДЕСКТОП '+line('d')+'\nМОБИЛЬНЫЙ '+line('m')+'\n'+css('d')+'\n'+css('m');
+  }
+  function renderRows(){
+    body.innerHTML='';
+    ROWS.forEach(function(r){
+      if(r[0]){ var g=document.createElement('div'); g.className='ht-group'; g.textContent=r[0]; body.appendChild(g); }
+      var row=document.createElement('div'); row.className='ht-row';
+      row.innerHTML='<label>'+r[2]+'</label><input type="range" min="'+r[3]+'" max="'+r[4]+'" step="1" value="'+st[cur][r[1]]+'" data-v="'+r[1]+'"><output>'+st[cur][r[1]]+'%</output>';
+      body.appendChild(row);
+    });
+  }
   body.addEventListener('input',function(ev){
     var v=ev.target.getAttribute&&ev.target.getAttribute('data-v');
     if(!v) return;
-    st[v]=+ev.target.value;
-    ev.target.parentNode.querySelector('output').textContent=st[v]+'%';
-    try{ localStorage.setItem('bikaiHeroTuner',JSON.stringify(st)); }catch(e){}
+    st[cur][v]=+ev.target.value;
+    ev.target.parentNode.querySelector('output').textContent=st[cur][v]+'%';
+    try{ localStorage.setItem('bikaiTuner_'+cur,JSON.stringify(st[cur])); }catch(e){}
     apply();
   });
+  function setTab(k){
+    cur=k;
+    document.getElementById('htTabD').classList.toggle('on',k==='d');
+    document.getElementById('htTabM').classList.toggle('on',k==='m');
+    renderRows();
+  }
+  document.getElementById('htTabD').addEventListener('click',function(){ setTab('d'); });
+  document.getElementById('htTabM').addEventListener('click',function(){ setTab('m'); });
   document.getElementById('htReset').addEventListener('click',function(){
-    CFG.forEach(function(c){ st[c[1]]=c[4]; });
-    try{ localStorage.removeItem('bikaiHeroTuner'); }catch(e){}
-    [].forEach.call(body.querySelectorAll('input'),function(inp){
-      inp.value=st[inp.getAttribute('data-v')];
-      inp.parentNode.querySelector('output').textContent=inp.value+'%';
-    });
-    apply();
+    st[cur]=Object.assign({},DEF[cur]);
+    try{ localStorage.removeItem('bikaiTuner_'+cur); }catch(e){}
+    renderRows(); apply();
   });
   document.getElementById('htCopy').addEventListener('click',function(){
     out.select();
     try{ navigator.clipboard.writeText(out.value); }catch(e){ document.execCommand('copy'); }
   });
   document.getElementById('htBtn').addEventListener('click',function(){ panel.hidden=!panel.hidden; });
-  apply();
+  renderRows(); apply();
 })();
 </script>
 """
