@@ -477,7 +477,7 @@ main{min-height:60vh}
       });
       root.style.setProperty('--'+k+'-ang', st[k].ang+'deg');
     });
-    function line(k,name){ return name+': прозрачность '+st[k]['ice-op']+'%, держать до '+st[k]['ice-hold']+'%, растворить к '+st[k]['ice-fade']+'% | белый '+st[k]['veil-op']+'% / '+st[k]['veil-hold']+'% / '+st[k]['veil-fade']+'% | направление '+(st[k].ang===90?'слева→направо':'сверху→вниз'); }
+    function line(k){ return 'прозрачность '+st[k]['ice-op']+'%, держать до '+st[k]['ice-hold']+'%, растворить к '+st[k]['ice-fade']+'% | белый '+st[k]['veil-op']+'% / '+st[k]['veil-hold']+'% / '+st[k]['veil-fade']+'% | направление '+(st[k].ang===90?'слева→направо':'сверху→вниз'); }
     function css(k){ return '--'+k+'-ice-op:'+(st[k]['ice-op']/100)+'; --'+k+'-ice-hold:'+st[k]['ice-hold']+'%; --'+k+'-ice-fade:'+st[k]['ice-fade']+'%; --'+k+'-veil-op:'+(st[k]['veil-op']/100)+'; --'+k+'-veil-hold:'+st[k]['veil-hold']+'%; --'+k+'-veil-fade:'+st[k]['veil-fade']+'%; --'+k+'-ang:'+st[k].ang+'deg;'; }
     out.value='ДЕСКТОП '+line('d')+'\nМОБИЛЬНЫЙ '+line('m')+'\n'+css('d')+'\n'+css('m');
   }
@@ -522,7 +522,14 @@ main{min-height:60vh}
     out.select();
     try{ navigator.clipboard.writeText(out.value); }catch(e){ document.execCommand('copy'); }
   });
-  document.getElementById('htBtn').addEventListener('click',function(){ panel.hidden=!panel.hidden; });
+  var htBtn=document.getElementById('htBtn');
+  htBtn.style.display='none';
+  htBtn.addEventListener('click',function(){ panel.hidden=!panel.hidden; });
+  var brand=document.querySelector('.brand'), taps=0, tt=0;
+  if(brand){ brand.addEventListener('click',function(){
+    var now=Date.now(); if(now-tt>600) taps=0; tt=now; taps++;
+    if(taps>=3){ taps=0; var vis=htBtn.style.display!=='none'; htBtn.style.display=vis?'none':'flex'; if(vis) panel.hidden=true; }
+  }); }
   renderRows(); renderDir(); apply();
 })();
 </script>
