@@ -266,6 +266,7 @@ for idx, (img, kicker, title, lead, href) in enumerate(SLIDES):
     hero_slider += f"""
   <div class="hs-slide{' is-active' if idx == 0 else ''}">
     <div class="hs-img" style="background-image:url('assets/hero/{img}.webp')"></div>
+    <div class="hs-veil"></div>
     <div class="hs-overlay"></div>
     <div class="hs-content">
       <p class="hs-kicker">{e(kicker)}</p>
@@ -281,6 +282,90 @@ hero_slider += '\n  <div class="hs-dots"><div class="hs-dots-in">'
 for idx, (img, kicker, *_r) in enumerate(SLIDES):
     hero_slider += f'<button class="hs-dot{" is-active" if idx == 0 else ""}" aria-label="{e(kicker)}"></button>'
 hero_slider += "</div></div>\n</section>"
+
+HERO_TUNER = """
+<style>
+.ht-btn{position:fixed;right:14px;bottom:14px;z-index:99;width:44px;height:44px;border-radius:50%;
+  background:rgba(36,39,40,.75);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;border:0;backdrop-filter:blur(4px)}
+.ht-panel{position:fixed;right:14px;bottom:66px;z-index:99;width:300px;max-height:80vh;overflow:auto;
+  background:#fff;border:1px solid #dfe9f5;border-radius:10px;box-shadow:0 12px 40px rgba(20,40,80,.18);
+  padding:14px 16px;font:13px/1.45 system-ui,sans-serif;color:#242728}
+.ht-head{display:flex;align-items:center;gap:6px;font-weight:700;margin-bottom:8px}
+.ht-head button{margin-left:auto;font:11px system-ui;border:1px solid #dfe9f5;background:#f3f8fd;border-radius:6px;padding:3px 8px;cursor:pointer}
+.ht-head button+button{margin-left:0}
+.ht-group{margin:10px 0 4px;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#F02F1D}
+.ht-row{display:grid;grid-template-columns:88px 1fr 44px;align-items:center;gap:8px;margin:4px 0}
+.ht-row label{font-size:12px;color:#4d5254}
+.ht-row output{font-size:11px;text-align:right}
+.ht-row input[type=range]{width:100%}
+.ht-panel textarea{width:100%;height:70px;margin-top:8px;font:10px/1.4 monospace;border:1px solid #dfe9f5;border-radius:6px;padding:6px;color:#4d5254;box-sizing:border-box}
+</style>
+<button class="ht-btn" id="htBtn" title="Тюнер HERO" aria-label="Тюнер HERO">🎛</button>
+<div class="ht-panel" id="htPanel" hidden>
+  <div class="ht-head">Тюнер HERO<button id="htCopy" type="button">копировать</button><button id="htReset" type="button">сброс</button></div>
+  <div id="htBody"></div>
+  <textarea id="htOut" readonly></textarea>
+</div>
+<script>
+(function(){
+  var CFG=[
+    ['Лёд — верхний слой','ice-op','Прозрачность',0,100,100],
+    [null,'ice-hold','Держать до',0,90,38],
+    [null,'ice-fade','Растворить к',20,100,78],
+    ['Белый слой — под льдом','veil-op','Прозрачность',0,100,0],
+    [null,'veil-hold','Держать до',0,90,30],
+    [null,'veil-fade','Растворить к',20,100,70]
+  ];
+  var root=document.documentElement,
+      body=document.getElementById('htBody'),
+      out=document.getElementById('htOut'),
+      panel=document.getElementById('htPanel'),
+      st={};
+  try{ st=JSON.parse(localStorage.getItem('bikaiHeroTuner')||'{}')||{}; }catch(e){}
+  CFG.forEach(function(c){ if(typeof st[c[1]]!=='number') st[c[1]]=c[4]; });
+  function apply(){
+    CFG.forEach(function(c){
+      var v=st[c[1]];
+      root.style.setProperty('--'+c[1], c[1].indexOf('-op')>-1 ? (v/100) : v+'%');
+    });
+    out.value='ЛЁД: прозрачность '+st['ice-op']+'%, держать до '+st['ice-hold']+'%, растворить к '+st['ice-fade']+'%\\n'+
+              'БЕЛЫЙ: прозрачность '+st['veil-op']+'%, держать до '+st['veil-hold']+'%, растворить к '+st['veil-fade']+'%\\n'+
+              '--ice-op:'+(st['ice-op']/100)+'; --ice-hold:'+st['ice-hold']+'%; --ice-fade:'+st['ice-fade']+'%; --veil-op:'+(st['veil-op']/100)+'; --veil-hold:'+st['veil-hold']+'%; --veil-fade:'+st['veil-fade']+'%;';
+  }
+  CFG.forEach(function(c){
+    if(c[0]){ var g=document.createElement('div'); g.className='ht-group'; g.textContent=c[0]; body.appendChild(g); }
+    var row=document.createElement('div'); row.className='ht-row';
+    row.innerHTML='<label>'+c[2]+'</label><input type="range" min="'+c[3]+'" max="'+c[4]+'" step="1" value="'+st[c[1]]+'" data-v="'+c[1]+'"><output>'+st[c[1]]+'%</output>';
+    body.appendChild(row);
+  });
+  body.addEventListener('input',function(ev){
+    var v=ev.target.getAttribute&&ev.target.getAttribute('data-v');
+    if(!v) return;
+    st[v]=+ev.target.value;
+    ev.target.parentNode.querySelector('output').textContent=st[v]+'%';
+    try{ localStorage.setItem('bikaiHeroTuner',JSON.stringify(st)); }catch(e){}
+    apply();
+  });
+  document.getElementById('htReset').addEventListener('click',function(){
+    CFG.forEach(function(c){ st[c[1]]=c[4]; });
+    try{ localStorage.removeItem('bikaiHeroTuner'); }catch(e){}
+    [].forEach.call(body.querySelectorAll('input'),function(inp){
+      inp.value=st[inp.getAttribute('data-v')];
+      inp.parentNode.querySelector('output').textContent=inp.value+'%';
+    });
+    apply();
+  });
+  document.getElementById('htCopy').addEventListener('click',function(){
+    out.select();
+    try{ navigator.clipboard.writeText(out.value); }catch(e){ document.execCommand('copy'); }
+  });
+  document.getElementById('htBtn').addEventListener('click',function(){ panel.hidden=!panel.hidden; });
+  apply();
+})();
+</script>
+"""
+hero_slider += HERO_TUNER
 
 SLIDER_JS = """
 <script>
