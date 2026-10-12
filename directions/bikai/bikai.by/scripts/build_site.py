@@ -311,6 +311,8 @@ HERO_TUNER = """
 .ht-head .ht-sp{margin-left:auto}
 .ht-tab{opacity:.55}
 .ht-tab.on{opacity:1;border-color:#F02F1D;color:#F02F1D;font-weight:700}
+.ht-dirrow{display:flex;justify-content:flex-end;margin:-2px 0 2px}
+.ht-dir{font:11px system-ui;border:1px solid #dfe9f5;background:#f3f8fd;border-radius:6px;padding:3px 8px;cursor:pointer;color:#242728}
 .ht-group{margin:10px 0 4px;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#F02F1D}
 .ht-row{display:grid;grid-template-columns:88px 1fr 44px;align-items:center;gap:8px;margin:4px 0}
 .ht-row label{font-size:12px;color:#4d5254}
@@ -323,6 +325,7 @@ HERO_TUNER = """
   <div class="ht-head">Тюнер HERO
     <button id="htTabD" class="ht-tab on" type="button">десктоп</button><button id="htTabM" class="ht-tab" type="button">мобильный</button>
     <span class="ht-sp"></span><button id="htCopy" type="button">копировать</button><button id="htReset" type="button">сброс</button></div>
+  <div class="ht-dirrow"><button id="htDir" type="button"></button></div>
   <div id="htBody"></div>
   <textarea id="htOut" readonly></textarea>
 </div>
@@ -337,8 +340,8 @@ HERO_TUNER = """
     [null,'veil-fade','Растворить к',20,100]
   ];
   var DEF={
-    d:{'ice-op':33,'ice-hold':12,'ice-fade':67,'veil-op':100,'veil-hold':36,'veil-fade':62},
-    m:{'ice-op':33,'ice-hold':10,'ice-fade':55,'veil-op':100,'veil-hold':30,'veil-fade':70}
+    d:{'ice-op':33,'ice-hold':12,'ice-fade':67,'veil-op':100,'veil-hold':36,'veil-fade':62,'ang':90},
+    m:{'ice-op':33,'ice-hold':10,'ice-fade':55,'veil-op':100,'veil-hold':30,'veil-fade':70,'ang':90}
   };
   var root=document.documentElement,
       body=document.getElementById('htBody'),
@@ -355,9 +358,10 @@ HERO_TUNER = """
         var v=st[k][r[1]];
         root.style.setProperty('--'+k+'-'+r[1], r[1].indexOf('-op')>-1 ? (v/100) : v+'%');
       });
+      root.style.setProperty('--'+k+'-ang', st[k].ang+'deg');
     });
-    function line(k,name){ return name+': прозрачность '+st[k]['ice-op']+'%, держать до '+st[k]['ice-hold']+'%, растворить к '+st[k]['ice-fade']+'% | белый '+st[k]['veil-op']+'% / '+st[k]['veil-hold']+'% / '+st[k]['veil-fade']+'%'; }
-    function css(k){ return '--'+k+'-ice-op:'+(st[k]['ice-op']/100)+'; --'+k+'-ice-hold:'+st[k]['ice-hold']+'%; --'+k+'-ice-fade:'+st[k]['ice-fade']+'%; --'+k+'-veil-op:'+(st[k]['veil-op']/100)+'; --'+k+'-veil-hold:'+st[k]['veil-hold']+'%; --'+k+'-veil-fade:'+st[k]['veil-fade']+'%;'; }
+    function line(k,name){ return name+': прозрачность '+st[k]['ice-op']+'%, держать до '+st[k]['ice-hold']+'%, растворить к '+st[k]['ice-fade']+'% | белый '+st[k]['veil-op']+'% / '+st[k]['veil-hold']+'% / '+st[k]['veil-fade']+'% | направление '+(st[k].ang===90?'слева→направо':'сверху→вниз'); }
+    function css(k){ return '--'+k+'-ice-op:'+(st[k]['ice-op']/100)+'; --'+k+'-ice-hold:'+st[k]['ice-hold']+'%; --'+k+'-ice-fade:'+st[k]['ice-fade']+'%; --'+k+'-veil-op:'+(st[k]['veil-op']/100)+'; --'+k+'-veil-hold:'+st[k]['veil-hold']+'%; --'+k+'-veil-fade:'+st[k]['veil-fade']+'%; --'+k+'-ang:'+st[k].ang+'deg;'; }
     out.value='ДЕСКТОП '+line('d')+'\\nМОБИЛЬНЫЙ '+line('m')+'\\n'+css('d')+'\\n'+css('m');
   }
   function renderRows(){
@@ -377,11 +381,18 @@ HERO_TUNER = """
     try{ localStorage.setItem('bikaiTuner_'+cur,JSON.stringify(st[cur])); }catch(e){}
     apply();
   });
+  var dirBtn=document.getElementById('htDir');
+  function renderDir(){ dirBtn.textContent='направление: '+(st[cur].ang===90?'слева → направо':'сверху → вниз'); }
+  dirBtn.addEventListener('click',function(){
+    st[cur].ang = st[cur].ang===90 ? 180 : 90;
+    try{ localStorage.setItem('bikaiTuner_'+cur,JSON.stringify(st[cur])); }catch(e){}
+    renderDir(); apply();
+  });
   function setTab(k){
     cur=k;
     document.getElementById('htTabD').classList.toggle('on',k==='d');
     document.getElementById('htTabM').classList.toggle('on',k==='m');
-    renderRows();
+    renderRows(); renderDir();
   }
   document.getElementById('htTabD').addEventListener('click',function(){ setTab('d'); });
   document.getElementById('htTabM').addEventListener('click',function(){ setTab('m'); });
@@ -395,7 +406,7 @@ HERO_TUNER = """
     try{ navigator.clipboard.writeText(out.value); }catch(e){ document.execCommand('copy'); }
   });
   document.getElementById('htBtn').addEventListener('click',function(){ panel.hidden=!panel.hidden; });
-  renderRows(); apply();
+  renderRows(); renderDir(); apply();
 })();
 </script>
 """
