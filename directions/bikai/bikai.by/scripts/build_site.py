@@ -168,11 +168,23 @@ def page_shell(title, description, depth, body, active=""):
       <img src="{root}assets/logo-emblem.svg" alt="" class="brand-emblem">
       <img src="{root}assets/logo-wordmark.svg" alt="BIKAI" class="brand-img">
     </a>
-    <nav class="main-nav">{nav_html}</nav>
-    <a href="{root}catalog/index.html#consumables" class="btn btn-ghost nav-cta">Подбор расходников</a>
-    <a href="tel:{e(COMPANY['phone'].replace(' ', ''))}" class="btn btn-accent nav-cta">{e(COMPANY['phone'])}</a>
+    <div class="nav-zone">
+      <nav class="main-nav">{nav_html}</nav>
+      <a href="{root}catalog/index.html#consumables" class="btn btn-ghost nav-cta">Подбор расходников</a>
+      <a href="tel:{e(COMPANY['phone'].replace(' ', ''))}" class="btn btn-accent nav-cta">{e(COMPANY['phone'])}</a>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
+<script>
+(function(){
+  var b=document.getElementById('burgerBtn'), h=document.querySelector('.site-header');
+  if(!b||!h) return;
+  b.addEventListener('click',function(ev){ ev.stopPropagation(); var o=h.classList.toggle('open'); b.setAttribute('aria-expanded',o?'true':'false'); });
+  document.addEventListener('click',function(ev){ if(h.classList.contains('open') && !ev.target.closest('.nav-zone') && !ev.target.closest('.burger')) h.classList.remove('open'); });
+  h.addEventListener('click',function(ev){ if(ev.target.closest('.nav-zone a')) h.classList.remove('open'); });
+})();
+</script>
 <main>
 {body}
 </main>
@@ -285,10 +297,10 @@ hero_slider += "</div></div>\n</section>"
 
 HERO_TUNER = """
 <style>
-.ht-btn{width:34px;height:34px;border-radius:50%;background:rgba(36,39,40,.45);color:#fff;font-size:16px;
-  display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;margin-left:12px;flex:0 0 auto}
-.ht-btn:hover{background:rgba(36,39,40,.8)}
-.ht-panel{position:fixed;right:14px;top:70px;z-index:99;width:310px;max-width:calc(100vw - 28px);max-height:calc(100vh - 90px);overflow:auto;
+.ht-btn{position:fixed;right:14px;bottom:14px;z-index:99;width:44px;height:44px;border-radius:50%;
+  background:rgba(36,39,40,.75);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;border:0;backdrop-filter:blur(4px)}
+.ht-panel{position:fixed;right:14px;bottom:66px;z-index:99;width:310px;max-width:calc(100vw - 28px);max-height:82vh;overflow:auto;
   background:#fff;border:1px solid #dfe9f5;border-radius:10px;box-shadow:0 12px 40px rgba(20,40,80,.18);
   padding:14px 16px;font:13px/1.45 system-ui,sans-serif;color:#242728}
 .ht-head{display:flex;align-items:center;gap:6px;font-weight:700;margin-bottom:8px;flex-wrap:wrap}
@@ -380,8 +392,6 @@ HERO_TUNER = """
     try{ navigator.clipboard.writeText(out.value); }catch(e){ document.execCommand('copy'); }
   });
   document.getElementById('htBtn').addEventListener('click',function(){ panel.hidden=!panel.hidden; });
-  var hi=document.querySelector('.header-inner');
-  if(hi) hi.appendChild(document.getElementById('htBtn'));
   renderRows(); apply();
 })();
 </script>

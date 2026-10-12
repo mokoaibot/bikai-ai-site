@@ -60,9 +60,20 @@ a:hover{color:var(--red-dark)}
 .main-nav a:hover{color:var(--red)}
 .main-nav a.active{color:var(--ink);border-bottom-color:var(--red)}
 .nav-cta{margin-left:0}
+.nav-zone{display:contents}
+.burger{display:none;flex-direction:column;gap:4px;background:none;border:0;padding:10px;margin-left:auto;cursor:pointer}
+.burger span{width:22px;height:2px;background:var(--ink);display:block;border-radius:1px}
 @media(max-width:900px){
-  .header-inner{padding:12px 16px;gap:12px}
-  .main-nav{margin-left:0;gap:16px;order:3;width:100%}
+  .header-inner{padding:12px 16px;gap:12px;flex-wrap:nowrap}
+  .burger{display:flex}
+  .nav-zone{display:none;position:absolute;top:100%;left:0;right:0;background:var(--white);
+    border-bottom:1px solid var(--line);box-shadow:0 18px 40px rgba(20,40,80,.12);
+    padding:8px 16px 18px;flex-direction:column;gap:10px}
+  .site-header.open .nav-zone{display:flex}
+  .nav-zone .main-nav{margin-left:0;gap:0;width:100%;flex-direction:column}
+  .nav-zone .main-nav a{padding:12px 4px;border-bottom:1px solid var(--line);font-size:14px}
+  .nav-zone .main-nav a:last-child{border-bottom-color:transparent}
+  .nav-zone .nav-cta{margin-left:0;text-align:center}
 }
 
 /* ---------- buttons ---------- */
