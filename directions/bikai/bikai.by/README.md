@@ -43,9 +43,12 @@ site/
 - В build-шаблон добавлены description, canonical, Open Graph и Twitter Card.
   Для надёжности Telegram все страницы используют общую `site/og-cover.jpg`;
   это одно разрешённое JPEG-исключение, остальные изображения — WebP.
-- Пользователь уже загрузил предыдущую версию в FTP; текущий пакет с JPEG нужно
-  загрузить повторно в web-root. `engine/deploy_gh_pages.py` обновляет только зеркало.
-  Готовый архив (191 файл, около 4.2 MB): `/home/user/bikai-by-site-update.zip`.
+- Текущий JPEG-пакет уже загружен заказчиком на основной хостинг; live OG `bikai.by`
+  и зеркало сейчас отдают одинаковый HTML и `og-cover.jpg`. Прямой ZIP текущего сайта
+  доступен по GitHub-ссылке выше; обновляется вместе с `build_site.py`.
+- LiteSpeed пропускает TelegramBot/WhatsApp/Twitter/LinkedIn в наших тестах, но
+  отвечает 403 для `facebookexternalhit` и `meta-externalagent`; для Meta-превью нужна
+  разблокировка crawler’ов на хостинге. Более широкое SEO и Schema.org остаются задачами.
 - Более широкое SEO, Schema.org и регистрация в БелГИЭ / привязка ЕРИП
   остаются отдельными задачами.
 

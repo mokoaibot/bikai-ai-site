@@ -150,18 +150,21 @@
   `directions/bikai/bikai.by/site/og-cover.jpg` (1200×630 JPEG) — единственное
   форматное исключение для соцпревью; изображения сайта/товаров остаются WebP.
   Страницы брендбука и сравнения имеют отдельные статические метаданные.
-- После FTP-загрузки заказчиком `bikai.by` отдаёт canonical/og:url на apex-домен,
-  страницу и старую WebP-обложку с HTTP 200. TelegramBot/WhatsApp UA также получают
-  200; Telegram-превью всё ещё не появилось, поэтому approved JPEG social-only cover.
-- Новый архив после этой правки: `/home/user/bikai-by-site-update.zip` (191 файл,
-  ~4.2 MB). На live `og-cover.jpg` пока 404, прежний `.webp` ещё 200 — новый архив
-  ожидает FTP upload. После upload нужно убедиться, что JPG стал 200, затем обновить
-  кэш через WebpageBot и проверить новой отправкой ссылки.
-  Прямого доступа к LiteSpeed-хостингу у агента нет.
-- Текущий blocker для Meta/Facebook: `facebookexternalhit` и `meta-externalagent`
-  получают 403 от LiteSpeed (Facebot — 200). Если Meta-превью не появится, хостингу
-  нужно разрешить эти crawler user-agent / убрать антибот-блокировку.
-- Один только deploy в `gh-pages` обновляет зеркало, не LiteSpeed-хостинг.
+- На проверке после последнего FTP-upload live `https://bikai.by/` отдаёт canonical/og:url
+  на apex и `og:image=https://bikai.by/og-cover.jpg` (JPEG 1200×630, 115 KB, HTTP 200).
+  GitHub Pages mirror и production возвращают побайтно одинаковый HTML (SHA-256
+  `1372132af9900782a4ec7c03efc269ac310b814c0a658f6bb3b6eaf670da50fa`) и один JPG.
+- `TelegramBot`, WhatsApp, Twitterbot, LinkedInBot и Slackbot UA получают 200 с обеих
+  площадок. Однако это тест с нашего IP, не с IP Telegram. Telegram кэширует карточку
+  по URL; после изменений re-scrape именно `https://bikai.by/` через WebpageBot и тест
+  новой отправкой (старые сообщения не обновляются).
+- Разница production vs mirror для соцсетей: `facebookexternalhit` и
+  `meta-externalagent` получают 403 только на LiteSpeed, но 200 на GitHub Pages;
+  Facebot получает 200. Для Meta/Facebook/Instagram нужно попросить хостинг убрать
+  антибот-блокировку / разрешить crawler user-agent (и при необходимости IP).
+- Архив текущего сайта в GitHub: `directions/bikai/bikai.by/site-current.zip`, ссылка
+  добавлена в README/About-ready text. Пересоздаётся вместе с build_site.py; ручной
+  FTP-upload основной площадки остаётся за заказчиком.
 
 ## Прямая ссылка на ZIP сайта в GitHub
 - `directions/bikai/bikai.by/scripts/build_site.py` теперь создаёт
