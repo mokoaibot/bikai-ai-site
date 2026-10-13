@@ -29,8 +29,9 @@ DB_PATH = os.path.join(HERE, "..", "..", "catalog", "data", "bikai_catalog.db")
 IMAGES_SRC = os.path.join(HERE, "..", "..", "catalog", "images")
 SITE_DIR = os.path.join(HERE, "..", "site")
 IMAGES_DST = os.path.join(SITE_DIR, "images")
-# GitHub Pages URL until bikai.by is purchased and connected. Update this once.
-PUBLIC_BASE_URL = "https://mokoaibot.github.io/bikai-ai-site/"
+# Canonical/OG origin for the live production site; use apex, not www.
+# GitHub Pages remains a mirror; update this if the primary domain changes.
+PUBLIC_BASE_URL = "https://bikai.by/"
 DEFAULT_OG_IMAGE = PUBLIC_BASE_URL + "og-cover.webp"
 
 INSTRUMENT_CATS = {"chromatography", "mass-spectrometry", "spectroscopy",
