@@ -23,6 +23,7 @@ import os
 import re
 import shutil
 import sqlite3
+import zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(HERE, "..", "..", "catalog", "data", "bikai_catalog.db")
@@ -750,4 +751,15 @@ with open(os.path.join(SITE_DIR, "contacts.html"), "w", encoding="utf-8") as f:
         page_path="contacts.html",
     ))
 
+# A direct, always-current GitHub download of the complete static site.
+# Place it at the bikai.by project root, beside scripts/ and site/.
+ARCHIVE_PATH = os.path.normpath(os.path.join(HERE, "..", "site-current.zip"))
+with zipfile.ZipFile(ARCHIVE_PATH, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=8) as archive:
+    for current, dirs, files in os.walk(SITE_DIR):
+        dirs.sort()
+        for filename in sorted(files):
+            path = os.path.join(current, filename)
+            archive.write(path, os.path.relpath(path, SITE_DIR).replace(os.sep, "/"))
+
 print(f"OK: {n_products} товаров ({n_instruments} приборов, {n_consumables} расходников) -> {SITE_DIR}")
+print(f"ZIP для скачивания: {ARCHIVE_PATH} ({os.path.getsize(ARCHIVE_PATH)} bytes)")

@@ -162,3 +162,12 @@
   получают 403 от LiteSpeed (Facebot — 200). Если Meta-превью не появится, хостингу
   нужно разрешить эти crawler user-agent / убрать антибот-блокировку.
 - Один только deploy в `gh-pages` обновляет зеркало, не LiteSpeed-хостинг.
+
+## Прямая ссылка на ZIP сайта в GitHub
+- `directions/bikai/bikai.by/scripts/build_site.py` теперь создаёт
+  `directions/bikai/bikai.by/site-current.zip` рядом с исходником; внутри ZIP
+  файлы лежат от корня web-root, архив автоматически обновляется при пересборке.
+- Ссылка для скачивания:
+  `https://github.com/mokoaibot/bikai-ai-site/raw/refs/heads/main/directions/bikai/bikai.by/site-current.zip`.
+  Добавлена в корневой README и README сайта BIKAI.by; после коммита обновить и
+  короткое описание репозитория GitHub (About), если API позволяет.
