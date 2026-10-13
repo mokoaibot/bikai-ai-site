@@ -29,6 +29,9 @@ DB_PATH = os.path.join(HERE, "..", "..", "catalog", "data", "bikai_catalog.db")
 IMAGES_SRC = os.path.join(HERE, "..", "..", "catalog", "images")
 SITE_DIR = os.path.join(HERE, "..", "site")
 IMAGES_DST = os.path.join(SITE_DIR, "images")
+# GitHub Pages URL until bikai.by is purchased and connected. Update this once.
+PUBLIC_BASE_URL = "https://mokoaibot.github.io/bikai-ai-site/"
+DEFAULT_OG_IMAGE = PUBLIC_BASE_URL + "og-cover.webp"
 
 INSTRUMENT_CATS = {"chromatography", "mass-spectrometry", "spectroscopy",
                     "functional-modules", "gas-generators"}
@@ -155,9 +158,13 @@ BURGER_JS = """<script>
 </script>"""
 
 
-def page_shell(title, description, depth, body, active=""):
+def page_shell(title, description, depth, body, active="", page_path="",
+               og_image="", og_image_width=1200, og_image_height=630,
+               og_image_alt="Оборудование BIKAI и UVTech для лабораторий"):
     """depth = сколько '../' нужно до корня site/ с текущей страницы."""
     root = "../" * depth if depth else "./"
+    canonical_url = PUBLIC_BASE_URL + page_path.lstrip("/") if page_path else PUBLIC_BASE_URL
+    og_image_url = PUBLIC_BASE_URL + og_image.lstrip("/") if og_image else DEFAULT_OG_IMAGE
     nav_html = "\n".join(
         f'<a href="{root}{href.lstrip("/")}" class="{"active" if href==active else ""}">{e(label)}</a>'
         for href, label in NAV
@@ -169,6 +176,22 @@ def page_shell(title, description, depth, body, active=""):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(title)}</title>
 <meta name="description" content="{e(description)}">
+<link rel="canonical" href="{e(canonical_url)}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BIKAI / UVTech — дилер в Беларуси">
+<meta property="og:title" content="{e(title)}">
+<meta property="og:description" content="{e(description)}">
+<meta property="og:url" content="{e(canonical_url)}">
+<meta property="og:image" content="{e(og_image_url)}">
+<meta property="og:image:secure_url" content="{e(og_image_url)}">
+<meta property="og:image:type" content="image/webp">
+<meta property="og:image:width" content="{og_image_width}">
+<meta property="og:image:height" content="{og_image_height}">
+<meta property="og:image:alt" content="{e(og_image_alt)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{e(title)}">
+<meta name="twitter:description" content="{e(description)}">
+<meta name="twitter:image" content="{e(og_image_url)}">
 <link rel="stylesheet" href="{root}assets/style.css">
 <link rel="icon" type="image/svg+xml" href="{root}assets/logo-emblem.svg">
 </head>
@@ -603,6 +626,7 @@ with open(os.path.join(SITE_DIR, "catalog", "index.html"), "w", encoding="utf-8"
         "Каталог — BIKAI.by",
         "Полный каталог BIKAI/UVTech: приборы и расходные материалы с поиском по названию и артикулу.",
         depth=1, body=catalog_body, active="/catalog/index.html",
+        page_path="catalog/index.html",
     ))
 
 # --------------------------------------------------------------------- #
@@ -686,8 +710,16 @@ for p in products:
   {groups_html}
 </section>
 """
+    product_og_image = f"images/{os.path.basename(data['images'][0])}" if data["images"] else ""
     with open(os.path.join(SITE_DIR, "product", f"{p['slug']}.html"), "w", encoding="utf-8") as f:
-        f.write(page_shell(f"{name} — BIKAI.by", tagline or name, depth=1, body=body))
+        f.write(page_shell(
+            f"{name} — BIKAI.by", tagline or name, depth=1, body=body,
+            page_path=f"product/{p['slug']}.html",
+            og_image=product_og_image,
+            og_image_width=900 if product_og_image else 1200,
+            og_image_height=900 if product_og_image else 630,
+            og_image_alt=f"{name} — оборудование BIKAI",
+        ))
 
 # --------------------------------------------------------------------- #
 # Contacts page
@@ -718,6 +750,7 @@ with open(os.path.join(SITE_DIR, "contacts.html"), "w", encoding="utf-8") as f:
         "Контакты — BIKAI.by",
         "Контакты и реквизиты официального дилера BIKAI/UVTech в Беларуси.",
         depth=0, body=contacts_body, active="/contacts.html",
+        page_path="contacts.html",
     ))
 
 print(f"OK: {n_products} товаров ({n_instruments} приборов, {n_consumables} расходников) -> {SITE_DIR}")
