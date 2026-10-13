@@ -169,5 +169,9 @@
   файлы лежат от корня web-root, архив автоматически обновляется при пересборке.
 - Ссылка для скачивания:
   `https://github.com/mokoaibot/bikai-ai-site/raw/refs/heads/main/directions/bikai/bikai.by/site-current.zip`.
-  Добавлена в корневой README и README сайта BIKAI.by; после коммита обновить и
-  короткое описание репозитория GitHub (About), если API позволяет.
+  Добавлена в корневой README и README сайта BIKAI.by; протестирована: HTTP 200,
+  `application/zip`, 191 файл.
+- GitHub About/description остаётся пустым: PATCH API отвергнут с 403
+  `Resource not accessible by personal access token`; доступный токен только для содержимого.
+  Если заказчик просит именно поле About, он может вручную вставить:
+  `BIKAI.by — дилер BIKAI/UVTech в Беларуси. Скачать архив сайта: https://github.com/mokoaibot/bikai-ai-site/raw/refs/heads/main/directions/bikai/bikai.by/site-current.zip`.
