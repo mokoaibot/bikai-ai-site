@@ -32,7 +32,7 @@ IMAGES_DST = os.path.join(SITE_DIR, "images")
 # Canonical/OG origin for the live production site; use apex, not www.
 # GitHub Pages remains a mirror; update this if the primary domain changes.
 PUBLIC_BASE_URL = "https://bikai.by/"
-DEFAULT_OG_IMAGE = PUBLIC_BASE_URL + "og-cover.webp"
+DEFAULT_OG_IMAGE = PUBLIC_BASE_URL + "og-cover.jpg"
 
 INSTRUMENT_CATS = {"chromatography", "mass-spectrometry", "spectroscopy",
                     "functional-modules", "gas-generators"}
@@ -185,7 +185,7 @@ def page_shell(title, description, depth, body, active="", page_path="",
 <meta property="og:url" content="{e(canonical_url)}">
 <meta property="og:image" content="{e(og_image_url)}">
 <meta property="og:image:secure_url" content="{e(og_image_url)}">
-<meta property="og:image:type" content="image/webp">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="{og_image_width}">
 <meta property="og:image:height" content="{og_image_height}">
 <meta property="og:image:alt" content="{e(og_image_alt)}">
@@ -711,15 +711,11 @@ for p in products:
   {groups_html}
 </section>
 """
-    product_og_image = f"images/{os.path.basename(data['images'][0])}" if data["images"] else ""
     with open(os.path.join(SITE_DIR, "product", f"{p['slug']}.html"), "w", encoding="utf-8") as f:
         f.write(page_shell(
             f"{name} — BIKAI.by", tagline or name, depth=1, body=body,
             page_path=f"product/{p['slug']}.html",
-            og_image=product_og_image,
-            og_image_width=900 if product_og_image else 1200,
-            og_image_height=900 if product_og_image else 630,
-            og_image_alt=f"{name} — оборудование BIKAI",
+            og_image_alt="Оборудование BIKAI / UVTech для лабораторий",
         ))
 
 # --------------------------------------------------------------------- #

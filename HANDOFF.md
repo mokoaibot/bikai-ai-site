@@ -146,15 +146,19 @@
   `directions/bikai/bikai.by/scripts/build_site.py` задан `PUBLIC_BASE_URL`;
   GitHub Pages остаётся зеркалом.
 - Шаблон выдаёт description, canonical, Open Graph и Twitter Card для главной,
-  каталога, карточек товаров и контактов. У товара в превью своё фото; для
-  остальных страниц используется `directions/bikai/bikai.by/site/og-cover.webp`
-  (1200×630 WebP). Страницы брендбука и сравнения имеют отдельные статические метаданные.
-- Хостинг `bikai.by` отвечает через LiteSpeed; прямого доступа для загрузки нет.
-  На проверке после переезда live HTML всё ещё ссылался OG/canonical на GitHub Pages.
-  Собран архив для web-root: `/home/user/bikai-by-site-update.zip` (190 файлов,
-  4.1 MB). До загрузки архива на хостинг не считать live-превью исправленным.
-  Один только deploy в `gh-pages` этот хостинг не обновляет.
-- Проверка user-agent на live: `TelegramBot`, WhatsApp, TwitterBot, LinkedInBot
-  получают 200; `facebookexternalhit` и `meta-externalagent` получают 403 от LiteSpeed
-  (Facebot — 200). Если Meta/Facebook превью не появится после загрузки, попросить
-  хостинг разрешить эти crawler user-agent / убрать антибот-блокировку.
+  каталога, товаров и контактов. По разрешению заказчика общая карточка
+  `directions/bikai/bikai.by/site/og-cover.jpg` (1200×630 JPEG) — единственное
+  форматное исключение для соцпревью; изображения сайта/товаров остаются WebP.
+  Страницы брендбука и сравнения имеют отдельные статические метаданные.
+- После FTP-загрузки заказчиком `bikai.by` отдаёт canonical/og:url на apex-домен,
+  страницу и старую WebP-обложку с HTTP 200. TelegramBot/WhatsApp UA также получают
+  200; Telegram-превью всё ещё не появилось, поэтому approved JPEG social-only cover.
+- Новый архив после этой правки: `/home/user/bikai-by-site-update.zip` (191 файл,
+  ~4.2 MB). На live `og-cover.jpg` пока 404, прежний `.webp` ещё 200 — новый архив
+  ожидает FTP upload. После upload нужно убедиться, что JPG стал 200, затем обновить
+  кэш через WebpageBot и проверить новой отправкой ссылки.
+  Прямого доступа к LiteSpeed-хостингу у агента нет.
+- Текущий blocker для Meta/Facebook: `facebookexternalhit` и `meta-externalagent`
+  получают 403 от LiteSpeed (Facebot — 200). Если Meta-превью не появится, хостингу
+  нужно разрешить эти crawler user-agent / убрать антибот-блокировку.
+- Один только deploy в `gh-pages` обновляет зеркало, не LiteSpeed-хостинг.

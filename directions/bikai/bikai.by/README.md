@@ -26,7 +26,8 @@ site/
   contacts.html        ← контакты + реквизиты ООО «Сайенстех»
   assets/style.css     ← вся стилистика
   images/               ← копия фото из catalog/images
-  og-cover.webp         ← карточка Open Graph (1200×630)
+  og-cover.jpg          ← JPEG только для Open Graph-превью (1200×630)
+  og-cover.webp         ← прежняя WebP-версия общей карточки
   catalog-compare.html  ← сравнение фото, сохранять до проверки заказчиком
   images-new/           ← прозрачный вариант фото для сравнения, сохранять
 ```
@@ -35,11 +36,12 @@ site/
 
 - Основной домен: https://bikai.by/; пользовательский хостинг отвечает через
   LiteSpeed. GitHub Pages `https://mokoaibot.github.io/bikai-ai-site/` — зеркало.
-- В build-шаблон добавлены description, canonical, Open Graph и Twitter Card;
-  карточки товаров используют фото товара. Общая карточка — `site/og-cover.webp`.
-- Для обновления основного хостинга нужен upload результата `site/` в web-root;
-  `engine/deploy_gh_pages.py` обновляет только зеркало. Текущий архив для
-  ручной загрузки: `/home/user/bikai-by-site-update.zip`.
+- В build-шаблон добавлены description, canonical, Open Graph и Twitter Card.
+  Для надёжности Telegram все страницы используют общую `site/og-cover.jpg`;
+  это одно разрешённое JPEG-исключение, остальные изображения — WebP.
+- Пользователь уже загрузил предыдущую версию в FTP; текущий пакет с JPEG нужно
+  загрузить повторно в web-root. `engine/deploy_gh_pages.py` обновляет только зеркало.
+  Готовый архив (191 файл, около 4.2 MB): `/home/user/bikai-by-site-update.zip`.
 - Более широкое SEO, Schema.org и регистрация в БелГИЭ / привязка ЕРИП
   остаются отдельными задачами.
 
