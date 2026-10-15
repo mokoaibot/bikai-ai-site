@@ -741,12 +741,43 @@ contacts_body = f"""
     <p>{e(COMPANY['bank'])}<br>БИК {e(COMPANY['bic'])}<br>р/с {e(COMPANY['iban'])}</p>
   </div>
 </section>
+<section class="company-history" aria-labelledby="companyHistoryTitle">
+  <p class="eyebrow">О компании BIKAI</p>
+  <h2 id="companyHistoryTitle">Японские корни и международное развитие</h2>
+  <div class="company-history-copy">
+    <p>Японская BIKAI Technology Co., Ltd. была основана в 2024 году. Её история связана с развитием сенсорного направления в Токио с 2023 года; сегодня в Токио находятся штаб-квартира и центр исследований и разработок компании.</p>
+  </div>
+</section>
+<section class="company-links" aria-labelledby="companyLinksTitle">
+  <p class="eyebrow">Официальные ресурсы</p>
+  <h2 id="companyLinksTitle">BIKAI и UVTech</h2>
+  <div class="company-links-grid">
+    <a class="company-link-card" href="https://www.bikaicorp.com/" target="_blank" rel="noopener noreferrer">
+      <span class="company-link-label">Международный сайт</span>
+      <span class="company-link-title">BIKAI Global</span>
+      <span class="company-link-description">Международный сайт и каталог продукции BIKAI.</span>
+      <span class="company-link-domain">bikaicorp.com ↗</span>
+    </a>
+    <a class="company-link-card" href="https://www.bikai.jp/" target="_blank" rel="noopener noreferrer">
+      <span class="company-link-label">Японский сайт</span>
+      <span class="company-link-title">BIKAI Japan</span>
+      <span class="company-link-description">Официальный сайт японской BIKAI Technology Co., Ltd.</span>
+      <span class="company-link-domain">bikai.jp ↗</span>
+    </a>
+    <a class="company-link-card" href="https://www.uvtech-cc.com/" target="_blank" rel="noopener noreferrer">
+      <span class="company-link-label">Сайт производителя</span>
+      <span class="company-link-title">UVTech</span>
+      <span class="company-link-description">Оборудование и решения производителя BIKAI/UVTech.</span>
+      <span class="company-link-domain">uvtech-cc.com ↗</span>
+    </a>
+  </div>
+</section>
 """
 
 with open(os.path.join(SITE_DIR, "contacts.html"), "w", encoding="utf-8") as f:
     f.write(page_shell(
         "Контакты — BIKAI.by",
-        "Контакты и реквизиты официального дилера BIKAI/UVTech в Беларуси.",
+        "Контакты дилера BIKAI/UVTech в Беларуси, кратко о японской компании BIKAI и официальные сайты.",
         depth=0, body=contacts_body, active="/contacts.html",
         page_path="contacts.html",
     ))

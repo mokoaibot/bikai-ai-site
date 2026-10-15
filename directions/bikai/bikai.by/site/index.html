@@ -316,6 +316,21 @@ main{min-height:60vh}
 .contacts-card p{margin-bottom:var(--s4)}
 .contacts-card a{color:var(--ink)}
 .contacts-card a:hover{color:var(--red)}
+.company-history,.company-links{max-width:var(--wrap);margin:0 auto;padding-left:24px;padding-right:24px}
+.company-history{padding-top:var(--s5);padding-bottom:var(--s5)}
+.company-history h2,.company-links h2{margin-bottom:var(--s4)}
+.company-history-copy{max-width:920px;padding:20px 24px;border-left:3px solid var(--red);background:var(--paper)}
+.company-history-copy p{max-width:840px;margin:0;color:var(--ink)}
+.company-links{padding-top:var(--s5);padding-bottom:var(--s8)}
+.company-links-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.company-link-card{display:flex;flex-direction:column;align-items:flex-start;gap:9px;min-height:190px;padding:22px;border:1px solid var(--line);background:var(--white);color:var(--ink);transition:border-color .15s,background .15s}
+.company-link-card:hover{border-color:var(--red);background:var(--paper);color:var(--ink)}
+.company-link-label{color:var(--red);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.company-link-title{color:var(--ink);font-size:20px;font-weight:600;line-height:1.2}
+.company-link-description{color:var(--gray);font-size:14px;line-height:1.45}
+.company-link-domain{margin-top:auto;color:var(--red);font-size:13px;font-weight:600}
+@media(max-width:900px){.company-links-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.company-history,.company-links{padding-left:16px;padding-right:16px}.company-history-copy{padding:18px 18px}.company-links-grid{grid-template-columns:1fr}.company-link-card{min-height:165px}}
 
 /* ---------- footer ---------- */
 .site-footer{border-top:1px solid var(--line);background:var(--paper);margin-top:var(--s8)}

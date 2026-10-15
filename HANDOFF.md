@@ -178,3 +178,17 @@
   `Resource not accessible by personal access token`; доступный токен только для содержимого.
   Если заказчик просит именно поле About, он может вручную вставить:
   `BIKAI.by — дилер BIKAI/UVTech в Беларуси. Скачать архив сайта: https://github.com/mokoaibot/bikai-ai-site/raw/refs/heads/main/directions/bikai/bikai.by/site-current.zip`.
+
+## Контакты: история японской BIKAI и официальные сайты
+- В `directions/bikai/bikai.by/scripts/build_site.py` добавлен короткий блок о
+  BIKAI Technology Co., Ltd.: основана в 2024; сенсорное направление ведётся с
+  2023 года; штаб-квартира и R&D расположены в Токио. Факты проверены по
+  `https://www.bikai-sensor.jp/en/company/` и `https://www.bikai.jp/en/about`.
+- Добавлены три внешние карточки: международный сайт BIKAI (`bikaicorp.com`),
+  японский сайт (`bikai.jp`) и сайт производителя UVTech (`uvtech-cc.com`).
+  Источники подтверждают, что UVTech — Beijing UVTech Inc., китайская
+  производственная структура/бренд группы; не заявлять, что все приборы
+  произведены в Японии.
+- Сборка уже выполнена, обновлённый FTP-архив локально:
+  `directions/bikai/bikai.by/site-current.zip` (~4.21 MB). Требуется push/deploy
+  на GitHub и загрузка пользователем через FTP; прямого доступа к боевому хостингу нет.
